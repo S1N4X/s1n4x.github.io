@@ -1,0 +1,34 @@
+{{/* Override of themes/terminal/layouts/partials/footer.html.
+     Drops "Powered by Hugo" + "Theme made by panr" attribution; the site
+     reads as ctfint-branded. Hugo itself stays in <meta name="generator">
+     and a single-line credit inside an HTML comment for source readers. */}}
+
+<footer class="footer">
+  <div class="footer__inner">
+    <div class="copyright">
+      <span class="footer__brand">$ ctfint <span class="footer__dim">--version 1.5.3</span></span>
+      <span class="footer__sep">::</span>
+      {{ if $.Site.Copyright }}
+        <span>{{ $.Site.Copyright | safeHTML }}</span>
+      {{ else if site.Params.copyright }}
+        <span>{{ site.Params.copyright | safeHTML }}</span>
+      {{ else }}
+        <span>© {{ now.Year }} S1N4X</span>
+      {{ end }}
+      <span class="footer__sep">::</span>
+      <span><a href="https://github.com/S1N4X" target="_blank" rel="noopener">github.com/S1N4X</a></span>
+    </div>
+  </div>
+</footer>
+
+<!-- Built with Hugo + a modified panr/hugo-theme-terminal. Source: github.com/S1N4X -->
+
+{{ $menu := resources.Get "js/menu.js" | js.Build }}
+{{ $cp := resources.Get "js/code.js" | js.Build }}
+
+{{ $bundle := slice $menu $cp | resources.Concat "bundle.js" | resources.Minify }}
+
+<script type="text/javascript" src="{{ $bundle.RelPermalink }}"></script>
+
+{{/* Extended footer (per-post token-burn etc.) */}}
+{{ partial "extended_footer.html" . }}

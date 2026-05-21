@@ -8,6 +8,7 @@ defaultContentLanguageInSubdir = false
 title = "ctfint"
 theme = "terminal"
 pagination.pagerSize = 15
+copyright = "© 2026 ctfint · S1N4X · CC-BY-SA 4.0"
 # enableGitInfo flipped on AFTER first commit lands (Hugo refuses to build on
 # an unborn branch otherwise). Toggle to true once the initial push completes.
 enableGitInfo = false

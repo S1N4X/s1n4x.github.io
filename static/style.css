@@ -91,6 +91,57 @@ article small {
   max-width: 100%;
 }
 
+/* === Footer (ctfint-branded override) ================================== */
+.footer .copyright {
+  font-family: "Fira Code", Monaco, Consolas, "Ubuntu Mono", monospace;
+  font-size: 0.82em;
+  opacity: 0.85;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0 8px;
+  align-items: baseline;
+}
+.footer__brand {
+  color: var(--accent);
+  font-weight: bold;
+}
+.footer__dim {
+  opacity: 0.55;
+  font-weight: normal;
+}
+.footer__sep {
+  opacity: 0.4;
+}
+
+/* === ctfint callout (intro block above writeups/reports lists) ========= */
+.ctfint-callout {
+  border-left: 3px solid var(--accent);
+  background: color-mix(in srgb, var(--accent) 6%, transparent);
+  padding: 14px 18px;
+  margin: 14px 0 22px 0;
+  font-family: "Fira Code", Monaco, Consolas, "Ubuntu Mono", monospace;
+}
+.ctfint-callout__headline {
+  color: var(--accent);
+  font-weight: bold;
+  font-size: 1.05em;
+  letter-spacing: 0.02em;
+  margin-bottom: 6px;
+}
+.ctfint-callout__body {
+  font-size: 0.94em;
+  line-height: 1.5;
+  opacity: 0.95;
+}
+.ctfint-callout__body p {
+  margin: 0.25em 0;
+}
+.ctfint-callout__more {
+  font-size: 0.85em;
+  margin-top: 8px;
+  opacity: 0.75;
+}
+
 /* === Active nav highlight ============================================== */
 /* Current section in the top menu: green background, black text. Applied
  * to the <li class="active"> wrapper rendered by layouts/partials/menu.html
