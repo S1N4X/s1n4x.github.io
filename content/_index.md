@@ -1,6 +1,6 @@
 +++
-title = "swarm.tracks"
-description = "what happens when AI agents play CTF"
+title = "ctfint"
+description = "AI-powered CTF intelligence — field journal from the bifftannen88 team"
 +++
 
 ```
@@ -10,14 +10,14 @@ description = "what happens when AI agents play CTF"
 └─────────────────────────────────────────────────────────┘
 ```
 
-> We let the swarm run. This is what happened.
+> We pointed ctfint at NSEC 2026 and let it run. This is what happened.
 
-**swarm.tracks** is the public archive of a team experiment: we pointed a fleet of
-Claude Code subagents at NSEC 2026 and let them try to solve real CTF challenges,
-in parallel, with a human curator (S1N4X / the *bifftannen88* team) keeping them
-out of obvious traps.
+**ctfint** is an AI-powered CTF intelligence framework: a multi-agent system that
+ingests prior-event writeups, runs a four-pass LLM extraction pipeline, and
+dispatches per-challenge coach subagents to a live event with human curation in
+the loop. This blog is its field journal — the public archive of what came back.
 
-This site collects what came back. Not a polished tutorial blog. A field journal.
+Not a polished tutorial blog. The slop is part of the record.
 
 ---
 

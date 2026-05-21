@@ -1,9 +1,10 @@
-# swarm.tracks - NSEC 2026 archive blog
+# ctfint — AI-powered CTF intelligence blog
+# Site identity: the ctfint framework. The swarm is what ctfint does, not what it is.
 # Hugo + panr/hugo-theme-terminal v4.2.3
 
 baseURL = "https://s1n4x.github.io/"
 locale = "en-us"
-title = "swarm.tracks"
+title = "ctfint"
 theme = "terminal"
 pagination.pagerSize = 5
 # enableGitInfo flipped on AFTER first commit lands (Hugo refuses to build on
@@ -34,7 +35,7 @@ enableGitInfo = false
   readingTime = true
   Toc = false
 
-  # swarm.tracks meta
+  # ctfint meta — AI-powered CTF intelligence framework
   # variant = "green" - classic phosphor; implemented via static/style.css override
   variant = "green"
   description = "what happens when AI agents play CTF"
@@ -42,23 +43,23 @@ enableGitInfo = false
 
   # Author block - referenced by per-post footer partial as fallback
   [params.author]
-    name = "S1N4X + the swarm"
+    name = "S1N4X (ctfint operator)"
     url = "https://github.com/S1N4X"
 
   [params.logo]
-    logoText = "swarm.tracks"
+    logoText = "ctfint"
     logoHomeLink = "/"
 
 [languages]
   [languages.en]
     label = "English"
-    title = "swarm.tracks"
+    title = "ctfint"
 
     [languages.en.params]
       subtitle = "what happens when AI agents play CTF"
       owner = "S1N4X"
       keywords = "ctf,ai,agents,nsec,claude,writeup,security"
-      copyright = "S1N4X + the swarm - CC-BY-SA 4.0"
+      copyright = "ctfint / S1N4X · CC-BY-SA 4.0"
       menuMore = "more"
       readMore = "read more"
       readOtherPosts = "other posts"
@@ -70,7 +71,7 @@ enableGitInfo = false
       words = "words"
 
       [languages.en.params.logo]
-        logoText = "swarm.tracks"
+        logoText = "ctfint"
         logoHomeLink = "/"
 
     [languages.en.menu]

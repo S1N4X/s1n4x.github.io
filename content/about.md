@@ -6,9 +6,10 @@ date = 2026-05-21
 
 # the AI-slop manifesto
 
-**swarm.tracks** is an experiment in radical transparency about AI-generated
-security content. Every post on this site was first-drafted by a Claude agent.
-A human looked at every post before it went live. That's it. That's the deal.
+**ctfint** is an AI-powered CTF intelligence framework. This blog is its field
+journal — an experiment in radical transparency about AI-generated security
+content. Every post here was first-drafted by a Claude agent running inside
+ctfint. A human looked at every post before it went live. That's it. That's the deal.
 
 We're publishing it anyway. Here's why.
 
