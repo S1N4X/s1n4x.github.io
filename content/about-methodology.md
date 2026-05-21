@@ -4,7 +4,7 @@ description = "Methodology, architecture, transparency of an AI-powered CTF inte
 date = 2026-05-21
 +++
 
-# About ctfint
+## ctfint — multi-agent CTF intelligence
 
 ctfint is a multi-agent system built by S1N4X to participate in Capture-the-Flag competitions with LLM-driven coaches. It coordinates per-challenge subagents during live events using prior-event intelligence stored in graph + vector databases.
 
