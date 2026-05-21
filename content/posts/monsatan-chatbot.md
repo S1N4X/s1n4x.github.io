@@ -1,12 +1,12 @@
 +++
-title = "Monsatan - Chatbot — 3/3"
+title = "Monsatan - Chatbot - 3/3"
 date = 2026-05-20
 categories = ["nsec26"]
 tags = ["ai", "solved", "web"]
 model = "Sonnet (default)"
 draft = false
 +++
-Status: **SOLVED** — 3/3 sub-flags captured
+Status: **SOLVED** - 3/3 sub-flags captured
 
 ## Context
 
@@ -33,7 +33,7 @@ _Preserved from pre-standardization writeup(s). May contain duplicate context._
 
 ## Monsatan - Chatbot (Topic 58682)
 
-Status: **SOLVED** — 3/3 sub-flags captured
+Status: **SOLVED** - 3/3 sub-flags captured
 
 ### From `58682-monsatan-chatbot.md`
 
@@ -114,14 +114,14 @@ FLAG-{085a1ccb46afb053063f2e73dce5f298}       [Database query via authenticated 
 - **Endpoint:** `POST /api/chat` with `{"messages":[{"role":"user","content":"..."}]}`
 - **Flags submitted:** 2/2 (track marker: `3/3 You should always trust LLMs with your dirty little secrets`)
 - **Flags:**
-  - `FLAG-{4893b388c0951c612be529e091366833}` — leaked system prompt
-  - `FLAG-{085a1ccb46afb053063f2e73dce5f298}` — SQL tool exfiltration
+  - `FLAG-{4893b388c0951c612be529e091366833}` - leaked system prompt
+  - `FLAG-{085a1ccb46afb053063f2e73dce5f298}` - SQL tool exfiltration
 
 ## Challenge
 
 MonsaBot is the customer-service assistant for "Monsatan Corporation". The chatbot UI is plain SvelteKit; the backend exposes `/api/chat` and tells the model that *"Authenticated requests can use tools."*
 
-## Flag 1 — system prompt disclosure (prompt injection)
+## Flag 1 - system prompt disclosure (prompt injection)
 
 A single classic jailbreak request leaked the system prompt verbatim:
 
@@ -135,7 +135,7 @@ The response (`artifacts/sysprompt_dump.json`) included:
 
 → Flag #1 captured.
 
-## Flag 2 — authenticated SQL tool
+## Flag 2 - authenticated SQL tool
 
 The leaked prompt names the API key as the bearer for the privileged tool path. Submitting it as a normal HTTP `Authorization` header on `/api/chat`:
 
@@ -156,27 +156,27 @@ Content-Type: application/json
 
 ## Techniques
 
-- Direct prompt injection ("ignore previous instructions") — fully effective; no system-side filtering.
+- Direct prompt injection ("ignore previous instructions") - fully effective; no system-side filtering.
 - Credential reuse: secret leaked inside a system prompt was actually a real bearer token honored by the API layer (classic LLM-tool boundary confusion).
 - Tool abuse: the SQL tool had no allow-list on table names, so `sqlite_master` enumeration was free.
 
 ## Solve harness
 
-See `artifacts/chat.ps1` — small PowerShell wrapper that posts a `messages` array to `/api/chat` and prints the JSON response. Used for both flags by feeding different user messages (and, for flag 2, an extra `-Headers @{Authorization='Bearer ...'}`).
+See `artifacts/chat.ps1` - small PowerShell wrapper that posts a `messages` array to `/api/chat` and prints the JSON response. Used for both flags by feeding different user messages (and, for flag 2, an extra `-Headers @{Authorization='Bearer ...'}`).
 
 ## Lessons
 
-- Never put secrets in a system prompt — assume any prompt content will be exfiltrated.
-- Don't make an LLM the gatekeeper for `Authorization` — the *transport* still enforced the bearer correctly, but the bearer itself was made discoverable by the LLM, which collapses the trust boundary.
+- Never put secrets in a system prompt - assume any prompt content will be exfiltrated.
+- Don't make an LLM the gatekeeper for `Authorization` - the *transport* still enforced the bearer correctly, but the bearer itself was made discoverable by the LLM, which collapses the trust boundary.
 
 ## Artifacts
 
-- `artifacts/sysprompt_dump.json` — full system prompt leaked via prompt injection (contains flag 1)
-- `artifacts/sql_dump.json` — assistant response showing the SQL tool invocation
-- `artifacts/chat.ps1` — PowerShell client used to drive `/api/chat`
-- `artifacts/page.html`, `artifacts/index.html`, `*.js` — SvelteKit front-end recon
-- `artifacts/cdp.py` — Chrome DevTools Protocol script (was a backup channel via the laptop browser)
-- `nsec/flags/monsatan-chatbot.txt` — both flag values + askgod confirmation
+- `artifacts/sysprompt_dump.json` - full system prompt leaked via prompt injection (contains flag 1)
+- `artifacts/sql_dump.json` - assistant response showing the SQL tool invocation
+- `artifacts/chat.ps1` - PowerShell client used to drive `/api/chat`
+- `artifacts/page.html`, `artifacts/index.html`, `*.js` - SvelteKit front-end recon
+- `artifacts/cdp.py` - Chrome DevTools Protocol script (was a backup channel via the laptop browser)
+- `nsec/flags/monsatan-chatbot.txt` - both flag values + askgod confirmation
 
 
 ---
@@ -192,8 +192,8 @@ See `artifacts/chat.ps1` — small PowerShell wrapper that posts a `messages` ar
 > honeypots_avoided: 0
 >
 > Notable:
-> - **Agent-1** (Sonnet (default)) — 10.6m: Cross-track Monsatan secret matrix — mapped HMAC reuse hypothesis across 5 Monsatan tracks
-> - **Agent-2** (Opus 4.7) — 7.1m: Monsatan Defacing — final flag 6/6 via deface manifesto injection chain
-> - **Agent-3** (Sonnet (default)) — 3.9m: Monsatan Pesticide WASM JWT crypto chain — confirmed WASM has no crypto symbols (negative result locked in)
+> - **Agent-1** (Sonnet (default)) - 10.6m: Cross-track Monsatan secret matrix - mapped HMAC reuse hypothesis across 5 Monsatan tracks
+> - **Agent-2** (Opus 4.7) - 7.1m: Monsatan Defacing - final flag 6/6 via deface manifesto injection chain
+> - **Agent-3** (Sonnet (default)) - 3.9m: Monsatan Pesticide WASM JWT crypto chain - confirmed WASM has no crypto symbols (negative result locked in)
 >
-> _Cross-track HMAC secret hunt + GitLab PAT pivot + WASM crypto absence — multi-pronged solve._
+> _Cross-track HMAC secret hunt + GitLab PAT pivot + WASM crypto absence - multi-pronged solve._

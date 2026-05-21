@@ -6,7 +6,7 @@ tags = ["crypto", "stuck"]
 model = "Sonnet (default)"
 draft = false
 +++
-Status: **STUCK** — 0/unknown sub-flags captured
+Status: **STUCK** - 0/unknown sub-flags captured
 
 ## Context
 
@@ -28,7 +28,7 @@ _Preserved from pre-standardization writeup(s). May contain duplicate context._
 
 ## Prestige Arboretum (Topic 59834)
 
-Status: **STUCK** — 0/unknown sub-flags captured
+Status: **STUCK** - 0/unknown sub-flags captured
 
 ## Context
 
@@ -38,7 +38,7 @@ Status: **STUCK** — 0/unknown sub-flags captured
 
 ## Designer Intel (Discord, post-event 2026-05-19)
 
-**Designer:** Philippe Arteau ([designer]). **Intended solution (from #[designer] channel, linkster78 msg 1506045574712004609 — community solve):**
+**Designer:** Philippe Arteau ([designer]). **Intended solution (from #[designer] channel, linkster78 msg 1506045574712004609 - community solve):**
 
 - Token is AES-128-CBC over JSON `{...,"user_email":"INPUT",...,"user_level":1,...}`
 - Reset password with **varying `name` length** to grow plaintext block boundary
@@ -51,7 +51,7 @@ Status: **STUCK** — 0/unknown sub-flags captured
 **Why our 3 coach waves missed it:**
 - Our ECB analysis was directionally correct (we identified ECB-with-fixed-XOR per probe26) but our forge_token.py targeted level=10 via triple-flip; the actual structure needed an 80-byte prefix + 2-block transplant
 - Our plus/Base64 oracle pivot (from external research hint) was a different parsing quirk, NOT the primary primitive
-- The `+` URL-decode behavior IS real but not directly exploitable — the real primitive was ECB block transplant on a *valid* working token with the right offset
+- The `+` URL-decode behavior IS real but not directly exploitable - the real primitive was ECB block transplant on a *valid* working token with the right offset
 
 This is a high-value pattern for next-year writeup mining: **ECB-mode block transplant where the attacker controls input length to align ciphertext blocks**. Combine with reset-password endpoint that gives the oracle.
 
@@ -71,9 +71,9 @@ This is a high-value pattern for next-year writeup mining: **ECB-mode block tran
 > honeypots_avoided: 0
 >
 > Notable:
-> - **Agent-1** (Sonnet (default)) — 90.3m: ECB block-splice — 90.3 minute deep crypto coach; mapped probe26 ECB-with-fixed-XOR mode discovery
-> - **Agent-2** (Sonnet (default)) — 74.5m: Padding oracle (restart) — 74.5 minutes after night-1 CBC hypothesis flipped to ECB
-> - **Agent-3** (Sonnet (default)) — 62.2m: Prestige independent solve — 62.2 minutes, hit stop_sequence at the splice-boundary decision
+> - **Agent-1** (Sonnet (default)) - 90.3m: ECB block-splice - 90.3 minute deep crypto coach; mapped probe26 ECB-with-fixed-XOR mode discovery
+> - **Agent-2** (Sonnet (default)) - 74.5m: Padding oracle (restart) - 74.5 minutes after night-1 CBC hypothesis flipped to ECB
+> - **Agent-3** (Sonnet (default)) - 62.2m: Prestige independent solve - 62.2 minutes, hit stop_sequence at the splice-boundary decision
 >
 > _16 agents, 0 flags. Strategy B (1-byte flip diagnostic) → Strategy A (triple-flip level=10) → Strategy C (ECB block-splice harvest). All three fired. Designer post-event: actual solve was an 80-byte prefix + 2-block transplant the team missed by inches._
 

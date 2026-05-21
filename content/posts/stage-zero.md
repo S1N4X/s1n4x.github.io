@@ -1,12 +1,12 @@
 +++
-title = "Stage Zero recruitment — 4/4"
+title = "Stage Zero recruitment - 4/4"
 date = 2026-05-20
 categories = ["nsec26"]
 tags = ["reverse", "solved"]
 model = "Opus 4.7"
 draft = false
 +++
-Status: **SOLVED** — 4/4 sub-flags captured
+Status: **SOLVED** - 4/4 sub-flags captured
 
 ## Context
 
@@ -34,7 +34,7 @@ _Preserved from pre-standardization writeup(s). May contain duplicate context._
 
 ## Stage Zero recruitment (Topic 59042)
 
-Status: **SOLVED** — 4/4 sub-flags captured
+Status: **SOLVED** - 4/4 sub-flags captured
 
 ### From `59042-stage-zero.md`
 
@@ -135,24 +135,24 @@ ASCII interpretation:
 ```
 
 ### Techniques Used
-- **ISO image analysis** — 7-Zip extraction of disc image format
-- **PE binary parsing** — Portable Executable header analysis (DOS/PE signature, section enumeration)
-- **String extraction** — Embedded string identification in compiled binary sections
-- **Hex dump analysis** — Byte-level inspection and context extraction
-- **Binary forensics** — Offset-based flag location and validation
+- **ISO image analysis** - 7-Zip extraction of disc image format
+- **PE binary parsing** - Portable Executable header analysis (DOS/PE signature, section enumeration)
+- **String extraction** - Embedded string identification in compiled binary sections
+- **Hex dump analysis** - Byte-level inspection and context extraction
+- **Binary forensics** - Offset-based flag location and validation
 
 ### Tools Used
-- 7-Zip (7z.exe v23.01) — ISO extraction and archive handling
-- Python 3.12.1 — PE structure parsing and binary analysis
-- PowerShell — File system operations and hex inspection
-- Bash — Artifact collection and verification
+- 7-Zip (7z.exe v23.01) - ISO extraction and archive handling
+- Python 3.12.1 - PE structure parsing and binary analysis
+- PowerShell - File system operations and hex inspection
+- Bash - Artifact collection and verification
 
 ### Related Analysis
 
 The challenge employs a common malware delivery pattern:
-- **Dual-executable payload** — Often seen in lateral movement attacks
-- **Embedded flag in binary** — Direct flag embedding in compiled code
-- **Cryptic ordering hints** — Tests analyst ability to identify execution sequence
+- **Dual-executable payload** - Often seen in lateral movement attacks
+- **Embedded flag in binary** - Direct flag embedding in compiled code
+- **Cryptic ordering hints** - Tests analyst ability to identify execution sequence
 
 ### What Worked
 
@@ -163,19 +163,19 @@ The challenge employs a common malware delivery pattern:
 
 ### What Didn't Work
 
-✗ Attempting to use WSL to run UPX — Permission issues and fstab failures
-✗ Native Windows `strings` equivalent — Not available in base install
-✗ Executing the binaries directly — Not necessary for flag extraction
+✗ Attempting to use WSL to run UPX - Permission issues and fstab failures
+✗ Native Windows `strings` equivalent - Not available in base install
+✗ Executing the binaries directly - Not necessary for flag extraction
 
 ## Artifacts
 
 All challenge artifacts are located in `artifacts/`:
 
-- `config.exe` — Original executable from ISO
-- `install.exe` — Original executable from ISO (contains embedded flag)
-- `README.md` — Challenge description and hints
-- `findings.txt` — Detailed analysis findings
-- `hex_dump.txt` — Hex dump of flag location context
+- `config.exe` - Original executable from ISO
+- `install.exe` - Original executable from ISO (contains embedded flag)
+- `README.md` - Challenge description and hints
+- `findings.txt` - Detailed analysis findings
+- `hex_dump.txt` - Hex dump of flag location context
 
 See `artifacts/hex_dump.txt` for the exact binary context of the flag location.
 

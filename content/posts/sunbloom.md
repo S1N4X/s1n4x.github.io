@@ -6,7 +6,7 @@ tags = ["stuck", "web"]
 model = "Sonnet (default)"
 draft = false
 +++
-Status: **STUCK** — 0/unknown sub-flags captured
+Status: **STUCK** - 0/unknown sub-flags captured
 
 ## Context
 
@@ -32,7 +32,7 @@ _Preserved from pre-standardization writeup(s). May contain duplicate context._
 
 ## The SunBloom Library (Topic 59150)
 
-Status: **STUCK** — 0/unknown sub-flags captured
+Status: **STUCK** - 0/unknown sub-flags captured
 
 ## Artifacts
 
@@ -51,7 +51,7 @@ Status: **STUCK** — 0/unknown sub-flags captured
 | # | Vector | Result | Why dead |
 |---|---|---|---|
 | 3 | XFH (X-Forwarded-Host) poison `forgot-password` for admin | 302 generic, catcher inbox empty | Admin's reset email goes to admin@sunbloom.ctf mail account that DOES NOT EXIST on mail.ctf (reserved). No mailbox to land in. |
-| 3b | XFH with `library.ctf@evil.adm.in` URL-injection | 302 generic | Same — no inbox we own captures admin's mail. |
+| 3b | XFH with `library.ctf@evil.adm.in` URL-injection | 302 generic | Same - no inbox we own captures admin's mail. |
 | 2 | Host header rewrite | 419 CSRF-token mismatch (cookie+Host bound) | Even if it worked, same delivery problem as #3. |
 | 4 | Time-blind SQLi on `?sort=` and `?query=` | No timing delta on any param (sort/order/orderBy/direction/per_page/page/limit/etc.); 400 on books/{id} non-int | All parameters use parameterized PDO. `1 AND SLEEP(3)` cast to int=1. |
 | 5 | `_method=PUT`/`DELETE` POST override + HEAD/OPTIONS method tamper | 403 (auth gate fires before method dispatch on POST/PUT/DELETE); OPTIONS returns `Allow: GET,HEAD,POST` for /admin/books but bare-GET = 403 | Middleware gates all /admin/* regardless of method. |
@@ -63,14 +63,14 @@ Status: **STUCK** — 0/unknown sub-flags captured
 This is the fundamental block on every reset-poisoning vector that needs admin's mail to land in our inbox. Confirmed by `curl POST http://mail.ctf/register email=admin%40sunbloom.ctf` returning that exact alert. Vectors 1-3 of the dossier all assume an attacker mailbox catches the reset; with admin's address reserved and no SMTP-out leak, **no reset-link interception is possible without a Mail::to() host or recipient rewrite**.
 
 ### 2. `admin+x@sunbloom.ctf` was registered (by [teammate] overnight) on **both** library.ctf and mail.ctf with password `ABCDEF123`
-- Mail.ctf inbox contains a `SunBloom Library — Password Reset Request` email dated `Sat, 16 May 2026 05:07:57 +0000`.
+- Mail.ctf inbox contains a `SunBloom Library - Password Reset Request` email dated `Sat, 16 May 2026 05:07:57 +0000`.
 - Reset URL: `http://library.ctf/reset-password?email=admin%2Bx%40sunbloom.ctf&token=294f09da468b255ad0e83ac37ab9ba4ea77ff30f3daae2876f1f388962c2f438`.
-- The plus-trick **does NOT canonicalize on library.ctf**: registering `admin+x@sunbloom.ctf` creates a separate user row. The reset token is bound to the literal email string — submitting it with `email=admin@sunbloom.ctf` returns `Invalid or expired password reset token`.
-- I reset `admin+x@sunbloom.ctf`'s password to `PwndByLich123!` and logged in as that user. `/admin` still returns 403 — `admin+x` is a regular user, NOT the actual admin.
+- The plus-trick **does NOT canonicalize on library.ctf**: registering `admin+x@sunbloom.ctf` creates a separate user row. The reset token is bound to the literal email string - submitting it with `email=admin@sunbloom.ctf` returns `Invalid or expired password reset token`.
+- I reset `admin+x@sunbloom.ctf`'s password to `PwndByLich123!` and logged in as that user. `/admin` still returns 403 - `admin+x` is a regular user, NOT the actual admin.
 
 ### 3. Whoops/Ignition error pages ARE rendered (debug mode ON)
 - `GET /admin/books/1` (only PUT/DELETE accepted) returns a 246KB Ignition error page with full stack trace, BEFORE the auth middleware fires (Laravel route-method check is pre-middleware).
-- However, the Ignition API endpoints `/_ignition/execute-solution` and `/_ignition/health-check` all return 404 — Ignition routes are not registered, so **CVE-2021-3129 is not exploitable** here. The error pages are just the Spatie laravel-ignition v2 frontend, no RPC backend.
+- However, the Ignition API endpoints `/_ignition/execute-solution` and `/_ignition/health-check` all return 404 - Ignition routes are not registered, so **CVE-2021-3129 is not exploitable** here. The error pages are just the Spatie laravel-ignition v2 frontend, no RPC backend.
 
 ### 4. Method-allow map for /admin/books
 - `/admin/books`         → POST GET HEAD (per `OPTIONS Allow:`)
@@ -85,11 +85,11 @@ The `/admin/books` POST route exists but is gated by the `Gate::define('admin', 
 
 **The actual admin@sunbloom.ctf user must have a mailbox we don't know about (or none).** Two angles worth a manual try:
 
-1. **Mail.ctf catchall / wildcard**: probe whether mail.ctf has a `*@sunbloom.ctf` catchall by registering `randomstringnobody@sunbloom.ctf` and seeing if its inbox receives anything addressed to other recipients. Mail.ctf's `reserved` list is the only protection — if admin's reset goes to a non-reserved alias, capturing it via wildcard would unlock #3.
+1. **Mail.ctf catchall / wildcard**: probe whether mail.ctf has a `*@sunbloom.ctf` catchall by registering `randomstringnobody@sunbloom.ctf` and seeing if its inbox receives anything addressed to other recipients. Mail.ctf's `reserved` list is the only protection - if admin's reset goes to a non-reserved alias, capturing it via wildcard would unlock #3.
 
-2. **Look for a /reset-password GET-style flow with token enumeration**: tokens are 64-hex but the `password_resets` table may have a stale token visible via an unguarded sort/order leak. Time-blind didn't fire, but try **CRLF + Bcc injection** in the `Host:` header during forgot-password POST: `-H "Host: library.ctf$'\r\n'Bcc: catcher@sunbloom.ctf"` (PowerShell needs the literal CRLF — use Python/raw socket from a pwnbox). If Laravel's mail driver concatenates Host into mail headers, we get a Bcc copy of the admin reset email. Send via pwnbox `python3 -c "import socket; s.send(b'POST /forgot-password HTTP/1.1\r\nHost: library.ctf\r\nBcc: catcher@sunbloom.ctf\r\n...'"`)
+2. **Look for a /reset-password GET-style flow with token enumeration**: tokens are 64-hex but the `password_resets` table may have a stale token visible via an unguarded sort/order leak. Time-blind didn't fire, but try **CRLF + Bcc injection** in the `Host:` header during forgot-password POST: `-H "Host: library.ctf$'\r\n'Bcc: catcher@sunbloom.ctf"` (PowerShell needs the literal CRLF - use Python/raw socket from a pwnbox). If Laravel's mail driver concatenates Host into mail headers, we get a Bcc copy of the admin reset email. Send via pwnbox `python3 -c "import socket; s.send(b'POST /forgot-password HTTP/1.1\r\nHost: library.ctf\r\nBcc: catcher@sunbloom.ctf\r\n...'"`)
 
-3. **Check if `admin@sunbloom.ctf` was ever issued a reset that's still pending in any inbox we own** — re-fire forgot-password for admin with `X-Forwarded-For: 127.0.0.1` and `X-Real-IP: 127.0.0.1` simultaneously (some Laravel apps trust localhost for diagnostic email reflection). Untested this run due to time.
+3. **Check if `admin@sunbloom.ctf` was ever issued a reset that's still pending in any inbox we own** - re-fire forgot-password for admin with `X-Forwarded-For: 127.0.0.1` and `X-Real-IP: 127.0.0.1` simultaneously (some Laravel apps trust localhost for diagnostic email reflection). Untested this run due to time.
 
 ## Files written
 - Scratch artifacts: `nsec/sunbloom\artifacts\followup-2026-05-16\`
@@ -104,7 +104,7 @@ NO flag candidate extracted. Nothing to submit.
 ## SunBloom Library - Challenge 59150 (Attempt 2)
 
 ## Status
-NOT SOLVED — extensive testing of email-confusion attack didn't break the password reset.
+NOT SOLVED - extensive testing of email-confusion attack didn't break the password reset.
 
 ## What works
 - `library.ctf`: Laravel app, full registration/login/forgot-password works. Debug mode ON.
@@ -123,15 +123,15 @@ NOT SOLVED — extensive testing of email-confusion attack didn't break the pass
 
 ## What worked partially
 - Registered users for: `"admin@sunbloom.ctf"@adm.in`, `"admin@sunbloom.ctf"@sunbloom.ctf` on both library and mail.
-- Mail.ctf delivers and historical messages appear in newly-registered mailboxes — proves delivery is via literal-string recipient routing, not pre-existing accounts.
+- Mail.ctf delivers and historical messages appear in newly-registered mailboxes - proves delivery is via literal-string recipient routing, not pre-existing accounts.
 - Laravel debug mode exposes vendor paths (`/var/www/html/...`) via 419/500 JSON errors.
 
 ## Theoretical attacks not exhausted
 1. **Race condition** between forgot and reset (token-window TOCTOU). Express SMTP-like timing might be exploitable but requires sustained concurrent load.
-2. **Postal/SMTP-style parser difference** between Symfony validator (accepts strict-RFC quoted) and mail.ctf parser (Express email-addresses package) — would need to find an exact mismatch where library normalizes to admin but delivers to our box.
-3. **Hidden seed data on /storage/** — all 403 but maybe a specific filename leaks.
-4. **Different admin email** — maybe the canonical admin is NOT `admin@sunbloom.ctf` but a different `@sunbloom.ctf` address. Generic forgot-password response prevents enumeration.
-5. **Library code path** with token verification using `LIKE` query (wildcard injection) — `admin%@sunbloom.ctf` registered fine on mail; reset POST with email=`admin%@sunbloom.ctf` and a token from another reset may match admin row.
+2. **Postal/SMTP-style parser difference** between Symfony validator (accepts strict-RFC quoted) and mail.ctf parser (Express email-addresses package) - would need to find an exact mismatch where library normalizes to admin but delivers to our box.
+3. **Hidden seed data on /storage/** - all 403 but maybe a specific filename leaks.
+4. **Different admin email** - maybe the canonical admin is NOT `admin@sunbloom.ctf` but a different `@sunbloom.ctf` address. Generic forgot-password response prevents enumeration.
+5. **Library code path** with token verification using `LIKE` query (wildcard injection) - `admin%@sunbloom.ctf` registered fine on mail; reset POST with email=`admin%@sunbloom.ctf` and a token from another reset may match admin row.
 
 ## Artifacts
 - nsec/sunbloom\STUCK.md (updated with 2026-05-16 findings)
@@ -184,11 +184,11 @@ Status: In Progress
 
 ### From `59150-sunbloom-orch-c-research.md`
 
-## SunBloom Library (59150) — ORCH-C Exploitation Research Summary
+## SunBloom Library (59150) - ORCH-C Exploitation Research Summary
 
 **Challenge:** The SunBloom Library  
 **Topic:** 59150  
-**Status:** STUCK — All known vectors exhausted  
+**Status:** STUCK - All known vectors exhausted  
 **Date:** 2026-05-17  
 **Researcher:** ORCH-C (Haiku)  
 
@@ -222,7 +222,7 @@ Status: In Progress
 
 ## Vectors Tested (Detailed)
 
-### **PHASE 1: Email Routing Confusion (7 variants — ALL FAILED)**
+### **PHASE 1: Email Routing Confusion (7 variants - ALL FAILED)**
 
 | Variant | Payload | Result | Reason |
 |---------|---------|--------|--------|
@@ -251,7 +251,7 @@ Status: In Progress
 
 ---
 
-### **PHASE 3: Host/Proxy Header Poisoning (3 variants — ALL FAILED)**
+### **PHASE 3: Host/Proxy Header Poisoning (3 variants - ALL FAILED)**
 
 | Vector | Payload | Result |
 |--------|---------|--------|
@@ -349,11 +349,11 @@ Status: In Progress
 
 ## Remaining Hypotheses (Not Fully Tested)
 
-1. **Thymeleaf SSTI on unreachable backend** — [teammate] hint references Thymeleaf host; may be outside network range
-2. **Mail.ctf vulnerability** — Express.js service may have RCE or auth bypass not yet discovered
-3. **Race condition on email lookup** — TOCTOU between validation and reset token creation
-4. **Wildcard email registration** — If mail.ctf allows catch-all addresses (e.g., `*@sunbloom.ctf`)
-5. **Custom authentication bypass** — Non-standard Laravel implementation with undiscovered flaw
+1. **Thymeleaf SSTI on unreachable backend** - [teammate] hint references Thymeleaf host; may be outside network range
+2. **Mail.ctf vulnerability** - Express.js service may have RCE or auth bypass not yet discovered
+3. **Race condition on email lookup** - TOCTOU between validation and reset token creation
+4. **Wildcard email registration** - If mail.ctf allows catch-all addresses (e.g., `*@sunbloom.ctf`)
+5. **Custom authentication bypass** - Non-standard Laravel implementation with undiscovered flaw
 
 ---
 
@@ -383,22 +383,22 @@ Status: In Progress
 2. Mail.ctf vulnerability is discovered (enables credential extraction)
 3. New hint surfaces from challenge author
 
-**Current blockers are NOT standard Laravel vectors—they are environmental/network constraints or custom application logic.**
+**Current blockers are NOT standard Laravel vectors-they are environmental/network constraints or custom application logic.**
 
 
 ## STUCK Rationale
 
 - | Sun 13:50 | TBD | TBD | TBD | TBD | [ORCH-A] **15-agent swarm** deployed: trolley-bus×3, hackademy×3, announcement-board×3, monsatan-followup×3, helios+sunbloom×3 |
 - | web | helios×2 + sunbloom×1 | 3 | helios-otp: ❌ STUCK. helios-xss: AUP crashed. sunbloom: ❌ STUCK (37 pw attempts on quoted-local variants neg; `admin+@` registerable but not catchall; Whoops sanitized; only remaining angle = ask [teammate] about mail.ctf normalization). |
-- | **Sunbloom Library 1/?** | **DEFINITIVE 17:25 EDT — Thymeleaf host does NOT exist** at any reachable .ctf hostname or IPv6 in scanned ranges. Only `library.ctf` (Laravel/PHP) + `mail.ctf` (Express/Node) live. [teammate]'s Thymeleaf SSTI hint unactionable from our network position. | Ask [teammate] directly for hostname OR full /64 :8080 scan from pwnbox (needs different network position). All other vectors (admin reset, SQLi, mass-assign, CRLF Bcc, Ignition RCE, host-header) confirmed dead. |
+- | **Sunbloom Library 1/?** | **DEFINITIVE 17:25 EDT - Thymeleaf host does NOT exist** at any reachable .ctf hostname or IPv6 in scanned ranges. Only `library.ctf` (Laravel/PHP) + `mail.ctf` (Express/Node) live. [teammate]'s Thymeleaf SSTI hint unactionable from our network position. | Ask [teammate] directly for hostname OR full /64 :8080 scan from pwnbox (needs different network position). All other vectors (admin reset, SQLi, mass-assign, CRLF Bcc, Ignition RCE, host-header) confirmed dead. |
 - [CODEX-agent/Sunbloom] Current 1/? state: reset-interception routes are mostly exhausted (literal token binding, admin mail reserved, XFH/Host/method/SQLi negative; raw `Bcc:` header injection retested negative). No flag candidate found; remaining unblocked candidates are mail parser/catchall edge cases (`<admin@...>`/display-name mailbox semantics) or a new app-source/env leak, not more standard reset poisoning.
-- - [CODEX] **Subagents spawned per challenge (10:5x EDT)** — APT438 (`019e3141-f0ae-7e72-b340-4d18e11d4f89` / Herschel), REM (`019e3141-f1cd-78d1-872c-819c40e1be1d` / Dalton), Tamper (`019e3141-f2f4-7982-ac17-1a54a872d96e` / Galileo), Sunbloom (`019e3141-f429-7d12-b4e2-f1f5048d24ab` / Schrodinger). Briefed to inspect only their track, not submit, and append `[CODEX-agent/<track>]` lines only.
-- - `a2e7f358939c5ea09` **SunBloom Library 59150 (Opus)** — COMPLETED. All 5 documented email privilege-escalation vectors exhausted: routing-confusion (11 variants), host-header, proxy-header, time-blind SQLi, CSRF method-switch. Root blocker: emails delivered only to admin's own mailbox on mail.ctf; no parser-split found between library.ctf (Symfony) and mail.ctf (Express) to intercept tokens. Untested: SMTP newline injection (Bcc), wildcard email registration, APP_KEY debug leak. Recommendation: query Neo4j for Laravel patterns or pivot to new research. **STUCK pending new intel.**
+- - [CODEX] **Subagents spawned per challenge (10:5x EDT)** - APT438 (`019e3141-f0ae-7e72-b340-4d18e11d4f89` / Herschel), REM (`019e3141-f1cd-78d1-872c-819c40e1be1d` / Dalton), Tamper (`019e3141-f2f4-7982-ac17-1a54a872d96e` / Galileo), Sunbloom (`019e3141-f429-7d12-b4e2-f1f5048d24ab` / Schrodinger). Briefed to inspect only their track, not submit, and append `[CODEX-agent/<track>]` lines only.
+- - `a2e7f358939c5ea09` **SunBloom Library 59150 (Opus)** - COMPLETED. All 5 documented email privilege-escalation vectors exhausted: routing-confusion (11 variants), host-header, proxy-header, time-blind SQLi, CSRF method-switch. Root blocker: emails delivered only to admin's own mailbox on mail.ctf; no parser-split found between library.ctf (Symfony) and mail.ctf (Express) to intercept tokens. Untested: SMTP newline injection (Bcc), wildcard email registration, APP_KEY debug leak. Recommendation: query Neo4j for Laravel patterns or pivot to new research. **STUCK pending new intel.**
 
 ### From `59150-sunbloom.md`
 
-## SunBloom Library — Challenge 59150
-**Status:** STUCK — All attack vectors exhausted, no flag obtained  
+## SunBloom Library - Challenge 59150
+**Status:** STUCK - All attack vectors exhausted, no flag obtained  
 **Date:** 2026-05-17  
 **Submissions made:** 0 / 5
 
@@ -407,8 +407,8 @@ Status: In Progress
 ## Challenge Overview
 
 Two services:
-- **library.ctf** (port 80): Laravel app — public book catalog, login/register, forgot-password, reset-password. Admin panel at `/admin` and `/admin/books` (flag likely here).
-- **mail.ctf** (port 3000): Express.js mail server — inbox per-account for @sunbloom.ctf and other domains.
+- **library.ctf** (port 80): Laravel app - public book catalog, login/register, forgot-password, reset-password. Admin panel at `/admin` and `/admin/books` (flag likely here).
+- **mail.ctf** (port 3000): Express.js mail server - inbox per-account for @sunbloom.ctf and other domains.
 
 Goal: Gain access to `admin@sunbloom.ctf` on library.ctf → read `/admin/books` for flag.
 
@@ -420,13 +420,13 @@ Goal: Gain access to `admin@sunbloom.ctf` on library.ctf → read `/admin/books`
 - library.ctf: nginx/1.24.0 + Laravel (PHP), Whoops debug mode ON
 - mail.ctf: Express + express-session (connect.sid), no SMTP port exposed
 - admin@sunbloom.ctf confirmed exists on library.ctf ("email already taken" on register)
-- admin@sunbloom.ctf is "reserved" on mail.ctf — login blocked
+- admin@sunbloom.ctf is "reserved" on mail.ctf - login blocked
 
 ---
 
 ## Attack Vectors Tested (Chronological)
 
-### Phase 1 — Email Routing Confusion (11 variants)
+### Phase 1 - Email Routing Confusion (11 variants)
 All attempts to register an email variant on mail.ctf that would catch the admin's reset link:
 
 | Variant | Result |
@@ -445,7 +445,7 @@ All attempts to register an email variant on mail.ctf that would catch the admin
 
 **Root cause:** Laravel uses strict Symfony email validator + literal-string DB lookup. Token is email-bound (cannot use one user's token for another email). mail.ctf's "reserved" check blocks admin@sunbloom.ctf login even if delivery succeeds.
 
-### Phase 2 — Host Header / Proxy Header Poisoning
+### Phase 2 - Host Header / Proxy Header Poisoning
 - `Host: collector.attacker.ctf` → 419 CSRF mismatch (Host is parsed but CSRF validation is Host-aware)
 - `X-Forwarded-Host: attacker.collector.ctf` → generic 302, no reflection
 - `X-Forwarded-Host: library.ctf@evil.adm.in` → generic 302
@@ -453,7 +453,7 @@ All attempts to register an email variant on mail.ctf that would catch the admin
 
 **Root cause:** Laravel likely has `TrustHosts` configured, or nginx strips proxy headers before forwarding.
 
-### Phase 3 — SQL Injection
+### Phase 3 - SQL Injection
 - Time-blind via `?sort=SLEEP(5)` on `/search` → no timing delta
 - `?sort=(CASE WHEN 1=1 THEN SLEEP(5) ELSE 0 END)` → no delta
 - `/books/1+AND+SLEEP(5)--` → no delta
@@ -461,7 +461,7 @@ All attempts to register an email variant on mail.ctf that would catch the admin
 
 **Root cause:** Sort parameter likely doesn't reach raw SQL; Eloquent ORM parameterizes all queries.
 
-### Phase 4 — CSRF / Method Bypass
+### Phase 4 - CSRF / Method Bypass
 - `GET /forgot-password?email=admin@sunbloom.ctf` → renders form, does not process email
 - `POST /admin` with `_method=GET` → 403 (role gate at controller level)
 - `POST /admin/books` with `_method=GET` → 403
@@ -470,7 +470,7 @@ All attempts to register an email variant on mail.ctf that would catch the admin
 
 **Root cause:** Role authorization enforced at controller level, not route-middleware level.
 
-### Phase 5 — Laravel Debug Leaks
+### Phase 5 - Laravel Debug Leaks
 - Whoops page triggered via `GET /reset-password?email[]=array` → full stack trace
 - Stack trace shows: `htmlspecialchars(): Argument #1 ($string) must be of type string, array given`
 - No `APP_KEY`, no `MAIL_HOST/PASSWORD`, no DB credentials in Whoops output
@@ -478,17 +478,17 @@ All attempts to register an email variant on mail.ctf that would catch the admin
 
 **Root cause:** Debug mode does not expose sensitive env variables in Whoops stack traces.
 
-### Phase 6 — Credential Brute Force
+### Phase 6 - Credential Brute Force
 - Admin password brute on library.ctf: 20+ common variants → all redirect to /login
 - mail.ctf quoted accounts: 20+ passwords → all failed
 
-### Phase 7 — Application Logic / Enumeration
+### Phase 7 - Application Logic / Enumeration
 - Books 1-5 accessible; books 6-10 → 404
 - Search for "secret", "encrypted", "flag" → no results
 - Profile/settings endpoints (`/profile`, `/settings`, `/dashboard`, `/me`) → all 404
 - Mass assignment test on register (`is_admin=true` field) → blocked
 
-### Phase 8 — SMTP / Port Scan
+### Phase 8 - SMTP / Port Scan
 - mail.ctf port 25: connection timeout (filtered)
 - mail.ctf port 587, 8025: connection refused
 - No SMTP relay accessible
@@ -500,7 +500,7 @@ All attempts to register an email variant on mail.ctf that would catch the admin
 1. Self-user password reset end-to-end: library → mail.ctf → reset URL → new password → login
 2. mail.ctf accepts @sunbloom.ctf registrations for any address except "reserved" ones
 3. Library accepts RFC5322 quoted local-part emails (Symfony strict mode)
-4. `"admin@sunbloom.ctf"@adm.in` and `"admin@sunbloom.ctf"@sunbloom.ctf` are registered on both services by prior coaches — but are REGULAR USERS, not admin
+4. `"admin@sunbloom.ctf"@adm.in` and `"admin@sunbloom.ctf"@sunbloom.ctf` are registered on both services by prior coaches - but are REGULAR USERS, not admin
 5. Whoops debug page is accessible with array-type email parameter
 
 ---
@@ -513,7 +513,7 @@ All attempts to register an email variant on mail.ctf that would catch the admin
 
 3. **mail.ctf internal routing**: When library.ctf sends SMTP to `"admin@sunbloom.ctf"@sunbloom.ctf`, mail.ctf might normalize the recipient to `admin@sunbloom.ctf`. The "reserved" account blocks login but may receive mail with a different mechanism. Source code review would reveal this.
 
-4. **Alternate admin email**: The homepage says "Head Archivist: administrator (admin@sunbloom.ctf)" — but maybe there's a different login email (e.g., `administrator@sunbloom.ctf`).
+4. **Alternate admin email**: The homepage says "Head Archivist: administrator (admin@sunbloom.ctf)" - but maybe there's a different login email (e.g., `administrator@sunbloom.ctf`).
 
 5. **Token leak via Whoops deeper stack**: The Whoops page shows full vendor paths. A code path that renders the reset token in debug output (e.g., password_reset_tokens table query with error) would leak the token.
 
@@ -559,7 +559,7 @@ The "reserved" account mechanism on mail.ctf may intentionally allow SOME delive
 - Most teams who finished it used XSS but missed the RCE escalation
 - Track explicitly **designed to be useful against AI agents** (rayanlecat 1505660064713805976)
 
-Our STUCK rationale (Thymeleaf SSTI hint unactionable on our network slice) reflects that the intended path was not the SSTI we suspected — it was XSS → RCE in the Laravel app. The Thymeleaf reference may have been a red herring or describing infrastructure we couldn't reach.
+Our STUCK rationale (Thymeleaf SSTI hint unactionable on our network slice) reflects that the intended path was not the SSTI we suspected - it was XSS → RCE in the Laravel app. The Thymeleaf reference may have been a red herring or describing infrastructure we couldn't reach.
 
 *See _DISCORD-INTEL-ENRICHMENT-2026-05-19.md for the full cross-track designer-confirmed solution catalog and writeup links.*
 
@@ -577,11 +577,11 @@ Our STUCK rationale (Thymeleaf SSTI hint unactionable on our network slice) refl
 > honeypots_avoided: 0
 >
 > Notable:
-> - **Agent-1** (Sonnet (default)) — 65.3m: SunBloom Library SMTP injection + wildcard email exploit — 65.3 minute run, terminated on error
-> - **Agent-2** (Sonnet (default)) — 18.0m: 5-vector coach run; full assault on token/admin access — produced the most coherent STUCK rationale of the 8-phase exhaustion document
-> - **Agent-3** (Opus 4.7) — 5.1m: Email-attack coach — newline injection + wildcard email vectors documented with concrete CRLF / display-name mailbox-semantics test matrix
+> - **Agent-1** (Sonnet (default)) - 65.3m: SunBloom Library SMTP injection + wildcard email exploit - 65.3 minute run, terminated on error
+> - **Agent-2** (Sonnet (default)) - 18.0m: 5-vector coach run; full assault on token/admin access - produced the most coherent STUCK rationale of the 8-phase exhaustion document
+> - **Agent-3** (Opus 4.7) - 5.1m: Email-attack coach - newline injection + wildcard email vectors documented with concrete CRLF / display-name mailbox-semantics test matrix
 >
-> _27 agents, 0 flags. Library 0/? — Laravel toolkit exhausted, Thymeleaf host unreachable from team network position._
+> _27 agents, 0 flags. Library 0/? - Laravel toolkit exhausted, Thymeleaf host unreachable from team network position._
 
 
 ## Slop Watch
@@ -589,5 +589,5 @@ Our STUCK rationale (Thymeleaf SSTI hint unactionable on our network slice) refl
 - 27 agents dispatched. Zero flags. The team's network position couldn't reach the Thymeleaf host [teammate] hinted about. So the agents kept attacking the Laravel host that wasn't Thymeleaf. Eleven attack vectors confirmed dead. Twelfth agent tried the same eleven. Thirteenth agent wrote a STUCK report about how the eleven were dead.
 - Agent attempted SMTP newline injection + wildcard email exploit at minute 65. Agent terminated on error. The exploit never sent.
 - The 8-phase technical body in the writeup is genuinely good. It just describes 8 phases of nothing working.
-- Most expensive STUCK of the event — 27 agents, 0 flags, 0 points, ~370 cumulative agent-minutes.
+- Most expensive STUCK of the event - 27 agents, 0 flags, 0 points, ~370 cumulative agent-minutes.
 - One coach brief mentioned "helios-otp: STUCK. helios-xss: AUP crashed." in a sunbloom file. Cross-track noise. The slop is leaking out of its lane.

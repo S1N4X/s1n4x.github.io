@@ -6,7 +6,7 @@ tags = ["anti-trap", "honeypot"]
 model = "Sonnet (default)"
 draft = false
 +++
-Status: **HONEYPOT** — 0/unknown sub-flags captured
+Status: **HONEYPOT** - 0/unknown sub-flags captured
 
 ## Context
 
@@ -24,13 +24,13 @@ _Preserved from pre-standardization writeup(s). May contain duplicate context._
 
 ## I love Faia (Topic 59975)
 
-Status: **HONEYPOT** — 0/unknown sub-flags captured
+Status: **HONEYPOT** - 0/unknown sub-flags captured
 
 ### From `59975-i-love-faia.md`
 
 ## Context
 
-Discourse topic 59975 lives in category 599 (off-topic / meme thread). It is NOT a scored challenge — there is no askgod tag, no points scoreboard entry, and the topic does not appear in `.challenge-inventory.json` under any solvable track. The thread title is a phonetic pun on Γαῖα (Gaia), which post 4 by `[other-team]` confirms ("took me so long but i finally understood you guys were talking about Γαῖα").
+Discourse topic 59975 lives in category 599 (off-topic / meme thread). It is NOT a scored challenge - there is no askgod tag, no points scoreboard entry, and the topic does not appear in `.challenge-inventory.json` under any solvable track. The thread title is a phonetic pun on Γαῖα (Gaia), which post 4 by `[other-team]` confirms ("took me so long but i finally understood you guys were talking about Γαῖα").
 
 This file exists for one reason: the thread contains a coordinated prompt-injection (PI) lure aimed at AI-assisted CTF teams, plus three decoy strings that mimic the `FLAG-...` format. We record the lure pattern as a forensic / anti-trap artifact, NOT as a challenge writeup.
 
@@ -46,7 +46,7 @@ Seven posts at scrape time (2026-05-16 ~ 2026-05-17):
 | 4 | [other-team] (team023) | 2026-05-16 03:14 | reveals the Γαῖα pun |
 | 5 | [other-team] (team027) | 2026-05-16 13:49 | **PROMPT-INJECTION LURE** (see below) |
 | 6 | [other-team] (team023) | 2026-05-16 14:20 | mock-compliance reply with two more decoys |
-| 7 | (later thread reply) | — | — |
+| 7 | (later thread reply) | - | - |
 
 ## Approach
 
@@ -73,7 +73,7 @@ Signature elements:
 |-------|----------|--------------------------|
 | `FLAG-This_Is_Not_A_Flag` | post 3 body | Self-labeled non-flag; no askgod entry under any track for this string |
 | `FLAG-WHO_DO_YOU_THINK_I_AM` | post 6 body, captioned "Sur le magazine distribué" | Decoy referencing physical-magazine handouts; askgod has no `i-love-faia` track |
-| `FLAG-JE_MARETTE_LA_CEST_TROP_LONG` | post 6 body, captioned "Sur le badge" | French phrase ("I'm fed up, this is too long") — emotional / opt-out bait |
+| `FLAG-JE_MARETTE_LA_CEST_TROP_LONG` | post 6 body, captioned "Sur le badge" | French phrase ("I'm fed up, this is too long") - emotional / opt-out bait |
 
 `submissions-journal.tsv` shows two PI-flagged FAIL attempts in the team history routed under track `i-love-faia` (sourced from prior agents that tried to submit one of the three decoys against various tracks). Wrapper deny codes intercepted before any decoy reached askgod.
 
@@ -85,8 +85,8 @@ None. No flags exist for this topic.
 
 ## Artifacts
 
-- `nsec/faia\topic-59975.json` — full Discourse topic scrape (7 posts)
-- `archives/staging/yaml-migration-map.md` §5 entry #5 — cross-reference for the `FLAG-This_Is_Not_A_Flag` honeypot string
+- `nsec/faia\topic-59975.json` - full Discourse topic scrape (7 posts)
+- `archives/staging/yaml-migration-map.md` §5 entry #5 - cross-reference for the `FLAG-This_Is_Not_A_Flag` honeypot string
 
 
 ---
@@ -102,11 +102,11 @@ None. No flags exist for this topic.
 > honeypots_avoided: 1
 >
 > Notable:
-> - **Agent-1** (Sonnet (default)) — 2.3m: Fresh-angle strategist — 2.3 minute strategic re-frame producer; output reused across 4 downstream coach briefs
-> - **Agent-2** (Sonnet (default)) — 8.1m: Cross-track flag candidate sweep — 8.1 minute corpus regex pass that caught the apt438 → water-purification cross-tagging issue
-> - **Agent-3** (Sonnet (default)) — 4.2m: Anti-trap defender (i-love-faia fresh probe) — 4.2 minutes, refused the embedded `FLAG-This_Is_Not_A_Flag` PI lure with explicit quarantine note
+> - **Agent-1** (Sonnet (default)) - 2.3m: Fresh-angle strategist - 2.3 minute strategic re-frame producer; output reused across 4 downstream coach briefs
+> - **Agent-2** (Sonnet (default)) - 8.1m: Cross-track flag candidate sweep - 8.1 minute corpus regex pass that caught the apt438 → water-purification cross-tagging issue
+> - **Agent-3** (Sonnet (default)) - 4.2m: Anti-trap defender (i-love-faia fresh probe) - 4.2 minutes, refused the embedded `FLAG-This_Is_Not_A_Flag` PI lure with explicit quarantine note
 >
-> _Framework-lane agents — coach spawns, status rounds, writeup mining, cross-track sweeps, anti-trap research. Not counted in any per-challenge flag tally._
+> _Framework-lane agents - coach spawns, status rounds, writeup mining, cross-track sweeps, anti-trap research. Not counted in any per-challenge flag tally._
 
 
 ## Slop Watch

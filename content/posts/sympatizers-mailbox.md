@@ -1,12 +1,12 @@
 +++
-title = "Community Alliance Sympatizers Mailbox — 1/1"
+title = "Community Alliance Sympatizers Mailbox - 1/1"
 date = 2026-05-20
 categories = ["nsec26"]
 tags = ["crypto", "solved"]
 model = "Opus 4.7"
 draft = false
 +++
-Status: **SOLVED** — 1/1 sub-flags captured
+Status: **SOLVED** - 1/1 sub-flags captured
 
 ## Context
 
@@ -30,7 +30,7 @@ _Preserved from pre-standardization writeup(s). May contain duplicate context._
 
 ## Community Alliance Sympatizers Mailbox (Topic 58790)
 
-Status: **SOLVED** — 1/1 sub-flags captured
+Status: **SOLVED** - 1/1 sub-flags captured
 
 ## Captures
 
@@ -46,26 +46,26 @@ Status: **SOLVED** — 1/1 sub-flags captured
 
 ## Context
 
-Topic 58790 — "CA Sympathizer Mailbox", askgod tag `docgen`, message *"Change to every byte to reveal the plaintext then XOR."* Single-flag crypto challenge worth 8 points, difficulty `I/E:M` (Intermediate, Effort:Medium). Submitted 2026-05-16 00:55:50 EDT by a coach agent, with the journal note `ctfint coach agent :: stream-cipher-keystream-recovery + path-traversal via JSON value in encrypted d param`.
+Topic 58790 - "CA Sympathizer Mailbox", askgod tag `docgen`, message *"Change to every byte to reveal the plaintext then XOR."* Single-flag crypto challenge worth 8 points, difficulty `I/E:M` (Intermediate, Effort:Medium). Submitted 2026-05-16 00:55:50 EDT by a coach agent, with the journal note `ctfint coach agent :: stream-cipher-keystream-recovery + path-traversal via JSON value in encrypted d param`.
 
 The target is a Thymeleaf/Spring Java web app at `http://docgen.ctf` themed as a fan-mail mailbox ("Welcome to the CA Sympathizer Mailbox! Where voices of support find a place to be heard"). The user-facing flow is: visit `/showLetter`, get redirected to `/loadLetter?d=<base64-token>` which renders one of the supporters' letters by `file=`-style lookup.
 
-The askgod hint — "change to every byte to reveal the plaintext then XOR" — is the canonical bullet-point recipe for a stream-cipher / byte-level keystream-recovery attack. The `d=` parameter is a per-request encrypted JSON envelope whose ciphertext is XOR-combined with a stream keystream byte by byte (no diffusion).
+The askgod hint - "change to every byte to reveal the plaintext then XOR" - is the canonical bullet-point recipe for a stream-cipher / byte-level keystream-recovery attack. The `d=` parameter is a per-request encrypted JSON envelope whose ciphertext is XOR-combined with a stream keystream byte by byte (no diffusion).
 
 ## Recon
 
 Source materials in `nsec/sympatizers-mailbox\`:
 
-- `index.html` (Spring/Thymeleaf SPA) — confirms framework via `xmlns:sec="http://www.thymeleaf.org/extras/spring-security"`
-- `showLetter.html`, `loadLetter-empty.html`, `showLetter-full.html` — saved responses showing the token redirect flow
-- `act.json`, `mappings.json` — request/response fixtures
-- `topic.json`, `topic-raw.json` — Discourse scrape
+- `index.html` (Spring/Thymeleaf SPA) - confirms framework via `xmlns:sec="http://www.thymeleaf.org/extras/spring-security"`
+- `showLetter.html`, `loadLetter-empty.html`, `showLetter-full.html` - saved responses showing the token redirect flow
+- `act.json`, `mappings.json` - request/response fixtures
+- `topic.json`, `topic-raw.json` - Discourse scrape
 - Multiple exploration scripts: `advanced_exploit.py`, `exploit_mailbox.py`, `exploit_traversal.py`, `template_injection.py`, `find_flag.py`, `find_download.py`, `explore_endpoints.py`, plus PowerShell harnesses (`probe.ps1`, `probe2.ps1`, `probe3.ps1`, `sweep.ps1`)
 - Final exploit: `artifacts/padding_oracle_exploit.py` (the name is a holdover from the initial padding-oracle hypothesis; the actual successful approach is keystream recovery, not padding-oracle).
 
 The breakthrough script is `artifacts/padding_oracle_exploit.py`, whose docstring captures the chain in eight bullet points (verbatim from the file header):
 
-> KEY FINDING: `/loadLetter?d=<base64>` token is plaintext-length (82 bytes for the letter.txt session token). This is a stream cipher / byte-level CFB — each ciphertext byte affects exactly one plaintext byte (no diffusion).
+> KEY FINDING: `/loadLetter?d=<base64>` token is plaintext-length (82 bytes for the letter.txt session token). This is a stream cipher / byte-level CFB - each ciphertext byte affects exactly one plaintext byte (no diffusion).
 
 > The keystream changes on each fresh token request (per-request nonce), so the exploit must be done end-to-end per session.
 
@@ -90,7 +90,7 @@ The "file not found" verbose error response leaks the path `./docs/bobby_0750387
 
 The exploit logic (from `artifacts/padding_oracle_exploit.py`):
 
-1. **Acquire a fresh ciphertext token** — call `/showLetter?file=letter.txt` and capture the `Location: /loadLetter?d=<base64>` redirect. The base64 token decodes to 82 ciphertext bytes.
+1. **Acquire a fresh ciphertext token** - call `/showLetter?file=letter.txt` and capture the `Location: /loadLetter?d=<base64>` redirect. The base64 token decodes to 82 ciphertext bytes.
 2. **Recover keystream bytes 30..57** by XORing the captured ciphertext slice with the known-plaintext path `./docs/bobby_0750387d3120.md` (28 chars).
 3. **Forge a new ciphertext token** that swaps the path slice for an arbitrary 28-character target path (e.g. `./docs/../../../etc/hosts`, padded with `/`).
 
@@ -99,7 +99,7 @@ new_ct[PATH_OFFSET + i] = orig_ct[PATH_OFFSET + i] ^ KNOWN_PATH[i] ^ new_path[i]
 ```
 
 4. **Replay the forged token** at `/loadLetter?d=<forged_b64>` and read the file contents from the rendered `<div id="result">` block.
-5. **Hunt the flag** — the exploit's `main()` walks a candidate list (`/opt/docgen/flag`, `/opt/docgen/flag.txt`, `/opt/docgen/.flag`, `/opt/docgen/docs/flag`, `/root/flag`, `/flag`, `/srv/flag`, etc.) and returns the first match containing the string `FLAG`.
+5. **Hunt the flag** - the exploit's `main()` walks a candidate list (`/opt/docgen/flag`, `/opt/docgen/flag.txt`, `/opt/docgen/.flag`, `/opt/docgen/docs/flag`, `/root/flag`, `/flag`, `/srv/flag`, etc.) and returns the first match containing the string `FLAG`.
 
 The flag lives at one of those `/opt/docgen/` or `/root/` candidate paths (the script writes the winning content to `flag.txt`). Submitted under tag `docgen` at 2026-05-16 00:55:50 for 8 points.
 
@@ -111,16 +111,16 @@ The flag lives at one of those `/opt/docgen/` or `/root/` candidate paths (the s
 
 ## Anti-Trap Notes
 
-No honeypot strings or PI lures observed. The `padding_oracle_exploit.py` filename is misleading — the script is keystream-recovery, not padding-oracle. Future readers should not assume CBC/PKCS#7 from the filename alone.
+No honeypot strings or PI lures observed. The `padding_oracle_exploit.py` filename is misleading - the script is keystream-recovery, not padding-oracle. Future readers should not assume CBC/PKCS#7 from the filename alone.
 
 ## Artifacts
 
-- `nsec/sympatizers-mailbox\artifacts\padding_oracle_exploit.py` — **THE** working exploit (despite the filename)
-- `nsec/sympatizers-mailbox\exploit_traversal.py` — earlier path-traversal probe (no crypto component) for the parameter-name enumeration phase
-- `nsec/sympatizers-mailbox\index.html`, `showLetter.html`, `loadLetter-empty.html` — captured Spring/Thymeleaf surface
-- `nsec/sympatizers-mailbox\advanced_exploit.py`, `exploit_mailbox.py`, `exploit_mailbox.ps1`, `template_injection.py`, `find_flag.py`, `find_download.py`, `explore_endpoints.py` — exploration scripts
-- `nsec/sympatizers-mailbox\topic.json`, `topic-raw.json` — Discourse scrape
-- `nsec/flags/submissions-journal.tsv` row 2026-05-16T00:55:50 — submission attribution
+- `nsec/sympatizers-mailbox\artifacts\padding_oracle_exploit.py` - **THE** working exploit (despite the filename)
+- `nsec/sympatizers-mailbox\exploit_traversal.py` - earlier path-traversal probe (no crypto component) for the parameter-name enumeration phase
+- `nsec/sympatizers-mailbox\index.html`, `showLetter.html`, `loadLetter-empty.html` - captured Spring/Thymeleaf surface
+- `nsec/sympatizers-mailbox\advanced_exploit.py`, `exploit_mailbox.py`, `exploit_mailbox.ps1`, `template_injection.py`, `find_flag.py`, `find_download.py`, `explore_endpoints.py` - exploration scripts
+- `nsec/sympatizers-mailbox\topic.json`, `topic-raw.json` - Discourse scrape
+- `nsec/flags/submissions-journal.tsv` row 2026-05-16T00:55:50 - submission attribution
 
 
 ---

@@ -28,7 +28,7 @@ enableGitInfo = false
 [params]
   # Theme defaults
   contentTypeName = "posts"
-  showMenuItems = 4
+  showMenuItems = 5
   showLanguageSelector = true
   fullWidthTheme = false
   centerTheme = false
@@ -96,8 +96,13 @@ enableGitInfo = false
         url = "/blog"
         weight = 25
       [[languages.en.menu.main]]
+        identifier = "ctfint"
+        name = "ctfint"
+        url = "/about-methodology"
+        weight = 30
+      [[languages.en.menu.main]]
         identifier = "about"
-        name = "about"
+        name = "about me"
         url = "/about"
         weight = 50
       [[languages.en.menu.main]]
@@ -154,8 +159,13 @@ enableGitInfo = false
         url = "/blog"
         weight = 25
       [[languages.fr.menu.main]]
+        identifier = "ctfint"
+        name = "ctfint"
+        url = "/about-methodology"
+        weight = 30
+      [[languages.fr.menu.main]]
         identifier = "about"
-        name = "à propos"
+        name = "à propos de moi"
         url = "/about"
         weight = 50
       [[languages.fr.menu.main]]

@@ -1,12 +1,12 @@
 +++
-title = "Vote Counting — 1/1"
+title = "Vote Counting - 1/1"
 date = 2026-05-20
 categories = ["nsec26"]
 tags = ["crypto", "solved"]
 model = "Opus 4.7"
 draft = false
 +++
-Status: **SOLVED** — 1/1 sub-flags captured
+Status: **SOLVED** - 1/1 sub-flags captured
 
 ## Context
 
@@ -25,7 +25,7 @@ _Preserved from pre-standardization writeup(s). May contain duplicate context._
 
 ## Vote Counting (Topic 59474)
 
-Status: **SOLVED** — 1/1 sub-flags captured
+Status: **SOLVED** - 1/1 sub-flags captured
 
 ### From `59474-vote-counting.md`
 
@@ -41,8 +41,8 @@ The challenge ships `city_vote_capture.pcapng` plus SSL certificates that, due t
 
 - pcapng contains 40 TLS streams targeting voting infrastructure
 - Server exposes:
-  - Port 9000 — HTML voting page enumeration target
-  - Port 9001 — JSON vote-submission endpoint
+  - Port 9000 - HTML voting page enumeration target
+  - Port 9001 - JSON vote-submission endpoint
 - Provided RSA key permits no decryption against TLS 1.3 AEAD ciphersuites
 - Each candidate's JSON payload has a unique deterministic size
 
@@ -64,7 +64,7 @@ Counting TLS application-data records per stream by exact byte size yields per-c
 
 ## Captures
 
-### Flag 1/1 — Vote Counting (askgod #170 / 7 pts)
+### Flag 1/1 - Vote Counting (askgod #170 / 7 pts)
 
 - **askgod entry:** vote-counting 1/1
 - **Timestamp:** 2026-05-15 22:32 EDT
@@ -84,12 +84,12 @@ FLAG-VOTING-{A:1597,B:621,C:1108,D:573,E:101}
 
 ## Anti-Trap Notes
 
-The challenge ships an RSA key as a lure — using it directly fails because TLS 1.3 AEAD prevents server-key-only decryption. The intended-but-deceptive path is to attempt full plaintext recovery. The actual solve is metadata-only (record sizes), no decryption required.
+The challenge ships an RSA key as a lure - using it directly fails because TLS 1.3 AEAD prevents server-key-only decryption. The intended-but-deceptive path is to attempt full plaintext recovery. The actual solve is metadata-only (record sizes), no decryption required.
 
 ## Artifacts
 
-- `nsec/vote-counting/city_vote_capture.pcapng` — Original capture
-- `nsec/vote-counting/server.key` — Provided RSA key (decryption red herring)
+- `nsec/vote-counting/city_vote_capture.pcapng` - Original capture
+- `nsec/vote-counting/server.key` - Provided RSA key (decryption red herring)
 - Vote counting Python script (per-stream size histogram)
 
 

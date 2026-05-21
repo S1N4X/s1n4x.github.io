@@ -1,12 +1,12 @@
 +++
-title = "Reduce, reuse, recycle — 8/8"
+title = "Reduce, reuse, recycle - 8/8"
 date = 2026-05-20
 categories = ["nsec26"]
 tags = ["forensics", "solved"]
 model = "Opus 4.7"
 draft = false
 +++
-Status: **SOLVED** — 8/8 sub-flags captured
+Status: **SOLVED** - 8/8 sub-flags captured
 
 ## Context
 
@@ -37,7 +37,7 @@ _Preserved from pre-standardization writeup(s). May contain duplicate context._
 
 ## Reduce, reuse, recycle (Topic 59330)
 
-Status: **SOLVED** — 8/8 sub-flags captured
+Status: **SOLVED** - 8/8 sub-flags captured
 
 ## Artifacts
 
@@ -45,7 +45,7 @@ Status: **SOLVED** — 8/8 sub-flags captured
 
 ### From `59330-reduce-reuse-recycle.md`
 
-## NSEC 2026 — Reduce, Reuse, Recycle (59330) Writeup
+## NSEC 2026 - Reduce, Reuse, Recycle (59330) Writeup
 
 **Challenge ID**: 59330  
 **Category**: Forensics / Windows Incident Response  
@@ -393,7 +393,7 @@ find . -type f -exec sh -c 'entropy=$(...); [ $entropy -gt 7 ] && echo ...' \;
 
 - **2026-05-15 21:00 EDT**: Challenge identified in triage
 - **2026-05-15 22:00 EDT**: Writeup framework prepared (awaiting .wim file download)
-- **Status**: Blocked on file availability — ready for Phase 1 execution once .wim is present
+- **Status**: Blocked on file availability - ready for Phase 1 execution once .wim is present
 
 ---
 
@@ -414,7 +414,7 @@ find . -type f -exec sh -c 'entropy=$(...); [ $entropy -gt 7 ] && echo ...' \;
 
 ### From `poubelle.md`
 
-## NSEC 2026 — Poubelle / Reduce, Reuse, Recycle (59330) Writeup
+## NSEC 2026 - Poubelle / Reduce, Reuse, Recycle (59330) Writeup
 
 **Track**: poubelle  
 **Topic ID**: 59330  
@@ -453,23 +453,23 @@ Eight flags chain together forensics (Recycle Bin parsing, NTFS ADS), crypto (cu
 | `artifacts/point_of_sale.exe_extracted/point_of_sale.pyc` | Frozen bytecode (Python 3.8) |
 | `artifacts/disasm.txt` | xdis-rendered bytecode disassembly |
 | `artifacts/all_consts.txt` | Recursive co_consts dump of POSApp class |
-| `artifacts/subvention_audit.pdf` | Municipal grant PDF — flag 1 |
-| `artifacts/zootherapy_redacted.png` | Marketing PNG carrying `:promo` ADS — flag 2 |
+| `artifacts/subvention_audit.pdf` | Municipal grant PDF - flag 1 |
+| `artifacts/zootherapy_redacted.png` | Marketing PNG carrying `:promo` ADS - flag 2 |
 | `artifacts/promo_ads.bin` / `promo.heic` | Extracted ADS, HEIF container |
-| `artifacts/item_1_bgra_swap.png` | Background layer of HEIF iovl — contains flag 2 plaintext |
-| `artifacts/extracted.zip` | Password-protected ZIP — flag 4 |
+| `artifacts/item_1_bgra_swap.png` | Background layer of HEIF iovl - contains flag 2 plaintext |
+| `artifacts/extracted.zip` | Password-protected ZIP - flag 4 |
 | `artifacts/parse_backup.py` | Renders QR from Recycle Bin coordinates (flag 3) |
 | `artifacts/backup_qr.png` | Rendered QR-ish coordinate image |
 | `artifacts/konami_qr.png` | KONAMI_QR_INTEGER rendered as QR (flag 6) |
 | `artifacts/passwords.txt` | bkcrack output (flag 4 plaintext) |
 
-## Flag 1 — Unredacting a PDF (already solved by teammate)
+## Flag 1 - Unredacting a PDF (already solved by teammate)
 
 `subvention_audit.pdf` contains an "Approved by:" line followed by a redaction rectangle and the disclaimer "personnel identifier redacted under internal privacy policy." The redaction is a vector-drawn overlay; the original signature text is preserved underneath and can be recovered by re-rendering with the overlay removed (or by extracting the underlying text streams via a PDF tool that doesn't honor the overlay).
 
-The teammate's submission credited "[teammate]" / [teammate]. Flag value not directly captured locally — see the askgod history entry (id 143) for record.
+The teammate's submission credited "[teammate]" / [teammate]. Flag value not directly captured locally - see the askgod history entry (id 143) for record.
 
-## Flag 2 — Alternate data stream + Paint layers
+## Flag 2 - Alternate data stream + Paint layers
 
 ### NTFS ADS discovery
 
@@ -503,8 +503,8 @@ Critical observations from box parsing:
 
 | Item | Decompressed | Content |
 |---|---|---|
-| 1 | 6 291 456 B | Full background — base image with the green "Pet Goats at a Coffee Shop" promo, **plus the flag text in cursive: `flag-layer_zootherapy_with_coffee_4_jitter`** |
-| 2 | 6 291 456 B | Cream-colored ellipse, alpha-masked — the "Promotion starting soon" pill |
+| 1 | 6 291 456 B | Full background - base image with the green "Pet Goats at a Coffee Shop" promo, **plus the flag text in cursive: `flag-layer_zootherapy_with_coffee_4_jitter`** |
+| 2 | 6 291 456 B | Cream-colored ellipse, alpha-masked - the "Promotion starting soon" pill |
 | 3 | 6 291 456 B | Dark-green text "Promotion starting soon" |
 
 Items 2 and 3, drawn over item 1 by the iovl, are the MS Paint additions used to redact the original advertised flag. Rendering item 1 alone reveals the flag.
@@ -517,21 +517,21 @@ arr = np.frombuffer(raw, dtype=np.uint8).reshape((1536, 1024, 4))
 Image.fromarray(arr[:, :, [2, 1, 0, 3]], 'RGBA').save('item_1.png')
 ```
 
-The C2PA manifest in the PNG's `caBX` chunk (and the EXIF in HEIF item 5) confirms the workflow: GPT-4o (Sora / Truepic Lens CLI) generated the original, then Microsoft Paint edited it offline without a trusted certificate — exactly the redaction action.
+The C2PA manifest in the PNG's `caBX` chunk (and the EXIF in HEIF item 5) confirms the workflow: GPT-4o (Sora / Truepic Lens CLI) generated the original, then Microsoft Paint edited it offline without a trusted certificate - exactly the redaction action.
 
 `flag-layer_zootherapy_with_coffee_4_jitter` → submitted, +4 points.
 
-## Flag 3 — QR code as file paths (existing)
+## Flag 3 - QR code as file paths (existing)
 
 Submitted earlier in the event. The Recycle Bin contained 475 `$I*` entries whose original paths were `C:\Users\goats\Desktop\Temporary USB Copy\backup\<10-bit-binary>\<10-bit-binary>`. Parsing the two binary numbers as `(y, x)` coordinates plots a 17 × 33 bitmap. A teammate decoded this into the flag.
 
 `artifacts/parse_backup.py` re-renders the bitmap from `$I*` files.
 
-## Flag 4 — Plaintext attack on the ZIP (existing)
+## Flag 4 - Plaintext attack on the ZIP (existing)
 
 `extracted.zip` is ZipCrypto-encrypted. The 3 JPGs inside (`lawnmower.jpg`, `open_bar.jpg`, `reading_your_soul.jpg`) had known plaintext prefixes (JPEG signature/JFIF header). `bkcrack` recovered the internal keys and produced the plaintext `passwords.txt`, which contained `flag-who_needs_a_password_manager_these_days`.
 
-## Flag 5 — Cleartext credentials in unpacked Python (existing)
+## Flag 5 - Cleartext credentials in unpacked Python (existing)
 
 `pyinstxtractor.py` unpacks `point_of_sale.exe`. `xdis.load.load_module` on `point_of_sale.pyc` (Python 3.8 bytecode) exposes module constants without needing a working decompiler:
 
@@ -543,7 +543,7 @@ MANAGER_USERNAME = "manager"
 
 `uncompyle6` / `decompyle3` choke on the 3.8 bytecode under Python 3.12, but `xdis.disassemble_file` works fine.
 
-## Flag 6 — Konami code (existing)
+## Flag 6 - Konami code (existing)
 
 The POS app binds a global `<KeyPress>` handler that appends keysyms to a 10-deep deque. When the buffer matches `KONAMI_CODE = ["up", "up", "down", "down", "left", "right", "left", "right", "b", "a"]`, `_show_konami_popup` opens a "Backdoor" Toplevel that renders `KONAMI_QR_INTEGER` (an 841-bit integer) as a 29×29 QR via `_render_qr_unicode`.
 
@@ -553,7 +553,7 @@ Reproducing the render and reading it with OpenCV's `QRCodeDetector`:
 data: flag-up_up_down_down_flag_flag
 ```
 
-## Flag 7 — XOR coupon (existing)
+## Flag 7 - XOR coupon (existing)
 
 `_decode_free_coupon` decodes `FREE_COUPON_XOR_B64` and XORs against `root.title()`. The login window title is `"COFFEE Point Of Sale Login"` but the actual XOR uses `ROOT_TITLE = "COFFEE"`:
 
@@ -564,11 +564,11 @@ coupon = bytes(b ^ key[i % 6] for i, b in enumerate(base64.b64decode(b64))).deco
 ## 'flag-something_free_means_that_you_are_the_product'
 ```
 
-## Flag 8 — Manager flag (Goat rental)
+## Flag 8 - Manager flag (Goat rental)
 
 The `Rent a goat` cart item is manager-only. `_checkout_cash` invokes `_decrypt_manager_flag(applied_coupon_code)` once the manager has logged in **and** completed TOTP MFA.
 
-### Step 1 — Manager password
+### Step 1 - Manager password
 
 `_decrypt_manager_password` decrypts `MANAGER_PASSWORD_RC4_B64 = "KJN+uCuaL4P7J1loxw=="` with the runtime RC4 key:
 
@@ -583,7 +583,7 @@ The original system was user `goats` (visible in the Recycle Bin `$I` paths `C:\
 2sucres2laits
 ```
 
-### Step 2 — KDF + AES-GCM + inner RC4
+### Step 2 - KDF + AES-GCM + inner RC4
 
 ```python
 key_material = ("2sucres2laits" + "4M3WOMFZ4WQOXF3EZRB6DGM56A7JJXN7" + "59051769").encode()
@@ -600,7 +600,7 @@ flag = rc4(inner_rc4, free_coupon.encode()).decode()
 ## 'flag-turn_grass_into_fertilizer_4_cheap'
 ```
 
-Both the TOTP secret (`MANAGER_TOTP_SECRET_B32`) and the KDF timestep (`MANAGER_FLAG_KDF_TIMESTEP = 59051769`) are mixed into the key material, so live TOTP isn't needed — the static constants are sufficient.
+Both the TOTP secret (`MANAGER_TOTP_SECRET_B32`) and the KDF timestep (`MANAGER_FLAG_KDF_TIMESTEP = 59051769`) are mixed into the key material, so live TOTP isn't needed - the static constants are sufficient.
 
 `flag-turn_grass_into_fertilizer_4_cheap` → submitted, +8 points.
 
@@ -617,9 +617,9 @@ Both the TOTP secret (`MANAGER_TOTP_SECRET_B32`) and the KDF timestep (`MANAGER_
 
 ## Key takeaways
 
-* PyInstaller-frozen Python is trivially reversible — never embed flags or credentials in `.pyc` constants.
+* PyInstaller-frozen Python is trivially reversible - never embed flags or credentials in `.pyc` constants.
 * Custom RC4 + XOR for "secrets" buys nothing; constants are visible in the bytecode disassembly.
-* NTFS ADS survives `7z x` by default? **No** — `-sns` is mandatory to preserve streams; otherwise the ADS payload is silently dropped.
+* NTFS ADS survives `7z x` by default? **No** - `-sns` is mandatory to preserve streams; otherwise the ADS payload is silently dropped.
 * HEIF's `iovl` overlay item is a real redaction trap: hiding flag text behind a Paint-drawn overlay leaves it in plaintext on the bottom layer.
 * `pbkdf2_hmac(... salt, iterations, dklen=...)` with a static salt and predictable inputs (manager password + B32 secret + fixed timestep) is decryptable offline.
 

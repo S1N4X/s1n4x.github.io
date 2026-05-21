@@ -1,5 +1,5 @@
 +++
-title = "NSEC 2026 — Agent Failure Modes & Limitations"
+title = "NSEC 2026 - Agent Failure Modes & Limitations"
 description = "Honest accounting of where ctfint's multi-agent system fell short."
 date = 2026-05-21
 categories = ["nsec26"]

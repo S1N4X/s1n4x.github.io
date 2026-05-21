@@ -1,12 +1,12 @@
 +++
-title = "Monsatan - Sprinklers — 2/2"
+title = "Monsatan - Sprinklers - 2/2"
 date = 2026-05-20
 categories = ["nsec26"]
 tags = ["ics", "solved"]
 model = "Sonnet (default)"
 draft = false
 +++
-Status: **SOLVED** — 2/2 sub-flags captured
+Status: **SOLVED** - 2/2 sub-flags captured
 
 ## Context
 
@@ -31,7 +31,7 @@ _Preserved from pre-standardization writeup(s). May contain duplicate context._
 
 ## Monsatan - Sprinklers (Topic 59980)
 
-Status: **SOLVED** — 2/2 sub-flags captured
+Status: **SOLVED** - 2/2 sub-flags captured
 
 ## Captures
 
@@ -119,7 +119,7 @@ Error codes (from string list): 0=SUCCESS, 3=AUTH_FAILURE, 5=INVALID_ARG, 6=CMD_
 
 The cmd table has gaps. Probing `0x3e0..0x3f5` and `0x7d0..0x7e0`:
 - All other codes return `err=6 (CMD_UNKNOWN)`
-- **`cmd 0x3ea` returns `err=0` with payload `FLAG-{1b45263069e94ad25747109944e889bb}\n\x00`** — no auth needed.
+- **`cmd 0x3ea` returns `err=0` with payload `FLAG-{1b45263069e94ad25747109944e889bb}\n\x00`** - no auth needed.
 
 This is a legacy/dev command the developers forgot to remove. The probe used a 48-byte header with all-zero signature, `cmd=0x3ea`, `usernameLen=0`, `payloadLen=0`.
 
@@ -138,7 +138,7 @@ When we send `usernameLen=0` (empty username), the server-side password lookup r
 expected = HMAC-SHA256(b"", b"" + cmd_le32 + payload)
 ```
 
-The client can compute the **exact same value** by signing with an empty key over an empty username + cmd + payload. The signatures match — **authentication succeeds without ever knowing a real password**.
+The client can compute the **exact same value** by signing with an empty key over an empty username + cmd + payload. The signatures match - **authentication succeeds without ever knowing a real password**.
 
 ### Attack chain (from `shell.ctf` via IPv6)
 
@@ -201,8 +201,8 @@ FATAL ERROR: FLAG-{4c7022450e7e5f58e3f2187c4fb4d5c3}
 > honeypots_avoided: 0
 >
 > Notable:
-> - **Agent-1** (Sonnet (default)) — 10.6m: Cross-track Monsatan secret matrix — mapped HMAC reuse hypothesis across 5 Monsatan tracks
-> - **Agent-2** (Opus 4.7) — 7.1m: Monsatan Defacing — final flag 6/6 via deface manifesto injection chain
-> - **Agent-3** (Sonnet (default)) — 3.9m: Monsatan Pesticide WASM JWT crypto chain — confirmed WASM has no crypto symbols (negative result locked in)
+> - **Agent-1** (Sonnet (default)) - 10.6m: Cross-track Monsatan secret matrix - mapped HMAC reuse hypothesis across 5 Monsatan tracks
+> - **Agent-2** (Opus 4.7) - 7.1m: Monsatan Defacing - final flag 6/6 via deface manifesto injection chain
+> - **Agent-3** (Sonnet (default)) - 3.9m: Monsatan Pesticide WASM JWT crypto chain - confirmed WASM has no crypto symbols (negative result locked in)
 >
-> _Cross-track HMAC secret hunt + GitLab PAT pivot + WASM crypto absence — multi-pronged solve._
+> _Cross-track HMAC secret hunt + GitLab PAT pivot + WASM crypto absence - multi-pronged solve._

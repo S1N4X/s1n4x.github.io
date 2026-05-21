@@ -1,12 +1,12 @@
 +++
-title = "Trading cards! — 4/4"
+title = "Trading cards! - 4/4"
 date = 2026-05-20
 categories = ["nsec26"]
 tags = ["misc", "solved"]
 model = "Opus 4.7"
 draft = false
 +++
-Status: **SOLVED** — 4/4 sub-flags captured
+Status: **SOLVED** - 4/4 sub-flags captured
 
 ## Context
 
@@ -33,13 +33,13 @@ _Preserved from pre-standardization writeup(s). May contain duplicate context._
 
 ## Trading cards! (Topic 59726)
 
-Status: **SOLVED** — 4/4 sub-flags captured
+Status: **SOLVED** - 4/4 sub-flags captured
 
 ### From `59726-trading-cards.md`
 
 ## Trading cards! (Topic 59726)
 
-Status: **STUCK** — 4/4 sub-flags captured
+Status: **STUCK** - 4/4 sub-flags captured
 
 ## STUCK Rationale
 
@@ -49,7 +49,7 @@ See artifacts for in-progress investigation notes.
 
 ## Trading cards! (Topic 59726)
 
-Status: **STUCK** — 0/unknown sub-flags captured
+Status: **STUCK** - 0/unknown sub-flags captured
 
 ## Artifacts
 
@@ -66,7 +66,7 @@ Status: **STUCK** — 0/unknown sub-flags captured
 
 ## Context
 
-Steganography challenge handing out a deck of NPC trading cards ([teammate], [npc], Woonderk1nd, Axolotzl) with hidden data on each card image plus a "chase card" puzzle integrating them. Four distinct askgod sub-tags — one per card.
+Steganography challenge handing out a deck of NPC trading cards ([teammate], [npc], Woonderk1nd, Axolotzl) with hidden data on each card image plus a "chase card" puzzle integrating them. Four distinct askgod sub-tags - one per card.
 
 ## Recon
 
@@ -80,11 +80,11 @@ Card images delivered via the NSEC venue (physical artwork + digital card images
 
 Standard image-stego pipeline applied to each card:
 
-1. **Metadata extraction** (`exiftool -a`) — surfaces Comment-field flag candidates and hints
-2. **String extraction** (`strings`) — surfaces ASCII-buried payloads
-3. **Binwalk** — extracts embedded ZIPs or files appended after IEND
-4. **LSB extraction** — per-channel bit-plane reveal of hidden text or images
-5. **Chase card puzzle** — ties the per-card extracted values via a substitution/positional cipher to produce the final 4/4 flag
+1. **Metadata extraction** (`exiftool -a`) - surfaces Comment-field flag candidates and hints
+2. **String extraction** (`strings`) - surfaces ASCII-buried payloads
+3. **Binwalk** - extracts embedded ZIPs or files appended after IEND
+4. **LSB extraction** - per-channel bit-plane reveal of hidden text or images
+5. **Chase card puzzle** - ties the per-card extracted values via a substitution/positional cipher to produce the final 4/4 flag
 
 Each card produced a separate askgod-tagged flag. The Axolotzl card was the integration step (4/4 chase puzzle).
 
@@ -99,7 +99,7 @@ All four submitted in rapid succession at 2026-05-15 21:40 EDT (team-direct, bat
 | 3 | Woonderk1nd Card | 3/4 | card-decode |
 | 4 | Axolotzl Card | 4/4 | card-decode (chase puzzle integration) |
 
-Per-flag values redacted (askgod-only — values not preserved in writeup file).
+Per-flag values redacted (askgod-only - values not preserved in writeup file).
 
 ## Anti-Trap Notes
 
@@ -107,9 +107,9 @@ The card artwork itself is the canonical hint surface; the chase card's puzzle i
 
 ## Artifacts
 
-- `nsec/trading-cards/artifacts/` — Card images + extraction outputs
-- `nsec/trading-cards/artifacts/batch_analysis.sh` — Bulk steghide/binwalk/exiftool driver
-- `nsec/trading-cards/artifacts/stego_toolkit.py` — LSB/channel extraction toolkit
+- `nsec/trading-cards/artifacts/` - Card images + extraction outputs
+- `nsec/trading-cards/artifacts/batch_analysis.sh` - Bulk steghide/binwalk/exiftool driver
+- `nsec/trading-cards/artifacts/stego_toolkit.py` - LSB/channel extraction toolkit
 
 
 ---

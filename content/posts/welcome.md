@@ -1,12 +1,12 @@
 +++
-title = "Welcome to the CTF! — 1/1"
+title = "Welcome to the CTF! - 1/1"
 date = 2026-05-20
 categories = ["nsec26"]
 tags = ["info", "solved"]
 model = "Opus 4.7"
 draft = false
 +++
-Status: **SOLVED** — 1/1 sub-flags captured
+Status: **SOLVED** - 1/1 sub-flags captured
 
 ## Context
 
@@ -24,7 +24,7 @@ _Preserved from pre-standardization writeup(s). May contain duplicate context._
 
 ## Welcome to the CTF! (Topic 59942)
 
-Status: **SOLVED** — 1/1 sub-flags captured
+Status: **SOLVED** - 1/1 sub-flags captured
 
 ## Artifacts
 
@@ -36,7 +36,7 @@ Status: **SOLVED** — 1/1 sub-flags captured
 
 ## Context
 
-A brief setup challenge pointing teams to a shared IPv6-capable jump host (`shell.ctf`) for use in other challenges. The challenge brief acts as a "Rule flag" / setup acknowledgement — the flag is automatically granted when the team checks in.
+A brief setup challenge pointing teams to a shared IPv6-capable jump host (`shell.ctf`) for use in other challenges. The challenge brief acts as a "Rule flag" / setup acknowledgement - the flag is automatically granted when the team checks in.
 
 **Target Information:**
 - Hostname: `shell.ctf`
@@ -66,12 +66,12 @@ No technical exploitation required. The flag for this challenge is granted autom
 
 ## Captures
 
-### Flag 1/1 — Rule flag (welcome)
+### Flag 1/1 - Rule flag (welcome)
 
 - **askgod entry:** #155 "Rule flag" 1 pt
 - **Timestamp:** 2026-05-15 21:23 EDT
 - **Method:** Team check-in / askgod automatic rule-flag grant
-- **Value:** Redacted (askgod-only — value never appeared on the team box)
+- **Value:** Redacted (askgod-only - value never appeared on the team box)
 
 ## Cross-Track References
 
@@ -82,8 +82,8 @@ No technical exploitation required. The flag for this challenge is granted autom
 
 ## Artifacts
 
-- `nsec/welcome\recon.txt` — Team 061 recon notes
-- `nsec/shellctf_known_hosts` — SSH known_hosts entries
+- `nsec/welcome\recon.txt` - Team 061 recon notes
+- `nsec/shellctf_known_hosts` - SSH known_hosts entries
 
 
 ---

@@ -1,12 +1,12 @@
 +++
-title = "Nursery — 1/1"
+title = "Nursery - 1/1"
 date = 2026-05-20
 categories = ["nsec26"]
 tags = ["solved", "stego"]
 model = "Opus 4.7"
 draft = false
 +++
-Status: **SOLVED** — 1/1 sub-flags captured
+Status: **SOLVED** - 1/1 sub-flags captured
 
 ## Context
 
@@ -31,15 +31,15 @@ _Preserved from pre-standardization writeup(s). May contain duplicate context._
 
 ## Nursery (Topic 58718)
 
-Status: **SOLVED** — 1/1 sub-flags captured
+Status: **SOLVED** - 1/1 sub-flags captured
 
 ### From `58718-nursery.md`
 
 ## Context
 
-Topic 58718 ("Nursery") — askgod tag `nursery`, message *"Life always finds a way"*, single-flag track (1/1), 3 points. Initial hint: "Flag in https://dl.nsec/nursery.html". Difficulty `B/E:L` (Basic, Effort:Low) per askgod CFSS tag.
+Topic 58718 ("Nursery") - askgod tag `nursery`, message *"Life always finds a way"*, single-flag track (1/1), 3 points. Initial hint: "Flag in https://dl.nsec/nursery.html". Difficulty `B/E:L` (Basic, Effort:Low) per askgod CFSS tag.
 
-The challenge ships a single static HTML file (`nursery.html`, 920,922 bytes, 113 lines) containing 32 embedded SVG plant/tree fractals, each labeled with a numeric ID (e.g. 1021, 1054, ..., 1484). The prose copy invites the player to "listen to the samples" — that wording is metaphorical: each SVG encodes data via its geometric structure.
+The challenge ships a single static HTML file (`nursery.html`, 920,922 bytes, 113 lines) containing 32 embedded SVG plant/tree fractals, each labeled with a numeric ID (e.g. 1021, 1054, ..., 1484). The prose copy invites the player to "listen to the samples" - that wording is metaphorical: each SVG encodes data via its geometric structure.
 
 ## Recon
 
@@ -47,7 +47,7 @@ Triage (`nsec/nursery\artifacts\TRIAGE_REPORT.md`):
 
 - One HTML file, 32 base64-encoded data-URI SVGs of L-system-style plant fractals
 - Each SVG has a numeric label; IDs are non-sequential and clustered in the 1000-1500 range
-- Visual inspection: tree complexity varies — sparse trees vs dense trees
+- Visual inspection: tree complexity varies - sparse trees vs dense trees
 - First-pass bit extraction (`analyze2.py`) treated branch presence/absence as binary and produced ~5,422 bits across all 32 samples, decoding to garbage ASCII
 
 The garbage output ruled out raw branch-presence as the encoding. The successful route was a positional / structural counting scheme: each SVG's distinctive feature (line count, dot count, or stroke count depending on the analyst's specific implementation) maps to a single ASCII byte. Concatenating one byte per SVG, in the order presented by `nursery.html`, yields the flag string.
@@ -72,17 +72,17 @@ The submission landed at 2026-05-15 23:02 EDT for 3 points (askgod #40), tagged 
 
 ## Anti-Trap Notes
 
-No honeypot strings observed in nursery artifacts. The "samples" wording in the challenge prose is a red herring inviting audio/signal-processing tooling — the actual encoding is purely visual / structural and requires only an SVG parser plus a counter.
+No honeypot strings observed in nursery artifacts. The "samples" wording in the challenge prose is a red herring inviting audio/signal-processing tooling - the actual encoding is purely visual / structural and requires only an SVG parser plus a counter.
 
 ## Artifacts
 
-- `nsec/nursery\nursery.html` — the challenge file (32 embedded SVG plant fractals)
-- `nsec/nursery\artifacts\TRIAGE_REPORT.md` — initial triage notes
-- `nsec/nursery\artifacts\svgs\` — extracted SVG samples (per-file)
-- `nsec/nursery\artifacts\analyze.py`, `analyze2.py`, `extract.py` — extraction / counting scripts
-- `nsec/nursery\artifacts\fetch-html.ps1`, `fetch-nursery.ps1` — fetch helpers
-- `nsec/nursery\artifacts\grid.html`, `grid_full.html`, `grid.png` — visual grid layouts
-- `nsec/nursery\artifacts\topic.json` — Discourse topic scrape
+- `nsec/nursery\nursery.html` - the challenge file (32 embedded SVG plant fractals)
+- `nsec/nursery\artifacts\TRIAGE_REPORT.md` - initial triage notes
+- `nsec/nursery\artifacts\svgs\` - extracted SVG samples (per-file)
+- `nsec/nursery\artifacts\analyze.py`, `analyze2.py`, `extract.py` - extraction / counting scripts
+- `nsec/nursery\artifacts\fetch-html.ps1`, `fetch-nursery.ps1` - fetch helpers
+- `nsec/nursery\artifacts\grid.html`, `grid_full.html`, `grid.png` - visual grid layouts
+- `nsec/nursery\artifacts\topic.json` - Discourse topic scrape
 
 
 ---

@@ -1,12 +1,12 @@
 +++
-title = "Renewable Energy Mobility (REM) — 6/7"
+title = "Renewable Energy Mobility (REM) - 6/7"
 date = 2026-05-19
 categories = ["nsec26"]
 tags = ["ics", "iot", "mqtt", "partial"]
 model = "Opus 4.7"
 draft = false
 +++
-Status: **PARTIAL** — 6/7 sub-flags captured
+Status: **PARTIAL** - 6/7 sub-flags captured
 
 ## Context
 
@@ -25,7 +25,7 @@ Status: **PARTIAL** — 6/7 sub-flags captured
 
 ## STUCK Rationale
 
-- | ~14:30 | REM 4-7/7 | Used Bearer FLAG-183fe43778ea6241e736d8e2e1bcb300 (3/7 already submitted) against http://broker.renewable-energy-mobility.ctf:8081 firmware catalog — 5 prod fw all openssl:aes-256-cbc:pbkdf2 with FIXED salt `01-02-03-04-05-06-07-08`. ~50 passphrase candidates tested, none decrypt to squashfs magic | Stuck on AES passphrase recovery |
+- | ~14:30 | REM 4-7/7 | Used Bearer FLAG-183fe43778ea6241e736d8e2e1bcb300 (3/7 already submitted) against http://broker.renewable-energy-mobility.ctf:8081 firmware catalog - 5 prod fw all openssl:aes-256-cbc:pbkdf2 with FIXED salt `01-02-03-04-05-06-07-08`. ~50 passphrase candidates tested, none decrypt to squashfs magic | Stuck on AES passphrase recovery |
 
 ## Artifacts
 
@@ -41,7 +41,7 @@ _Preserved from pre-standardization writeup(s). May contain duplicate context._
 
 ## Renewable Energy Mobility (REM) (Topic 59582)
 
-Status: **PARTIAL** — 6/7 sub-flags captured
+Status: **PARTIAL** - 6/7 sub-flags captured
 
 ## Artifacts
 
@@ -76,7 +76,7 @@ Status: **PARTIAL** — 6/7 sub-flags captured
 
 ### From `59582-rem.md`
 
-## NSEC 2026 — Topic 59582 — REM (Renewable Energy Mobility) — Static analysis pass 2/7
+## NSEC 2026 - Topic 59582 - REM (Renewable Energy Mobility) - Static analysis pass 2/7
 
 Date: 2026-05-16
 Mode: offline static analysis (VPN down)
@@ -90,10 +90,10 @@ Find `firmware_repo_api_key` from `nsec/rem\pod-ops-cli` (Go ELF, 6.2 MB, built 
 **The string `firmware_repo_api_key` is NOT in the binary, nor is any related token.**
 `pod-ops-cli` is a pure MQTT maintenance client. It never speaks HTTP, has no embedded
 Bearer/Authorization header, and does not know about the firmware repo at all. The
-firmware key cannot be recovered from this binary alone — it lives only server-side
+firmware key cannot be recovered from this binary alone - it lives only server-side
 (on the broker or the pod runtime).
 
-## Evidence — what's in the binary
+## Evidence - what's in the binary
 
 ### ELF map (parsed manually)
 ```
@@ -123,13 +123,13 @@ main.connectMQTT           va=0x5f73a0 sz=0x3b2
 No `fetchFirmware`, `httpClient`, `repo*`, `apiKey*` symbol.
 
 ### CLI verbs (decoded from RIP-relative LEAs in `runCLICommand` + dispatch block @0x1f28fe)
-- `pod <pod-id>` — set target
-- `config set <field> <value>` — fields = `route-id|route_id`, `target-speed|target_cruise_speed_kmh`, `max-speed|max_speed_kmh`, `failsafe-mode`, `autonomy-enabled|autonomy_enabled`
+- `pod <pod-id>` - set target
+- `config set <field> <value>` - fields = `route-id|route_id`, `target-speed|target_cruise_speed_kmh`, `max-speed|max_speed_kmh`, `failsafe-mode`, `autonomy-enabled|autonomy_enabled`
   - NB: `firmware-repo-url`, `firmware-repo-api-key`, `api-key` are NOT valid fields → publishes get rejected with `unsupported field %q`
-- `diag [topic ...]` — default `devices/#`
-- `get_flag` — publishes empty body to `flag/request/<podID>`, subscribes to nothing flag-related
-- `safe-stop` — quick maintenance stop
-- `resume` — re-enable autonomy
+- `diag [topic ...]` - default `devices/#`
+- `get_flag` - publishes empty body to `flag/request/<podID>`, subscribes to nothing flag-related
+- `safe-stop` - quick maintenance stop
+- `resume` - re-enable autonomy
 - `help`, `exit`
 - `provision` (top-level subcommand, not in maint shell)
 
@@ -145,7 +145,7 @@ The two `config set firmware-*` lines in our earlier `cmds.log` would have produ
 - LEA strings: `flag/request/` (@0x64e1af), `get_flag` (@0x64d34e)
 - Publishes `get_flag` body to `flag/request/<podID>`. NO subscription to any response
   topic before publish → the CLI is fire-and-forget; the broker / pod side decides what
-  to do. **The lack of broker echo we observed yesterday is therefore expected — the
+  to do. **The lack of broker echo we observed yesterday is therefore expected - the
   CLI was never going to print anything.**
 
 ### Strings tally for suspect tokens (whole binary, raw byte search)
@@ -163,9 +163,9 @@ The two `config set firmware-*` lines in our earlier `cmds.log` would have produ
 | `crypto/tls`                | 927   |
 
 ### Embedded secrets in `.noptrdata` (full inventory)
-- `main.caCertPEM`         @0x3ef3a0 — Mosquitto CA cert (already extracted to `certificate_2.pem`)
-- `main.bootstrapCertPEM`  @ same blob — bootstrap client cert (`certificate_1.pem`)
-- `main.bootstrapKeyPEM`   @0x3ef8e0 — bootstrap RSA private key (`private_key_1.pem`)
+- `main.caCertPEM`         @0x3ef3a0 - Mosquitto CA cert (already extracted to `certificate_2.pem`)
+- `main.bootstrapCertPEM`  @ same blob - bootstrap client cert (`certificate_1.pem`)
+- `main.bootstrapKeyPEM`   @0x3ef8e0 - bootstrap RSA private key (`private_key_1.pem`)
 - TLS label constants (`master secret`, `key expansion`, `client/server finished`, etc.)
 - No additional PEM, no other secret, no obfuscated/XORed blob detected.
 
@@ -174,24 +174,24 @@ The two `config set firmware-*` lines in our earlier `cmds.log` would have produ
 - Broker IPv6: `9000:d37e:c40b:edd5:216:3eff:feef:4f22` (@0x65768b)
 - Broker port: 8883 (default in `runProvision`)
 
-That's it. No firmware-repo URL, no port 8081 reference — the pod-ops-cli does not
+That's it. No firmware-repo URL, no port 8081 reference - the pod-ops-cli does not
 even know `firmware_repo_url:8081` exists. Whatever entity hits that endpoint, it is
 NOT this binary.
 
-## Conclusion — re-orientation needed
+## Conclusion - re-orientation needed
 
 `firmware_repo_api_key` is held by the **pod runtime** or the **broker authz layer**,
 not by `pod-ops-cli`. Static analysis has been exhausted; further extraction requires
-live broker interaction (currently impossible — VPN down).
+live broker interaction (currently impossible - VPN down).
 
 Practical implication: the prior agent's strategy of "config set firmware-repo-api-key"
-was incorrect — that field doesn't exist in the CLI's dispatch. The masked
+was incorrect - that field doesn't exist in the CLI's dispatch. The masked
 `firmware_repo_api_key` value the prior agent reported broker-side is the **only copy**
 that's reachable to us, and it's deliberately masked. Recovery requires:
 1. A higher-privilege identity than `maintenance` to read the unmasked config, OR
 2. Tricking a pod into echoing the key through telemetry / config-dump, OR
 3. Side-channel: making a pod fetch firmware from our listener so the **pod** sends
-   the Bearer header to us — but it requires triggering a real firmware fetch which
+   the Bearer header to us - but it requires triggering a real firmware fetch which
    the broker controls.
 
 ## Morning attack plan (when VPN is back)
@@ -209,7 +209,7 @@ that's reachable to us, and it's deliberately masked. Recovery requires:
 3. **Provision a CN that matches the wildcard ACL on a privileged config topic.**
    Try `CN=firmware-service`, `CN=repo-client`, `CN=mosquitto-bridge`. Subscribe
    to `firmware/#`, `repo/#`, `service/#`, `internal/#`, `admin/#`.
-4. **Read the actual `devices/<pod>/config` topic value when pod is online** — the
+4. **Read the actual `devices/<pod>/config` topic value when pod is online** - the
    unmasked key field name might be different (e.g. `update_token`, `repo_secret`).
    Subscribe pre-handshake so we receive the retained config message immediately.
 5. **Publish a malformed `provision/request/<id>` with a bootstrap-signed CSR
@@ -217,7 +217,7 @@ that's reachable to us, and it's deliberately masked. Recovery requires:
    Prior agent already did this for `maintenance` cert (got OID 1.3.6.1.4.1.55555.1.1
    accepted as "1/7"). Try role values: `0xFF`, `admin`, `root`, `firmware-admin`,
    `repo-writer`, integer `99`, `0x7fffffff`.
-6. **Bootstrap key reuse via a different broker virtual host** — check the broker's
+6. **Bootstrap key reuse via a different broker virtual host** - check the broker's
    TLS SNI handling: connect with `server_hostname=firmware-repo.renewable-energy-mobility.ctf`
    and see if a different ACL is loaded.
 
@@ -229,7 +229,7 @@ Following up on the encrypted `.squashfs.enc` payloads with aes-256-cbc:pbkdf2:
 - Tested ~600 thematic candidates: renewable, energy, mobility, fleet, pod, firmware, nsec, ctf, broker, mqtt, maintenance, etc.
 - Tested algorithm variations: pbkdf2 with iter=1000/10000/100000/1000000, legacy MD5 KDF, aes-128-cbc, aes-256-gcm
 - All 5 encrypted files use identical salt `01-02-03-04-05-06-07-08`
-- **Result: ZERO matches** — no passphrase decrypted to squashfs magic `68737173` or `73717368`
+- **Result: ZERO matches** - no passphrase decrypted to squashfs magic `68737173` or `73717368`
 
 **Conclusion:** 
 - Flags 4/7 through 7/7 are **NOT** in the decrypted firmware payloads (passphrase is not thematic/predictable)
@@ -238,13 +238,13 @@ Following up on the encrypted `.squashfs.enc` payloads with aes-256-cbc:pbkdf2:
 
 ## Output artifacts updated
 - (this file) `nsec/writeups\59582-rem.md`
-- `nsec/rem\artifacts\firmware-key-candidates.txt` — empty (no candidates found)
-- `nsec/rem\artifacts\passphrase-brute-2026-05-17.txt` — firmware decryption brute-force log (~600 candidates, ZERO matches)
+- `nsec/rem\artifacts\firmware-key-candidates.txt` - empty (no candidates found)
+- `nsec/rem\artifacts\passphrase-brute-2026-05-17.txt` - firmware decryption brute-force log (~600 candidates, ZERO matches)
 
 
 ## STUCK Rationale
 
-- | ~14:30 | REM 4-7/7 | Used Bearer FLAG-183fe43778ea6241e736d8e2e1bcb300 (3/7 already submitted) against http://broker.renewable-energy-mobility.ctf:8081 firmware catalog — 5 prod fw all openssl:aes-256-cbc:pbkdf2 with FIXED salt `01-02-03-04-05-06-07-08`. ~50 passphrase candidates tested, none decrypt to squashfs magic | Stuck on AES passphrase recovery |
+- | ~14:30 | REM 4-7/7 | Used Bearer FLAG-183fe43778ea6241e736d8e2e1bcb300 (3/7 already submitted) against http://broker.renewable-energy-mobility.ctf:8081 firmware catalog - 5 prod fw all openssl:aes-256-cbc:pbkdf2 with FIXED salt `01-02-03-04-05-06-07-08`. ~50 passphrase candidates tested, none decrypt to squashfs magic | Stuck on AES passphrase recovery |
 - - [CODEX-inventory] 2026-05-16 14:32 EDT: rebuilt askgod-first challenge inventory after repeated duplicate work. Fresh cache files: `nsec/.askgod-history.txt`, `nsec/.askgod-tracks.json`, `nsec/.challenge-inventory.json`, and `nsec/ASKGOD-INVENTORY.md`. Current open canonical askgod tracks are: `announcement-board` 3/4, `apt438` 3/9, `badge-firmware` 2/5, `fossilco` 6/8, `grid-alignment` 1/2, `helios-fleet-network` 2/5, `monsatan-defacing` 5/6, `monsatan-impact-study` 2/5, `renewable-energy-mobility` 2/7, `weather-station` 1/4. Completed aliases now explicitly map to askgod before work/submission: `monsatan-kiosk` 1/1, `lowcode`/Water purification 4/4, `tamper`/Seed Vault 6/6, `open-sunshine.mcp.ctf`/Hello Sunshine 2/2, `multi-facteur-authentication` 6/6, `teamworking` 1/1, `gh-agent`/Drone license 2/2, plus other complete tracks in `ASKGOD-INVENTORY.md`. `submit-flag.ps1` now refreshes askgod before submit and denies complete aliases before making the MCP call; `find-flag-gaps.ps1` suppresses candidates that live only under complete askgod tracks. One guard-test before the `lowcode` parser fix hit askgod with `FLAG-AAAAAAAAAAAAAAAA` under `water-purification` and got FAIL; subsequent guard tests denied locally as intended.
 - - [CODEX-workflow-fix] 2026-05-16 14:45 EDT: fixed both Codex and Claude Code CTFINT skills so future orchestrators/coaches must refresh askgod, rank by CFSS, skip completed aliases, and skip physical/device tracks unless explicitly requested. Patched skill mirrors: `<operator-codex-skills>/ctfint_workflow`, `ctfint_coach-spawn`, `ctfint_askgod-submit` and `<repo>/.claude/skills/ctfint_workflow`, `ctfint_coach-spawn`, `ctfint_askgod-submit`. Also updated `nsec/team-status/challenge-inventory.py` to emit `open_priorities_nonphysical` in `nsec/.challenge-inventory.json` and a "Low-Hanging Open Tracks (non-physical)" section in `nsec/ASKGOD-INVENTORY.md`. Current CFSS queue: `renewable-energy-mobility` 2/7, `weather-station` 1/4, `helios-fleet-network` 2/5, `monsatan-impact-study` 2/5, `monsatan-defacing` 5/6, then `apt438`, `fossilco`, `announcement-board`. Physical excluded by default: `badge-firmware`, `crystal`, `grid-alignment`, `monsatan-kiosk`, `plant-watering`, `radio-beacon`, `infinite-energy`.
 - - [CODEX-active-wave] 2026-05-16 14:47 EDT: refreshed askgod/inventory again before assigning work. Active non-physical wave: `renewable-energy-mobility` 2/7, `helios-fleet-network` 2/5, `monsatan-impact-study` 2/5. `weather-station` remains open 1/4 by askgod but is skipped for this wave because the known local easy candidate is askgod DUP and prior notes show no new fast path. All coaches must submit only through `nsec/submit-flag.ps1 -Track <slug>` and must stop on `DENY-*`.
@@ -253,11 +253,11 @@ Following up on the encrypted `.squashfs.enc` payloads with aes-256-cbc:pbkdf2:
 
 ### From `renewable-energy-mobility-2of7-v2.md`
 
-## Renewable Energy Mobility (REM) — 2/7 — STUCK (v2 attempt)
+## Renewable Energy Mobility (REM) - 2/7 - STUCK (v2 attempt)
 
 **Track**: renewable-energy-mobility
 **Flag #**: 2/7
-**Status**: **NOT SOLVED** — comprehensive intel gathered, no flag candidate verified
+**Status**: **NOT SOLVED** - comprehensive intel gathered, no flag candidate verified
 **Time budget**: 15 min (slightly exceeded due to investigation depth)
 **Author**: ctfint coach agent (team 061)
 **Date**: 2026-05-16
@@ -270,45 +270,45 @@ Bottom line: the **firmware-repo-url poisoning** angle ([teammate]'s chain step 
 
 ## What is known about 2/7 (after this session)
 
-The 1/7 flag `FLAG-b06c303920434173d12fa84c7cd26371` is embedded in custom X.509 extension OID `1.3.6.1.4.1.55555.1.1` of EVERY provisioned cert (verified across `maintenance.crt`, `maintenance-rw.crt`, pod-UUID, and freshly-issued UUID certs `00000000-0000-4000-8000-000000000000` and `ffffffff-ffff-4fff-bfff-ffffffffffff`). **Provisioning more certs does NOT yield 2/7** — the OID is a constant for the track.
+The 1/7 flag `FLAG-b06c303920434173d12fa84c7cd26371` is embedded in custom X.509 extension OID `1.3.6.1.4.1.55555.1.1` of EVERY provisioned cert (verified across `maintenance.crt`, `maintenance-rw.crt`, pod-UUID, and freshly-issued UUID certs `00000000-0000-4000-8000-000000000000` and `ffffffff-ffff-4fff-bfff-ffffffffffff`). **Provisioning more certs does NOT yield 2/7** - the OID is a constant for the track.
 
 ## [teammate]'s intel (gathered 10:57 EDT)
 
 MQTT topics confirmed live on broker (`[9000:d37e:c40b:edd5:216:3eff:feef:4f22]:8883`):
-- `devices/<pod>/status` — pod state, firmware status
-- `devices/<pod>/config` — full config (with api_key MASKED)
-- `devices/<pod>/config/set` — write config
-- `devices/<pod>/events` — events (config_updated, config_update_rejected, repo_url_reset, station_stop, system_recovered, system_down)
-- `devices/<pod>/telemetry` — telemetry (mostly spammy)
-- `provision/request/<cn>` — submit CSR
-- `provision/response/<cn>` — receive cert
-- `flag/request/<pod_id>` — accepted publishes from pod; **no response seen** on any flag/+ topic
+- `devices/<pod>/status` - pod state, firmware status
+- `devices/<pod>/config` - full config (with api_key MASKED)
+- `devices/<pod>/config/set` - write config
+- `devices/<pod>/events` - events (config_updated, config_update_rejected, repo_url_reset, station_stop, system_recovered, system_down)
+- `devices/<pod>/telemetry` - telemetry (mostly spammy)
+- `provision/request/<cn>` - submit CSR
+- `provision/response/<cn>` - receive cert
+- `flag/request/<pod_id>` - accepted publishes from pod; **no response seen** on any flag/+ topic
 
 Truncated `ma...` config field per [teammate] expanded from strings dump: **`max-speed`** (matches `max_speed_kmh` in JSON). Full writable list: `route-id, target-speed, max-speed, failsafe-mode, autonomy-enabled`. Confirmed via broker rejection event payloads.
 
 ## Angles attempted (all UNSUCCESSFUL)
 
-### Angle A — Pod-context get_flag (`hunt_2of7.py`)
+### Angle A - Pod-context get_flag (`hunt_2of7.py`)
 - Connect AS pod (cert + client_id `189bc82f-...`)
 - Subscribe `flag/#`, `audit/#`, `incidents/#`, `safety/#`, `ops/#`, `alerts/#`, `broker/#`, `system/#`, `secret/#`, `admin/#`, `internal/#`, `devices/<pod>/+`, `devices/<pod>/+/+`
 - All SUBACK rc=0 (allowed). Zero retained messages on flag/audit/safety/etc.
 - Published `get_flag` to `flag/request/<pod>` from pod context
 - **Result**: TLS connection dropped right after the publish (likely pod ACL forbids publishing to `flag/request/*` and broker disconnects). No response ever observed.
 
-### Angle B — Provision/+ MITM (`watch_provision.py`)
+### Angle B - Provision/+ MITM (`watch_provision.py`)
 [teammate]'s hint #4: subscribe to `provision/+` and `provision/+/+` as readonly cert. Goal: catch other operators' CSR responses (which might contain a different flag in a "note" or "message" field).
 - All subscriptions accepted (rc=0)
 - 30s passive listen → **zero traffic** on provision/#, firmware/#, audit/#, incidents/#, alerts/#, broker/#, ops/#, internal/#, $SYS/#, logs/#, metrics/#
 - Conclusion: no live provisioning happening from other teams while we listened (or broker isolates per-client traffic).
 
-### Angle C — Provision with exotic CNs (`provision_probe.py`)
+### Angle C - Provision with exotic CNs (`provision_probe.py`)
 Tried CN values: `admin`, `operator`, `broker`, `root`, `audit`, `maintenance-admin`, `maintenance-rw`, `ops` → all rejected with explicit error:
 ```json
 {"status":"error","message":"Only the following client ID are allowed: {'maintenance', 'maintenance-readonly', '<UUIDv4>'}"}
 ```
 Then tried `00000000-0000-4000-8000-000000000000` and `ffffffff-ffff-4fff-bfff-ffffffffffff` → both ISSUED certs, both contain the same `FLAG-b06c30...` (1/7) in OID `1.3.6.1.4.1.55555.1.1`. No metadata flag in response JSON.
 
-### Angle D — firmware_repo_url + immediate triggers (`race_firmware.py`)
+### Angle D - firmware_repo_url + immediate triggers (`race_firmware.py`)
 1. Set `firmware_repo_url` to `http://[2602:fc62:ef:2061::102]:8888/` (our listener)
 2. Immediately publish 7 different config-set payloads trying to force a check: `firmware_check`, `check_firmware`, `update_firmware`, `firmware_repository_status: check`, `firmware_version: 2.7.4`, `check_now`
 3. Also published `devices/<pod>/cmd` with command `firmware_check`, `check_firmware`, `update`, `fw_update`, `fw_check`, `poll`
@@ -317,21 +317,21 @@ Then tried `00000000-0000-4000-8000-000000000000` and `ffffffff-ffff-4fff-bfff-f
 - `config_update_rejected` for every field other than the documented set (`route-id`, `target-speed`, `max-speed`, `failsafe-mode`, `autonomy-enabled`, `firmware_repo_url`)
 - `config_updated` for `firmware_repo_url` (successfully accepted our URL)
 - `firmware_repository_status: repo_unreachable` with detail `[Errno 111] Connection refused` (broker DID try, but our listener was DOWN)
-- ~8s later: `repo_url_reset` event with reason **`firmware_repo_url reset to default after repeated check failures`** — broker auto-reverts to `http://broker.renewable-energy-mobility.ctf:8081/`
+- ~8s later: `repo_url_reset` event with reason **`firmware_repo_url reset to default after repeated check failures`** - broker auto-reverts to `http://broker.renewable-energy-mobility.ctf:8081/`
 - After reset, status flips back to `update_available` (broker can reach own internal repo)
 
-**Listener mystery**: PowerShell `Get-NetTCPConnection -LocalPort 8888` returned no row at the time of the broker's fetch attempt. The `fw_listener.py` process (PID 41192) had died (originally started 01:55) — only logged 2 hits from earlier PowerShell self-tests, not from the broker. The broker's "Connection refused" is consistent with no listener bound when the fetch happened.
+**Listener mystery**: PowerShell `Get-NetTCPConnection -LocalPort 8888` returned no row at the time of the broker's fetch attempt. The `fw_listener.py` process (PID 41192) had died (originally started 01:55) - only logged 2 hits from earlier PowerShell self-tests, not from the broker. The broker's "Connection refused" is consistent with no listener bound when the fetch happened.
 
 ## High-confidence next steps (for whoever picks this up)
 
 ### Critical fix: keep an HTTP listener ACTUALLY UP
 
 The whole firmware-poison angle hinges on:
-1. A listener bound on the IPv6 address the broker can reach (`2602:fc62:ef:2061::102` confirmed reachable — our own machine, since we're on VPN)
+1. A listener bound on the IPv6 address the broker can reach (`2602:fc62:ef:2061::102` confirmed reachable - our own machine, since we're on VPN)
 2. Listener stays up for the ~5-10s window between URL-set and broker's first GET
 3. Listener returns a VALID firmware manifest JSON so the broker doesn't trip "repeated check failures" and reset the URL
 
-`fw_listener.py` exists at `nsec/rem\fw_listener.py` — it handles GET/HEAD/POST and returns a stable JSON manifest. **Restart it and verify with `Get-NetTCPConnection -LocalPort 8888` BEFORE setting the URL.** The new `capture_flag.py` already runs the right subscribe pattern; reuse.
+`fw_listener.py` exists at `nsec/rem\fw_listener.py` - it handles GET/HEAD/POST and returns a stable JSON manifest. **Restart it and verify with `Get-NetTCPConnection -LocalPort 8888` BEFORE setting the URL.** The new `capture_flag.py` already runs the right subscribe pattern; reuse.
 
 ### What to capture
 
@@ -339,7 +339,7 @@ The broker GET will include an `Authorization: Bearer <api_key>` header. The `fi
 ```
 curl -k -H "Authorization: Bearer <captured>" "http://broker.renewable-energy-mobility.ctf:8081/"
 ```
-The legitimate repo at port 8081 returns `HTTP/1.0 401 Unauthorized` with `WWW-Authenticate: Bearer realm="REM Firmware Catalog"` — confirmed reachable on the VPN. 2/7 likely lives in the firmware catalog payload.
+The legitimate repo at port 8081 returns `HTTP/1.0 401 Unauthorized` with `WWW-Authenticate: Bearer realm="REM Firmware Catalog"` - confirmed reachable on the VPN. 2/7 likely lives in the firmware catalog payload.
 
 ### Pre-stage manifest
 
@@ -351,7 +351,7 @@ Then serve the bin endpoint too (any small payload). This should prevent the "re
 
 ### Pod-context safety event hunt (NOT yet attempted)
 
-The CLI exposes `safe-stop` command. Issuing it as the pod (or as maintenance with the pod set) MAY emit an audit event on a topic we haven't been subscribed to. Try subscribing as maintenance to `audit/#`, `incidents/#`, `alerts/#` (we got SUBACK rc=0 — they're permitted) and then issue `safe-stop` via the pod-ops-cli binary. We tested PASSIVE (Angle B); we have not tested with the CLI's safe-stop trigger.
+The CLI exposes `safe-stop` command. Issuing it as the pod (or as maintenance with the pod set) MAY emit an audit event on a topic we haven't been subscribed to. Try subscribing as maintenance to `audit/#`, `incidents/#`, `alerts/#` (we got SUBACK rc=0 - they're permitted) and then issue `safe-stop` via the pod-ops-cli binary. We tested PASSIVE (Angle B); we have not tested with the CLI's safe-stop trigger.
 
 ### Hidden CLI commands
 
@@ -363,15 +363,15 @@ All artifacts under `nsec/rem\`:
 
 | File | Purpose |
 |------|---------|
-| `hunt_2of7.py` | Angle A — pod-context get_flag, broad subscribe |
-| `watch_provision.py` | Angle B — provision/+ passive listen as readonly |
-| `provision_probe.py` | Angle C — exotic CNs (admin, root, nil-UUID, max-UUID, etc.) |
-| `race_firmware.py` | Angle D — firmware URL set + immediate triggers |
+| `hunt_2of7.py` | Angle A - pod-context get_flag, broad subscribe |
+| `watch_provision.py` | Angle B - provision/+ passive listen as readonly |
+| `provision_probe.py` | Angle C - exotic CNs (admin, root, nil-UUID, max-UUID, etc.) |
+| `race_firmware.py` | Angle D - firmware URL set + immediate triggers |
 | `fw_listener.py` | IPv6 HTTP listener (start before URL set) |
-| `maintenance.crt/.key` | Maintenance cert (FLAG-b06c... in OID) — 1/7 |
+| `maintenance.crt/.key` | Maintenance cert (FLAG-b06c... in OID) - 1/7 |
 | `189bc82f-...crt/.key` | Pod-UUID cert (same FLAG in OID) |
 | `56c87783-...crt/.key` | Alt-UUID cert (same FLAG in OID) |
-| `maintenance-readonly.crt/.key` | Readonly cert (no flag in OID — confirmed) |
+| `maintenance-readonly.crt/.key` | Readonly cert (no flag in OID - confirmed) |
 | `certificate_1.pem`, `private_key_1.pem` | Bootstrap cert + key extracted from pod-ops-cli binary |
 | `certificate_2.pem` | CA cert (Mosquitto-CA) |
 
@@ -379,7 +379,7 @@ All artifacts under `nsec/rem\`:
 
 1. `firmware_repo_url` is the ONLY non-documented field that broker accepts on `config/set`. Every other field name produces `config_update_rejected` with `Unsupported config fields: <name>`.
 2. After ~2 consecutive failed firmware-check attempts, broker emits `repo_url_reset` event and reverts URL to default (`http://broker.renewable-energy-mobility.ctf:8081/`).
-3. Pod-cert connection survives subscribing to ANY topic (all SUBACK rc=0 including `flag/#`, `audit/#`, `secret/#`, `admin/#`, `internal/#`). But TLS CLOSES on PUBLISH to `flag/request/<pod>` from pod context — likely ACL violation on publish.
+3. Pod-cert connection survives subscribing to ANY topic (all SUBACK rc=0 including `flag/#`, `audit/#`, `secret/#`, `admin/#`, `internal/#`). But TLS CLOSES on PUBLISH to `flag/request/<pod>` from pod context - likely ACL violation on publish.
 4. Maintenance-readonly cert can subscribe to anything; can it publish? not retested this session.
 5. Provision endpoint strictly enforces CN ∈ {`maintenance`, `maintenance-readonly`, any UUIDv4}. CN must match MQTT client_id.
 
@@ -390,10 +390,10 @@ Did NOT submit a flag. 3 attempts on `submit-flag.ps1` budget remains untouched 
 
 ### From `renewable-energy-mobility-2of7.md`
 
-## NSEC 2026 — Renewable Energy Mobility (REM) — Flag 2/7 — PARTIAL / STUCK
+## NSEC 2026 - Renewable Energy Mobility (REM) - Flag 2/7 - PARTIAL / STUCK
 
 Date: 2026-05-16
-Status: **STUCK** — significant new findings but flag not extracted within time budget.
+Status: **STUCK** - significant new findings but flag not extracted within time budget.
 
 ## Goal
 Recover flag 2/7 for the REM track (topic 59582). Have flag 1/7 already from
@@ -450,7 +450,7 @@ Path-enumeration via this oracle (all under default base
   /firmware/{index,catalog}{,.json}
 plus URL tricks: `?flag`, `?api_key=leak`, `#flag`, https, ftp, empty, "null".
 
-**The fact that we get HTTP 404 — not 401 — confirms the broker authenticates
+**The fact that we get HTTP 404 - not 401 - confirms the broker authenticates
 with the real api_key on every fetch.** The flag-bearing path simply isn't in
 our wordlist; it's a path that the broker's *original* URL implicitly appends.
 
@@ -463,19 +463,19 @@ And `curl http://broker:8081/firmware` from us with no auth returns 401 too.
 Conclusion: the broker appends a fixed suffix (likely `/firmware/manifest.json`
 or `/firmware/189bc82f-.../manifest`) to whatever URL we set. We could not
 confirm the suffix because the broker's request never reached our outbound
-listener (Errno 111 — likely NSEC firewall blocks inbound port 8888/8080/80
+listener (Errno 111 - likely NSEC firewall blocks inbound port 8888/8080/80
 from the broker side).
 
 ## What we tried for the outbound capture
 - Listener on `[::]:8888`, `[::]:8080`, `[::]:80`, bound on all IPv6 interfaces.
-- Tried URL with team's `user02` IPv6 (`2602:fc62:ef:2061::102`) — refused.
-- Tried URL with VPN `wg-internal` IPv6 (`2602:fc62:ef:2070::1` and `::50`) —
+- Tried URL with team's `user02` IPv6 (`2602:fc62:ef:2061::102`) - refused.
+- Tried URL with VPN `wg-internal` IPv6 (`2602:fc62:ef:2070::1` and `::50`) -
   refused.
 - All locally reachable (curl from same host returns 200); only broker's
   inbound is RST'd.
 
 ## What did NOT work
-- get_flag via pod-ops-cli's `flag/request/<pod_id>` publish: silent — no
+- get_flag via pod-ops-cli's `flag/request/<pod_id>` publish: silent - no
   response on any MQTT topic (we subscribed `#`, all 18 wildcard subscriptions
   including `flag/#`, `response/#`, `result/#`, `$SYS/#` accepted with code 0,
   no flag-bearing message ever delivered).
@@ -490,7 +490,7 @@ from the broker side).
 
 ## Additional observation: trailing-slash quirk
 `firmware_repo_url = http://broker.../firmware/` (with trailing slash) returned
-`repo_unreachable: [Errno 101] Network is unreachable` — a *different* error
+`repo_unreachable: [Errno 101] Network is unreachable` - a *different* error
 from the usual 404. Suggests a URL-parsing quirk inside the broker's HTTP
 client where a trailing slash redirects the request to a different host or
 treats the path as protocol-relative. **Worth investigating**: maybe an SSRF
@@ -498,7 +498,7 @@ that bypasses the auth layer entirely lives in this code path.
 
 ## Next steps when the agent resumes (with bigger budget)
 1. **Find the broker's appended suffix.** Stand up a public IPv6 catcher that
-   NSEC's network can reach — e.g. CTF-internal IPv6 service, or get the NSEC
+   NSEC's network can reach - e.g. CTF-internal IPv6 service, or get the NSEC
    ops to whitelist port 8888 inbound from `9000::/16`. Once a single broker
    GET arrives, the `Authorization: Bearer …` header gives us the 37-char
    `firmware_repo_api_key`, and we can curl the real firmware repo for the flag.
@@ -508,33 +508,33 @@ that bypasses the auth layer entirely lives in this code path.
 3. **Look for the suffix in another binary.** The pod runtime (server-side) is
    the one composing the URL. There's no pod runtime in our possession; only
    `pod-ops-cli` (the maintenance client), and the suffix is NOT in that
-   binary (verified — no `firmware`/`http`/`Authorization` strings).
-4. **Try CSR with X.509 OID extension** containing alternate role bits — the
+   binary (verified - no `firmware`/`http`/`Authorization` strings).
+4. **Try CSR with X.509 OID extension** containing alternate role bits - the
    prior `1.3.6.1.4.1.55555.1.1` got us "maintenance" privileges; maybe a
    different OID value yields a higher-privilege cert that can read
    `firmware_repo_api_key` unmasked.
 
 ## Files (all under nsec/rem\)
-- `fw_hijack.py` — primary URL hijack to test outbound. WORKS but listener
+- `fw_hijack.py` - primary URL hijack to test outbound. WORKS but listener
   unreachable.
-- `path_enum2.py`, `path_enum3.py` — path enumeration via SSRF oracle (all 404).
-- `probe_config_set.py` — tested config/set behaviors (rejected fields list).
-- `provision_admin.py` — confirmed admin/fleet-admin CNs blocked.
-- `readonly_check.py` — confirmed readonly cert sees same masked api_key.
-- `listener80.py`, `fw_listener.py` — IPv6 HTTP listeners (running but unreached).
-- `fw_listener.log`, `listener80.log` — only local-curl test hits; no broker
+- `path_enum2.py`, `path_enum3.py` - path enumeration via SSRF oracle (all 404).
+- `probe_config_set.py` - tested config/set behaviors (rejected fields list).
+- `provision_admin.py` - confirmed admin/fleet-admin CNs blocked.
+- `readonly_check.py` - confirmed readonly cert sees same masked api_key.
+- `listener80.py`, `fw_listener.py` - IPv6 HTTP listeners (running but unreached).
+- `fw_listener.log`, `listener80.log` - only local-curl test hits; no broker
   callbacks captured.
-- `capture_v2.py`, `get_flag_active.py`, `one_conn_attack.py` — pre-SSRF
+- `capture_v2.py`, `get_flag_active.py`, `one_conn_attack.py` - pre-SSRF
   attempts using get_flag CLI and broad subscriptions (all returned nothing).
 
 ## Submission status
-Have NOT submitted any flag for 2/7 — no candidate value extracted.
+Have NOT submitted any flag for 2/7 - no candidate value extracted.
 1/7 (FLAG-b06c303920434173d12fa84c7cd26371) remains the only submitted REM flag.
 
 ## Promising line to follow next
 The single best lead is the **`Errno 101 Network unreachable`** response on
 `firmware_repo_url = http://broker.../firmware/` (trailing slash). This is
-NOT a 404 — the broker's HTTP client misroutes the request entirely. Pair
+NOT a 404 - the broker's HTTP client misroutes the request entirely. Pair
 with URL parsing oddities (e.g., `http://broker/foo@evil/bar`,
 double-slashes, IDN host, IPv6 literal smuggling) to find a way to either
 fetch from an *unauthenticated* path on the broker's internal network OR
@@ -555,7 +555,7 @@ strict no-flood rule.
 
 We got to **6/7** via dev-kit decrypt + MQTT firmware-upload-server toggle. Flag 7/7 was the upload-server exploit primitive (tar/zip rejection blocked our archive overlay attempt).
 
-[designer] post-event reaction: "I hope you had some fun fixing the REM" — suggesting the upload-exploit chain we tried was on the right track. Full solution scripts available in the channel.
+[designer] post-event reaction: "I hope you had some fun fixing the REM" - suggesting the upload-exploit chain we tried was on the right track. Full solution scripts available in the channel.
 
 *See _DISCORD-INTEL-ENRICHMENT-2026-05-19.md for the full cross-track designer-confirmed solution catalog and writeup links.*
 
@@ -573,10 +573,10 @@ We got to **6/7** via dev-kit decrypt + MQTT firmware-upload-server toggle. Flag
 > honeypots_avoided: 0
 >
 > Notable:
-> - **Agent-1** (Opus 4.7) — 18.0m: REM 5/7 firmware repository pivot — found the deployable firmware key path that unlocked positions 5 and 6
-> - **Agent-2** (Sonnet (default)) — 231.0m: REM 6/7 firmware reverse — ran 231 minutes mining squashfs overlays and AES-256-CBC + PBKDF2 dev firmware package; output-capped before stop_reason
-> - **Agent-3** (Sonnet (default)) — 20.3m: REM 7/7 MQTT exfil — captured the last reachable broker signal
-> - **Agent-4** (Opus 4.7) — 101.2m: Firmware decryption — flags 4-7, 101.2 minutes mining MQTT undocumented get_flag command + custom X.509 OID extension parse
+> - **Agent-1** (Opus 4.7) - 18.0m: REM 5/7 firmware repository pivot - found the deployable firmware key path that unlocked positions 5 and 6
+> - **Agent-2** (Sonnet (default)) - 231.0m: REM 6/7 firmware reverse - ran 231 minutes mining squashfs overlays and AES-256-CBC + PBKDF2 dev firmware package; output-capped before stop_reason
+> - **Agent-3** (Sonnet (default)) - 20.3m: REM 7/7 MQTT exfil - captured the last reachable broker signal
+> - **Agent-4** (Opus 4.7) - 101.2m: Firmware decryption - flags 4-7, 101.2 minutes mining MQTT undocumented get_flag command + custom X.509 OID extension parse
 >
 > _Six flags landed across 33 agents; firmware repository pivot was the single critical break._
 
@@ -586,5 +586,5 @@ We got to **6/7** via dev-kit decrypt + MQTT firmware-upload-server toggle. Flag
 - 33 agents on a 7-flag IoT track. Six flags landed. The seventh is documented but not landed because the broker masks `firmware_repo_api_key` server-side and the team's network position couldn't reach the broker's /64.
 - One agent ran 231 minutes on REM 6/7 firmware reverse. Output-capped before it could write its conclusion to stop_reason. The agent's last act was a tool call that never returned.
 - The `firmware_repo_url` config field accepts `file://` if you can write the config. The team tried this. The urljoin quirk in the parser dropped the `file://` prefix and tried to fetch it as HTTP. The flag was three lines deep in a Python library quirk.
-- "REM 5/7 firmware repository pivot" — 18-minute agent run that produced the single highest-EV finding of the event. Most productive minute of the swarm.
+- "REM 5/7 firmware repository pivot" - 18-minute agent run that produced the single highest-EV finding of the event. Most productive minute of the swarm.
 - One coach was queued in submission-queue P3 status as "P3 P0 candidate." Two priority levels in the same field. The actual priority was "whatever fires first."

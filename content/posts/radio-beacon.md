@@ -6,7 +6,7 @@ tags = ["rf", "stuck"]
 model = "Opus 4.7"
 draft = false
 +++
-Status: **STUCK** — 0/unknown sub-flags captured
+Status: **STUCK** - 0/unknown sub-flags captured
 
 ## Context
 
@@ -28,7 +28,7 @@ _Preserved from pre-standardization writeup(s). May contain duplicate context._
 
 ## Radio beacon (Topic 59798)
 
-Status: **STUCK** — 0/unknown sub-flags captured
+Status: **STUCK** - 0/unknown sub-flags captured
 
 ## Artifacts
 
@@ -44,12 +44,12 @@ Status: **STUCK** — 0/unknown sub-flags captured
 
 RF challenge. Discourse body mentions a transmission on `146.565 MHz` (2 m amateur
 band) with two message types, and tells participants to go to the RF table if they
-need access. The challenge is physical — no remote artifact, no remote endpoint.
+need access. The challenge is physical - no remote artifact, no remote endpoint.
 
 ## Recon
 
 - Discourse topic 59798 inspected: no URL, no filename, no attachment.
-- `nsec/` search for `radio`, `beacon`, `59798` — only unrelated audio
+- `nsec/` search for `radio`, `beacon`, `59798` - only unrelated audio
   (`team-status/ole-celebration.wav`) and Missing-Bus artifacts.
 - No `radio-beacon/` directory exists.
 - `CANDIDATE_FLAGS.txt` previously listed "RADIO BEACON (59798)" but the candidates
@@ -66,14 +66,14 @@ need access. The challenge is physical — no remote artifact, no remote endpoin
 
 ## Captures
 
-(None — `captures: []` above.)
+(None - `captures: []` above.)
 
 ## STUCK Rationale
 
 Cannot proceed without a venue SDR pickup at 146.565 MHz. Operator must:
 1. Carry an SDR or handheld receiver to the RF table.
 2. Capture the transmission live (Morse / DTMF / APRS / AFSK / FSK / SSTV /
-   spectrogram-text are all plausible — Discourse mentions "two message types").
+   spectrogram-text are all plausible - Discourse mentions "two message types").
 3. Save the recording to `nsec/radio-beacon\` and triage offline.
 
 ## Anti-Trap Notes
@@ -86,8 +86,8 @@ rejected as out-of-scope (it decodes to `0xdc8fd0` for trolley-bus 1/4).
 
 ## Artifacts
 
-- `nsec/.challenge-inventory.json` — `untouched_inventory[topic_id=59798]`
-- `nsec/writeups\59798-radio-beacon.md` — this file (replaces earlier stub)
+- `nsec/.challenge-inventory.json` - `untouched_inventory[topic_id=59798]`
+- `nsec/writeups\59798-radio-beacon.md` - this file (replaces earlier stub)
 - Misattribution context: `nsec/CANDIDATE_FLAGS.txt`, see also
   `nsec/missing-bus\artifacts\keyfob.complex16s`
 

@@ -1,12 +1,12 @@
 +++
-title = "Missing bus — 1/4"
+title = "Missing bus - 1/4"
 date = 2026-05-19
 categories = ["nsec26"]
 tags = ["hardware", "partial", "rf"]
 model = "Sonnet (default)"
 draft = false
 +++
-Status: **PARTIAL** — 1/4 sub-flags captured
+Status: **PARTIAL** - 1/4 sub-flags captured
 
 ## Context
 
@@ -37,13 +37,13 @@ _Preserved from pre-standardization writeup(s). May contain duplicate context._
 
 ## Missing bus (Topic 59870)
 
-Status: **PARTIAL** — 1/4 sub-flags captured
+Status: **PARTIAL** - 1/4 sub-flags captured
 
 ### From `59870-missing-bus.md`
 
 ## Missing bus (Topic 59870)
 
-Status: **STUCK** — 0/unknown sub-flags captured
+Status: **STUCK** - 0/unknown sub-flags captured
 
 ## Artifacts
 
@@ -69,7 +69,7 @@ Status: **STUCK** — 0/unknown sub-flags captured
 - **Category:** RF / Hardware → Wi-Fi / Physical
 - **Event:** NSEC 2026 (Gaia / Solarpunk)
 - **Owner (claimant):** [teammate] → submitted by **[teammate]** 2026-05-17 13:35 EDT
-- **Status:** **1/4 SOLVED** — `flag-dc8fd0` accepted by askgod (entry ID 28). Stage 2/4 unlocks Wi-Fi physical recon. Stages 3 and 4 not yet visible.
+- **Status:** **1/4 SOLVED** - `flag-dc8fd0` accepted by askgod (entry ID 28). Stage 2/4 unlocks Wi-Fi physical recon. Stages 3 and 4 not yet visible.
 - **Decoded value:** `0xdc8fd0` (24-bit OOK/PWM keyfob code, confirmed across 10+ frames)
 - **Flag-1 format ([teammate], Discourse 59870 post 1):** `flag-{HEX KEY CODE}` → `flag-dc8fd0`
 
@@ -79,7 +79,7 @@ Status: **STUCK** — 0/unknown sub-flags captured
 
 ---
 
-## Stage 2/4 — Wi-Fi physical recon (UNLOCKED at 17:35 UTC 2026-05-17)
+## Stage 2/4 - Wi-Fi physical recon (UNLOCKED at 17:35 UTC 2026-05-17)
 
 Immediately after [teammate] submitted `flag-dc8fd0` (13:35 EDT = 17:35 UTC), [teammate] posted a
 second message to Discourse topic 59870:
@@ -95,15 +95,15 @@ second message to Discourse topic 59870:
 
 - **SSID:** `MNT-BUS`
 - **WPA2 PSK:** `hamped1304`
-- **Mode:** physical Wi-Fi recon — the AP is broadcast from the actual bus prop on the
+- **Mode:** physical Wi-Fi recon - the AP is broadcast from the actual bus prop on the
   venue floor; not reachable over the NSEC VPN.
 - **DNS check (no remote bypass exists):** `mnt-bus.nsec`, `mnt-bus.ctf`, `bus1304.nsec`,
   `bus-1304.ctf`, `bus.nsec`, `trolley-bus.nsec`, `transit.nsec`, `dispatch.nsec`,
-  `maintenance.nsec`, `wifi-bus.nsec`, `onsite-bus.nsec` — **all NXDOMAIN** on both A and
+  `maintenance.nsec`, `wifi-bus.nsec`, `onsite-bus.nsec` - **all NXDOMAIN** on both A and
   AAAA over the active VPN tunnel (probed 2026-05-17 ~13:55 EDT, DARKLAB host).
 - **dl.nsec:** `https://dl.nsec/{missing-bus,bus1304,bus-1304,mnt-bus,trolley-bus,bus,firmware}/` → all 404 / 403.
 - **Discourse search:** `MNT-BUS`, `hamped1304`, `trolley`, `bus location`, `1304 located`,
-  `maintenance bus`, `venue bus` — only topic 59870 hits. No companion topic with a
+  `maintenance bus`, `venue bus` - only topic 59870 hits. No companion topic with a
   remote portal exists.
 - **Local Wi-Fi scan (DARKLAB 2026-05-17 13:54 EDT):** `netsh wlan show networks mode=bssid`
   visible SSIDs = `NSEC` only. Operator is not within range of `MNT-BUS` from the home base.
@@ -115,22 +115,22 @@ second message to Discourse topic 59870:
    `netsh wlan show networks mode=bssid | findstr /i MNT-BUS`.
 2. Once in range, connect with PSK `hamped1304`.
 3. Enumerate the AP LAN:
-   - `ipconfig` — note default gateway (likely `192.168.4.1` or similar AP-default).
-   - `curl http://<gateway>/` — look for maintenance dashboard / login page.
-   - `nmap -sV -p- <gateway>` — usual SSH/HTTP/Telnet ports.
+   - `ipconfig` - note default gateway (likely `192.168.4.1` or similar AP-default).
+   - `curl http://<gateway>/` - look for maintenance dashboard / login page.
+   - `nmap -sV -p- <gateway>` - usual SSH/HTTP/Telnet ports.
    - Check Common embedded-Linux paths: `/flag`, `/flag.txt`, `/cgi-bin/`, `/admin/`,
      `/maintenance/`, `/diag/`.
 4. Flag-2 is **most likely** posted on the maintenance landing page once connected
    (typical NSEC convention for the "you found it" stage on an isolated AP).
 
-### Stages 3 and 4 — speculation (NOT yet revealed by [teammate])
+### Stages 3 and 4 - speculation (NOT yet revealed by [teammate])
 
 Pattern from comparable NSEC tracks (REM, Helios, Monsatan): once the AP web UI is
 captured, expect:
 - **Flag 3/4:** auth bypass / default creds on the maintenance UI → escalated dashboard /
   bus telemetry page.
 - **Flag 4/4:** post-auth RCE or firmware extract on the bus's onboard ECU/router (the
-  "computer system" [teammate] says the outsiders tampered with — implies a second device
+  "computer system" [teammate] says the outsiders tampered with - implies a second device
   pivot once you're on the AP LAN).
 
 No remote pivot has been found. Any further progress requires the on-site Wi-Fi.
@@ -262,7 +262,7 @@ spectrum). Numeric findings in
 - **Wrapper pass:** YES (8 chars after FLAG-)
 - **askgod response:** `Invalid flag submitted`
 - **Exit code:** 1 (FAIL)
-- **Confidence loss:** HIGH — standard left-padding rejected
+- **Confidence loss:** HIGH - standard left-padding rejected
 
 **Analysis:** The format is NOT a simple zero-padding convention. The correct flag format remains unknown.
 
@@ -274,7 +274,7 @@ spectrum). Numeric findings in
 - Frame structure: 1-bit sync + 24-bit data payload per frame
 - All variant decodings (bit reversal, byte swap, polarity inversion, nibble reversal, decimal, etc.) have been tested
 - Direct askgod submissions of 8+ char variants all returned "Invalid flag submitted"
-- DENY-BRUTE rate-limit was hit (5 FAILs in 15 min window) — last attempt 2026-05-17 09:40
+- DENY-BRUTE rate-limit was hit (5 FAILs in 15 min window) - last attempt 2026-05-17 09:40
 
 **The blocker:** The local submission wrapper `submit-flag.ps1` enforces:
 ```regex
@@ -340,7 +340,7 @@ nsec/missing-bus\
   README.md                                    (contains stale "SOLVED" from synthetic file)
   iq_analysis_report.txt
   artifacts\
-    keyfob.complex16s                          (9.7 MB REAL CAPTURE — decoded as dc8fd0)
+    keyfob.complex16s                          (9.7 MB REAL CAPTURE - decoded as dc8fd0)
     keyfob.SYNTHETIC.complex16s                (symlink to earlier synthetic copy)
     iq-deep-analysis-v2.md                     (2026-05-17 ORCH-C final analysis)
     decoded.txt                                (prior pass findings)
@@ -364,9 +364,9 @@ nsec/flags\
   - Connect to maintenance Wi-Fi: SSID `MNT-BUS` / PSK `hamped1304`
   - Check `robots.txt` → it disallows `/panel`
   - `/panel` is the CLI endpoint where flags 2-4 live (parisianmerlot 1505659317226049726)
-- ili_the_butterfly walked around the venue noting "why is the signal strength of the ap so strong in this corner surrounded by people and laptops" — the maintenance AP was venue-physical
+- ili_the_butterfly walked around the venue noting "why is the signal strength of the ap so strong in this corner surrounded by people and laptops" - the maintenance AP was venue-physical
 
-**Tedre191 design note:** "Awesome track, and somewhat AI proof, which made it more rewarding!" — designer-intended AI defense via physical-required Wi-Fi recon.
+**Tedre191 design note:** "Awesome track, and somewhat AI proof, which made it more rewarding!" - designer-intended AI defense via physical-required Wi-Fi recon.
 
 Our progression (1/4 via [teammate] on-venue) was the maximum possible from operator's laptop. Flags 2-4 fully required on-venue presence.
 
@@ -388,9 +388,9 @@ Our progression (1/4 via [teammate] on-venue) was the maximum possible from oper
 > honeypots_avoided: 0
 >
 > Notable:
-> - **Agent-1** (Sonnet (default)) — 5.9m: Trolley-bus Discourse breakthrough — fresh-angle agent that connected RF capture to keyfob 24-bit hex format documented in Discourse topic body
-> - **Agent-2** (Sonnet (default)) — 62.9m: Missing Bus SDR IQ refined demodulation — 62.9 minutes of PWM bit-extraction; ultimately stuck on 24-bit-vs-32-bit framing question
-> - **Agent-3** (Sonnet (default)) — 19.6m: Missing Bus flag format and RF context deep-dive — read the askgod TS:B target-stat hint that the flag is 6-char hex of the 24-bit payload
+> - **Agent-1** (Sonnet (default)) - 5.9m: Trolley-bus Discourse breakthrough - fresh-angle agent that connected RF capture to keyfob 24-bit hex format documented in Discourse topic body
+> - **Agent-2** (Sonnet (default)) - 62.9m: Missing Bus SDR IQ refined demodulation - 62.9 minutes of PWM bit-extraction; ultimately stuck on 24-bit-vs-32-bit framing question
+> - **Agent-3** (Sonnet (default)) - 19.6m: Missing Bus flag format and RF context deep-dive - read the askgod TS:B target-stat hint that the flag is 6-char hex of the 24-bit payload
 >
 > _RF demod breakthrough on 27th attempt. 24-bit hex payload, EV1527/PT2240 family. Flag value `flag-dc8fd0` accepted server-side, hit DENY-SHAPE on local wrapper (6-char vs 8-char floor)._
 

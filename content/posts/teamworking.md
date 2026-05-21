@@ -1,12 +1,12 @@
 +++
-title = "Teamworking — 1/1"
+title = "Teamworking - 1/1"
 date = 2026-05-20
 categories = ["nsec26"]
 tags = ["info", "solved"]
 model = "Opus 4.7"
 draft = false
 +++
-Status: **SOLVED** — 1/1 sub-flags captured
+Status: **SOLVED** - 1/1 sub-flags captured
 
 ## Context
 
@@ -25,7 +25,7 @@ _Preserved from pre-standardization writeup(s). May contain duplicate context._
 
 ## Teamworking (Topic 59618)
 
-Status: **SOLVED** — 1/1 sub-flags captured
+Status: **SOLVED** - 1/1 sub-flags captured
 
 ### From `59618-teamworking.md`
 
@@ -47,11 +47,11 @@ There is no traditional puzzle surface in the topic body. The flag is awarded au
 - Full topic JSON extracted via Chrome CDP (authenticated session): no hidden text, control characters, zero-width characters, or non-ASCII encoding
 - HTML/CSS scan: no `display:none`, `opacity:0`, `font-size:0`, `color:white` elements; no `data-*` attributes hiding payloads
 - Metadata: no tags, attachments, links, file downloads; single post by bot account
-- Acrostic on the six values (ecology / mutual aid / decentralization / community resilience / shared knowledge / optimism) → "EMDCSO" — no semantic match
-- Capitalization, character-position, and word-extraction patterns — none
+- Acrostic on the six values (ecology / mutual aid / decentralization / community resilience / shared knowledge / optimism) → "EMDCSO" - no semantic match
+- Capitalization, character-position, and word-extraction patterns - none
 
 **Format-guessing attempts (negative):**
-- 17+ flag formats tested via askgod (`FLAG-stronger-together`, `FLAG-{teamworking}`, `FLAG-WE_ARE_STRONGER_TOGETHER`, etc.) — all rejected with "Invalid flag submitted"
+- 17+ flag formats tested via askgod (`FLAG-stronger-together`, `FLAG-{teamworking}`, `FLAG-WE_ARE_STRONGER_TOGETHER`, etc.) - all rejected with "Invalid flag submitted"
 
 ## Exploitation
 
@@ -59,7 +59,7 @@ No technical exploit. The flag was granted automatically by askgod once the team
 
 ## Captures
 
-### Flag 1/1 — Teamworking (askgod #156 / 2 pts)
+### Flag 1/1 - Teamworking (askgod #156 / 2 pts)
 
 - **askgod entry:** Teamworking 1/1
 - **Timestamp:** 2026-05-16 00:33 EDT
@@ -68,14 +68,14 @@ No technical exploit. The flag was granted automatically by askgod once the team
 
 ## Anti-Trap Notes
 
-The natural-language "stronger together" / "teamwork" phrasing is a strong lure for flag-format guessing. None of the obvious patterns are valid; this challenge type is intentionally **un-bruteforceable** by design — submitting wrong guesses just wastes attempts.
+The natural-language "stronger together" / "teamwork" phrasing is a strong lure for flag-format guessing. None of the obvious patterns are valid; this challenge type is intentionally **un-bruteforceable** by design - submitting wrong guesses just wastes attempts.
 
 ## Artifacts
 
-- `nsec/teamworking/topic.json` — Full Discourse topic JSON (authenticated)
-- `nsec/teamworking/page-inspect.json` — Rendered DOM dump
-- `nsec/teamworking/fetch-topic.ps1` — Fetch script
-- `nsec/teamworking/inspect-page.ps1` — DOM inspection script
+- `nsec/teamworking/topic.json` - Full Discourse topic JSON (authenticated)
+- `nsec/teamworking/page-inspect.json` - Rendered DOM dump
+- `nsec/teamworking/fetch-topic.ps1` - Fetch script
+- `nsec/teamworking/inspect-page.ps1` - DOM inspection script
 
 
 ---

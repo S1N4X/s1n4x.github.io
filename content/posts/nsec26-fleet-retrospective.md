@@ -1,5 +1,5 @@
 +++
-title = "NSEC 2026 — Fleet Retrospective"
+title = "NSEC 2026 - Fleet Retrospective"
 description = "437 agents, 302 completed, the inside view of running a CTF swarm."
 date = 2026-05-21
 categories = ["nsec26"]

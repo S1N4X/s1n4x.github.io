@@ -6,7 +6,7 @@ tags = ["info", "stuck"]
 model = "Opus 4.7"
 draft = false
 +++
-Status: **STUCK** — 0/unknown sub-flags captured
+Status: **STUCK** - 0/unknown sub-flags captured
 
 ## Context
 
@@ -28,7 +28,7 @@ _Preserved from pre-standardization writeup(s). May contain duplicate context._
 
 ## Infinite Energy (Topic 58754)
 
-Status: **STUCK** — 0/unknown sub-flags captured
+Status: **STUCK** - 0/unknown sub-flags captured
 
 ## Artifacts
 
@@ -36,7 +36,7 @@ Status: **STUCK** — 0/unknown sub-flags captured
 
 ## STUCK Rationale
 
-- Doc Wonka NPC at venue — on-site only. No network surface to attack; track requires the operator to engage the NPC at the venue.
+- Doc Wonka NPC at venue - on-site only. No network surface to attack; track requires the operator to engage the NPC at the venue.
 
 ### From `58754-infinite-energy.md`
 
@@ -61,15 +61,15 @@ Doc Wonka NPC track. Discourse body:
 
 ## Attempted Exploitation Chains
 
-None — no network surface to attack. Operator action required at the venue.
+None - no network surface to attack. Operator action required at the venue.
 
 ## Captures
 
-(None — `captures: []` above.)
+(None - `captures: []` above.)
 
 ## STUCK Rationale
 
-This is not technically "stuck" — it is an unclaimed IRL track. Path forward:
+This is not technically "stuck" - it is an unclaimed IRL track. Path forward:
 locate the actor at the venue floor, engage in dialogue around the themes the
 Discourse body hints at (mysticism, sustainability, oneness with nature), and
 report back whatever phrase / token they release.
@@ -78,12 +78,12 @@ report back whatever phrase / token they release.
 
 The adjacent `crystal` askgod entry #37 ("Basic Electricity" → "Infinite Energy is a
 scam") tagged 1 pt under track `crystal` 2026-05-16 09:04 EDT is a separate scoring
-row from this topic. Do not confuse the two — Infinite Energy track score is still 0/0.
+row from this topic. Do not confuse the two - Infinite Energy track score is still 0/0.
 
 ## Artifacts
 
-- `nsec/.challenge-inventory.json` — `untouched_inventory[topic_id=58754]`
-- `nsec/writeups\58754-infinite-energy.md` — this file (replaces earlier stub)
+- `nsec/.challenge-inventory.json` - `untouched_inventory[topic_id=58754]`
+- `nsec/writeups\58754-infinite-energy.md` - this file (replaces earlier stub)
 
 
 ---

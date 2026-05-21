@@ -1,12 +1,12 @@
 +++
-title = "Seed Vault — 6/6"
+title = "Seed Vault - 6/6"
 date = 2026-05-20
 categories = ["nsec26"]
 tags = ["solved", "web"]
 model = "Opus 4.7"
 draft = false
 +++
-Status: **SOLVED** — 6/6 sub-flags captured
+Status: **SOLVED** - 6/6 sub-flags captured
 
 ## Context
 
@@ -31,7 +31,7 @@ _Preserved from pre-standardization writeup(s). May contain duplicate context._
 
 ## Seed Vault (Topic 59402)
 
-Status: **SOLVED** — 6/6 sub-flags captured
+Status: **SOLVED** - 6/6 sub-flags captured
 
 ## Captures
 
@@ -46,7 +46,7 @@ Status: **SOLVED** — 6/6 sub-flags captured
 
 ### From `tamper-seedvault-5-6.md`
 
-## Tamper / SeedVault — 5-6/6 progression (writeup)
+## Tamper / SeedVault - 5-6/6 progression (writeup)
 
 **Date**: 2026-05-16 ~15:20 UTC-4
 **Team**: 061
@@ -61,8 +61,8 @@ Status: **SOLVED** — 6/6 sub-flags captured
 | 2/6  | DONE   | 2026/05/15 22:23 | desktop screenshot QR |
 | 3/6  | DONE   | 2026/05/15 22:42 | logged-in catalog (`FLAG-l0gg3d-in-n0w-3l3v4t3-pr1vs`) |
 | 4/6  | DONE   | 2026/05/16 10:30 | elevate.php (physical riddle + SunniKey) |
-| 5/6  | **TODO** | — | "become an admin" |
-| 6/6  | **TODO** | — | "ensure the outsider cannot elevate" |
+| 5/6  | **TODO** | - | "become an admin" |
+| 6/6  | **TODO** | - | "ensure the outsider cannot elevate" |
 
 ## This session's deliverables
 
@@ -71,7 +71,7 @@ Status: **SOLVED** — 6/6 sub-flags captured
 - Discourse topic 59402 post body fetched via authenticated headed Chrome CDP (`fetch-topic-59402.ps1`)
 - Stealer log URL: `https://dl.nsec/ASHFATHER_HWID-9F2C-DEADBEEF.zip` (4.33 MB)
 - Saved to `nsec/tamper\stealer-log\ASHFATHER_HWID-9F2C-DEADBEEF.zip`
-- Extracted to `nsec/tamper\stealer-log\extracted\` — full LummaC2 dump (browsers, autofill, comms, FileGrabber, Wallets, Screen.png 4.3MB)
+- Extracted to `nsec/tamper\stealer-log\extracted\` - full LummaC2 dump (browsers, autofill, comms, FileGrabber, Wallets, Screen.png 4.3MB)
 
 ### Credentials confirmed working
 
@@ -88,7 +88,7 @@ Source: `extracted/Passwords.txt` entry #1 + `extracted/ImportantAutofills.txt`.
 Authenticated home (`home-authed.html`) shows:
 - `[data-admin-menu]` populated with **only**: `<a href="elevate.php">Admin</a>` + Logout
 - No staff/admin endpoints exposed for the outsider role
-- Catalog visible — uniquely: `SV-07-FL3` "FLAG-l0gg3d-in-n0w-3l3v4t3-pr1vs" (keeper-view bonus)
+- Catalog visible - uniquely: `SV-07-FL3` "FLAG-l0gg3d-in-n0w-3l3v4t3-pr1vs" (keeper-view bonus)
 
 Probed endpoints post-auth (all 404 or 0-byte):
 ```
@@ -103,10 +103,10 @@ Only `/elevate.php` is the gating endpoint. It returns:
 "Elevation refused. One of your answers is wrong."
 ```
 on POST with arbitrary `riddle=&token=`. Form requires both:
-- `riddle` — "What is the decoded name of the seed in the 3rd jar of the 2nd shelve?"
-- `token` — "SunniKey · large hex code" (~6 char monospace)
+- `riddle` - "What is the decoded name of the seed in the 3rd jar of the 2nd shelve?"
+- `token` - "SunniKey · large hex code" (~6 char monospace)
 
-Tested trivial bypass params (role=admin, level=admin, is_admin=1, promote=1, admin=true, type=admin, user_type=admin, bypass=1) — all return identical 5250-byte refusal. No type-juggling, no IDOR, no obvious server-side flag.
+Tested trivial bypass params (role=admin, level=admin, is_admin=1, promote=1, admin=true, type=admin, user_type=admin, bypass=1) - all return identical 5250-byte refusal. No type-juggling, no IDOR, no obvious server-side flag.
 
 ## Why 5/6 and 6/6 are physical-only
 
@@ -136,7 +136,7 @@ This is fully on-venue, with no remote attack surface. The web admin endpoint re
 
 ## Hypothesis about the riddle (for next agent)
 
-The elevate.php riddle "decoded name of the seed in the 3rd jar of the 2nd shelve" — TABLETTE II · JAR 3 in the authenticated catalog is:
+The elevate.php riddle "decoded name of the seed in the 3rd jar of the 2nd shelve" - TABLETTE II · JAR 3 in the authenticated catalog is:
 - Common: **Anatolia Drylands Emmer**
 - Latin: **Triticum dicoccum**
 - Keeper: Ferman Yıldırım
@@ -160,14 +160,14 @@ If operator returns with envelope contents (admin code + any new web URLs), this
 
 ## Files produced this session
 
-- `nsec/fetch-topic-59402.ps1` — CDP fetcher for Discourse topic JSON
-- `nsec/tamper\topic-59402.json` — full topic 59402 content (5 posts, 18.8 KB)
-- `nsec/tamper\stealer-log\ASHFATHER_HWID-9F2C-DEADBEEF.zip` — original zip (4.33 MB)
-- `nsec/tamper\stealer-log\extracted\` — full extraction tree (Passwords, Autofills, browsers, FileGrabber, etc.)
-- `nsec/tamper\home-authed.html` — authenticated catalog snapshot (40 KB)
-- `nsec/tamper\elevate-anon-look.html` — elevate.php form snapshot
-- `nsec/tamper\elevate-bad-attempt.html` — elevate.php failure response (with `riddle=test&token=000000`)
-- `nsec/tamper\login-result.html`, `home-codex-session.html` — auxiliary recon
+- `nsec/fetch-topic-59402.ps1` - CDP fetcher for Discourse topic JSON
+- `nsec/tamper\topic-59402.json` - full topic 59402 content (5 posts, 18.8 KB)
+- `nsec/tamper\stealer-log\ASHFATHER_HWID-9F2C-DEADBEEF.zip` - original zip (4.33 MB)
+- `nsec/tamper\stealer-log\extracted\` - full extraction tree (Passwords, Autofills, browsers, FileGrabber, etc.)
+- `nsec/tamper\home-authed.html` - authenticated catalog snapshot (40 KB)
+- `nsec/tamper\elevate-anon-look.html` - elevate.php form snapshot
+- `nsec/tamper\elevate-bad-attempt.html` - elevate.php failure response (with `riddle=test&token=000000`)
+- `nsec/tamper\login-result.html`, `home-codex-session.html` - auxiliary recon
 
 ## Submission log
 
@@ -176,11 +176,11 @@ If operator returns with envelope contents (admin code + any new web URLs), this
 
 ### From `tamper-seedvault.md`
 
-## Tamper / SeedVault 4-6/6 — Recon Notes (partial)
+## Tamper / SeedVault 4-6/6 - Recon Notes (partial)
 
 **Status**: 1/6, 2/6, 3/6 already submitted (per askgod history breadcrumb).
 **Blocker**: 4-6/6 require authenticated session as the "outsider" (admin).
-**This agent did NOT submit any flags** — no creds locally, strict no-brute.
+**This agent did NOT submit any flags** - no creds locally, strict no-brute.
 
 ## Challenge narrative (from Discourse 59402 / "Seed Vault")
 
@@ -194,39 +194,39 @@ So:
 
 ## Live host recon (2026-05-16 ~14:45 EDT)
 
-`http://seedvault.ctf/` — Apache/2.4.58 (Ubuntu), PHP. HTTPS NOT served (port 443 closed).
+`http://seedvault.ctf/` - Apache/2.4.58 (Ubuntu), PHP. HTTPS NOT served (port 443 closed).
 
 ### Endpoints confirmed
 
 | Path | Status | Notes |
 |------|--------|-------|
 | `/` | 200 (38204) | Public home, index.php rewrite |
-| `/index.php` | 200 | Anonymous landing — same as `/` |
+| `/index.php` | 200 | Anonymous landing - same as `/` |
 | `/login.php` | 200 | Keeper sign-in form, POSTs to `login.php` with `username` + `password` |
-| `/assets/` | 200 | **Directory listing enabled** — only `style.css` |
-| `/data/` | 200 | **Directory listing enabled** — `seeds.php` (8.1K), `site.php` (5.2K) |
-| `/includes/` | 200 | **Directory listing enabled** — see below |
+| `/assets/` | 200 | **Directory listing enabled** - only `style.css` |
+| `/data/` | 200 | **Directory listing enabled** - `seeds.php` (8.1K), `site.php` (5.2K) |
+| `/includes/` | 200 | **Directory listing enabled** - see below |
 | `/admin`, `/admin.php`, `/dashboard.php`, `/api*`, `/users*`, `/profile.php`, `/keeper.php`, `/vault.php`, `/seeds.php`, `/settings.php` | 404 | All blocked |
 | `/register.php`, `/signup.php`, `/forgot.php`, `/reset*.php`, `/recover.php` | 404 | No self-registration / password reset |
 
-### /includes/ files (all return 200/0-bytes when fetched standalone — they're `include`d)
+### /includes/ files (all return 200/0-bytes when fetched standalone - they're `include`d)
 
-- `auth.php` (3.8K) — login/auth helper
-- `bonus_check.php` (431B) — **tiny file, very suspicious name**, likely a feature check on a bonus / referral / promo code path
+- `auth.php` (3.8K) - login/auth helper
+- `bonus_check.php` (431B) - **tiny file, very suspicious name**, likely a feature check on a bonus / referral / promo code path
 - `footer.php` (1.8K)
-- `header.php` (6.0K) — when fetched standalone returns 500 (uses globals)
-- `mail_codes.php` (5.3K) — **mail-based code logic** — likely the "we don't email" disclaimer hides a way to email-link codes for keepers
-- `seed_glyph.php` (11K) — SVG glyph generator
-- `specimen.php` (3.4K) — seed-card renderer
+- `header.php` (6.0K) - when fetched standalone returns 500 (uses globals)
+- `mail_codes.php` (5.3K) - **mail-based code logic** - likely the "we don't email" disclaimer hides a way to email-link codes for keepers
+- `seed_glyph.php` (11K) - SVG glyph generator
+- `specimen.php` (3.4K) - seed-card renderer
 
 ### /data/ files
 
-- `seeds.php` (8.1K) — seed catalog data
-- `site.php` (5.2K) — site config (likely)
+- `seeds.php` (8.1K) - seed catalog data
+- `site.php` (5.2K) - site config (likely)
 
 ### Cookie / session
 
-- `SVSESSID` — PHPSESSID-style, set on every request. No JWT, no signed cookie. Server-side session.
+- `SVSESSID` - PHPSESSID-style, set on every request. No JWT, no signed cookie. Server-side session.
 - No CSRF token visible on the login form.
 
 ### Login form behavior
@@ -237,11 +237,11 @@ So:
 
 ### What 4-6/6 likely is (hypotheses)
 
-1. **In-app admin panel** behind the `admin-burger` menu (visible empty `[data-admin-menu]` in `header.php` — likely populated server-side when `session.role == admin`). Hidden links populate after login.
-2. **A "take control" action** — possibly a "claim", "lock", "freeze vault", or "rotate mesh keys" admin endpoint.
-3. **`bonus_check.php`** — possibly checks a bonus / one-time admin code that the outsider had (could be in stealer log too).
-4. **`mail_codes.php`** — codes sent via email; the disclaimer "we don't email" may be ironic and a keeper-mail backdoor exists.
-5. The 6/6 might involve the **physical "SunniKey & large hex code"** (per Pivot1x10 intel) — a hardware element at the venue.
+1. **In-app admin panel** behind the `admin-burger` menu (visible empty `[data-admin-menu]` in `header.php` - likely populated server-side when `session.role == admin`). Hidden links populate after login.
+2. **A "take control" action** - possibly a "claim", "lock", "freeze vault", or "rotate mesh keys" admin endpoint.
+3. **`bonus_check.php`** - possibly checks a bonus / one-time admin code that the outsider had (could be in stealer log too).
+4. **`mail_codes.php`** - codes sent via email; the disclaimer "we don't email" may be ironic and a keeper-mail backdoor exists.
+5. The 6/6 might involve the **physical "SunniKey & large hex code"** (per Pivot1x10 intel) - a hardware element at the venue.
 
 ## What the next agent needs
 
@@ -257,17 +257,17 @@ The stealer log file is referenced in the NSEC platform Discourse topic 59402 ("
 2. Extract autofill creds for `seedvault.ctf` from the browser-data dump in the log.
 3. Login with those exact creds.
 4. Walk the admin menu (the `[data-admin-menu]` populates for admin role).
-5. Probe `/includes/bonus_check.php?code=X` post-auth, `/includes/mail_codes.php?action=` post-auth — they're includes, but probably also have entry-point shims.
+5. Probe `/includes/bonus_check.php?code=X` post-auth, `/includes/mail_codes.php?action=` post-auth - they're includes, but probably also have entry-point shims.
 6. The "take control" flag likely needs editing `seeds.php` data or triggering an admin action.
 
 ## Files produced this session
 
-- `nsec/tamper\recon\index-anon.html` — anon landing snapshot
-- `nsec/tamper\recon\index-anon.headers` — response headers
-- `nsec/tamper\recon\login-fresh.html` — login form snapshot
-- `nsec/tamper\recon\data-listing.html` — `/data/` directory listing
-- `nsec/tamper\recon\includes-listing.html` — `/includes/` directory listing  
-- (8 stub files for each PHP include, all 0-byte / 500 — confirms they're include-only)
+- `nsec/tamper\recon\index-anon.html` - anon landing snapshot
+- `nsec/tamper\recon\index-anon.headers` - response headers
+- `nsec/tamper\recon\login-fresh.html` - login form snapshot
+- `nsec/tamper\recon\data-listing.html` - `/data/` directory listing
+- `nsec/tamper\recon\includes-listing.html` - `/includes/` directory listing  
+- (8 stub files for each PHP include, all 0-byte / 500 - confirms they're include-only)
 
 ## Submission history this session
 

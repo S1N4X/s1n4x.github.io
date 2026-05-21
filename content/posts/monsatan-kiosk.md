@@ -1,12 +1,12 @@
 +++
-title = "Monsatan - Kiosk — 1/1"
+title = "Monsatan - Kiosk - 1/1"
 date = 2026-05-20
 categories = ["nsec26"]
 tags = ["kiosk-escape", "solved"]
 model = "Sonnet (default)"
 draft = false
 +++
-Status: **SOLVED** — 1/1 sub-flags captured
+Status: **SOLVED** - 1/1 sub-flags captured
 
 ## Context
 
@@ -30,7 +30,7 @@ _Preserved from pre-standardization writeup(s). May contain duplicate context._
 
 ## Monsatan - Kiosk (Topic 59006)
 
-Status: **SOLVED** — 1/1 sub-flags captured
+Status: **SOLVED** - 1/1 sub-flags captured
 
 ## Captures
 
@@ -44,7 +44,7 @@ Status: **SOLVED** — 1/1 sub-flags captured
 
 ### From `59006-INDEX.md`
 
-## NSEC 2026 CTF Challenge 59006 — Complete Documentation Index
+## NSEC 2026 CTF Challenge 59006 - Complete Documentation Index
 
 ## Challenge: Monsatan Kiosk Escape
 
@@ -381,25 +381,25 @@ After submission:
 ## 📞 Reference Quick Links
 
 ### For Methodology
-→ **KIOSK_EXPLOIT_PLAN.md** — 10 attack vectors explained
+→ **KIOSK_EXPLOIT_PLAN.md** - 10 attack vectors explained
 
 ### For Quick Reference
-→ **EXPLOITATION_QUICK_REFERENCE.md** — 1-min summary + commands
+→ **EXPLOITATION_QUICK_REFERENCE.md** - 1-min summary + commands
 
 ### For Visual Navigation
-→ **EXPLOITATION_FLOWCHART.md** — Flowcharts and decision trees
+→ **EXPLOITATION_FLOWCHART.md** - Flowcharts and decision trees
 
 ### For Keyboard Shortcuts
-→ **KIOSK_CHEATSHEET.txt** — All shortcuts with explanations
+→ **KIOSK_CHEATSHEET.txt** - All shortcuts with explanations
 
 ### For Troubleshooting
 → **README.md** → Troubleshooting section
 
 ### For Complete Overview
-→ **59006-PACKAGE-SUMMARY.txt** — Full package description
+→ **59006-PACKAGE-SUMMARY.txt** - Full package description
 
 ### For Main Writeup
-→ **59006-monsatan-kiosk.md** — Complete, templated writeup
+→ **59006-monsatan-kiosk.md** - Complete, templated writeup
 
 ---
 
@@ -932,11 +932,11 @@ Kiosk Locked Interface (Fullscreen/Restricted)
 
 Once solved, save to `artifacts/` directory:
 
-- `flag.txt` — The exact flag content
-- `exploitation-log.txt` — Timeline of shortcuts attempted and results
-- `command-output.txt` — Output of key commands (whoami, dir, flag content)
-- `system-info.txt` — System information discovered
-- `shortcut-results.json` — Which shortcuts worked and which didn't
+- `flag.txt` - The exact flag content
+- `exploitation-log.txt` - Timeline of shortcuts attempted and results
+- `command-output.txt` - Output of key commands (whoami, dir, flag content)
+- `system-info.txt` - System information discovered
+- `shortcut-results.json` - Which shortcuts worked and which didn't
 
 ---
 
@@ -1277,13 +1277,13 @@ type C:\Users\*\Desktop\flag.txt
 #### Flag Search Results
 
 **Common Flag Locations Checked**:
-- [ ] `C:\flag.txt` — Result: [Found/Not found]
-- [ ] `C:\Users\[username]\Desktop\flag.txt` — Result: [Found/Not found]
-- [ ] `C:\Users\[username]\Documents\flag.txt` — Result: [Found/Not found]
-- [ ] `C:\Windows\System32\flag.txt` — Result: [Found/Not found]
-- [ ] `C:\Windows\Temp\flag.txt` — Result: [Found/Not found]
-- [ ] `C:\ProgramData\flag.txt` — Result: [Found/Not found]
-- [ ] `C:\Temp\flag.txt` — Result: [Found/Not found]
+- [ ] `C:\flag.txt` - Result: [Found/Not found]
+- [ ] `C:\Users\[username]\Desktop\flag.txt` - Result: [Found/Not found]
+- [ ] `C:\Users\[username]\Documents\flag.txt` - Result: [Found/Not found]
+- [ ] `C:\Windows\System32\flag.txt` - Result: [Found/Not found]
+- [ ] `C:\Windows\Temp\flag.txt` - Result: [Found/Not found]
+- [ ] `C:\ProgramData\flag.txt` - Result: [Found/Not found]
+- [ ] `C:\Temp\flag.txt` - Result: [Found/Not found]
 
 #### Advanced Search (if flag not in common locations)
 
@@ -1523,9 +1523,9 @@ Possible reasons:
 ---
 
 ### Documentation Used
-- `KIOSK_CHEATSHEET.txt` — Quick reference keyboard shortcuts
-- `KIOSK_EXPLOIT_PLAN.md` — Detailed 10-vector methodology
-- `find_flag.ps1` — Automated flag discovery script
+- `KIOSK_CHEATSHEET.txt` - Quick reference keyboard shortcuts
+- `KIOSK_EXPLOIT_PLAN.md` - Detailed 10-vector methodology
+- `find_flag.ps1` - Automated flag discovery script
 
 ### External References
 - [Windows Kiosk Mode Documentation](https://docs.microsoft.com/windows/configuration/kiosk-mode)
@@ -1555,16 +1555,16 @@ The Monsatan Kiosk challenge demonstrates how easily default Windows configurati
 ```
 Shortcut              | Expected Result              | Actual Result
 ──────────────────────┼──────────────────────────────┼─────────────────
-Alt+Tab               | Switch apps                  | (physical onsite — team executed)
-Alt+F4                | Close window                 | (physical onsite — team executed)
-Windows Key           | Open Start                   | (physical onsite — team executed)
-Ctrl+Alt+Delete       | Task Manager                 | (physical onsite — team executed; this is the path that worked)
-Escape                | Exit fullscreen              | (physical onsite — team executed)
-F11                   | Browser fullscreen toggle    | (physical onsite — team executed)
-Ctrl+W                | Close tab                    | (physical onsite — team executed)
-Win+R                 | Run dialog                   | (physical onsite — team executed)
-Win+D                 | Show desktop                 | (physical onsite — team executed)
-Win+Pause/Break       | System properties            | (physical onsite — team executed)
+Alt+Tab               | Switch apps                  | (physical onsite - team executed)
+Alt+F4                | Close window                 | (physical onsite - team executed)
+Windows Key           | Open Start                   | (physical onsite - team executed)
+Ctrl+Alt+Delete       | Task Manager                 | (physical onsite - team executed; this is the path that worked)
+Escape                | Exit fullscreen              | (physical onsite - team executed)
+F11                   | Browser fullscreen toggle    | (physical onsite - team executed)
+Ctrl+W                | Close tab                    | (physical onsite - team executed)
+Win+R                 | Run dialog                   | (physical onsite - team executed)
+Win+D                 | Show desktop                 | (physical onsite - team executed)
+Win+Pause/Break       | System properties            | (physical onsite - team executed)
 ```
 
 ---
@@ -1600,7 +1600,7 @@ Installed Software: [Notable programs]
 **Document Version**: 1.0  
 **Last Updated**: 2026-05-15  
 **Status**: Complete  
-**Solved By**: NSEC 2026 team @ table 061 (physical kiosk at venue, 2026-05-16 14:13 EDT, askgod #23 — Desktop flag 4 pts)  
+**Solved By**: NSEC 2026 team @ table 061 (physical kiosk at venue, 2026-05-16 14:13 EDT, askgod #23 - Desktop flag 4 pts)  
 **Method**: Chrome kiosk-mode escape → OS shell → `Desktop/flag.txt`  
 
 ---
@@ -1623,8 +1623,8 @@ Installed Software: [Notable programs]
 > honeypots_avoided: 0
 >
 > Notable:
-> - **Agent-1** (Sonnet (default)) — 10.6m: Cross-track Monsatan secret matrix — mapped HMAC reuse hypothesis across 5 Monsatan tracks
-> - **Agent-2** (Opus 4.7) — 7.1m: Monsatan Defacing — final flag 6/6 via deface manifesto injection chain
-> - **Agent-3** (Sonnet (default)) — 3.9m: Monsatan Pesticide WASM JWT crypto chain — confirmed WASM has no crypto symbols (negative result locked in)
+> - **Agent-1** (Sonnet (default)) - 10.6m: Cross-track Monsatan secret matrix - mapped HMAC reuse hypothesis across 5 Monsatan tracks
+> - **Agent-2** (Opus 4.7) - 7.1m: Monsatan Defacing - final flag 6/6 via deface manifesto injection chain
+> - **Agent-3** (Sonnet (default)) - 3.9m: Monsatan Pesticide WASM JWT crypto chain - confirmed WASM has no crypto symbols (negative result locked in)
 >
-> _Cross-track HMAC secret hunt + GitLab PAT pivot + WASM crypto absence — multi-pronged solve._
+> _Cross-track HMAC secret hunt + GitLab PAT pivot + WASM crypto absence - multi-pronged solve._

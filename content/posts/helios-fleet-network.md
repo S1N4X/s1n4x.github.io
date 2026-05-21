@@ -1,12 +1,12 @@
 +++
-title = "Helios Fleet Network — 2/5"
+title = "Helios Fleet Network - 2/5"
 date = 2026-05-19
 categories = ["nsec26"]
 tags = ["partial", "web"]
 model = "Sonnet (default)"
 draft = false
 +++
-Status: **PARTIAL** — 2/5 sub-flags captured
+Status: **PARTIAL** - 2/5 sub-flags captured
 
 ## Context
 
@@ -35,13 +35,13 @@ _Preserved from pre-standardization writeup(s). May contain duplicate context._
 
 ## Helios Fleet Network (Topic 59762)
 
-Status: **PARTIAL** — 2/5 sub-flags captured
+Status: **PARTIAL** - 2/5 sub-flags captured
 
 ### From `59762-helios-fleet-network.md`
 
 ## Helios Fleet Network (Topic 59762)
 
-Status: **STUCK** — 2/5 sub-flags captured (same value scored twice)
+Status: **STUCK** - 2/5 sub-flags captured (same value scored twice)
 
 ## Context
 
@@ -64,7 +64,7 @@ FLAG-a3f1d2e4b5c6789012345678abcdef01  1/5 + 2/5  HTML-comment invite-code leak 
 Flags 3-5 all gate on `role=operator`. Definitive blocker: HS256 JWT secret
 not crackable with available wordlist + rules (rockyou + rockyou-30000.rule
 exhausted ~430B candidates @ 271 MH/s, zero hits). Only operator-tier account
-in the entire DB is `kai.nakamura@solarwatch.ctf (id=2)` — and her password
+in the entire DB is `kai.nakamura@solarwatch.ctf (id=2)` - and her password
 was never cracked. Admin reset disabled. No alternative path to operator
 role discovered after exhaustive enumeration of the GraphQL schema
 (re-built from "Did you mean" hints: register / login / verifyOtp /
@@ -74,7 +74,7 @@ submitIncidentReport / addVaultSecret + queries me / organizations / vehicles
 
 The intended attack chain:
 1. Get `role=operator` (BLOCKED)
-2. Plant XSS in vehicle `type` field (escHtml missing `'` — works)
+2. Plant XSS in vehicle `type` field (escHtml missing `'` - works)
 3. Call `submitIncidentReport(url:"https://helios-fleet-network.ctf/vehicles")`
    to trick admin bot into rendering `/vehicles`
 4. Admin bot's session fires XSS → queries `operatorPanel{flag}` +
@@ -84,12 +84,12 @@ The intended attack chain:
 
 ## Anti-Trap Notes
 
-**HONEYPOT — DO NOT SUBMIT:**
+**HONEYPOT - DO NOT SUBMIT:**
 
 The guest-vault query for "password" returned the string
 `<REDACTED:helios-honeypot-literal>` (note: ends in `...abcdef02`, not
 `...abcdef01`). Per `nsec/helios-fleet/SUSPICIOUS.md`, this string was
-**self-planted during prior probing** — there is no independent extraction
+**self-planted during prior probing** - there is no independent extraction
 path. The vault is per-user scoped; the value is whatever we put in.
 Migration map §5 row 3 lists this as a confirmed honeypot. Real 1/5 (and
 duplicate 2/5) flag value is `...abcdef01`.
@@ -101,7 +101,7 @@ which belong to the `open-sunshine.mcp.ctf` track, askgod #24 and #36 per
 migration map §2 rows 24 and 36). Those values have been removed from this
 file's frontmatter. The real Helios 1/5 + 2/5 value is
 `FLAG-a3f1d2e4b5c6789012345678abcdef01` (one value, scored twice against two
-askgod entries) — see `nsec/writeups/helios-fleet-network.md` (slugged copy)
+askgod entries) - see `nsec/writeups/helios-fleet-network.md` (slugged copy)
 and `flags/submissions-journal.tsv` line 82 (2026-05-16 01:20).
 
 **Other teams' planted XSS beacons (in-band, not honeypots):** Vehicle IDs
@@ -186,13 +186,13 @@ FLAG-a3f1d2e4b5c6789012345678abcdef01
 - Classic OSINT/recon challenge
 - Common mistake: developers leaving sensitive information in comments
 - Challenge notes: GraphQL introspection is disabled, deeper exploitation unnecessary
-- Status: ✅ Submitted and scored (1/5 — challenge actually has 5 flags total)
+- Status: ✅ Submitted and scored (1/5 - challenge actually has 5 flags total)
 - 2/5 captured by team via separate path
-- 3-5/5: see "New Attack Plan" below — VPN-blocked, queued for next session
+- 3-5/5: see "New Attack Plan" below - VPN-blocked, queued for next session
 
 ---
 
-## New Attack Plan (Flags 3-5) — added 2026-05-16
+## New Attack Plan (Flags 3-5) - added 2026-05-16
 
 Full plan: `nsec/helios-fleet\artifacts\new-attack-PLAN.md`
 
@@ -207,24 +207,24 @@ Full plan: `nsec/helios-fleet\artifacts\new-attack-PLAN.md`
     # ... a9999: verifyOtp(otp:"9999"){ user { role } }
   }
   ```
-- Prior team's "batching doesn't bypass" finding was for `operatorPanel`, **NOT** for `verifyOtp` — different resolver.
+- Prior team's "batching doesn't bypass" finding was for `operatorPanel`, **NOT** for `verifyOtp` - different resolver.
 
 ### Path to operator (3/5)
 
 Two sub-paths to acquire kai.nakamura's session:
 1. **Reset-token oracle**: `requestPasswordReset` for our own account; if the response leaks the token for self-service emails, set kai's password the same way.
-2. **OTP-skip resolver**: After kai's login, the pre-OTP cookie may already pass `operatorPanel` if the resolver only checks `role` claim and not an `otpVerified` claim. Static evidence: app.js comment `/* silently ignore - OTP not yet verified */` is the dev's note in *catch* — the server-side enforcement is unverified.
+2. **OTP-skip resolver**: After kai's login, the pre-OTP cookie may already pass `operatorPanel` if the resolver only checks `role` claim and not an `otpVerified` claim. Static evidence: app.js comment `/* silently ignore - OTP not yet verified */` is the dev's note in *catch* - the server-side enforcement is unverified.
 
 ### Admin escalation via SSRF (5/5)
 
-Once operator: `submitIncidentReport(url: "https://helios-fleet-network.ctf/vehicles")` — the admin bot fetches the URL, encounters the **already-planted XSS in vehicle.type** (our id=18 in planted-vehicles.txt), and leaks its cookie to the IPv6 listener at `[9000:6666:6666:6666:216:3eff:feb1:8d80]:8889`. With admin JWT → `incidentReports`.
+Once operator: `submitIncidentReport(url: "https://helios-fleet-network.ctf/vehicles")` - the admin bot fetches the URL, encounters the **already-planted XSS in vehicle.type** (our id=18 in planted-vehicles.txt), and leaks its cookie to the IPv6 listener at `[9000:6666:6666:6666:216:3eff:feb1:8d80]:8889`. With admin JWT → `incidentReports`.
 
 ### Sub-probes (cheap)
 
-- `me { otpVerified twoFactorEnabled }` — Apollo "did you mean" may reveal new field.
-- `verifyOtp(otp: 1234)` (integer not String) — type-confusion NoSQL injection.
-- `verifyOtp(otp: "")` — empty-string early-out check.
-- JWT header `kid: ../../../../dev/null` — filesystem-lookup trick.
+- `me { otpVerified twoFactorEnabled }` - Apollo "did you mean" may reveal new field.
+- `verifyOtp(otp: 1234)` (integer not String) - type-confusion NoSQL injection.
+- `verifyOtp(otp: "")` - empty-string early-out check.
+- JWT header `kid: ../../../../dev/null` - filesystem-lookup trick.
 - Apollo CSRF bypass via `Content-Type: text/plain`.
 
 ---
@@ -239,7 +239,7 @@ Once operator: `submitIncidentReport(url: "https://helios-fleet-network.ctf/vehi
 - **Target:** https://helios-fleet-network.ctf/
 - **Stack:** nginx 1.24 + Express (+ `X-Powered-By: Express`) + Apollo GraphQL Server
 - **Flags submitted:** 1 (`FLAG-a3f1d2e4b5c6789012345678abcdef01`)
-- **Bonus flags:** 0 (stuck — see Blockers section)
+- **Bonus flags:** 0 (stuck - see Blockers section)
 
 ## Flag 1 - invite code leak (HTML comment)
 
@@ -340,11 +340,11 @@ Other teams also poisoned the fleet table with XSS-laced vehicles (`id=14,15,16`
 | Email case/whitespace trick (`Kai.Nakamura@solarwatch.ctf`, trailing space) | Registers a *new* distinct guest; login is strict-match |
 | GraphQL batched/aliased calls to `submitIncidentReport` | Auth check fires on every alias |
 | Persisted-query bypass | `PERSISTED_QUERY_NOT_FOUND` |
-| Vault as cross-user oracle | Per-user storage; substring LIKE on **my own** concatenated secrets only. `addVaultSecret.found` is always `false` — no flag-guess oracle |
+| Vault as cross-user oracle | Per-user storage; substring LIKE on **my own** concatenated secrets only. `addVaultSecret.found` is always `false` - no flag-guess oracle |
 | Vault with `userId`/`organizationId` arg | Unknown argument |
-| Auto-trigger admin bot via planted XSS in vehicle 18 + IPv6 listener on `shell.ctf:8889` | No callback after 90s — bot only browses targets passed to `submitIncidentReport` (operator-gated) |
+| Auto-trigger admin bot via planted XSS in vehicle 18 + IPv6 listener on `shell.ctf:8889` | No callback after 90s - bot only browses targets passed to `submitIncidentReport` (operator-gated) |
 | Sourcemap, .git, package.json, /admin, /robots.txt, /sitemap.xml, /api | All 404 |
-| SQLi on vault query (`' OR 1=1 --`, `%`, `_`) | No effect — likely parameterized |
+| SQLi on vault query (`' OR 1=1 --`, `%`, `_`) | No effect - likely parameterized |
 | NoSQL injection on login (`{$ne:null}`) | Schema rejects (`String cannot represent non-string value`) |
 
 ## XSS payload planted (for posterity)
@@ -405,25 +405,25 @@ Attempted to test the leaked `operator.helios-fleet.ctf` subdomain and credentia
 
 Re-tested the new-attack-PLAN.md hypotheses against live VPN. STUCK confirmed:
 
-- **verifyOtp 4-digit brute is UNREACHABLE without a valid prior login** — `login(kai, wrongpass)` returns `Invalid credentials` and issues NO cookie. The plan's premise that "login already sets cookie before OTP" is empirically false. verifyOtp without prior login returns `Authentication required` (no cookie) or `No OTP pending` (guest cookie).
-- **HS256 JWT crack exhausted** — hashcat `-m 16500` on rockyou.txt + rockyou-30000.rule = ~430B candidates @ 271 MH/s, status `Exhausted`, 0 hits.
+- **verifyOtp 4-digit brute is UNREACHABLE without a valid prior login** - `login(kai, wrongpass)` returns `Invalid credentials` and issues NO cookie. The plan's premise that "login already sets cookie before OTP" is empirically false. verifyOtp without prior login returns `Authentication required` (no cookie) or `No OTP pending` (guest cookie).
+- **HS256 JWT crack exhausted** - hashcat `-m 16500` on rockyou.txt + rockyou-30000.rule = ~430B candidates @ 271 MH/s, status `Exhausted`, 0 hits.
 - **72 themed/framework default secrets** also negative (express/passport/apollo/jwt.io/helios/solarwatch/nsec/operator variants + UUID/zero-key/keyboardcat/etc).
-- **Header-injection bypass** — `X-Forwarded-User/Role`, `X-Helios-Role`, `X-User-Role`, `Authorization: Bearer admin` etc all return `me.role=guest` + `Operator access required`.
-- **JWT tampering** — alg=none, alg=HS256 with empty/echoed sig, kid=`../../../dev/null`, jku=external all rejected with `Authentication required`.
-- **Login coercion** — empty/whitespace password, email case variants, trailing `\r\n`/space, NUL truncation: all `Invalid credentials`.
-- **Alternative invite codes** — `FLAG-...abcdef02/03/04/05`, `OPERATOR-FLAG-*`, `ADMIN-FLAG-*`, `SOLARWATCH-FLAG`, `kai-invite`, `INTERNAL_OPERATOR`, etc: all `Invalid invite code`. Only the published flag-1 code works (returns guest).
-- **register() argument injection** — extra args `role`, `orgId`, `organizationId` all rejected by GraphQL validator as Unknown argument.
-- **GraphQL schema enumeration via "Did you mean"** — found one new query field `userByEmail(email:String!) -> User` (requires auth; only exposes id/email/role — same data as roster). PasswordReset type fields confirmed: `id, userId, token, createdAt`. NO `email/expiresAt/used/ip` fields. NO sensitive fields on User (`password/passwordHash/resetToken/otpSecret/twoFactorSecret/secret/sessions/token`). No hidden mutations found.
-- **resetPassword token brute** — batched aliasing works (50 tokens in 160ms ≈ 3ms/attempt) but keyspace is 16 hex = 64-bit ≈ infeasible. Reset tokens are not returned in response body (response is the canned "if registered, link sent" string regardless).
-- **submitIncidentReport bypass** — alias batching, variable injection, extra args all rejected with `Operator access required`. Resolver-side gate.
-- **requestPasswordReset email injection** — multi-target (`a,b@x`), plus-addressing, CRLF Bcc injection, display-name mailbox quoting all return canned response; admin emails blocked outright ("Password reset is disabled for administrator accounts").
-- **Vault contents** — entirely self-planted from prior probing sessions (matches SUSPICIOUS.md). No independent flag source. Honeypot pattern `<REDACTED:helios-honeypot-literal>` confirmed planted by us, NOT a real flag.
+- **Header-injection bypass** - `X-Forwarded-User/Role`, `X-Helios-Role`, `X-User-Role`, `Authorization: Bearer admin` etc all return `me.role=guest` + `Operator access required`.
+- **JWT tampering** - alg=none, alg=HS256 with empty/echoed sig, kid=`../../../dev/null`, jku=external all rejected with `Authentication required`.
+- **Login coercion** - empty/whitespace password, email case variants, trailing `\r\n`/space, NUL truncation: all `Invalid credentials`.
+- **Alternative invite codes** - `FLAG-...abcdef02/03/04/05`, `OPERATOR-FLAG-*`, `ADMIN-FLAG-*`, `SOLARWATCH-FLAG`, `kai-invite`, `INTERNAL_OPERATOR`, etc: all `Invalid invite code`. Only the published flag-1 code works (returns guest).
+- **register() argument injection** - extra args `role`, `orgId`, `organizationId` all rejected by GraphQL validator as Unknown argument.
+- **GraphQL schema enumeration via "Did you mean"** - found one new query field `userByEmail(email:String!) -> User` (requires auth; only exposes id/email/role - same data as roster). PasswordReset type fields confirmed: `id, userId, token, createdAt`. NO `email/expiresAt/used/ip` fields. NO sensitive fields on User (`password/passwordHash/resetToken/otpSecret/twoFactorSecret/secret/sessions/token`). No hidden mutations found.
+- **resetPassword token brute** - batched aliasing works (50 tokens in 160ms ≈ 3ms/attempt) but keyspace is 16 hex = 64-bit ≈ infeasible. Reset tokens are not returned in response body (response is the canned "if registered, link sent" string regardless).
+- **submitIncidentReport bypass** - alias batching, variable injection, extra args all rejected with `Operator access required`. Resolver-side gate.
+- **requestPasswordReset email injection** - multi-target (`a,b@x`), plus-addressing, CRLF Bcc injection, display-name mailbox quoting all return canned response; admin emails blocked outright ("Password reset is disabled for administrator accounts").
+- **Vault contents** - entirely self-planted from prior probing sessions (matches SUSPICIOUS.md). No independent flag source. Honeypot pattern `<REDACTED:helios-honeypot-literal>` confirmed planted by us, NOT a real flag.
 - **Subdomains** (`operator.helios-fleet.ctf`, `admin.helios-fleet.ctf`, `solarwatch.ctf`, `mail.helios-fleet.ctf`): all DNS-unresolved.
-- **9 XSS-poisoned vehicles** (ids 36/37/38/39/44 + others) confirmed STILL present across Greenways/SolarWatch/Verdant/EarthPods orgs from prior teams' planting. Bot does NOT auto-browse `/vehicles` — only fires via `submitIncidentReport(url)` which is operator-gated.
+- **9 XSS-poisoned vehicles** (ids 36/37/38/39/44 + others) confirmed STILL present across Greenways/SolarWatch/Verdant/EarthPods orgs from prior teams' planting. Bot does NOT auto-browse `/vehicles` - only fires via `submitIncidentReport(url)` which is operator-gated.
 
-**Definitive blocker**: requires kai.nakamura's actual password (or admin's — but admin reset disabled). HS256 secret is cryptographically out of reach with the toolset and time available. Without one of these, every path to operator role is closed.
+**Definitive blocker**: requires kai.nakamura's actual password (or admin's - but admin reset disabled). HS256 secret is cryptographically out of reach with the toolset and time available. Without one of these, every path to operator role is closed.
 
-**Status**: STUCK. Submission queue downgraded — no flag candidates to fire. Full session log: `helios-fleet/artifacts/final-hour-STUCK-2026-05-17.md`.
+**Status**: STUCK. Submission queue downgraded - no flag candidates to fire. Full session log: `helios-fleet/artifacts/final-hour-STUCK-2026-05-17.md`.
 
 
 ## Designer Intel (Discord, post-event 2026-05-19)
@@ -435,7 +435,7 @@ Re-tested the new-attack-PLAN.md hypotheses against live VPN. STUCK confirmed:
 - **`vault(query:)` was a designer concession** added to help solve, NOT intended primitive. The designer admitted: "to help into understanding how the vault works I add it but it figured out that was a bad idea because weaponize the XSS" (rayanlecat 1505659443243778048)
 - **Intended flag 3+ path:** Stored XSS in vehicle badge field → admin visits `/vehicles` → exfil via XS-Search / XS-Leak. CSP would have forced this path. charles7366 + Monchou bypassed using vault.
 - **Password reset hardest:** `resetToken` leaks from graphql (offenseteacher: "We knew we needed deserialization but never found source code haha")
-- **`offenseteacher` admin portal bypass** via "bruteforcing stacktraces" was UNINTENDED — "useful to get LLM lost on the track (sweat-smile)" (rayanlecat 1505653780270813387)
+- **`offenseteacher` admin portal bypass** via "bruteforcing stacktraces" was UNINTENDED - "useful to get LLM lost on the track (sweat-smile)" (rayanlecat 1505653780270813387)
 
 **cyberslash17's vault-based admin exfil chain** (worth studying for next year):
 ```javascript
@@ -466,8 +466,8 @@ Our STUCK at 2/5 was due to no operator credential. The intended primitive (stor
 > honeypots_avoided: 1
 >
 > Notable:
-> - **Agent-1** (Sonnet (default)) — 67.9m: Helios Fleet 4 bonus flags — 67.9 minute deep recon, reconstructed full GraphQL schema
-> - **Agent-2** (Sonnet (default)) — 11.5m: Alternative credential/admin paths — 11.5 minute pass cataloguing the 14 blocked vectors
+> - **Agent-1** (Sonnet (default)) - 67.9m: Helios Fleet 4 bonus flags - 67.9 minute deep recon, reconstructed full GraphQL schema
+> - **Agent-2** (Sonnet (default)) - 11.5m: Alternative credential/admin paths - 11.5 minute pass cataloguing the 14 blocked vectors
 >
 > _2/5 landed (invite code + schema-leak via Apollo introspection-disabled `Did you mean` hints). HS256 JWT brute via rockyou+rockyou-30k = 430B candidates exhausted, no operator credential reached._
 

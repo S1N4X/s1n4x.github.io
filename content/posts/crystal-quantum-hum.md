@@ -1,12 +1,12 @@
 +++
-title = "The Crystal and the Grid - Part I: The Quantum Hum — 2/2"
+title = "The Crystal and the Grid - Part I: The Quantum Hum - 2/2"
 date = 2026-05-20
 categories = ["nsec26"]
 tags = ["hardware", "quantum", "solved"]
 model = "Opus 4.7"
 draft = false
 +++
-Status: **SOLVED** — 2/2 sub-flags captured
+Status: **SOLVED** - 2/2 sub-flags captured
 
 ## Context
 
@@ -29,7 +29,7 @@ _Preserved from pre-standardization writeup(s). May contain duplicate context._
 
 ## The Crystal and the Grid - Part I: The Quantum Hum (Topic 59906)
 
-Status: **SOLVED** — 2/2 sub-flags captured
+Status: **SOLVED** - 2/2 sub-flags captured
 
 ## Captures
 

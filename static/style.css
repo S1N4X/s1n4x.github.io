@@ -31,6 +31,19 @@
   --code-border: #2a0a3a;
 }
 
+/* --- Theme: solarpunk (sunlit-leaf, chartreuse + cream) ----------- */
+/* Optimistic counterpart to cyberpunk — warm-leaf earth with bright
+ * chartreuse accent. Matches the agrotech / renewable theme that ran
+ * through NSEC 2026 (Monsatan, Save-the-Trees, Sunbloom, REM, Plant
+ * Watering tracks). Distinct from the phosphor "green" theme: warmer
+ * earth bg, lighter cream foreground, yellower accent. */
+:root[data-theme="solarpunk"] {
+  --background: #0c1410;       /* deep warm leaf */
+  --foreground: #d9e5c8;        /* cream-leaf */
+  --accent: #94d63b;            /* chartreuse — sunlit green */
+  --code-border: #1f3a1a;
+}
+
 /* Subtle phosphor scanline + glow on the main heading area */
 .logo a,
 .post-title a,
@@ -152,8 +165,8 @@ article small {
   display: flex;
   align-items: center;
   gap: 16px;
-  margin: 14px 0 18px 0;
-  padding: 12px 0 12px 14px;
+  margin: 0 0 18px 0;       /* tight to the callout above */
+  padding: 8px 0 8px 14px;
   border-left: 3px solid var(--accent);
 }
 .team-credit__logo {
@@ -194,7 +207,7 @@ article small {
   border-left: 3px solid var(--accent);
   background: color-mix(in srgb, var(--accent) 6%, transparent);
   padding: 14px 18px;
-  margin: 14px 0 22px 0;
+  margin: 14px 0 12px 0;       /* tight bottom — team-credit follows */
   font-family: "Fira Code", Monaco, Consolas, "Ubuntu Mono", monospace;
 }
 .ctfint-callout__headline {

@@ -1,14 +1,14 @@
 +++
-title = "[Beginner track] Hackademy — 17/18"
+title = "[Beginner track] Hackademy - 17/18"
 date = 2026-05-20
 categories = ["nsec26"]
 tags = ["partial", "web"]
 model = "Sonnet (default)"
 draft = false
 +++
-Status: **PARTIAL** — 17/18 sub-flags captured (chal5 / Open Redirect 101 STUCK)
+Status: **PARTIAL** - 17/18 sub-flags captured (chal5 / Open Redirect 101 STUCK)
 
-> The earlier "SOLVED 21/21" header was incorrect — askgod aggregate count included cross-track tags ("You now know..." → save-the-trees, "That's a lot of cores..." → drone-license) that were not actual hackademy sub-flags. Migration map §6 row #7 and §7 (cross-track mislabeling). The true hackademy result is 17 captured of 18 in-scope sub-flags; chal5 (Open Redirect 101) remains STUCK (bot never visits the webhook listener, HS256 secret not recovered).
+> The earlier "SOLVED 21/21" header was incorrect - askgod aggregate count included cross-track tags ("You now know..." → save-the-trees, "That's a lot of cores..." → drone-license) that were not actual hackademy sub-flags. Migration map §6 row #7 and §7 (cross-track mislabeling). The true hackademy result is 17 captured of 18 in-scope sub-flags; chal5 (Open Redirect 101) remains STUCK (bot never visits the webhook listener, HS256 secret not recovered).
 
 ## Context
 
@@ -44,25 +44,25 @@ _Preserved from pre-standardization writeup(s). May contain duplicate context._
 
 ## [Beginner track] Hackademy (Topic 58934)
 
-Status: **SOLVED** — 21/21 sub-flags captured
+Status: **SOLVED** - 21/21 sub-flags captured
 
 ### From `58934-hackademy.md`
 
 ## [Beginner track] Hackademy (Topic 58934)
 
-Status: **STUCK** — 21/21 sub-flags captured
+Status: **STUCK** - 21/21 sub-flags captured
 
 ## STUCK Rationale
 
 - | web | hackademy chal5 + recon | 3 | ❌ DEFINITIVELY DONE: 17/18 SOLVED, chal5 STUCK (bot doesn't visit even with `http://` filter passed). All 3 hackademy agents confirm. Cross-track: askgod mislabels "You now know..." (=save-trees) and "That's a lot of cores..." (=drone-license). |
 - **Hackademy intel (chal5 STUCK rationale):** Bot never visits webhook listener despite IPv6 connectivity verified; JWT secret not recovered. Untested: JWT `kid` injection, POST variant of pentester.php, parameter pollution.
-- | **[ORCH-B] Hackademy chal5 (Open Redirect 101)** | NO LONGER STUCK — was "no external listener reachable", now unblocked | [ORCH-B] webhook.site has IPv6 (`2a01:4f8:121:114d::2`); attack chain staged in `flags/hackademy-chal5-NEXT.txt` |
+- | **[ORCH-B] Hackademy chal5 (Open Redirect 101)** | NO LONGER STUCK - was "no external listener reachable", now unblocked | [ORCH-B] webhook.site has IPv6 (`2a01:4f8:121:114d::2`); attack chain staged in `flags/hackademy-chal5-NEXT.txt` |
 
 ### From `58934-hackademy.md`
 
 ## [Beginner track] Hackademy (Topic 58934)
 
-Status: **STUCK** — 0/unknown sub-flags captured
+Status: **STUCK** - 0/unknown sub-flags captured
 
 ### From `58934-hackademy-chal5-open-redirect-101-STUCK.md`
 
@@ -187,7 +187,7 @@ with a wildcard DNS pointing at the new listener.
 - | web | hackademy chal5 + recon | 3 | ❌ DEFINITIVELY DONE: 17/18 SOLVED, chal5 STUCK (bot doesn't visit even with `http://` filter passed). All 3 hackademy agents confirm. Cross-track: askgod mislabels "You now know..." (=save-trees) and "That's a lot of cores..." (=drone-license). |
 - **Hackademy intel (chal5 STUCK rationale):** Bot never visits webhook listener despite IPv6 connectivity verified; JWT secret not recovered. Untested: JWT `kid` injection, POST variant of pentester.php, parameter pollution.
 - | 🎯 P2 | **hackademy chal5 (Open Redirect 101)** *(transferred from ORCH-B → ORCH-A)* | Provision webhook.site IPv6 → trigger `?sub_url=` → capture JWT → fetch flag | `flags/hackademy-chal5-NEXT.txt` (manual curl chain, 6 steps) | MED-HIGH | [ORCH-A] |
-- | **[ORCH-B] Hackademy chal5 (Open Redirect 101)** | NO LONGER STUCK — was "no external listener reachable", now unblocked | [ORCH-B] webhook.site has IPv6 (`2a01:4f8:121:114d::2`); attack chain staged in `flags/hackademy-chal5-NEXT.txt` |
+- | **[ORCH-B] Hackademy chal5 (Open Redirect 101)** | NO LONGER STUCK - was "no external listener reachable", now unblocked | [ORCH-B] webhook.site has IPv6 (`2a01:4f8:121:114d::2`); attack chain staged in `flags/hackademy-chal5-NEXT.txt` |
 
 ### From `58934-hackademy.md`
 
@@ -669,10 +669,10 @@ The "Grand Master Pentester" bot did not visit any of the webhook.site URLs. Thi
 > honeypots_avoided: 0
 >
 > Notable:
-> - **Agent-1** (Sonnet (default)) — 19.0m: Hackademy Beginner Track 17/18 — 19-minute LFI/SSRF/Inclusion/DBMS/Upload/Pwn ladder sweep
-> - **Agent-2** (Sonnet (default)) — 81.2m: Chal5 webhook.site primary listener — 81.2 minutes; never got bot-visit despite confirmed IPv6 reachability
+> - **Agent-1** (Sonnet (default)) - 19.0m: Hackademy Beginner Track 17/18 - 19-minute LFI/SSRF/Inclusion/DBMS/Upload/Pwn ladder sweep
+> - **Agent-2** (Sonnet (default)) - 81.2m: Chal5 webhook.site primary listener - 81.2 minutes; never got bot-visit despite confirmed IPv6 reachability
 >
-> _17 of 18 beginner-ladder flags landed. Chal5 (Open Redirect 101) STUCK — bot never visited webhook.site even with confirmed IPv6 reachability + JWT extraction proof._
+> _17 of 18 beginner-ladder flags landed. Chal5 (Open Redirect 101) STUCK - bot never visited webhook.site even with confirmed IPv6 reachability + JWT extraction proof._
 
 
 ## Slop Watch
@@ -680,4 +680,4 @@ The "Grand Master Pentester" bot did not visit any of the webhook.site URLs. Thi
 - 13 agents on the 18-flag beginner ladder. 17 landed. Chal5 (Open Redirect 101) STUCK because the admin bot never visited webhook.site even with confirmed IPv6 reachability and a working JWT extraction.
 - One agent's webhook.site primary listener ran 81.2 minutes. The webhook received nothing. The bot may or may not have existed at all.
 - Two cross-track askgod tag mislabelings landed in the hackademy track: "You now know..." (actually save-the-trees) and "That's a lot of cores..." (actually drone-license). The hackademy INDEX initially read 21/21 because those two foreign sub-flags counted in the bucket. The real total is 17/18.
-- The `58934-hackademy.md` writeup has both "Status: SOLVED — 21/21" and "Status: STUCK — 21/21" in the same file. Different duplicated sections. The reader picks whichever they reached first.
+- The `58934-hackademy.md` writeup has both "Status: SOLVED - 21/21" and "Status: STUCK - 21/21" in the same file. Different duplicated sections. The reader picks whichever they reached first.

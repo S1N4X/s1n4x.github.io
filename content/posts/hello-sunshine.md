@@ -1,12 +1,12 @@
 +++
-title = "Hello Sunshine — 2/2"
+title = "Hello Sunshine - 2/2"
 date = 2026-05-20
 categories = ["nsec26"]
 tags = ["pwn", "solved"]
 model = "Opus 4.7"
 draft = false
 +++
-Status: **SOLVED** — 2/2 sub-flags captured
+Status: **SOLVED** - 2/2 sub-flags captured
 
 ## Context
 
@@ -32,7 +32,7 @@ _Preserved from pre-standardization writeup(s). May contain duplicate context._
 
 ## Hello Sunshine (Topic 58826)
 
-Status: **SOLVED** — 2/2 sub-flags captured
+Status: **SOLVED** - 2/2 sub-flags captured
 
 ### From `58826-hello-sunshine.md`
 
@@ -41,8 +41,8 @@ Status: **SOLVED** — 2/2 sub-flags captured
 ## Context
 
 Model Context Protocol (MCP) server exploitation challenge on `open-sunshine.mcp.ctf`. Two-stage challenge:
-- **Sunrise (1/2)** — escape the Python sandbox via the MCP "sun-cycle" tool
-- **Sundown (2/2)** — bypass a token blocklist via Pyodide internal mount API
+- **Sunrise (1/2)** - escape the Python sandbox via the MCP "sun-cycle" tool
+- **Sundown (2/2)** - bypass a token blocklist via Pyodide internal mount API
 
 The server runs a Pyodide WASM Python with Bun JS host bindings exposed for code execution.
 
@@ -50,12 +50,12 @@ The server runs a Pyodide WASM Python with Bun JS host bindings exposed for code
 
 - MCP endpoint registry maps tools (`sun-cycle`, `forecast`, etc.) to Python-backed executors
 - `sun-cycle` accepts an `astro_script` argument and executes it inside a Pyodide VM
-- `js` module is reachable inside the Pyodide runtime — direct path to `Bun.spawnSync` for OS commands
+- `js` module is reachable inside the Pyodide runtime - direct path to `Bun.spawnSync` for OS commands
 - Server filters incoming tool arguments via a token blocklist (rejects literal "flag", "open", "read", etc.)
 
 ## Exploitation
 
-### Stage 1 — Sunrise (1/2)
+### Stage 1 - Sunrise (1/2)
 
 Within the Pyodide sandbox, `js.Bun.spawnSync` is reachable through the `js` polyfill module. Reading `/flag1`:
 
@@ -67,13 +67,13 @@ print(result.stdout.toString())
 
 This escapes the Python-only sandbox by pivoting to the JS host (Bun) and reads the first flag file.
 
-### Stage 2 — Sundown (2/2)
+### Stage 2 - Sundown (2/2)
 
 The second flag (`/flag2`) is protected by:
 1. Token-blocklist on inbound MCP arguments
 2. Path normalization that strips obvious file references
 
-Bypass: use `pyodide_js.mountNodeFS()` to re-mount the host filesystem from inside Pyodide using strings constructed at runtime (not in the literal arguments — they evade the inbound blocklist). Then read the flag through the new mount.
+Bypass: use `pyodide_js.mountNodeFS()` to re-mount the host filesystem from inside Pyodide using strings constructed at runtime (not in the literal arguments - they evade the inbound blocklist). Then read the flag through the new mount.
 
 ```python
 import pyodide_js
@@ -86,14 +86,14 @@ The character-by-character literal construction evades the static blocklist on t
 
 ## Captures
 
-### Flag 1/2 — Sunrise (askgod #34 / 4 pts)
+### Flag 1/2 - Sunrise (askgod #34 / 4 pts)
 
 - **askgod entry:** open-sunshine.mcp.ctf 1/2 Sunrise
 - **Timestamp:** 2026-05-15 22:30 EDT
 - **Value:** `FLAG-b74d95e89c2c63a830efcdcf30`
 - **Method:** MCP Pyodide+Bun `js.Bun.spawnSync` to read /flag1
 
-### Flag 2/2 — Sundown (askgod #35 / 8 pts)
+### Flag 2/2 - Sundown (askgod #35 / 8 pts)
 
 - **askgod entry:** open-sunshine.mcp.ctf 2/2 Sundown
 - **Timestamp:** 2026-05-15 22:38 EDT
@@ -102,8 +102,8 @@ The character-by-character literal construction evades the static blocklist on t
 
 ## Artifacts
 
-- `nsec/hello-sunshine/exploit_*.py` — Pyodide payload variants
-- `nsec/hello-sunshine/responses/` — MCP tool-call dumps
+- `nsec/hello-sunshine/exploit_*.py` - Pyodide payload variants
+- `nsec/hello-sunshine/responses/` - MCP tool-call dumps
 
 
 ---

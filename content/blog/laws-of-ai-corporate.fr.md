@@ -2,12 +2,12 @@
 title = "Mes six lois de l'utilisation de l'IA au travail"
 description = "Six engagements personnels que je tiens quand j'utilise des LLM dans mon travail de sécurité et d'ingénierie."
 date = 2026-05-21
-tags = ["ai-secops", "opinion", "éthique"]
+tags = ["aisecops", "opinion", "éthique"]
 draft = false
-model = "Opus 4.7 (aide à la rédaction) — les six lois sont les miennes"
+model = "Opus 4.7 (aide à la rédaction) - les six lois sont les miennes"
 +++
 
-Après un an à opérer des systèmes d'IA dans du travail de sécurité — pistes CTF, exercices purple team, triage d'anomalies — j'en suis arrivé à six engagements personnels. Je les garde courts exprès. Ce n'est pas de la politique. C'est ce que je dois aux gens avec qui je travaille.
+Après un an à opérer des systèmes d'IA dans du travail de sécurité - pistes CTF, exercices purple team, triage d'anomalies - j'en suis arrivé à six engagements personnels. Je les garde courts exprès. Ce n'est pas de la politique. C'est ce que je dois aux gens avec qui je travaille.
 
 ## 1. Je révise ce que le LLM me produit.
 
@@ -23,21 +23,21 @@ Dans le travail, dans les livrables, dans les conversations avec collègues et c
 
 ## 4. Je ne personnifie pas l'IA. C'est un outil.
 
-Pas de « il » qui pense, pas de « elle » qui veut, pas de cadrage anthropomorphique. Le LLM ne pense pas, ne veut pas, ne mérite pas. Le traiter comme un collègue brouille qui est réellement responsable — moi. Un outil est un outil. Le nommer correctement est la première honnêteté.
+Pas de « il » qui pense, pas de « elle » qui veut, pas de cadrage anthropomorphique. Le LLM ne pense pas, ne veut pas, ne mérite pas. Le traiter comme un collègue brouille qui est réellement responsable - moi. Un outil est un outil. Le nommer correctement est la première honnêteté.
 
 ## 5. Je ne sous-traite pas le respect que je dois à mes collègues à un LLM.
 
 Le modèle n'est pas un substitut de collègue ni un évaluateur de collègue. Coller le travail d'un coéquipier dans un chatbot pour trouver des contre-arguments, pour pinailler, ou pour « vérifier » son raisonnement avant de répondre, c'est dire *que je fais plus confiance au modèle qu'à la personne avec qui je travaille*. Non. Et je ne ferai pas semblant.
 
-Si je suis en désaccord avec un coéquipier, je lui apporte le désaccord directement, avec ma propre réflexion — pas avec une transcription fraîche d'un modèle qui ne l'a jamais rencontré. La version paresseuse de moi se sert de l'IA pour être la personne la plus intelligente dans la pièce. La version honnête s'en sert pour mieux faire le travail, et gagne ensuite la pièce à l'ancienne.
+Si je suis en désaccord avec un coéquipier, je lui apporte le désaccord directement, avec ma propre réflexion - pas avec une transcription fraîche d'un modèle qui ne l'a jamais rencontré. La version paresseuse de moi se sert de l'IA pour être la personne la plus intelligente dans la pièce. La version honnête s'en sert pour mieux faire le travail, et gagne ensuite la pièce à l'ancienne.
 
 ## 6. Les LLM ne savent pas compter.
 
-Cette liste s'intitule « six lois ». Elle en a sept. Ni moi ni le modèle ne l'avons remarqué pendant la révision. Si quelque chose doit être exactement *N*, comptez-le vous-même — et ne faites pas confiance au titre.
+Cette liste s'intitule « six lois ». Elle en a sept. Ni moi ni le modèle ne l'avons remarqué pendant la révision. Si quelque chose doit être exactement *N*, comptez-le vous-même - et ne faites pas confiance au titre.
 
 ## 7. Si je n'ai pas tout lu, je le déclare.
 
-La lecture partielle arrive — travail en cours, sous-ensembles échantillonnés, raccourcis méthodologiques où j'ai confirmé un motif sur quelques cas représentatifs et extrapolé. Quand ça arrive, je le dis d'emblée : notes de portée, divulgation de méthode, taille de l'échantillon, ce que j'ai vraiment vu versus ce que j'ai cité. La fausse modestie, c'est « je pourrais avoir tort ». La transparence, c'est « j'ai échantillonné cinq sur quarante-sept; la tendance pourrait ne pas tenir. »
+La lecture partielle arrive - travail en cours, sous-ensembles échantillonnés, raccourcis méthodologiques où j'ai confirmé un motif sur quelques cas représentatifs et extrapolé. Quand ça arrive, je le dis d'emblée : notes de portée, divulgation de méthode, taille de l'échantillon, ce que j'ai vraiment vu versus ce que j'ai cité. La fausse modestie, c'est « je pourrais avoir tort ». La transparence, c'est « j'ai échantillonné cinq sur quarante-sept; la tendance pourrait ne pas tenir. »
 
 Le lecteur peut alors calibrer. Le lecteur ne peut pas calibrer ce qu'il ignore que j'ai sauté.
 

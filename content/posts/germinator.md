@@ -1,12 +1,12 @@
 +++
-title = "The Germinator — 1/1"
+title = "The Germinator - 1/1"
 date = 2026-05-20
 categories = ["nsec26"]
 tags = ["reverse", "solved"]
 model = "Opus 4.7"
 draft = false
 +++
-Status: **SOLVED** — 1/1 sub-flags captured
+Status: **SOLVED** - 1/1 sub-flags captured
 
 ## Context
 
@@ -18,7 +18,7 @@ Status: **SOLVED** — 1/1 sub-flags captured
 |---|---|---|---|
 | 2/2 | `FLAG-ezt1VGwGtTllv30EaamravzI67cXoljj` | Spoof license requirements / compute key (NOT the binary's honeypot fixture) | 2026-05-16T00:52:00-04:00 |
 
-> The plaintext `FLAG-SEEDS-GROW-FOREVER-{GROWTH_UNLOCKED}` string visible in `germinator.bin` is a **honeypot fixture** (see §5 row #1 of migration map). Submitting it returns `[invalid flag]`. The askgod-accepted value is `FLAG-ezt1VGwGtTllv30EaamravzI67cXoljj` per `flags/.submit-history.jsonl` 2026-05-16T17:42:59 (DUP — team had submitted directly earlier).
+> The plaintext `FLAG-SEEDS-GROW-FOREVER-{GROWTH_UNLOCKED}` string visible in `germinator.bin` is a **honeypot fixture** (see §5 row #1 of migration map). Submitting it returns `[invalid flag]`. The askgod-accepted value is `FLAG-ezt1VGwGtTllv30EaamravzI67cXoljj` per `flags/.submit-history.jsonl` 2026-05-16T17:42:59 (DUP - team had submitted directly earlier).
 
 ## Artifacts
 
@@ -32,13 +32,13 @@ _Preserved from pre-standardization writeup(s). May contain duplicate context._
 
 ## The Germinator (Topic 59186)
 
-Status: **SOLVED** — 1/1 sub-flags captured
+Status: **SOLVED** - 1/1 sub-flags captured
 
 ### From `59186-germinator.md`
 
-## The Germinator — SOLVED 2/2 (Topic 59186)
+## The Germinator - SOLVED 2/2 (Topic 59186)
 
-**Status: SOLVED — 2/2 sub-flags captured** (per migration map §6 #1; per `flags/.submit-history.jsonl` 2026-05-16T17:42:59 DUP submission of real flag value)
+**Status: SOLVED - 2/2 sub-flags captured** (per migration map §6 #1; per `flags/.submit-history.jsonl` 2026-05-16T17:42:59 DUP submission of real flag value)
 
 **CRITICAL CORRECTION (orch-b1, 2026-05-19):** Multiple prior writeup revisions mis-recorded this track as STUCK/blocked or used the in-binary honeypot string `FLAG-SEEDS-GROW-FOREVER-{GROWTH_UNLOCKED}` (or other wrong values like `FLAG-b74d95e89c2c63a830efcdcf30` which is a hello-sunshine flag, or `FLAG-<not-recorded-locally>`). All of these are INCORRECT. The real, askgod-accepted flag is `FLAG-ezt1VGwGtTllv30EaamravzI67cXoljj`.
 
@@ -50,13 +50,13 @@ See artifacts for in-progress investigation notes.
 
 ## The Germinator (Topic 59186)
 
-Status: **STUCK** — 1/1 sub-flags captured
+Status: **STUCK** - 1/1 sub-flags captured
 
 ### From `59186-germinator.md`
 
 ## The Germinator (Topic 59186)
 
-Status: **SOLVED** — 2/2 sub-flags captured
+Status: **SOLVED** - 2/2 sub-flags captured
 
 **Status correction note:** Prior linter version mis-set this to STUCK 0/unknown with the wrong flag value (`FLAG-b74d95e89c2c63a830efcdcf30`, which is actually a hello-sunshine flag). The real, askgod-accepted flag is `FLAG-ezt1VGwGtTllv30EaamravzI67cXoljj` per `flags/.submit-history.jsonl` 2026-05-16T17:42:59 (recorded as DUP because the team submitted directly earlier).
 
@@ -72,13 +72,13 @@ Status: **SOLVED** — 2/2 sub-flags captured
 
 ### From `59186-germinator.md`
 
-## The Germinator — Firmware License Check Defeat (Challenge 59186)
+## The Germinator - Firmware License Check Defeat (Challenge 59186)
 
 ## Context
 
 Firmware license-verification challenge. A 2048-byte x86-64 ELF firmware image (`germinator.bin`) gates flag-printing code behind a JNE (Jump if Not Equal) conditional jump. The binary contains a visible plaintext string `FLAG-SEEDS-GROW-FOREVER-{GROWTH_UNLOCKED}` and a hardcoded license key `GERMINATOR-KEY-2026`.
 
-**Critical anti-trap note:** The plaintext `FLAG-SEEDS-GROW-FOREVER-{GROWTH_UNLOCKED}` string visible in the binary is a HONEYPOT fixture, not the real CTF flag. Patching the JNE and printing the embedded string yields the honeypot value. The actual CTF flag is `FLAG-ezt1VGwGtTllv30EaamravzI67cXoljj` and is obtained by correctly satisfying the license-key derivation logic — not by patching the gate.
+**Critical anti-trap note:** The plaintext `FLAG-SEEDS-GROW-FOREVER-{GROWTH_UNLOCKED}` string visible in the binary is a HONEYPOT fixture, not the real CTF flag. Patching the JNE and printing the embedded string yields the honeypot value. The actual CTF flag is `FLAG-ezt1VGwGtTllv30EaamravzI67cXoljj` and is obtained by correctly satisfying the license-key derivation logic - not by patching the gate.
 
 ## Recon
 
@@ -87,7 +87,7 @@ Firmware license-verification challenge. A 2048-byte x86-64 ELF firmware image (
 - Strings of interest:
   - `=== GERMINATOR FIRMWARE v2.0 ===`
   - `GERMINATOR-KEY-2026` (decoy / honeypot key)
-  - `FLAG-SEEDS-GROW-FOREVER-{GROWTH_UNLOCKED}` (HONEYPOT — embedded fixture)
+  - `FLAG-SEEDS-GROW-FOREVER-{GROWTH_UNLOCKED}` (HONEYPOT - embedded fixture)
   - `GERMKEY_H9`
   - `Invalid License - Please enter a valid license key`
   - `License Valid - Welcome to Germinator`
@@ -101,7 +101,7 @@ Firmware license-verification challenge. A 2048-byte x86-64 ELF firmware image (
 
 ### The trap: patch-and-print yields honeypot
 
-Patching `75 20 → 90 90` (NOP NOP) at 0x010D forces fall-through into the flag-print path. Doing so prints `FLAG-SEEDS-GROW-FOREVER-{GROWTH_UNLOCKED}` — this is the in-binary lure and **not** the real flag.
+Patching `75 20 → 90 90` (NOP NOP) at 0x010D forces fall-through into the flag-print path. Doing so prints `FLAG-SEEDS-GROW-FOREVER-{GROWTH_UNLOCKED}` - this is the in-binary lure and **not** the real flag.
 
 ### The real path: derive license, satisfy check legitimately
 
@@ -111,11 +111,11 @@ This is a classic "honeypot in the binary" pattern: the obvious plaintext string
 
 ## Captures
 
-### Flag 2/2 — Germinator, Activate!
+### Flag 2/2 - Germinator, Activate!
 
 - **askgod entry:** Germinator, Activate! 2/2
 - **Timestamp:** 2026-05-16 00:52 EDT (team submitted before wrapper began tracking)
-- **Wrapper attempt:** `flags/.submit-history.jsonl` 2026-05-16T17:42:59 returned DUP — team had already submitted directly
+- **Wrapper attempt:** `flags/.submit-history.jsonl` 2026-05-16T17:42:59 returned DUP - team had already submitted directly
 - **Value:** `FLAG-ezt1VGwGtTllv30EaamravzI67cXoljj`
 - **Method:** Spoof license requirements / compute key from binary's KDF
 
@@ -123,20 +123,20 @@ This is a classic "honeypot in the binary" pattern: the obvious plaintext string
 
 The binary contains **two** flag-shaped strings:
 
-1. `FLAG-SEEDS-GROW-FOREVER-{GROWTH_UNLOCKED}` — embedded ASCII literal at offset 0x0111. This is the **honeypot fixture** referenced in the team's `feedback_honeypot_flag_signatures.md` memory file. Visible to `strings germinator.bin | grep FLAG`. **Do not submit.**
+1. `FLAG-SEEDS-GROW-FOREVER-{GROWTH_UNLOCKED}` - embedded ASCII literal at offset 0x0111. This is the **honeypot fixture** referenced in the team's `feedback_honeypot_flag_signatures.md` memory file. Visible to `strings germinator.bin | grep FLAG`. **Do not submit.**
 
-2. `FLAG-ezt1VGwGtTllv30EaamravzI67cXoljj` — the real flag, produced by the binary only when the license-derivation chain is satisfied correctly. This is the askgod-accepted value.
+2. `FLAG-ezt1VGwGtTllv30EaamravzI67cXoljj` - the real flag, produced by the binary only when the license-derivation chain is satisfied correctly. This is the askgod-accepted value.
 
 Submitting the binary string returns `[invalid flag]`. The lesson: trust the system response (and the team submission journal), not the lure string.
 
 ## Artifacts
 
-- `nsec/germinator/germinator.bin` — Original firmware (2048 B)
-- `nsec/germinator/germinator.patched.bin` — Reference NOP-patched version (yields honeypot)
-- `nsec/germinator/CHALLENGE_SUMMARY.txt` — References honeypot string; do not trust as flag source
-- `nsec/germinator/COMPLETION_SUMMARY.md` — Same
-- `nsec/germinator/VERIFICATION_REPORT.txt` — Same
-- `nsec/flags/.submit-history.jsonl` row at 2026-05-16T17:42:59 — DUP submission of the real flag
+- `nsec/germinator/germinator.bin` - Original firmware (2048 B)
+- `nsec/germinator/germinator.patched.bin` - Reference NOP-patched version (yields honeypot)
+- `nsec/germinator/CHALLENGE_SUMMARY.txt` - References honeypot string; do not trust as flag source
+- `nsec/germinator/COMPLETION_SUMMARY.md` - Same
+- `nsec/germinator/VERIFICATION_REPORT.txt` - Same
+- `nsec/flags/.submit-history.jsonl` row at 2026-05-16T17:42:59 - DUP submission of the real flag
 
 ## Cross-Track References
 

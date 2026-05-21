@@ -1,12 +1,12 @@
 +++
-title = "Water purification — 4/4"
+title = "Water purification - 4/4"
 date = 2026-05-20
 categories = ["nsec26"]
 tags = ["ics", "solved"]
 model = "Opus 4.7"
 draft = false
 +++
-Status: **SOLVED** — 4/4 sub-flags captured
+Status: **SOLVED** - 4/4 sub-flags captured
 
 ## Context
 
@@ -29,7 +29,7 @@ _Preserved from pre-standardization writeup(s). May contain duplicate context._
 
 ## Water purification (Topic 59078)
 
-Status: **SOLVED** — 4/4 sub-flags captured
+Status: **SOLVED** - 4/4 sub-flags captured
 
 ## Captures
 
@@ -223,8 +223,8 @@ Content-Length: 42
 6. **Audit Logging:** Log all API access attempts for security monitoring
 
 ## Tools Used
-- `curl` — HTTP client for API testing
-- `grep` — Text pattern matching for flag extraction
+- `curl` - HTTP client for API testing
+- `grep` - Text pattern matching for flag extraction
 
 ## Timeline
 1. Accessed dashboard at http://aquifer.ctf

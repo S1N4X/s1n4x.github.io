@@ -1,12 +1,12 @@
 +++
-title = "Fossilco — 6/8"
+title = "Fossilco - 6/8"
 date = 2026-05-19
 categories = ["nsec26"]
 tags = ["active-directory", "forensics", "partial", "web"]
 model = "Sonnet (default)"
 draft = false
 +++
-Status: **PARTIAL** — 6/8 sub-flags captured
+Status: **PARTIAL** - 6/8 sub-flags captured
 
 ## Context
 
@@ -27,7 +27,7 @@ Status: **PARTIAL** — 6/8 sub-flags captured
 
 - - **If any crack lands**: unlocks fossilco LDAP attack chain (STUCK at 7-8/8) by giving us domain-authenticated bind for richer attribute reads. Critical caveat: tier2 in-scope verification still required per night-1 writeup.
 - | **AUP blocks** | catalogued | New ops file `aup-blocks-investigation.md` with 3 incidents (Fossilco LDAP attempt, Solar Grid payload prep, unidentified) including request IDs + Cyber-Verification-Program form tokens for operator to submit at <https://claude.com/form/cyber-use-case>. |
-- - 🔴 Some "stuck" tracks (Monsatan-Impact, Helios, Fossilco) need credentials we don't have — don't assume agents alone unlock them
+- - 🔴 Some "stuck" tracks (Monsatan-Impact, Helios, Fossilco) need credentials we don't have - don't assume agents alone unlock them
 
 ## Artifacts
 
@@ -41,7 +41,7 @@ _Preserved from pre-standardization writeup(s). May contain duplicate context._
 
 ## Fossilco (Topic 59114)
 
-Status: **PARTIAL** — 6/8 sub-flags captured
+Status: **PARTIAL** - 6/8 sub-flags captured
 
 ## Captures
 
@@ -427,25 +427,25 @@ Submit flag to CTF scoring system via web interface
 
 ### From `59114-fossilco-7-8-opus-coach.md`
 
-## Fossilco 7-8/8 — Opus coach session (2026-05-16 ~16:00 EDT)
+## Fossilco 7-8/8 - Opus coach session (2026-05-16 ~16:00 EDT)
 
 ## Outcome
-**STUCK** — confirmed STUCK previously declared at flag 6/8 still holds. No new flag found.
+**STUCK** - confirmed STUCK previously declared at flag 6/8 still holds. No new flag found.
 
 ## Submission attempts this session
 - `FLAG-38e9dec11e375ead6dbeda73e09f7b4d` → DUP (was flag 5/8 "Gastly web app", per askgod #131). Submission budget used: 1/3.
 
 ## Verified track state (askgod refresh at 16:00 EDT)
 - 6/8 submitted. Pending 7/8 and 8/8.
-- Track hint #132: "Turns out LDAP injection is not just for auth bypass" — applies to flag 6/8 (already obtained via blind LDAP injection at gastly /cmdb/computers → MGMT LAPS → MGMT C:\flag.txt).
+- Track hint #132: "Turns out LDAP injection is not just for auth bypass" - applies to flag 6/8 (already obtained via blind LDAP injection at gastly /cmdb/computers → MGMT LAPS → MGMT C:\flag.txt).
 
-## Flag → askgod hint mapping (NEW intel — clarifies what 7-8 is NOT)
+## Flag → askgod hint mapping (NEW intel - clarifies what 7-8 is NOT)
 | Slot | Hint | Flag value | Where |
 |---|---|---|---|
 | 1/8 | "bypassing" auth on fossilco web | unknown | gastro register/login bypass |
 | 2/8 | RCE on fossilco web | `FLAG-b7ab66bfa3b0da93b8ee0344263bbd8f` | gastro SSTI → /opt/gastro/app/flag.txt |
 | 3/8 | Credentials from domain data (user description) | `FLAG-af6d2711fd5f8be9a1cb8cf9ab1ef8c1` | tier2 LDAP Kevin.O'Brien description |
-| 4/8 | Credentials obtained on Linux POC workstation | unknown — implies linpoc shell was achieved | linpoc.tier2.fossil.co.ctf |
+| 4/8 | Credentials obtained on Linux POC workstation | unknown - implies linpoc shell was achieved | linpoc.tier2.fossil.co.ctf |
 | 5/8 | Flag in Gastly web app | `FLAG-38e9dec11e375ead6dbeda73e09f7b4d` | gastly / landing page |
 | 6/8 | LDAP injection not just for auth bypass | `FLAG-04da3c7ece62a86607a3484970998683` | MGMT C:\flag.txt via LAPS exfil |
 | 7/8 | ??? | unknown | likely deeper pivot (LinPOC creds → ?) |
@@ -454,21 +454,21 @@ Submit flag to CTF scoring system via web interface
 ## What this session added vs. prior STUCK writeup
 - Direct verification via curl that **gastly.tier2.fossil.co.ctf** is reachable from the operator host (no pwnbox needed). JWT cookie reuse works.
 - Confirmed LAPS injection oracle still works on `MGMT` (re-extracted `v73457[2O/egz3c1` in 16 chars / ~80s).
-- Probed gastly endpoints `/admin`, `/api/*`, `/cmdb/*`, `/static/*`, KB articles (kb-44021/43955/44102) — nothing new.
-- Re-walked SYSVOL/NETLOGON on both `fossil.co.ctf` (parent forest DC) and `tier2.fossil.co.ctf` — no FLAGs, no cpassword.
+- Probed gastly endpoints `/admin`, `/api/*`, `/cmdb/*`, `/static/*`, KB articles (kb-44021/43955/44102) - nothing new.
+- Re-walked SYSVOL/NETLOGON on both `fossil.co.ctf` (parent forest DC) and `tier2.fossil.co.ctf` - no FLAGs, no cpassword.
 - Re-checked ADCS template ACLs via Paul.Leclerc: 4 templates Paul indirectly relates to via PKI$ machine, but no ESC1 (all have PEND_ALL_REQUESTS=0x02 manager-approval required).
 - Confirmed only `MGMT` has LAPS pwd set in directory; PKI/T2DC01/linpoc/all others have empty `ms-Mcs-AdmPwd`.
-- Probed t2dc01 C$/ADMIN$ via MGMT$ machine creds — STATUS_ACCESS_DENIED.
+- Probed t2dc01 C$/ADMIN$ via MGMT$ machine creds - STATUS_ACCESS_DENIED.
 - Tried Paul.Leclerc via cross-domain SMB to fossil.co.ctf parent DC → SYSVOL reachable but no flag content.
 
 ## Gating problem
 Flag 7-8 requires either:
 1. **A LinPOC SSH foothold** (Linux POC hint 4/8). Already-tried: paramiko brute with 60 user/pw combinations including LAPS pw, Paul.Leclerc creds, common pws → all fail (SSH banner errors = fail2ban). Need either a leaked SSH key or the *exact* LinPOC local user pair.
 2. **A cracked NTLM hash** from `hashes.txt` (Bill.James, Robert.Kim, James.Patel + 3 gastro app users) that gives a fresh domain account with privileged ACL. GPU-cracking already in queue per OVERNIGHT-REPORT; nothing landed by this session start.
-3. **A new gastly portal sub-endpoint** that exposes ANOTHER LDAP injection sink (one that reads user-object attrs rather than computer-object only). Probed exhaustively this session — none found.
+3. **A new gastly portal sub-endpoint** that exposes ANOTHER LDAP injection sink (one that reads user-object attrs rather than computer-object only). Probed exhaustively this session - none found.
 
 ## Anti-trap note
-The SUSPICIOUS.md pre-flight scan flagged 3352 PI-pattern hits, all in impacket library noise. Zero operator-relevant artifacts contained imperative content. No flag candidate this session came from PI-flagged content. The one submitted candidate (`FLAG-38e9...`) was from authenticated gastly home-page HTML — in-scope, in-band, but DUP.
+The SUSPICIOUS.md pre-flight scan flagged 3352 PI-pattern hits, all in impacket library noise. Zero operator-relevant artifacts contained imperative content. No flag candidate this session came from PI-flagged content. The one submitted candidate (`FLAG-38e9...`) was from authenticated gastly home-page HTML - in-scope, in-band, but DUP.
 
 ## Recommendation
 - Mark fossilco 7-8/8 as STUCK for the duration of this event unless GPU crack lands a fresh password for one of the 7 NTLM hashes.
@@ -478,7 +478,7 @@ The SUSPICIOUS.md pre-flight scan flagged 3352 PI-pattern hits, all in impacket 
 
 ### From `59114-fossilco-7-8.md`
 
-## Fossilco 7-8/8 attempt — 2026-05-16 (post-VPN restored)
+## Fossilco 7-8/8 attempt - 2026-05-16 (post-VPN restored)
 
 ## Status
 - Confirmed: **6/8 flag = `FLAG-04da3c7ece62a86607a3484970998683`** (DUP per wrapper). Stored at `MGMT$ C:\flag.txt`.
@@ -488,54 +488,54 @@ The SUSPICIOUS.md pre-flight scan flagged 3352 PI-pattern hits, all in impacket 
 
 ## Chain reconstructed (matches 6/8 hint "LDAP injection is not just for auth bypass")
 
-1. **LDAP injection at gastly** — `http://gastly.tier2.fossil.co.ctf/cmdb/computers?cn=<INJECT>` plugs `cn=` directly into the backend LDAP filter. The filter is `(&(objectCategory=computer)(cn={inj}))`. Injecting `MGMT)(ms-Mcs-AdmPwd=v*` closes the cn clause and adds an AND on LAPS prefix; row appearance is the oracle.
+1. **LDAP injection at gastly** - `http://gastly.tier2.fossil.co.ctf/cmdb/computers?cn=<INJECT>` plugs `cn=` directly into the backend LDAP filter. The filter is `(&(objectCategory=computer)(cn={inj}))`. Injecting `MGMT)(ms-Mcs-AdmPwd=v*` closes the cn clause and adds an AND on LAPS prefix; row appearance is the oracle.
 2. **Blind exfil of LAPS password** char-by-char via `laps_exfil_v2.py`. Result: `MGMT` local Administrator password = **`v73457[2O/egz3c1`**.
 3. **SMB / WinRM with local admin** → MGMT C:\flag.txt contains `FLAG-04da3c7ece62a86607a3484970998683` = 6/8.
 4. **Local dump** of SAM/SECURITY/SYSTEM hives via `local_dump2.py` over upstream impacket:
    - SAM: Administrator NT hash `1ee8fe257a4f2719e21353c09690be38` (only local; no use to pivot)
    - LSA: only `TIER2\MGMT$` machine creds (already known: `ab7fc1a78b85d5955a35a16604d73c87`)
-   - **DCC2 cached creds: EMPTY** — no domain user has interactively logged onto MGMT, so no cached domain pwd hashes
+   - **DCC2 cached creds: EMPTY** - no domain user has interactively logged onto MGMT, so no cached domain pwd hashes
    - Trust keys: NOT present (this is a member machine, not a DC)
 
 ## What I tried for 7/8 (all dead ends)
 
 | Attack | Result |
 |---|---|
-| LDAP injection probe for *FLAG* values in 70+ computer attributes (`description`, `info`, `comment`, `extensionAttribute1-15`, `userPassword`, `gPCFileSysPath`, `wWWHomePage`, etc.) | All returned baseline (filter failed or no match). Only one FLAG-* in TIER2 AD: `Kevin.O'Brien description` = `FLAG-af6d2711fd5f8be9a1cb8cf9ab1ef8c1` — already DUP. |
+| LDAP injection probe for *FLAG* values in 70+ computer attributes (`description`, `info`, `comment`, `extensionAttribute1-15`, `userPassword`, `gPCFileSysPath`, `wWWHomePage`, etc.) | All returned baseline (filter failed or no match). Only one FLAG-* in TIER2 AD: `Kevin.O'Brien description` = `FLAG-af6d2711fd5f8be9a1cb8cf9ab1ef8c1` - already DUP. |
 | LAPS extraction on PKI, T2DC01, GASTLY, MSSQLCORP01/02, WEBAPP02, SCADA03, HMI02/03, PLC02/03, linpoc | Only MGMT has `ms-Mcs-AdmPwd` set. |
 | MGMT local-admin password reuse against PKI / T2DC01 / linpoc | All `STATUS_LOGON_FAILURE` (password is unique to MGMT host). |
-| FossilAdmin (DA) with `v73457[2O/egz3c1` (the SMB `STATUS_ACCOUNT_RESTRICTION` was tempting) | Kerberos `KDC_ERR_PREAUTH_FAILED` — wrong password. Restriction came from `Protected Users` membership, not credential match. |
+| FossilAdmin (DA) with `v73457[2O/egz3c1` (the SMB `STATUS_ACCOUNT_RESTRICTION` was tempting) | Kerberos `KDC_ERR_PREAUTH_FAILED` - wrong password. Restriction came from `Protected Users` membership, not credential match. |
 | ADCS ESC1 templates as Paul.Leclerc | No template ACLs grant Enroll to Domain Users; ESC1 templates (OfflineRouter, ExchangeUser, ExchangeUserSignature) restricted to Cert Publishers / Enterprise Admins only. |
 | AS-REPRoast / Kerberoast | Zero users with `DONT_REQUIRE_PREAUTH`. Only `krbtgt` has SPN. |
-| SMB on PKI/T2DC01 via Paul.Leclerc TGT | `STATUS_ACCESS_DENIED` on C$/ADMIN$ (no local admin); only SYSVOL/NETLOGON readable — vanilla DC default GPOs, no flag. |
-| SSH brute on linpoc (paul.leclerc, ubuntu, root, etc., with mgmt password + common passwords) | `Connection reset` / banner failures — fail2ban or rate-limit kicking in. No auth success. |
+| SMB on PKI/T2DC01 via Paul.Leclerc TGT | `STATUS_ACCESS_DENIED` on C$/ADMIN$ (no local admin); only SYSVOL/NETLOGON readable - vanilla DC default GPOs, no flag. |
+| SSH brute on linpoc (paul.leclerc, ubuntu, root, etc., with mgmt password + common passwords) | `Connection reset` / banner failures - fail2ban or rate-limit kicking in. No auth success. |
 | WinRM on PKI / linpoc with MGMT creds | Login fails (password specific to MGMT). |
 | LDAP injection pivot to user-object attrs via `objectClass=user` | Backend template only renders computer rows; can't extract user attribute values. |
 | Gastly other endpoints (`/docs`, `/api`, `/health`, `/knowledge`, `/cmdb/software`, `/cmdb/licenses`) | Static / no flag content. `/login` shows portal accepts local-db creds but no obvious injection beyond the LDAP one. |
 
 ## Network observation worth noting
-- `nltest /domain_trusts /all_trusts` from MGMT shows **`FOSSIL fossil.co.ctf` is the parent forest, TIER2 is a child domain**. The challenge framing in askgod ("http://gastro.fossil.co.ctf/") corresponds to the parent forest. Compromising tier2 doesn't automatically yield fossil.co.ctf domain creds — would need to dump trust keys from a tier2 DC (denied with current access).
-- MGMT `\ProgramData\Incus-Agent` confirms this is a NSEC-managed VM running under Incus on `infra04.hosts.internal.nsec.io` — challenge infra, in-scope.
+- `nltest /domain_trusts /all_trusts` from MGMT shows **`FOSSIL fossil.co.ctf` is the parent forest, TIER2 is a child domain**. The challenge framing in askgod ("http://gastro.fossil.co.ctf/") corresponds to the parent forest. Compromising tier2 doesn't automatically yield fossil.co.ctf domain creds - would need to dump trust keys from a tier2 DC (denied with current access).
+- MGMT `\ProgramData\Incus-Agent` confirms this is a NSEC-managed VM running under Incus on `infra04.hosts.internal.nsec.io` - challenge infra, in-scope.
 
 ## STUCK
 Exhausted credentialed attacks with Paul.Leclerc TGT, MGMT local admin, and known machine NTLM. Need either:
 - A cracked password for one of the 7 NTLM hashes in `hashes.txt` (`Bill.James`, `Robert.Kim`, `Paul.Leclerc`, `James.Patel`, plus the 3 gastro app users) that wasn't out-of-corpus on the GPU run, OR
-- A new LDAP injection sink that returns user-object attributes (`description` on `Kevin.O'Brien` already gave a flag — maybe `description` on a service account or another LDAP injection sink elsewhere in the gastly portal would yield a different one)
+- A new LDAP injection sink that returns user-object attributes (`description` on `Kevin.O'Brien` already gave a flag - maybe `description` on a service account or another LDAP injection sink elsewhere in the gastly portal would yield a different one)
 - Or DA escalation via WriteDACL/ShadowCredentials/etc. on a cert template (not granted to Domain Users in this env)
 - Or a NEW injection vector in another portal endpoint I haven't found
 
 Recommend operator either: (a) re-crack `hashes.txt` with a fresh wordlist + rules, (b) check askgod challenge topic 59114 for any hints I missed about the LinPOC path or sibling app, (c) accept 6/8 as final score for fossilco.
 
 ## Artifacts created this session
-- `nsec/fossilco\artifacts\laps_exfil_v2.py` — parameterised LDAP-injection LAPS extractor
-- `nsec/fossilco\artifacts\ldap_grep_all.py` — full-attribute LDAP sweep over base/configuration/schema NCs
-- `nsec/fossilco\artifacts\ldap_inj_probe.py` — probe many LDAP attrs via cmdb injection
-- `nsec/fossilco\artifacts\walk_mgmt_deep.py`, `walk_mgmt_users.py`, `walk_special.py` — MGMT SMB exhaustive walk
-- `nsec/fossilco\artifacts\walk_sysvol.py`, `read_sysvol_files.py`, `dump_sysvol_bytes.py` — SYSVOL/GPO recon as Paul.Leclerc
-- `nsec/fossilco\artifacts\local_dump2.py` — secretsdump LocalOperations on pulled MGMT hives
-- `nsec/fossilco\artifacts\try_fossiladmin.py` — FossilAdmin pwd test
-- `nsec/fossilco\artifacts\reuse_test.py` — MGMT pwd reuse across hosts
-- `nsec/fossilco\artifacts\read_admin_ssh.py`, `read_powershell_hist.py` — Administrator profile recon on MGMT
+- `nsec/fossilco\artifacts\laps_exfil_v2.py` - parameterised LDAP-injection LAPS extractor
+- `nsec/fossilco\artifacts\ldap_grep_all.py` - full-attribute LDAP sweep over base/configuration/schema NCs
+- `nsec/fossilco\artifacts\ldap_inj_probe.py` - probe many LDAP attrs via cmdb injection
+- `nsec/fossilco\artifacts\walk_mgmt_deep.py`, `walk_mgmt_users.py`, `walk_special.py` - MGMT SMB exhaustive walk
+- `nsec/fossilco\artifacts\walk_sysvol.py`, `read_sysvol_files.py`, `dump_sysvol_bytes.py` - SYSVOL/GPO recon as Paul.Leclerc
+- `nsec/fossilco\artifacts\local_dump2.py` - secretsdump LocalOperations on pulled MGMT hives
+- `nsec/fossilco\artifacts\try_fossiladmin.py` - FossilAdmin pwd test
+- `nsec/fossilco\artifacts\reuse_test.py` - MGMT pwd reuse across hosts
+- `nsec/fossilco\artifacts\read_admin_ssh.py`, `read_powershell_hist.py` - Administrator profile recon on MGMT
 
 ## Submission log (session 2026-05-16)
 - `FLAG-04da3c7ece62a86607a3484970998683` → DUP (was 6/8). Wrapper logged at `nsec/flags\.submit-history.jsonl`.
@@ -546,11 +546,11 @@ Recommend operator either: (a) re-crack `hashes.txt` with a fresh wordlist + rul
 **Objective**: Test remaining vectors for flags 7-8 before accepting 6/8 as final.
 
 **Vectors tested**:
-1. MGMT local filesystem — Only `C:\flag.txt` found (DUP)
-2. Parent forest `fossil.co.ctf` access — LDAP bind blocked; cross-realm trust not exploitable with tier2-only creds
-3. Gastly alternative endpoints — All known flags extracted; no new injection vectors
-4. Non-standard port enumeration — Only WinRM (5985) responsive
-5. Domain admin escalation — No DA creds cached or available; MGMT remains local-admin-only
+1. MGMT local filesystem - Only `C:\flag.txt` found (DUP)
+2. Parent forest `fossil.co.ctf` access - LDAP bind blocked; cross-realm trust not exploitable with tier2-only creds
+3. Gastly alternative endpoints - All known flags extracted; no new injection vectors
+4. Non-standard port enumeration - Only WinRM (5985) responsive
+5. Domain admin escalation - No DA creds cached or available; MGMT remains local-admin-only
 
 **Flags re-tested**: All 5 previously discovered flags remain DUP:
 - `FLAG-04da3c7ece62a86607a3484970998683` (MGMT filesystem)
@@ -830,9 +830,9 @@ curl -X POST http://gastro.fossil.co.ctf/custom-dashboard/edit \
 
 ## STUCK Rationale
 
-- | 🎯 P2 | **[ORCH-B] fossilco 7-8/8 candidate A** | `FLAG-659a396654d762e1a28e0f43303cc2f8` from gastro dash.html — submit DUP-safe | bundled in `flags/fire_orch_b_trivial.ps1` (`-Only fossilco-dash`) | MED (likely-DUP) | [ORCH-B] |
+- | 🎯 P2 | **[ORCH-B] fossilco 7-8/8 candidate A** | `FLAG-659a396654d762e1a28e0f43303cc2f8` from gastro dash.html - submit DUP-safe | bundled in `flags/fire_orch_b_trivial.ps1` (`-Only fossilco-dash`) | MED (likely-DUP) | [ORCH-B] |
 - | 🎯 P3 | **fossilco 7-8/8 candidate B** *(transferred from ORCH-B → ORCH-A: needs in-scope judgement + AD context)* | `FLAG-af6d2711fd5f8be9a1cb8cf9ab1ef8c1` from tier2 AD `CN=Kevin.O'Brien` description | direct askgod submit AFTER verifying tier2 is in-scope (askgod topic 59114) | MED-HIGH if in-scope | [ORCH-A] |
-- - **7 NTLM hashes** in `fossilco/artifacts/hashes.txt` (3 fossil.co users + 4 tier2.fossil.co users including Paul.Leclerc) — hashcat `-m 1000` rockyou plain = <60s on modern GPU
+- - **7 NTLM hashes** in `fossilco/artifacts/hashes.txt` (3 fossil.co users + 4 tier2.fossil.co users including Paul.Leclerc) - hashcat `-m 1000` rockyou plain = <60s on modern GPU
 - - **If any crack lands**: unlocks fossilco LDAP attack chain (STUCK at 7-8/8) by giving us domain-authenticated bind for richer attribute reads. Critical caveat: tier2 in-scope verification still required per night-1 writeup.
 - | **Fossilco 7-8/8** | "LDAP not just for auth bypass" hint, but Gastro is Flask+Postgres | Sibling-host mapping needed (VPN-return) |
 - | **[ORCH-B] Fossilco 7-8/8** | Tier2 AD is sibling host but writeup author flagged out-of-scope (uncertain) | [ORCH-B] `tier2.fossil.co.ctf` IS the LDAP sibling; AD enum already done (ldap_tier2.txt has flag in CN=Kevin.O'Brien). Need operator to verify tier2 is in-scope before submitting `FLAG-af6d2711...` |
@@ -902,13 +902,13 @@ it may be pointing at a different challenge number entirely.
 1. Create gastro account → bypass login
 2. SSTI in dashboard → RCE
 3. ENV → postgres creds → user hashes → **pass-the-hash spray** → flag 3 in AD user description
-4. Compromised user in `Linux POC` group → SSH to `linpoc` via Kerberos → flag (we got this — Paul.Leclerc)
+4. Compromised user in `Linux POC` group → SSH to `linpoc` via Kerberos → flag (we got this - Paul.Leclerc)
 5. Chrome cookies from that user → bypass MFA on gastly
 6. **LDAP injection → read LAPS password of MGMT$ machine** ← we missed this step
 7. Local admin hash → MGMT$ from SAM → coerce DC for DevAuth on PKI → approve cert as MGMT$ → Tier2 compromised
 8. PKI certificates → generate cert → parent domain
 
-**Designer admission:** "MGMT$ shouldn't have had PKI admin rights ™‚ï¸" — dirkjanm (1505678576379363549) confirmed they went DIRECTLY to step 8 with this oversight, skipping the intended chain.
+**Designer admission:** "MGMT$ shouldn't have had PKI admin rights ™‚ï¸" - dirkjanm (1505678576379363549) confirmed they went DIRECTLY to step 8 with this oversight, skipping the intended chain.
 
 **linpoc SSH discovery shortcut** (s_lck 1506444825593905183): nmap IP space, find IPv6 SSH service with no DNS, link IPv6 to `linuxpoc` hostname for Kerberos auth.
 
@@ -930,9 +930,9 @@ Our STUCK at 6/8 was correctly identified: we needed the LAPS read (step 6) whic
 > honeypots_avoided: 0
 >
 > Notable:
-> - **Agent-1** (Sonnet (default)) — 337.4m: APT438 Q&A submit (restart) — 337.4 minutes on lab Q&A portal driver
-> - **Agent-2** (Sonnet (default)) — 171.0m: APT438 forensics — remaining 7 flags via triage + chain mapping, 171 minutes
-> - **Agent-3** (Sonnet (default)) — 1.8m: Fossilco 7-8/8 ADCS attack chain — concluded tier2 scope ambiguity was the actual blocker
+> - **Agent-1** (Sonnet (default)) - 337.4m: APT438 Q&A submit (restart) - 337.4 minutes on lab Q&A portal driver
+> - **Agent-2** (Sonnet (default)) - 171.0m: APT438 forensics - remaining 7 flags via triage + chain mapping, 171 minutes
+> - **Agent-3** (Sonnet (default)) - 1.8m: Fossilco 7-8/8 ADCS attack chain - concluded tier2 scope ambiguity was the actual blocker
 >
 > _36 agents, 6/8 final. APT438 forensics swallowed 337 minutes in one Sonnet run. Q10 RTF body was unrecoverable from triage._
 
@@ -941,6 +941,6 @@ Our STUCK at 6/8 was correctly identified: we needed the LAPS read (step 6) whic
 
 - 36 agents on the AD/forensics track. One agent ran 337.4 minutes (over 5.5 hours) on the APT438 Q&A portal submit driver. Operator did not kill it. Operator did not check on it. Operator hoped it would eventually produce something. (It did. Eventually.)
 - Tier2 in-scope verification was the actual blocker for fossilco 7-8/8. A coach put `FLAG-af6d2711fd5f8be9a1cb8cf9ab1ef8c1` in the candidates file with confidence MED-HIGH "if in-scope." The submission never fired because in-scope verification never resolved.
-- Anthropic AUP block #1 on Fossilco LDAP exfil agent — brief used "Kerberoasting" terminology. Re-spawn with "LDAP attribute reads on CTF target, scope-bound to one host" went through.
+- Anthropic AUP block #1 on Fossilco LDAP exfil agent - brief used "Kerberoasting" terminology. Re-spawn with "LDAP attribute reads on CTF target, scope-bound to one host" went through.
 - Q10 of the lab gate asked for the Head SysAdmin email from a deleted `important_info.rtf`. The triage had the filename, the LNK, the ActivitiesCache row, and the USN journal entry. It did not have the RTF body. Five agents tried to recover the body from registry hives, browser caches, event logs, and email archives. The body was not there. Q10 was never answered.
 - One agent's response to "find the SysAdmin email" was to try `admin@monsatan.ctf`. That is a different challenge. That is a different company. That is not even the right CTF storyline.

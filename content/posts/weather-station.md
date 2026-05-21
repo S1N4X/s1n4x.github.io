@@ -1,12 +1,12 @@
 +++
-title = "Weather station — 1/4"
+title = "Weather station - 1/4"
 date = 2026-05-20
 categories = ["nsec26"]
 tags = ["stuck", "web"]
 model = "Sonnet (default)"
 draft = false
 +++
-Status: **STUCK** — 1/4 sub-flags captured (free flag from error oracle; 2/4–4/4 blocked by Seed Server hardcoded `503` infrastructure response)
+Status: **STUCK** - 1/4 sub-flags captured (free flag from error oracle; 2/4–4/4 blocked by Seed Server hardcoded `503` infrastructure response)
 
 ## Context
 
@@ -22,7 +22,7 @@ Status: **STUCK** — 1/4 sub-flags captured (free flag from error oracle; 2/4�
 
 - | ~14:00 | Weather Station 2-4/4 | Discovered mission `seed_server`/`seed_endpoint`/`direct_flag` fields ARE writable but NOT consumed by /api/command (still 503). WS upgrades 101 but no server-push. Confirmed app.js schema {balloon_id, cmd, value} | STUCK. [teammate] hint "correct JSON triggers connector" but no shape produces non-503 |
 - - **Weather 1/4:** hard blocker confirmed: valid `/api/command` returns `503 SEED SERVER UNAVAILABLE`; `/api/balloons` is `200 []`; `/api/sensor-data?id=NSEC-01` is `404`. Evidence: `nsec/weather-station/deterministic-sidecar-2026-05-17.md`.
-- | a1242252f23fa3b46 | Weather Station VECTOR A | ✅ **COMPLETED** | 🛑 **STUCK** — VECTOR A blocked (JSON-only upload validation); Seed Server blocker hardcoded (cannot bypass from client side) |
+- | a1242252f23fa3b46 | Weather Station VECTOR A | ✅ **COMPLETED** | 🛑 **STUCK** - VECTOR A blocked (JSON-only upload validation); Seed Server blocker hardcoded (cannot bypass from client side) |
 - - Weather Station: VECTOR A 🛑 (infrastructure blocker)
 - - Weather Station (1/4): Seed Server offline (hardcoded blocker, infrastructure issue)
 - 4. Escalate blocked tracks to operator ([teammate] contact, tier2 scope, Helios hint, Weather Station infra)
@@ -40,16 +40,16 @@ _Preserved from pre-standardization writeup(s). May contain duplicate context._
 
 ## Weather station (Topic 59294)
 
-Status: **PARTIAL** — 1/4 sub-flags captured
+Status: **PARTIAL** - 1/4 sub-flags captured
 
 ### From `59294-weather-station-2-4-STUCK.md`
 
 ## NSEC 2026 - Weather Station 2/4 - PARTIAL (NOT solved this session)
 
-**Status**: STUCK after 15-min targeted probe budget. No new flag captured. Session 3 of 3 on this challenge — the upload error oracle yields only ONE flag string, which was already submitted as 1/4.
+**Status**: STUCK after 15-min targeted probe budget. No new flag captured. Session 3 of 3 on this challenge - the upload error oracle yields only ONE flag string, which was already submitted as 1/4.
 
 ## Session goal
-Investigate [teammate] hint: "Hmm, that's weird. Interesting behavior. It might be worth investigating more." This phrase matches the askgod-recorded message for weather-station 1/4 ("That's an interesting behavior") — implying the upload primitive has more leakage potential.
+Investigate [teammate] hint: "Hmm, that's weird. Interesting behavior. It might be worth investigating more." This phrase matches the askgod-recorded message for weather-station 1/4 ("That's an interesting behavior") - implying the upload primitive has more leakage potential.
 
 ## Already-confirmed facts (from prior sessions)
 - 1/4 = `FLAG-4db975944910fbec42ab9d62431186ec` (already submitted; see askgod history line 151)
@@ -66,7 +66,7 @@ The storage error template **always contains the same flag string** regardless o
 | `../../var/www/html/flag-2.txt`, `../../etc/passwd`, `../../proc/*`, `../../home/*`, `/etc/passwd`, `/sys/*`, `../../app/*`, broken symlink target, 4096-char path | `cannot create upload directory` |
 | `..`, `../`, `../../`, `../../../`, `....`, `../../../etc/passwd`, very-long filename | `cannot write configuration` |
 
-**Both variants embed FLAG-4db97594...** — confirmed identical via 60+ filename variants probed. The flag is **hardcoded in the error template**, not derived from filesystem state.
+**Both variants embed FLAG-4db97594...** - confirmed identical via 60+ filename variants probed. The flag is **hardcoded in the error template**, not derived from filesystem state.
 
 ### New error messages discovered
 | HTTP | Body | Trigger |
@@ -79,14 +79,14 @@ The storage error template **always contains the same flag string** regardless o
 ### Filter rules refined
 - Server validates filename via UTF-8 parser that rejects null bytes and CRLF, returning `400 INVALID FORM DATA`
 - Filename is allowed to contain: `/`, `..`, `%XX`-encoded sequences (not decoded server-side), spaces, semicolons, hash, question marks, dots in any combination, backslashes (interpreted literally)
-- Leading `/` accepted (absolute path) — `/tmp/x.json` is treated like `../../tmp/x.json` from configs dir
-- `../../tmp/<X>` is **writable** (200 ACCEPTED) — this is the only "successful" 2-level traversal target. Could be useful for /tmp-side write-then-symlink-race, but no read-back vector exists.
-- JSON content is accepted as `{}`, `null`, or any dict — no schema enforcement on mission fields
+- Leading `/` accepted (absolute path) - `/tmp/x.json` is treated like `../../tmp/x.json` from configs dir
+- `../../tmp/<X>` is **writable** (200 ACCEPTED) - this is the only "successful" 2-level traversal target. Could be useful for /tmp-side write-then-symlink-race, but no read-back vector exists.
+- JSON content is accepted as `{}`, `null`, or any dict - no schema enforcement on mission fields
 
 ### Endpoint enumeration update (no new flags)
-- `/api/*` is a Go-style handler (`404 page not found`) — whitelisted routes only: `/api/balloons`, `/api/sensor-data`, `/api/command`
-- `/api/audit`, `/api/log`, `/api/uploads`, `/api/flag*`, `/api/secret`, `/api/debug`, `/api/health`, `/api/version` etc. — all return same Go 404
-- `/mission/*` only serves `/mission/current` — `/mission/<anything-else>` is 404
+- `/api/*` is a Go-style handler (`404 page not found`) - whitelisted routes only: `/api/balloons`, `/api/sensor-data`, `/api/command`
+- `/api/audit`, `/api/log`, `/api/uploads`, `/api/flag*`, `/api/secret`, `/api/debug`, `/api/health`, `/api/version` etc. - all return same Go 404
+- `/mission/*` only serves `/mission/current` - `/mission/<anything-else>` is 404
 - `/api/sensor-data` requires `id` query param (returns 400 `MISSING BALLOON ID` if absent in query; body-only id rejected)
 - All ID lookups return 404 `UNIT NOT FOUND` regardless of input (no live balloon)
 - POST/PUT/PATCH/DELETE on `/api/sensor-data` all return same 404
@@ -94,34 +94,34 @@ The storage error template **always contains the same flag string** regardless o
 ### Static-file backing
 - `/mission/current` is backed by a file at `../mission/current.json` from upload-dir perspective (configs/)
 - Upload to `../mission/current.json` overwrites; uploaded JSON is **re-serialized** (so HTML chars escape, no SSTI possible)
-- Upload to `../mission/current` (no extension) is accepted but does NOT affect the served endpoint — endpoint is hardcoded to `.json` extension
-- No other static-file paths discovered (`../api/balloons` accepted as upload but `/api/balloons` remains `[]\n` — confirmed dynamic, not file-backed)
+- Upload to `../mission/current` (no extension) is accepted but does NOT affect the served endpoint - endpoint is hardcoded to `.json` extension
+- No other static-file paths discovered (`../api/balloons` accepted as upload but `/api/balloons` remains `[]\n` - confirmed dynamic, not file-backed)
 
 ### Content-injection attempts (all returned 200 + verbatim re-serialization)
 - JSON Schema `$ref`: `{"$ref":"file:///flag-2.txt"}` → reflected verbatim, no dereferencing
 - Include keys: `{"include":"/flag-2.txt"}`, `{"_template":"{{flag}}"}` → reflected verbatim
 - Prototype pollution: `{"__proto__":{...}}` → reflected verbatim
 - YAML subtype injection: `{"!!python/object:os.system":"id"}` → reflected verbatim
-- Circular refs, deeply-nested (50 levels), 10MB payloads — all accepted plain
+- Circular refs, deeply-nested (50 levels), 10MB payloads - all accepted plain
 
 ## What I DIDN'T try (next session candidates)
-1. **Race condition on `/mission/current.json`** — two simultaneous uploads racing the lighttpd file-serve; could expose partial-write content during serialization window. Worth ~2 min.
-2. **`/tmp` write-then-symlink race** — `../../tmp/x.json` succeeds. If app reads it later, could exploit symlink TOCTOU. Not investigated.
-3. **Verify [teammate] hint at venue** — message him for clarification. Three plausible meanings: (a) same oracle leaks DIFFERENT content I missed; (b) different oracle entirely; (c) flag-1 was already known by him as the only "easy" leak and the hint covers what we already have.
-4. **Balloon dispatch via mission-file weaponization when seed server comes online** — prior agent's recommendation. Time-gated.
-5. **/upload PUT/DELETE/PATCH method bypass** — prior recon shows 405, but only checked basic methods. No CONNECT, TRACE, or arbitrary method tested.
+1. **Race condition on `/mission/current.json`** - two simultaneous uploads racing the lighttpd file-serve; could expose partial-write content during serialization window. Worth ~2 min.
+2. **`/tmp` write-then-symlink race** - `../../tmp/x.json` succeeds. If app reads it later, could exploit symlink TOCTOU. Not investigated.
+3. **Verify [teammate] hint at venue** - message him for clarification. Three plausible meanings: (a) same oracle leaks DIFFERENT content I missed; (b) different oracle entirely; (c) flag-1 was already known by him as the only "easy" leak and the hint covers what we already have.
+4. **Balloon dispatch via mission-file weaponization when seed server comes online** - prior agent's recommendation. Time-gated.
+5. **/upload PUT/DELETE/PATCH method bypass** - prior recon shows 405, but only checked basic methods. No CONNECT, TRACE, or arbitrary method tested.
 
 ## Submissions made this session
 **None.** Submission budget preserved (0/3). The only flag string the upload-error oracle yields is `FLAG-4db97594...`, which was already submitted as 1/4 and would be a guaranteed DUP rejection.
 
 ## Recommendation
-- Ask [teammate] at venue for clarification — the hint may be referring to an oracle we ALREADY found, not a new one
+- Ask [teammate] at venue for clarification - the hint may be referring to an oracle we ALREADY found, not a new one
 - If seed server comes online (currently 503 on /api/command), revisit balloon-WS impersonation + mission-file weaponization combo
-- Multi-track integration angle still untested — check if another NSEC challenge ("seed-server", "ground-control", "mission-control") provides the upstream that flips /api/command from 503 → 200
+- Multi-track integration angle still untested - check if another NSEC challenge ("seed-server", "ground-control", "mission-control") provides the upstream that flips /api/command from 503 → 200
 
 ## Artifacts (this session)
-- `probes-2026-05-16/raw_upload.py` — raw socket multipart with binary filename edge cases (null bytes, CRLF, encoded chars)
-- `probes-2026-05-16/` — all test files
+- `probes-2026-05-16/raw_upload.py` - raw socket multipart with binary filename edge cases (null bytes, CRLF, encoded chars)
+- `probes-2026-05-16/` - all test files
 
 ## Key file paths
 - `nsec/weather-station\artifacts\probes-2026-05-16\raw_upload.py`
@@ -131,7 +131,7 @@ The storage error template **always contains the same flag string** regardless o
 
 ---
 
-## Session 4 — 2026-05-17 RCE pass (THIS SESSION)
+## Session 4 - 2026-05-17 RCE pass (THIS SESSION)
 
 **Status**: Planned RCE angles inventory + early-stage probe execution. Endpoint isolation issue (current environment cannot reach weather-station.ctf). Test harness created; execution pending venue/DNS availability.
 
@@ -159,9 +159,9 @@ The storage error template **always contains the same flag string** regardless o
 - Network issue: Current environment does not have DNS resolution for `weather-station.ctf` (pending venue access)
 
 ### Test harness location & artifacts created
-- `nsec/weather-station\artifacts\rce-pass-2026-05-17\rce_angles_tester.py` — comprehensive socket-level tester (all 13 angles)
-- `nsec/weather-station\artifacts\rce-pass-2026-05-17\quick-test.sh` — bash/curl version for fast venue testing
-- `nsec/weather-station\artifacts\rce-pass-2026-05-17\lighttpd-1.4.79-research.md` — CVE research + testing priorities
+- `nsec/weather-station\artifacts\rce-pass-2026-05-17\rce_angles_tester.py` - comprehensive socket-level tester (all 13 angles)
+- `nsec/weather-station\artifacts\rce-pass-2026-05-17\quick-test.sh` - bash/curl version for fast venue testing
+- `nsec/weather-station\artifacts\rce-pass-2026-05-17\lighttpd-1.4.79-research.md` - CVE research + testing priorities
 
 ### Execution plan
 When venue network access is restored:
@@ -180,23 +180,23 @@ If **ANY** angle returns non-404 status or shows file-write behavior:
 
 ### Analysis & strategy
 Created `STRATEGY.md` (detailed breakdown):
-- **VECTOR A (CGI/PHP upload)**: 65% confidence — lighttpd likely has CGI enabled
+- **VECTOR A (CGI/PHP upload)**: 65% confidence - lighttpd likely has CGI enabled
   - Upload to `../../var/www/cgi-bin/rce.cgi` or `../../var/www/html/shell.php`
   - GET /cgi-bin/rce.cgi or /shell.php → execution
-- **VECTOR B (Symlink TOCTOU race)**: 45% confidence — /tmp writable, needs race timing
-- **VECTOR C (WebSocket injection)**: 30% confidence — speculative, depends on backend processing
-- **VECTORS D-E (Multipart/CVE)**: 15-20% confidence — unlikely given prior testing
+- **VECTOR B (Symlink TOCTOU race)**: 45% confidence - /tmp writable, needs race timing
+- **VECTOR C (WebSocket injection)**: 30% confidence - speculative, depends on backend processing
+- **VECTORS D-E (Multipart/CVE)**: 15-20% confidence - unlikely given prior testing
 
 ### Artifacts summary
-- `rce_angles_tester.py` — Socket-level comprehensive tester covering all 13 angles
-- `quick-test.sh` — Fast 5-min curl-based recon (priority angles 2-4, 6, 9-10)
-- `STRATEGY.md` — Detailed confidence-ranked analysis + testing order
-- `lighttpd-1.4.79-research.md` — CVE research + mod_* attack surface
-- `README.md` — Full execution guide with quickstart
+- `rce_angles_tester.py` - Socket-level comprehensive tester covering all 13 angles
+- `quick-test.sh` - Fast 5-min curl-based recon (priority angles 2-4, 6, 9-10)
+- `STRATEGY.md` - Detailed confidence-ranked analysis + testing order
+- `lighttpd-1.4.79-research.md` - CVE research + mod_* attack surface
+- `README.md` - Full execution guide with quickstart
 
 ### Next steps
 1. Execute test harness when venue network available (schedule or immediate if on-site)
-2. **Prioritize Phase 1 testing** (angles 3-4 = CGI/PHP upload + lighttpd recon) — highest ROI (65% confidence)
+2. **Prioritize Phase 1 testing** (angles 3-4 = CGI/PHP upload + lighttpd recon) - highest ROI (65% confidence)
 3. Document all responses (200/400/403/405/500/503) + body + timing
 4. For any CANDIDATE, immediately chain to exploitation phase
 5. Report findings to [teammate] with exact payloads + STRATEGY context if vectors blocked
@@ -210,14 +210,14 @@ Created `STRATEGY.md` (detailed breakdown):
 
 ---
 
-## Session 5 — 2026-05-17 VECTOR A live execution
+## Session 5 - 2026-05-17 VECTOR A live execution
 
-**Status**: STUCK — CTF network connectivity dropped mid-session. Partial execution completed.  
+**Status**: STUCK - CTF network connectivity dropped mid-session. Partial execution completed.  
 **Target**: `weather-station.ctf` → `9000:d37e:c40b:8266:216:3eff:feff:1eff` (IPv6 only)
 
 ---
 
-## Session 6 — 2026-05-17 Shape Hunt Comprehensive Testing
+## Session 6 - 2026-05-17 Shape Hunt Comprehensive Testing
 
 **Status**: COMPLETED comprehensive JSON payload hunt. NO 200 OK responses found. All non-503 responses are errors (404, 405, 411).  
 **Conclusion**: `/api/command` 503 blocker is FUNDAMENTAL to the endpoint, not a payload format issue.
@@ -271,7 +271,7 @@ Created `STRATEGY.md` (detailed breakdown):
 
 ### Critical blocker analysis
 
-The `/api/command` endpoint unconditionally returns `503 SEED SERVER UNAVAILABLE` for ALL well-formed POST requests with `{"balloon_id":"...", "cmd":"..."}` body. This is not a payload validation issue — it's a RUNTIME dependency check.
+The `/api/command` endpoint unconditionally returns `503 SEED SERVER UNAVAILABLE` for ALL well-formed POST requests with `{"balloon_id":"...", "cmd":"..."}` body. This is not a payload validation issue - it's a RUNTIME dependency check.
 
 **Hypothesis**: The Go backend code is:
 ```go
@@ -286,17 +286,17 @@ func handleCommand(w http.ResponseWriter, r *http.Request) {
 ```
 
 This means:
-1. Payload correctness is IRRELEVANT — the seed check happens BEFORE command validation
+1. Payload correctness is IRRELEVANT - the seed check happens BEFORE command validation
 2. No amount of JSON shape variations will bypass this
 3. The 503 is INTENTIONAL, not a parsing error
 4. Flags MUST come from either: (a) seed server being available, or (b) a different attack vector entirely
 
 ### Artifacts created
 
-- `nsec/weather-station\artifacts\shape-hunt.py` — Phase 1 tester (119 tests)
-- `nsec/weather-station\artifacts\shape-hunt-v2.py` — Phase 2 tester (73 tests)
-- `nsec/weather-station\artifacts\shape-hunt-v3.py` — Phase 3 tester (44 tests)
-- `nsec/weather-station\artifacts\shape-hunt-2026-05-17.md` — Results log (240+ tests)
+- `nsec/weather-station\artifacts\shape-hunt.py` - Phase 1 tester (119 tests)
+- `nsec/weather-station\artifacts\shape-hunt-v2.py` - Phase 2 tester (73 tests)
+- `nsec/weather-station\artifacts\shape-hunt-v3.py` - Phase 3 tester (44 tests)
+- `nsec/weather-station\artifacts\shape-hunt-2026-05-17.md` - Results log (240+ tests)
 
 ### Next steps / Stuck points
 
@@ -311,11 +311,11 @@ This means:
 
 **Key new findings**:
 
-1. **Upload rejects non-JSON content-type at part level** — VECTOR A (CGI/PHP upload) blocked because the upload handler validates `Content-Type: application/json` on the multipart part AND parses the content as JSON. Any non-JSON payload returns `400 INVALID JSON`. All CGI/PHP/bash uploads fail.
+1. **Upload rejects non-JSON content-type at part level** - VECTOR A (CGI/PHP upload) blocked because the upload handler validates `Content-Type: application/json` on the multipart part AND parses the content as JSON. Any non-JSON payload returns `400 INVALID JSON`. All CGI/PHP/bash uploads fail.
 
-2. **VECTOR A confirmed dead** — Uploaded to `../../var/www/cgi-bin/rce.cgi`, `../../var/www/html/shell.php`, `../../app/shell.php`, etc. All return `400 INVALID JSON`. The server validates JSON before writing to disk, making code execution via upload impossible without a JSON bypass.
+2. **VECTOR A confirmed dead** - Uploaded to `../../var/www/cgi-bin/rce.cgi`, `../../var/www/html/shell.php`, `../../app/shell.php`, etc. All return `400 INVALID JSON`. The server validates JSON before writing to disk, making code execution via upload impossible without a JSON bypass.
 
-3. **Error oracle HARDCODED** — The flag `FLAG-4db975944910fbec42ab9d62431186ec` appears in ALL error messages regardless of filename path. It is hardcoded in the error template, not derived from filesystem reads. No new flags reachable via error oracle.
+3. **Error oracle HARDCODED** - The flag `FLAG-4db975944910fbec42ab9d62431186ec` appears in ALL error messages regardless of filename path. It is hardcoded in the error template, not derived from filesystem reads. No new flags reachable via error oracle.
 
 4. **Parent app (Ground Control) exposed via `/../`**:
    - `GET /../` returns the same Ground Control HTML
@@ -324,17 +324,17 @@ This means:
    - `POST /../api/command` returns same `503 SEED SERVER UNAVAILABLE`
 
 5. **Filesystem layout confirmed (via error oracle)**:
-   - `/srv/{mission,balloons,seed,app,uploads}/` — existing dirs (500 on upload = dir exists, can't traverse)
+   - `/srv/{mission,balloons,seed,app,uploads}/` - existing dirs (500 on upload = dir exists, can't traverse)
    - `../balloons/NSEC-01.json` EXISTS (returns 500 on overwrite attempt)
    - `../balloons/flag.txt` EXISTS (returns 500 on overwrite attempt)
-   - All `../app/*.lua` paths show "new write ok" (200) — files don't pre-exist, can be written
+   - All `../app/*.lua` paths show "new write ok" (200) - files don't pre-exist, can be written
    - Flag files at `../../flag-2.txt`, etc. trigger 500 "cannot write configuration"
 
-6. **SSRF via seed_server field does NOT work** — Tried 7+ localhost ports (5000, 3000, 4000, 6000, 7000, 8000, 8080, 9000). `/api/command` returns 503 regardless. Seed server check is HARDCODED, not config-driven.
+6. **SSRF via seed_server field does NOT work** - Tried 7+ localhost ports (5000, 3000, 4000, 6000, 7000, 8000, 8080, 9000). `/api/command` returns 503 regardless. Seed server check is HARDCODED, not config-driven.
 
-7. **WebSocket drops connection immediately** — WS upgrade succeeds (101), but server sends close frame `\x88\x041000` (code 1000 = normal close) immediately after first frame from client.
+7. **WebSocket drops connection immediately** - WS upgrade succeeds (101), but server sends close frame `\x88\x041000` (code 1000 = normal close) immediately after first frame from client.
 
-8. **Lua mod_magnet theory partially confirmed** — Prior Opus coach session confirmed backend is Lua/mod_magnet. We can write `.lua` files to `../app/` but they don't get executed because lighttpd.conf references a SPECIFIC filename. The exact configured script name is unknown.
+8. **Lua mod_magnet theory partially confirmed** - Prior Opus coach session confirmed backend is Lua/mod_magnet. We can write `.lua` files to `../app/` but they don't get executed because lighttpd.conf references a SPECIFIC filename. The exact configured script name is unknown.
 
 ### Critical blocker: JSON validator
 
@@ -347,15 +347,15 @@ This means we can only write **valid JSON objects** to disk via the upload path.
 
 ### Unexplored angles (next session priority)
 
-1. **Upload a Lua script embedded as a JSON string value, then trick lighttpd into executing it** — highly speculative
-2. **lighttpd.conf upload** — if we can write to the exact path of the config and trigger a reload... unrealistic
-3. **Content-Disposition filename* encoding bypass** — RFC 5987 encoding may bypass JSON validator
-4. **Wait for seed server** — `/api/command` 503 is the fundamental blocker; RCE bypasses won't help if flags are server-side
-5. **Multi-track coordination** — another NSEC challenge may be the seed server
+1. **Upload a Lua script embedded as a JSON string value, then trick lighttpd into executing it** - highly speculative
+2. **lighttpd.conf upload** - if we can write to the exact path of the config and trigger a reload... unrealistic
+3. **Content-Disposition filename* encoding bypass** - RFC 5987 encoding may bypass JSON validator
+4. **Wait for seed server** - `/api/command` 503 is the fundamental blocker; RCE bypasses won't help if flags are server-side
+5. **Multi-track coordination** - another NSEC challenge may be the seed server
 
 ### Session 5 conclusion
 
-**Status**: STUCK — VECTOR A blocked by JSON validator.  
+**Status**: STUCK - VECTOR A blocked by JSON validator.  
 **Flags captured**: 0  
 **Submission budget used**: 0/3  
 **Network**: CTF network dropped mid-session (100% packet loss). All findings from early session window.  
@@ -364,7 +364,7 @@ This means we can only write **valid JSON objects** to disk via the upload path.
 
 ### From `59294-weather-station-session-7-mission-tricks.md`
 
-## NSEC 2026 - Weather Station 2/4 — Session 7 Mission JSON Tricks
+## NSEC 2026 - Weather Station 2/4 - Session 7 Mission JSON Tricks
 **Status**: Test suite created and ready for venue execution  
 **Date**: 2026-05-17  
 **Time spent**: Design + implementation  
@@ -409,11 +409,11 @@ The prior 240+ payload variations (Session 6) all returned 503 because the seed 
 
 ### Orchestration
 
-- **RUN-ALL-MISSION-TESTS.sh** — Master script that runs all 3 tests in sequence, aggregates flags, produces timestamped logs
+- **RUN-ALL-MISSION-TESTS.sh** - Master script that runs all 3 tests in sequence, aggregates flags, produces timestamped logs
 
 ### Documentation
 
-- **MISSION-TRICKS-TEST-SUITE.md** — Full strategy document, execution order, success criteria, fallback angles
+- **MISSION-TRICKS-TEST-SUITE.md** - Full strategy document, execution order, success criteria, fallback angles
 
 ---
 
@@ -430,10 +430,10 @@ The prior 240+ payload variations (Session 6) all returned 503 because the seed 
 
 ## Known Constraints
 
-1. **Upload JSON-only** — Server validates Content-Type and parses JSON before write
-2. **Seed server hardcoded** — Prior testing confirmed seed availability check is unconditional
-3. **No executable upload** — CGI/PHP/Lua upload blocked by JSON validator
-4. **Error oracle limited** — Filesystem error messages always contain same hardcoded flag
+1. **Upload JSON-only** - Server validates Content-Type and parses JSON before write
+2. **Seed server hardcoded** - Prior testing confirmed seed availability check is unconditional
+3. **No executable upload** - CGI/PHP/Lua upload blocked by JSON validator
+4. **Error oracle limited** - Filesystem error messages always contain same hardcoded flag
 
 ---
 
@@ -483,10 +483,10 @@ bash RUN-ALL-MISSION-TESTS.sh http://weather-station.ctf
 
 ## If This Fails
 
-1. **Seed server multi-track** — Another NSEC challenge may be the upstream (ground-control, mission-control, seed-server)
-2. **Parent app attack** — `/../` reveals separate Ground Control app with different mission + endpoints
-3. **WebSocket loop** — `/ws` endpoint closes immediately; specific payload format may exist
-4. **RCE via Lua** — If lighttpd config points to a specific script name, uploading JSON-embedded Lua might work
+1. **Seed server multi-track** - Another NSEC challenge may be the upstream (ground-control, mission-control, seed-server)
+2. **Parent app attack** - `/../` reveals separate Ground Control app with different mission + endpoints
+3. **WebSocket loop** - `/ws` endpoint closes immediately; specific payload format may exist
+4. **RCE via Lua** - If lighttpd config points to a specific script name, uploading JSON-embedded Lua might work
 
 ---
 
@@ -523,7 +523,7 @@ Execute test suite at venue ASAP. If mission JSON tricks work, it should show as
 
 ## STUCK Rationale
 
-- | `aa18e13b191f8e1b6` | Weather-station 2-4/4 — WebSocket /ws + PUT/DELETE on /mission/current | my recon notes |
+- | `aa18e13b191f8e1b6` | Weather-station 2-4/4 - WebSocket /ws + PUT/DELETE on /mission/current | my recon notes |
 - | ~14:00 | Weather Station 2-4/4 | Discovered mission `seed_server`/`seed_endpoint`/`direct_flag` fields ARE writable but NOT consumed by /api/command (still 503). WS upgrades 101 but no server-push. Confirmed app.js schema {balloon_id, cmd, value} | STUCK. [teammate] hint "correct JSON triggers connector" but no shape produces non-503 |
 - | `ae89d2b3722e97bcb` | weather-station JSON shape blast | Enumerate cmd names, schema fields, headers, WS handshake variants for non-503 response | running |
 - - `nsec/weather-station/artifacts/rce-pass-2026-05-17/` -- STRATEGY.md, test harness, ANGLES rankings
@@ -843,9 +843,9 @@ The application's `/api/command` endpoint is hard-gated by an external Seed Serv
 
 ### Remaining attack surface
 
-1. **mod_magnet Lua script overwrite** — Backend confirmed as lighttpd/mod_magnet Lua. Upload can write to `../app/*.lua` but exact filename in `lighttpd.conf` is unknown. If the exact configured script filename is guessed, we can overwrite it with valid JSON that happens to also be valid Lua (unlikely but possible with `{}` empty object = empty Lua table).
-2. **Multi-track integration** — Seed server may be a separate NSEC challenge that must be solved first
-3. **CTF network re-probe** — Re-test when seed server comes online
+1. **mod_magnet Lua script overwrite** - Backend confirmed as lighttpd/mod_magnet Lua. Upload can write to `../app/*.lua` but exact filename in `lighttpd.conf` is unknown. If the exact configured script filename is guessed, we can overwrite it with valid JSON that happens to also be valid Lua (unlikely but possible with `{}` empty object = empty Lua table).
+2. **Multi-track integration** - Seed server may be a separate NSEC challenge that must be solved first
+3. **CTF network re-probe** - Re-test when seed server comes online
 
 ---
 
@@ -858,11 +858,11 @@ The application's `/api/command` endpoint is hard-gated by an external Seed Serv
 **Designer:** Temuujin. **Intended flag 2 solution (from #temuujin channel, ecapson msg 1505669833356869884):**
 
 - **Flag 2 = command injection in file path**, NOT path traversal as we suspected
-- Payload shape: `$(<linux-cmd>)/filename` — e.g. `$(id)/foo` or `$(cat /etc/passwd)/x`. The `$(...)` shell-substitution evaluates server-side; the trailing `/filename` keeps the path parser happy.
+- Payload shape: `$(<linux-cmd>)/filename` - e.g. `$(id)/foo` or `$(cat /etc/passwd)/x`. The `$(...)` shell-substitution evaluates server-side; the trailing `/filename` keeps the path parser happy.
 - Was "basic command injection from 90s" per ecapson
 - The error messages we leaked (which we interpreted as directory enumeration) were the command-injection oracle
 
-Our STUCK at 1/4 was correctly identified — we had path traversal arbitrary write but couldn't find anything interesting to write because we treated it as path traversal instead of command injection.
+Our STUCK at 1/4 was correctly identified - we had path traversal arbitrary write but couldn't find anything interesting to write because we treated it as path traversal instead of command injection.
 
 *See _DISCORD-INTEL-ENRICHMENT-2026-05-19.md for the full cross-track designer-confirmed solution catalog and writeup links.*
 
@@ -880,10 +880,10 @@ Our STUCK at 1/4 was correctly identified — we had path traversal arbitrary wr
 > honeypots_avoided: 0
 >
 > Notable:
-> - **Agent-1** (Sonnet (default)) — 38.6m: Weather-station 2-4 — 38.6 minute coach, full 7-vulnerability assessment + endpoint matrix
-> - **Agent-2** (Sonnet (default)) — 9.6m: VECTOR A exploitation execution — mission.json poisoning angle, output-capped at 9.6 minutes
+> - **Agent-1** (Sonnet (default)) - 38.6m: Weather-station 2-4 - 38.6 minute coach, full 7-vulnerability assessment + endpoint matrix
+> - **Agent-2** (Sonnet (default)) - 9.6m: VECTOR A exploitation execution - mission.json poisoning angle, output-capped at 9.6 minutes
 >
-> _1/4 landed via path traversal in /upload filename (askgod #151). Flags 2-4 STUCK — designer post-event revealed flag 2 was `$(cmd)/path` shell injection, not the path traversal we suspected._
+> _1/4 landed via path traversal in /upload filename (askgod #151). Flags 2-4 STUCK - designer post-event revealed flag 2 was `$(cmd)/path` shell injection, not the path traversal we suspected._
 
 
 ## Slop Watch

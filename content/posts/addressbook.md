@@ -1,12 +1,12 @@
 +++
-title = "The address book — 2/2"
+title = "The address book - 2/2"
 date = 2026-05-20
 categories = ["nsec26"]
 tags = ["solved", "web"]
 model = "Opus 4.7"
 draft = false
 +++
-Status: **SOLVED** — 2/2 sub-flags captured
+Status: **SOLVED** - 2/2 sub-flags captured
 
 ## Context
 
@@ -27,13 +27,13 @@ _Preserved from pre-standardization writeup(s). May contain duplicate context._
 
 ## The address book (Topic 59438)
 
-Status: **SOLVED** — 2/2 sub-flags captured
+Status: **SOLVED** - 2/2 sub-flags captured
 
 ### From `59438-addressbook.md`
 
 ## Context
 
-Topic 59438 — "The address book", askgod tag `addressbook`. A two-flag web challenge tagged `B/E:L` (1/2, 3 points) and `B/E:M` (2/2, 4 points). The application is an address-book front-end backed by an XML-database query layer, and the entire chain leans on XPath injection — a textbook NSEC web category for the lower-difficulty bracket.
+Topic 59438 - "The address book", askgod tag `addressbook`. A two-flag web challenge tagged `B/E:L` (1/2, 3 points) and `B/E:M` (2/2, 4 points). The application is an address-book front-end backed by an XML-database query layer, and the entire chain leans on XPath injection - a textbook NSEC web category for the lower-difficulty bracket.
 
 No track directory exists under `nsec/` for this challenge; both flags were submitted directly by a teammate via askgod within a five-minute window. This writeup reconstructs the chain from the askgod history message text and the inventory data in the YAML migration map §2 (rows #90 and #92).
 
@@ -43,19 +43,19 @@ The application surface presents a search/lookup form whose backend constructs a
 
 Two distinct primitives compose the solve:
 
-1. **Attribute exposure via XPath predicate manipulation** — by altering the predicate to match `@*` (any attribute) and lifting the projection to print the matched node's hidden attributes, the application leaks an attribute (the 1/2 flag) that the legitimate UI never renders.
-2. **File-read pivot via XPath + path-traversal** — XPath's `document(...)` function (or an equivalent `doc()` / `fn:doc()` depending on the backend) can be coaxed into reading a local file. With a path-traversal payload, the request reaches the build server's Maven configuration at `~/.m2/settings.xml`, where the second flag is embedded (server-side mistake — secrets stored in a Maven settings file readable by the JVM running the address-book service).
+1. **Attribute exposure via XPath predicate manipulation** - by altering the predicate to match `@*` (any attribute) and lifting the projection to print the matched node's hidden attributes, the application leaks an attribute (the 1/2 flag) that the legitimate UI never renders.
+2. **File-read pivot via XPath + path-traversal** - XPath's `document(...)` function (or an equivalent `doc()` / `fn:doc()` depending on the backend) can be coaxed into reading a local file. With a path-traversal payload, the request reaches the build server's Maven configuration at `~/.m2/settings.xml`, where the second flag is embedded (server-side mistake - secrets stored in a Maven settings file readable by the JVM running the address-book service).
 
 ## Exploitation
 
-### Flag 1/2 — XPath attribute disclosure (2026-05-16 01:50, askgod #38)
+### Flag 1/2 - XPath attribute disclosure (2026-05-16 01:50, askgod #38)
 
 - Probe the lookup endpoint with XPath payloads to confirm injection
 - Craft a query whose predicate union picks up `@*` (any attribute) and project the matched node + its attributes through the response template
 - The hidden attribute that the UI hides is dumped in the response body
 - Submit; askgod replies *"Good job, but there is still another flag to find!"* (3 pts, CFSS `B/E:L`)
 
-### Flag 2/2 — XPath + path-traversal to Maven settings (2026-05-16 01:55, askgod #39)
+### Flag 2/2 - XPath + path-traversal to Maven settings (2026-05-16 01:55, askgod #39)
 
 - Re-purpose the XPath injection point to invoke the document/doc XML function
 - Supply a `file://` URI (or an equivalent traversal `../../../../home/<user>/.m2/settings.xml`) that escapes the application's working directory and lands on the Java build-tool's Maven user settings
@@ -68,7 +68,7 @@ Both submissions are attributed in the migration map as "team direct" (no coach 
 
 | Position | Flag | Method | When |
 |---|---|---|---|
-| 1/2 | (value-redacted, askgod #38) | XPath injection — hidden attribute disclosure | 2026-05-16 01:50 |
+| 1/2 | (value-redacted, askgod #38) | XPath injection - hidden attribute disclosure | 2026-05-16 01:50 |
 | 2/2 | (value-redacted, askgod #39) | XPath injection + path-traversal to read Maven `settings.xml` | 2026-05-16 01:55 |
 
 ## Anti-Trap Notes
@@ -79,10 +79,10 @@ No honeypot strings, no PI lures observed in this challenge's surface area. Stan
 
 No local track directory exists. All evidence is journal-only:
 - `nsec/.askgod-history.txt` rows #38 and #39 (askgod attribution + CFSS difficulty tags)
-- `nsec/flags/submissions-journal.tsv` — corresponding entries with submission timestamps
+- `nsec/flags/submissions-journal.tsv` - corresponding entries with submission timestamps
 - `archives/staging/yaml-migration-map.md` §2 rows #90 and #92
 
-Lesson learned: when a track scores quickly with no local artifact accumulation, the canonical source-of-truth becomes the askgod message + submission-journal pair. Future agents who want to study the precise payloads will need to replay the live (or replay-VM) target — there are no captured HTTP requests on disk for this one.
+Lesson learned: when a track scores quickly with no local artifact accumulation, the canonical source-of-truth becomes the askgod message + submission-journal pair. Future agents who want to study the precise payloads will need to replay the live (or replay-VM) target - there are no captured HTTP requests on disk for this one.
 
 
 ---

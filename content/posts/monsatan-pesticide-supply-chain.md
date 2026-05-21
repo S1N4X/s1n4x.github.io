@@ -1,12 +1,12 @@
 +++
-title = "[Monsatan] Pesticide Supply Chain — 1/1"
+title = "[Monsatan] Pesticide Supply Chain - 1/1"
 date = 2026-05-20
 categories = ["nsec26"]
 tags = ["solved", "wasm", "web"]
 model = "Opus 4.7"
 draft = false
 +++
-Status: **SOLVED** — 1/1 sub-flag captured (askgod_tag `monsatan-orders`, askgod #14 — 9 pts, 2026-05-16 10:08 EDT)
+Status: **SOLVED** - 1/1 sub-flag captured (askgod_tag `monsatan-orders`, askgod #14 - 9 pts, 2026-05-16 10:08 EDT)
 
 ## Context
 
@@ -18,7 +18,7 @@ Status: **SOLVED** — 1/1 sub-flag captured (askgod_tag `monsatan-orders`, askg
 |---|---|---|---|
 | 1/1 | `FLAG-<not-recorded-locally>` | Leptos/Rust WASM client-side JWT signing intercept (`admin@monsatan.ctf`) | 2026-05-16T10:08:00-04:00 |
 
-## Solve Summary (askgod #14 — 9 pts, 2026-05-16 10:08)
+## Solve Summary (askgod #14 - 9 pts, 2026-05-16 10:08)
 
 The Pesticide Supply Chain portal at `http://supply.monsatan.ctf/` was a Leptos 0.8.17 / Rust WASM SPA exposing two endpoints (`POST /api/login...` and `GET /api/flag`). The flag is only returned when the JWT Bearer payload claims `sub: admin@monsatan.ctf`.
 
@@ -26,11 +26,11 @@ Earlier coach passes treated the HS256 signing secret as server-only and exhaust
 
 The actual solve (credit: **[teammate]**, 2026-05-16 10:08 EDT) instead intercepted the JWT-signing path **client-side** inside the WASM-compiled Leptos client: by hooking the WASM signing routine (or patching the in-memory representation pre-signature) the attacker can produce a token that the server treats as legitimate, since signing is performed using a key that the WASM exposed at runtime in the rendered SPA's signing context. The forged `admin@monsatan.ctf` token unlocks `/api/flag`. See submissions inventory migration map §2 row #95.
 
-This invalidates the earlier "secret-only-server-side" assumption documented in the preserved STUCK notes below — those notes are kept for archival completeness but the resolution lay client-side, not server-side.
+This invalidates the earlier "secret-only-server-side" assumption documented in the preserved STUCK notes below - those notes are kept for archival completeness but the resolution lay client-side, not server-side.
 
 ## Contributors
 
-- **[teammate]** — final solve path (Leptos/WASM client-side JWT signing intercept), 2026-05-16 10:08
+- **[teammate]** - final solve path (Leptos/WASM client-side JWT signing intercept), 2026-05-16 10:08
 
 ## Artifacts
 
@@ -45,7 +45,7 @@ _Preserved from pre-standardization writeup(s). May contain duplicate context._
 
 ## [Monsatan] Pesticide Supply Chain (Topic 59982)
 
-Status: **SOLVED** — 1/1 sub-flags captured
+Status: **SOLVED** - 1/1 sub-flags captured
 
 ## Artifacts
 
@@ -54,7 +54,7 @@ Status: **SOLVED** — 1/1 sub-flags captured
 
 ### From `59982-monsatan-pesticide-SOLVED.md`
 
-## 59982 — Monsatan Pesticide Supply Chain
+## 59982 - Monsatan Pesticide Supply Chain
 
 ## Status: NOT SOLVED (STUCK confirmed by 3rd independent pass)
 
@@ -66,7 +66,7 @@ The earlier draft (`59982-monsatan-pesticide.md`) is preserved separately; this 
 
 ## Target recap
 
-- Service: `http://supply.monsatan.ctf/` — Leptos 0.8.17 + WASM SPA
+- Service: `http://supply.monsatan.ctf/` - Leptos 0.8.17 + WASM SPA
 - Two endpoints only:
   - `POST /api/login9281767931185834753` (form-encoded `username=...&password=...`)
   - `GET /api/flag` (reads `Authorization: Bearer <jwt>`)
@@ -76,7 +76,7 @@ The earlier draft (`59982-monsatan-pesticide.md`) is preserved separately; this 
 ## Attack paths exhausted
 
 ### 1. WASM static analysis (writeup §54-78, prior pass)
-- 608 896 byte `app.wasm` has zero crypto material — no SHA-256 IV / K-table / HMAC pads / HS256 / jwt / secret strings. Top-50 high-entropy 32-byte windows are all Ryū float-to-string tables and Rust TypeId hashes.
+- 608 896 byte `app.wasm` has zero crypto material - no SHA-256 IV / K-table / HMAC pads / HS256 / jwt / secret strings. Top-50 high-entropy 32-byte windows are all Ryū float-to-string tables and Rust TypeId hashes.
 - **Confirmed: secret is server-only.**
 
 ### 2. ~80 secret-guess HMAC forge attempts (writeup §22-31)
@@ -99,12 +99,12 @@ The earlier draft (`59982-monsatan-pesticide.md`) is preserved separately; this 
 - PAT `<REDACTED:gitlab-pat>` still valid.
 - **Authenticates via HTTP basic auth only** (`monsatan-ci-bot:<pat>`); `PRIVATE-TOKEN` header and `Authorization: Bearer` paths return 403 `insufficient_scope` (`"scope":"ai_workflows api read_api"`). Scope is narrow `read_repository`.
 - Exhaustive enumeration: only `monsatan/website` (id=3) accessible. No pesticide/orders/supply repo exists. Searches for `pesticide`, `orders`, `supply`, `ci`, `runner`, `app`, `api`, `backend`, `leptos` all return `[]`. Project counts: `membership=0`, `owned=0`, `starred=0`. No subgroups under `monsatan`. Bot user `monsatan-ci-bot` not even visible via `/users?username=`.
-- Clone of `monsatan/website.git` (4 branches: main, build-deface, hotfix-deface, build-deface-recon) — `git log --all -p --pickaxe-all -S` for `pesticide|HS256|JWT_SECRET|EncodingKey|from_secret|monsatan-orders|leptos` returns ZERO hits across all commits.
+- Clone of `monsatan/website.git` (4 branches: main, build-deface, hotfix-deface, build-deface-recon) - `git log --all -p --pickaxe-all -S` for `pesticide|HS256|JWT_SECRET|EncodingKey|from_secret|monsatan-orders|leptos` returns ZERO hits across all commits.
 - `/projects/3/variables` and `/groups/6/variables` → 403 (scope insufficient). CI variables unreachable.
 - `/projects/3/issues` and `/merge_requests` → empty.
 - `/snippets`, `/snippets/public` → 401.
 
-build-deface-recon branch had 6 new commits since prior pass — all modifications to `tools/legacy_env_setup.sh` (another team's recon script for the deface track's `monsatan.ctf` website). **Zero pesticide intel.**
+build-deface-recon branch had 6 new commits since prior pass - all modifications to `tools/legacy_env_setup.sh` (another team's recon script for the deface track's `monsatan.ctf` website). **Zero pesticide intel.**
 
 ## Conclusion
 
@@ -119,13 +119,13 @@ The pesticide HS256 secret is provably:
 - Not reachable via timing/error oracle on login (uniform 500, no leak)
 
 The secret lives in container memory at `supply.monsatan.ctf` only. Recovery requires either:
-- **Live RCE on supply.monsatan.ctf** (no known vector found — only 2 server_fns exposed)
+- **Live RCE on supply.monsatan.ctf** (no known vector found - only 2 server_fns exposed)
 - **Lateral movement from a sibling-track compromise** (deface track shares CI runner; if that team's runner-RCE attempt succeeds and the runner mounts pesticide secrets, would expose it)
 - **A future challenge update** that exposes a third server_fn
 
 ## Recommended next probes (NOT executed, out of read-only scope or beyond rules)
 
-1. Re-survey `app.js` (25 KB) for ALL `/api/<digits>` server_fn URLs — there may be a forgotten admin-create or token-mint endpoint with a different numeric suffix than `9281767931185834753`.
+1. Re-survey `app.js` (25 KB) for ALL `/api/<digits>` server_fn URLs - there may be a forgotten admin-create or token-mint endpoint with a different numeric suffix than `9281767931185834753`.
 2. If sprinklers track yields a recovered user SCADA password, try it once as the HS256 secret (free attempt).
 3. If the deface track's CI-runner-RCE attempts succeed and they share the secret on team chat, retry with it.
 
@@ -135,15 +135,15 @@ The secret lives in container memory at `supply.monsatan.ctf` only. Recovery req
 
 ## Artifacts
 
-- `nsec/monsatan-pesticide\artifacts\app.wasm` (608 896 B) — Pesticide client
+- `nsec/monsatan-pesticide\artifacts\app.wasm` (608 896 B) - Pesticide client
 - `nsec/monsatan-pesticide\artifacts\strings.txt`, `app.js`, `login_page.html`
-- `nsec/monsatan-pesticide\artifacts\analyze.py|analyze2.py|analyze3.py` — offline WASM analyzers
-- `nsec/monsatan-pesticide\artifacts\hmac-candidates.txt` — top-50 dead-end key candidates
-- `nsec/monsatan-pesticide\artifacts\cross-track-secret-hunt.md` — sibling-track sweep
-- `nsec/monsatan-pesticide\artifacts\coach-opus-2026-05-16\STUCK_REPORT.md` — 1st PAT-chain pass STUCK proof
-- `nsec/monsatan-pesticide\artifacts\gitlab-clone-attempt\REPLAY_2026-05-16T14Z.md` — 2nd PAT-chain pass STUCK proof (this run)
-- `nsec/monsatan-pesticide\artifacts\gitlab-clone-attempt\exhaustive_listing.txt` — 25 GitLab API queries + responses
-- `nsec/monsatan-pesticide\artifacts\gitlab-clone-attempt\website\` — full clone of monsatan/website (read-only inspection)
+- `nsec/monsatan-pesticide\artifacts\analyze.py|analyze2.py|analyze3.py` - offline WASM analyzers
+- `nsec/monsatan-pesticide\artifacts\hmac-candidates.txt` - top-50 dead-end key candidates
+- `nsec/monsatan-pesticide\artifacts\cross-track-secret-hunt.md` - sibling-track sweep
+- `nsec/monsatan-pesticide\artifacts\coach-opus-2026-05-16\STUCK_REPORT.md` - 1st PAT-chain pass STUCK proof
+- `nsec/monsatan-pesticide\artifacts\gitlab-clone-attempt\REPLAY_2026-05-16T14Z.md` - 2nd PAT-chain pass STUCK proof (this run)
+- `nsec/monsatan-pesticide\artifacts\gitlab-clone-attempt\exhaustive_listing.txt` - 25 GitLab API queries + responses
+- `nsec/monsatan-pesticide\artifacts\gitlab-clone-attempt\website\` - full clone of monsatan/website (read-only inspection)
 
 Writeup finalised 2026-05-16 ~14:05Z (replay coach pass).
 
@@ -153,23 +153,23 @@ Writeup finalised 2026-05-16 ~14:05Z (replay coach pass).
 ## 59982 - Monsatan Pesticide Supply Chain
 
 ## Status
-- **NOT SOLVED** — token forgery blocked by server-side HS256 signature
+- **NOT SOLVED** - token forgery blocked by server-side HS256 signature
 - 0 submissions made (no candidate flag found; rule cap = 3)
 
 ## Target
-- `http://supply.monsatan.ctf/` — Leptos 0.8.17 + WASM SPA
+- `http://supply.monsatan.ctf/` - Leptos 0.8.17 + WASM SPA
 - Two and only two API endpoints (both `server_fn` with numeric hash suffix):
   - `POST /api/login9281767931185834753` (form-encoded `username=...&password=...`)
   - `GET /api/flag` (reads `Authorization: Bearer <jwt>`)
 - Reachable over plain HTTP (IPv6 `9000:d37e:c40b:aa70:216:3eff:fe6c:c3b0` port 80); `https://` not served.
 
 ## Token model (confirmed)
-- Login response body: JSON-quoted token of length exactly 100 chars = `header(36).payload(63)` — **NO third segment** sent to client.
+- Login response body: JSON-quoted token of length exactly 100 chars = `header(36).payload(63)` - **NO third segment** sent to client.
 - Header: `{"alg":"HS256","typ":"JWT"}` (decoded from `eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9`).
 - Payload (for ajacobs): `{"sub":"ajacobs@monsatan.ctf","exp":<unix+1h>}`.
-- Server returns **401 with empty body** for ALL non-admin tokens including a freshly issued valid ajacobs token. WASM client-side maps that 401 to the localised string `"Access denied. The flag can only be read by admin@monsatan.ctf."` for display only — that string is NOT in the HTTP body.
+- Server returns **401 with empty body** for ALL non-admin tokens including a freshly issued valid ajacobs token. WASM client-side maps that 401 to the localised string `"Access denied. The flag can only be read by admin@monsatan.ctf."` for display only - that string is NOT in the HTTP body.
 - Returns 405 for non-GET/HEAD on `/api/flag` and non-POST on `/api/login...`.
-- Returns 500 `ServerError|Invalid credentials. Access denied.` for any bad login; `Args|missing field 'password'` for missing field. Same 500 body for SQLi payloads — uniform, no leakage.
+- Returns 500 `ServerError|Invalid credentials. Access denied.` for any bad login; `Args|missing field 'password'` for missing field. Same 500 body for SQLi payloads - uniform, no leakage.
 
 ## Auth attack surface attempted (all failed → 401)
 - Header variants on `/api/flag`: `Authorization: Bearer X`, raw `X`, `bearer`, `BEARER`, `Token`, `JWT`, `monsatan_token: X` (custom), `X-Monsatan-Token`, cookie `monsatan_token=...`, `?token=...`, `?monsatan_token=...`. All 401.
@@ -177,26 +177,26 @@ Writeup finalised 2026-05-16 ~14:05Z (replay coach pass).
 - Forging signature with HS256 over fresh ajacobs `header.payload` using guessed secrets:
   - thematic: `monsatan`, `pesticide`, `supply-chain`, `gene-lock`, `biomass`, `procurement`, `genome`, `Monsatan Proprietary`, `Roundup`, `glyphosate`, `dicamba`, `Tomorrow`, `Growing-Tomorrow`, `Unified Seed`, `Sovereignty`, `2024`, `2020`, `v7.3`, `Genome Act 2020`, `9281767931185834753` (server_fn id), `monsatan_orders`, `monsatan-orders`, `MonsatanCorp`, `nsec`, `nsec2026`, `NSEC2026`, `ctf`, `flag`, etc.
   - generic: `secret`, `password`, `123456`, `admin`, `root`, `your-256-bit-secret`, `your-512-bit-secret`, `change-me`, `changeme`, `jwt`, `jwt_secret`, `JWT_SECRET`, `HMAC_KEY`, ``.
-  - empty / null variants (`""`, `"\x00"`, `"null"`, `"NULL"`) — inspired by 59980 `sprinklersbleed` empty-HMAC bypass (not applicable here).
+  - empty / null variants (`""`, `"\x00"`, `"null"`, `"NULL"`) - inspired by 59980 `sprinklersbleed` empty-HMAC bypass (not applicable here).
   - login user/password / login email as key: `ajacobs@monsatan.ctf`, `ajacobs`, `qwertyOnyx123!`, `qwertyOnyx123`, `Onyx`, `OnyxSecret`, etc.
-  - WASM-extracted high-entropy 32/64-byte windows at offsets `0x888A0`, `0x8AFA0`, `0x105B3`, `0x12C88`, `0x14B7E`, `0x222F5`, `0x1B06A` (all turned out to be WASM bytecode patterns, not crypto material — no SHA-256 IV / K-table found in binary anyway).
+  - WASM-extracted high-entropy 32/64-byte windows at offsets `0x888A0`, `0x8AFA0`, `0x105B3`, `0x12C88`, `0x14B7E`, `0x222F5`, `0x1B06A` (all turned out to be WASM bytecode patterns, not crypto material - no SHA-256 IV / K-table found in binary anyway).
 - ~80 distinct secret guesses across two batches, all returned 401.
 
 ## SQLi probe on login
 - Payloads: `' OR '1'='1`, `admin'--`, `admin@monsatan.ctf'--`, `admin@monsatan.ctf' OR '1'='1`, `' UNION SELECT 'admin@monsatan.ctf' --`, etc.
-- All return identical 500 `Invalid credentials. Access denied.` — no error oracle, no time difference. Either credentials are not stored in a SQL DB, or the wrapper sanitises input. Not a viable vector.
+- All return identical 500 `Invalid credentials. Access denied.` - no error oracle, no time difference. Either credentials are not stored in a SQL DB, or the wrapper sanitises input. Not a viable vector.
 
 ## Endpoint enumeration
-- `/admin`, `/api`, `/api/`, `/api/orders`, `/api/me`, `/api/users`, `/api/cancel`, `/api/admin`, `/api/refresh`, `/api/logout`, `/api/register`, `/api/signup`, `/api/reset`, `/api/password`, `/api/promote`, `/api/upgrade` — all 404.
-- `/api/<x>9281767931185834753` and other numeric suffixes — only `flag` (without suffix) and `login9281767931185834753` exist.
-- `/robots.txt`, `/sitemap.xml`, `/.well-known/security.txt`, `/favicon.ico`, `/.env`, `/.git/HEAD`, `/pkg/monsatan-orders.wasm.map` — all 404.
+- `/admin`, `/api`, `/api/`, `/api/orders`, `/api/me`, `/api/users`, `/api/cancel`, `/api/admin`, `/api/refresh`, `/api/logout`, `/api/register`, `/api/signup`, `/api/reset`, `/api/password`, `/api/promote`, `/api/upgrade` - all 404.
+- `/api/<x>9281767931185834753` and other numeric suffixes - only `flag` (without suffix) and `login9281767931185834753` exist.
+- `/robots.txt`, `/sitemap.xml`, `/.well-known/security.txt`, `/favicon.ico`, `/.env`, `/.git/HEAD`, `/pkg/monsatan-orders.wasm.map` - all 404.
 - `/admin` → 404, `/flag` → 200 (just the SPA shell, no server-rendered flag).
 
 ## WASM analysis (`app.wasm`, 608896 bytes)
 - Contains no JWT/HMAC/SHA-256 implementation. Confirmed by absence of SHA-256 IV constant `6a09e667...` and round-constant K-table.
 - No string referencing `secret`, `jwt_secret`, `hmac`, `HS256` algorithm constant, or any base64-ish 32+ byte blob outside Rust `/rustc/...` path strings and `__wbg_*` symbols.
 - Only sub-relevant strings: `/api/flag`, `Authorization`, `/api/login9281767931185834753`, `monsatan_token`, the three client-side error messages (`No session token found`, `Your session token is invalid or has expired...`, `Access denied. The flag can only be read by admin@monsatan.ctf.`), `Welcome back, ` (greeting prefix), and Leptos/server_fn boilerplate.
-- Confirms: WASM never signs or verifies — server holds the secret exclusively, secret is NOT shipped to the client.
+- Confirms: WASM never signs or verifies - server holds the secret exclusively, secret is NOT shipped to the client.
 
 ## Conclusion
 - [teammate]'s playbook (decode → swap `sub` → 2-or-3-segment send) assumes either `alg=none` acceptance or absence of signature verification. The deployed server **does** verify the HS256 signature; client receives only `header.payload` because the server strips the sig from the response (storing it internally or recomputing on demand keyed by the sub claim).
@@ -224,7 +224,7 @@ Three Python analyzers run (`analyze.py`, `analyze2.py`, `analyze3.py` in artifa
 - 68 data segments live at memOffs 0x100000-0x110000 (4096-byte WASM linear-memory page).
 - Top-50 highest-entropy 32-byte non-overlapping windows extracted to `artifacts/hmac-candidates.txt`.
 - ALL candidates land in `seg#22-#23` (memOff 1084094-1095304): inspection shows these are **Ryū f64-to-string lookup tables** (powers-of-10 mantissa table for Rust's `Display` impl on `f64`). The progressive segment-length pattern 1,1,1,2,2,2,3,3,3,3,4,4,4,5,5,5,5,6,6,6,7,7,7 is unmistakably the Ryū algorithm's `POW10_OFFSETS` / `POW10_SPLIT` tables.
-- A few candidates land near ASCII labels `'monsatan_token/login'`, `'struct FlagData'`, `'Authentication failed: Back to login'` (file offset 0x8af9c, mem 0x1068dc) — these adjacent bytes are Rust `TypeId` hashes / `&'static str` descriptors (16-byte 128-bit type-name hashes), NOT key material.
+- A few candidates land near ASCII labels `'monsatan_token/login'`, `'struct FlagData'`, `'Authentication failed: Back to login'` (file offset 0x8af9c, mem 0x1068dc) - these adjacent bytes are Rust `TypeId` hashes / `&'static str` descriptors (16-byte 128-bit type-name hashes), NOT key material.
 - High-entropy windows tried by previous agent (0x888A0, 0x8AFA0) live in this same float/typeid table region. Their failure is expected; the entire region is stdlib metadata.
 
 ## Recommendation for next pass

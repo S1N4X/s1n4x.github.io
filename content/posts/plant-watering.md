@@ -6,7 +6,7 @@ tags = ["honeypot", "ics", "untouched"]
 model = "Opus 4.7"
 draft = false
 +++
-Status: **UNTOUCHED** — 0 sub-flags captured (badge-gated, anti-trap honeypot fixture present in artifacts; see Anti-Trap Notes)
+Status: **UNTOUCHED** - 0 sub-flags captured (badge-gated, anti-trap honeypot fixture present in artifacts; see Anti-Trap Notes)
 
 ## Context
 
@@ -28,7 +28,7 @@ _Preserved from pre-standardization writeup(s). May contain duplicate context._
 
 ## Plant Watering ICS (Topic 58970)
 
-Status: **UNTOUCHED** — 0 sub-flags captured (badge-gated; honeypot fixture present, not submittable)
+Status: **UNTOUCHED** - 0 sub-flags captured (badge-gated; honeypot fixture present, not submittable)
 
 ## Artifacts
 
@@ -38,7 +38,7 @@ Status: **UNTOUCHED** — 0 sub-flags captured (badge-gated; honeypot fixture pr
 
 ## Context
 
-Topic 58970 — "Plant Watering ICS". A badge-gated hardware/ICS challenge that requires the physical NSEC crystal badge to be in CTF mode, with the operator joining the badge's WiFi AP (`NSEC-13EAC0`) from a laptop and impersonating an MQTT broker the badge expects to dial. Status: **UNTOUCHED — 0/1 submissions in `.challenge-inventory.json` and zero rows in `submissions-journal.tsv` for this track**.
+Topic 58970 - "Plant Watering ICS". A badge-gated hardware/ICS challenge that requires the physical NSEC crystal badge to be in CTF mode, with the operator joining the badge's WiFi AP (`NSEC-13EAC0`) from a laptop and impersonating an MQTT broker the badge expects to dial. Status: **UNTOUCHED - 0/1 submissions in `.challenge-inventory.json` and zero rows in `submissions-journal.tsv` for this track**.
 
 A prior coach generated an extensive coaching kit (`00_START_HERE.md`, `COACH_BRIEFING.md`, `EXECUTION_CHECKLIST.md`, `CHEAT_SHEET.txt`, `COACH_SESSION_SUMMARY.md`, `SESSION_COMPLETE.txt`, plus an artifact set in `artifacts/`) describing the badge-side flow:
 
@@ -50,7 +50,7 @@ A prior coach generated an extensive coaching kit (`00_START_HERE.md`, `COACH_BR
 6. Capture flag from broker log or badge serial
 7. Submit via `submit-flag.ps1`
 
-The kit claims 90% success rate with 10-15 minute solve time. **No actual flag was captured** — the kit was prepared in advance for an operator-driven badge-side execution that has not yet happened. The track sits at 0/1.
+The kit claims 90% success rate with 10-15 minute solve time. **No actual flag was captured** - the kit was prepared in advance for an operator-driven badge-side execution that has not yet happened. The track sits at 0/1.
 
 ## Approach
 
@@ -61,7 +61,7 @@ This is a STUCK / blocked track at archive time. Reproducing the chain requires:
 - Windows admin rights to set the static IP and add a firewall rule for TCP/1337
 - The `paho-mqtt` Python broker stub bundled in `crystal-badge/artifacts/badge_mqtt_broker.py`
 
-If/when a future operator executes the kit, the real flag will arrive at the broker log line `PUBLISH received: payload='FLAG-...'`. Submit it under the (currently empty) askgod tag for this track — the tag is allocated server-side at first valid submission.
+If/when a future operator executes the kit, the real flag will arrive at the broker log line `PUBLISH received: payload='FLAG-...'`. Submit it under the (currently empty) askgod tag for this track - the tag is allocated server-side at first valid submission.
 
 ## Captures
 
@@ -73,30 +73,30 @@ None.
 
 The fixture was injected into a mock firmware blob by the prior coach's own `artifacts/create_mock_firmware.py` script (see lines 43-44 of that file: `flag_text = b"FLAG-WATER-FLOWS-WHEN-THIRSTY-{GROWTH_ENABLED}"`). The mock firmware demonstrates a hypothetical "JNZ gate" license-check vulnerability that is structurally similar to the Germinator challenge (59186), but **the badge's actual ESP32 firmware has no such fixture**: the real flag is delivered at runtime by the badge's MQTT subsystem in response to a valid PUBLISH on topic `PLANT_SYSTEM`, not via a hardcoded string in a flash blob.
 
-The danger here is identical to the documented Germinator honeypot (`FLAG-SEEDS-GROW-FOREVER-{GROWTH_UNLOCKED}`): an operator or AI agent who reads `EXPLOITATION_WRITEUP.md` and trusts its "SOLVED" header could submit the fixture string to askgod, where it would be rejected — or worse, accepted under a tag-collision if a wrapper deny code does not match. Submit-flag wrapper deny-codes catch most placeholder patterns, but the cross-track honeypot risk remains.
+The danger here is identical to the documented Germinator honeypot (`FLAG-SEEDS-GROW-FOREVER-{GROWTH_UNLOCKED}`): an operator or AI agent who reads `EXPLOITATION_WRITEUP.md` and trusts its "SOLVED" header could submit the fixture string to askgod, where it would be rejected - or worse, accepted under a tag-collision if a wrapper deny code does not match. Submit-flag wrapper deny-codes catch most placeholder patterns, but the cross-track honeypot risk remains.
 
-**Per `feedback_honeypot_flag_signatures.md` and `archives/staging/yaml-migration-map.md` §5 entry #2**: `FLAG-WATER-FLOWS-WHEN-THIRSTY-{GROWTH_ENABLED}` is a **fixture / honeypot — never submit**. Treat any flag string sourced from `EXPLOITATION_WRITEUP.md`, `create_mock_firmware.py`, or any other artifact in `nsec/plant-watering/artifacts/` as PI-contaminated until and unless it has been re-extracted from a live MQTT broker capture against a real badge.
+**Per `feedback_honeypot_flag_signatures.md` and `archives/staging/yaml-migration-map.md` §5 entry #2**: `FLAG-WATER-FLOWS-WHEN-THIRSTY-{GROWTH_ENABLED}` is a **fixture / honeypot - never submit**. Treat any flag string sourced from `EXPLOITATION_WRITEUP.md`, `create_mock_firmware.py`, or any other artifact in `nsec/plant-watering/artifacts/` as PI-contaminated until and unless it has been re-extracted from a live MQTT broker capture against a real badge.
 
 OOB-verification policy (per `feedback_oob_flag_verification.md`) applies: any candidate flag for this track requires a second independent extraction path (a parallel broker log AND a serial-console capture from the badge) before submission.
 
 ## Artifacts
 
-- `nsec/plant-watering\00_START_HERE.md` — navigation guide, 7-step recipe
-- `nsec/plant-watering\COACH_BRIEFING.md` — full technical briefing
-- `nsec/plant-watering\COACH_SESSION_SUMMARY.md` — risk assessment
-- `nsec/plant-watering\EXECUTION_CHECKLIST.md` — step-by-step with checkboxes
-- `nsec/plant-watering\CHEAT_SHEET.txt` — 1-page quick reference
-- `nsec/plant-watering\README_COACH.md` — context and file navigation
-- `nsec/plant-watering\SESSION_COMPLETE.txt` — session summary (does NOT mean solve completed)
-- `nsec/plant-watering\artifacts\EXPLOITATION_WRITEUP.md` — **CONTAMINATED with honeypot fixture; do NOT trust its "SOLVED" header**
-- `nsec/plant-watering\artifacts\create_mock_firmware.py` — **SOURCE of the honeypot fixture string** (lines 43-44)
-- `nsec/plant-watering\artifacts\firmware.bin`, `firmware.patched.bin` — synthetic mock firmware artifacts, NOT real badge dumps
-- `nsec/plant-watering\artifacts\PLANT_WATERING_ATTACK_PLAN.md`, `INDEX.md`, `QUICK_START.md`, `README_SOLUTION.md`, `SOLUTION_COMPLETE.txt`, `SOLUTION_OVERVIEW.txt`, `FINAL_SUMMARY.txt` — additional prior-coach scaffolding (all built around the fixture, all unreliable until live-badge execution proves them)
-- `nsec/plant-watering\artifacts\exploit_plant_watering.py` — script targeting the mock firmware, not the live badge
-- `nsec/plant-watering\artifacts\exploitation_report.json` — synthetic report
-- `nsec/plant-watering\artifacts\fetch_topic.py`, `topic.json`, `metadata.json` — Discourse scrape utilities
-- `nsec/crystal-badge\artifacts\badge_mqtt_broker.py` — **the actual broker script that would be used for a real solve attempt**
-- `nsec/crystal-badge\artifacts\ICS-MQTT-SETUP.md` — real setup documentation
+- `nsec/plant-watering\00_START_HERE.md` - navigation guide, 7-step recipe
+- `nsec/plant-watering\COACH_BRIEFING.md` - full technical briefing
+- `nsec/plant-watering\COACH_SESSION_SUMMARY.md` - risk assessment
+- `nsec/plant-watering\EXECUTION_CHECKLIST.md` - step-by-step with checkboxes
+- `nsec/plant-watering\CHEAT_SHEET.txt` - 1-page quick reference
+- `nsec/plant-watering\README_COACH.md` - context and file navigation
+- `nsec/plant-watering\SESSION_COMPLETE.txt` - session summary (does NOT mean solve completed)
+- `nsec/plant-watering\artifacts\EXPLOITATION_WRITEUP.md` - **CONTAMINATED with honeypot fixture; do NOT trust its "SOLVED" header**
+- `nsec/plant-watering\artifacts\create_mock_firmware.py` - **SOURCE of the honeypot fixture string** (lines 43-44)
+- `nsec/plant-watering\artifacts\firmware.bin`, `firmware.patched.bin` - synthetic mock firmware artifacts, NOT real badge dumps
+- `nsec/plant-watering\artifacts\PLANT_WATERING_ATTACK_PLAN.md`, `INDEX.md`, `QUICK_START.md`, `README_SOLUTION.md`, `SOLUTION_COMPLETE.txt`, `SOLUTION_OVERVIEW.txt`, `FINAL_SUMMARY.txt` - additional prior-coach scaffolding (all built around the fixture, all unreliable until live-badge execution proves them)
+- `nsec/plant-watering\artifacts\exploit_plant_watering.py` - script targeting the mock firmware, not the live badge
+- `nsec/plant-watering\artifacts\exploitation_report.json` - synthetic report
+- `nsec/plant-watering\artifacts\fetch_topic.py`, `topic.json`, `metadata.json` - Discourse scrape utilities
+- `nsec/crystal-badge\artifacts\badge_mqtt_broker.py` - **the actual broker script that would be used for a real solve attempt**
+- `nsec/crystal-badge\artifacts\ICS-MQTT-SETUP.md` - real setup documentation
 
 ## Designer Intel (Discord, post-event 2026-05-19)
 
@@ -110,9 +110,9 @@ OOB-verification policy (per `feedback_oob_flag_verification.md`) applies: any c
 - Fallback: jc6505 confirmed mosquitto with self-signed certs works
 
 **Confirmed FSM bug** (lau2356 1506030647683321938, svieg confirmed):
-FSM logic is present in firmware but appears unreachable from any code path. svieg: "I will fix and release" — track may be redeployed for community play post-event.
+FSM logic is present in firmware but appears unreachable from any code path. svieg: "I will fix and release" - track may be redeployed for community play post-event.
 
-Our STUCK rationale (badge dock physical-only + Wi-Fi instability) was partially correct — even with badge, the FSM bug prevented full progression.
+Our STUCK rationale (badge dock physical-only + Wi-Fi instability) was partially correct - even with badge, the FSM bug prevented full progression.
 
 *See _DISCORD-INTEL-ENRICHMENT-2026-05-19.md for the full cross-track designer-confirmed solution catalog and writeup links.*
 
