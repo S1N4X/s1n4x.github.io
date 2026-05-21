@@ -146,12 +146,6 @@ article small {
   opacity: 0.4;
   font-style: italic;
 }
-.page-aka {
-  font-family: "Fira Code", Monaco, Consolas, "Ubuntu Mono", monospace;
-  font-size: 1.1em;
-  margin: -0.6em 0 1.2em 0;
-  letter-spacing: 0.02em;
-}
 
 /* === Team credit block (logo + bilingual credit paragraph) ============ */
 .team-credit {
@@ -190,8 +184,8 @@ article small {
     align-items: flex-start;
   }
   .team-credit__logo {
-    width: 64px;
     height: 64px;
+    width: auto;       /* preserve aspect ratio on narrow viewports too */
   }
 }
 
