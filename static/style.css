@@ -224,36 +224,35 @@ article small {
   opacity: 0.75;
 }
 
-/* === Theme picker swatches (dropdown items in header) ================= */
-.menu__dropdown--swatches {
-  display: flex !important;
-  flex-direction: row !important;
-  gap: 6px;
-  padding: 6px 8px;
-}
-.menu__dropdown--swatches > li {
-  margin: 0;
-  padding: 0;
-  border: none;
-}
-.menu__dropdown--swatches > li > a {
-  display: inline-block;
-  padding: 0;
-  border: none;
+/* === Theme picker (inline color circles beside language picker) ======= */
+.theme-picker-inline {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  margin-right: 12px;
 }
 .theme-swatch {
   display: inline-block;
-  width: 16px;
-  height: 16px;
+  width: 14px;
+  height: 14px;
   border-radius: 50%;
-  border: 1px solid color-mix(in srgb, var(--foreground) 40%, transparent);
-  transition: transform 100ms ease, border-color 100ms ease;
-  vertical-align: middle;
+  border: 1px solid color-mix(in srgb, var(--foreground) 30%, transparent);
+  padding: 0;
   cursor: pointer;
+  transition: transform 100ms ease, box-shadow 100ms ease, border-color 100ms ease;
+  vertical-align: middle;
 }
 .theme-swatch:hover {
-  transform: scale(1.15);
+  transform: scale(1.2);
   border-color: var(--foreground);
+}
+.theme-swatch:focus-visible {
+  outline: none;
+  border-color: var(--foreground);
+}
+.theme-swatch[aria-pressed="true"] {
+  border-color: var(--foreground);
+  box-shadow: 0 0 0 2px var(--background), 0 0 0 3px var(--foreground);
 }
 .theme-swatch--green     { background: #33ff66; }
 .theme-swatch--orange    { background: #ff9933; }

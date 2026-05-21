@@ -1,34 +1,30 @@
-{{/* Theme picker — same .menu chrome as language-menu.
-     Dropdown items are color swatches (circles filled with each theme's
-     accent), not text labels. Tooltip = theme name. */}}
-<ul class="menu menu--desktop menu--theme-selector">
-  <li class="menu__trigger" id="theme-trigger">green&nbsp;▾</li>
-  <li>
-    <ul class="menu__dropdown menu__dropdown--swatches">
-      <li><a href="#" data-theme="green" title="green (phosphor CRT)" aria-label="green theme"><span class="theme-swatch theme-swatch--green"></span></a></li>
-      <li><a href="#" data-theme="orange" title="orange (amber CRT)" aria-label="orange theme"><span class="theme-swatch theme-swatch--orange"></span></a></li>
-      <li><a href="#" data-theme="cyberpunk" title="cyberpunk (magenta)" aria-label="cyberpunk theme"><span class="theme-swatch theme-swatch--cyberpunk"></span></a></li>
-    </ul>
-  </li>
-</ul>
+{{/* Theme picker — three color circles, always visible, no dropdown.
+     Sits beside language picker in the header. Active swatch highlighted
+     via aria-pressed (CSS shows a ring around it). */}}
+<div class="theme-picker-inline" role="radiogroup" aria-label="color theme">
+  <button class="theme-swatch theme-swatch--green"     data-theme="green"     aria-pressed="true"  aria-label="green theme (phosphor CRT)"  title="green"></button>
+  <button class="theme-swatch theme-swatch--orange"    data-theme="orange"    aria-pressed="false" aria-label="orange theme (amber CRT)"    title="orange"></button>
+  <button class="theme-swatch theme-swatch--cyberpunk" data-theme="cyberpunk" aria-pressed="false" aria-label="cyberpunk theme (magenta)"   title="cyberpunk"></button>
+</div>
 <script>
   (function () {
     var KEY = 'ctfint-theme';
-    var trigger = document.getElementById('theme-trigger');
     var saved = null;
     try { saved = localStorage.getItem(KEY); } catch (e) {}
     var current = saved || 'green';
-    function setTrigger(t) {
-      if (trigger) trigger.innerHTML = t + '&nbsp;▾';
+    var btns = document.querySelectorAll('.theme-picker-inline .theme-swatch');
+    function applyActive(t) {
+      btns.forEach(function (b) {
+        b.setAttribute('aria-pressed', b.dataset.theme === t ? 'true' : 'false');
+      });
     }
-    setTrigger(current);
-    document.querySelectorAll('.menu--theme-selector a[data-theme]').forEach(function (a) {
-      a.addEventListener('click', function (e) {
-        e.preventDefault();
-        var t = a.dataset.theme;
+    applyActive(current);
+    btns.forEach(function (b) {
+      b.addEventListener('click', function () {
+        var t = b.dataset.theme;
         document.documentElement.setAttribute('data-theme', t);
         try { localStorage.setItem(KEY, t); } catch (e) {}
-        setTrigger(t);
+        applyActive(t);
       });
     });
   })();
