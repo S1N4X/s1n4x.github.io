@@ -202,35 +202,6 @@ article small {
   }
 }
 
-/* === ctfint callout (intro block above writeups/reports lists) ========= */
-.ctfint-callout {
-  border-left: 3px solid var(--accent);
-  background: color-mix(in srgb, var(--accent) 6%, transparent);
-  padding: 14px 18px;
-  margin: 14px 0 12px 0;       /* tight bottom — team-credit follows */
-  font-family: "Fira Code", Monaco, Consolas, "Ubuntu Mono", monospace;
-}
-.ctfint-callout__headline {
-  color: var(--accent);
-  font-weight: bold;
-  font-size: 1.05em;
-  letter-spacing: 0.02em;
-  margin-bottom: 6px;
-}
-.ctfint-callout__body {
-  font-size: 0.94em;
-  line-height: 1.5;
-  opacity: 0.95;
-}
-.ctfint-callout__body p {
-  margin: 0.25em 0;
-}
-.ctfint-callout__more {
-  font-size: 0.85em;
-  margin-top: 8px;
-  opacity: 0.75;
-}
-
 /* === Theme picker (inline color circles, sits AFTER language picker) === */
 /* Compact: 12px circles in a tight 5px row, total width ~46px. The
  * .header__inner uses justify-content:space-between, so language+theme
