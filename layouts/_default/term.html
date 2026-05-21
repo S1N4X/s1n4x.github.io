@@ -5,7 +5,26 @@
     </div>
   {{ end }}
 
-  {{ $paginator := .Paginate .Pages }}
+  {{/* Merge untranslated EN posts matching this term into non-default language listings */}}
+  {{ $pages := .Pages }}
+  {{ if ne .Site.Language.Lang "en" }}
+    {{ $lang := .Site.Language.Lang }}
+    {{ $plural := .Data.Plural }}
+    {{ $term := .Data.Term }}
+    {{ $enSite := index .Sites 0 }}
+    {{ $enMatching := where $enSite.RegularPages (printf "Params.%s" $plural) "intersect" (slice $term) }}
+    {{ range $enMatching }}
+      {{ $translated := false }}
+      {{ range .Translations }}
+        {{ if eq .Lang $lang }}{{ $translated = true }}{{ end }}
+      {{ end }}
+      {{ if not $translated }}
+        {{ $pages = $pages | append . }}
+      {{ end }}
+    {{ end }}
+    {{ $pages = sort $pages "Date" "desc" }}
+  {{ end }}
+  {{ $paginator := .Paginate $pages }}
 
   <div class="posts-detailed">
     <table class="posts-table">

@@ -5,8 +5,27 @@
     </div>
   {{ end }}
 
+  {{/* Merge untranslated EN posts into non-default language listings */}}
+  {{ $allPages := .Pages }}
+  {{ if ne .Site.Language.Lang "en" }}
+    {{ $lang := .Site.Language.Lang }}
+    {{ $enSection := (index .Sites 0).GetPage "/posts" }}
+    {{ with $enSection }}
+      {{ range .Pages }}
+        {{ $translated := false }}
+        {{ range .Translations }}
+          {{ if eq .Lang $lang }}{{ $translated = true }}{{ end }}
+        {{ end }}
+        {{ if not $translated }}
+          {{ $allPages = $allPages | append . }}
+        {{ end }}
+      {{ end }}
+    {{ end }}
+    {{ $allPages = sort $allPages "Date" "desc" }}
+  {{ end }}
+
   {{/* Filter out meta-writeups (reports). They live under /tags/meta-writeup/ (menu: "reports"). */}}
-  {{ $writeups := where .Pages "Params.tags" "intersect" (slice "meta-writeup") | symdiff .Pages }}
+  {{ $writeups := where $allPages "Params.tags" "intersect" (slice "meta-writeup") | symdiff $allPages }}
   {{ $paginator := .Paginate $writeups }}
 
   <div class="posts-detailed">
