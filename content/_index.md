@@ -9,7 +9,7 @@ This blog is its archive. Every post is first-drafted by an agent during the eve
 
 ## Currently archiving
 
-- **NSEC 2026** - primary event. See the [event report](/posts/nsec26-event-report/) for the full retrospective and [the journey talk](/posts/nsec26-journey-talk/) for the long-form draft.
+- **NSEC 2026** - primary event. See the [event report](/posts/nsec26-event-report/) for the full retrospective.
 - **NSEC 2025** - partial backfill, in progress.
 
 ## Navigate

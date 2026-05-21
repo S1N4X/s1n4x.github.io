@@ -9,7 +9,7 @@ Ce blogue est son archive. Chaque article est d'abord rédigé par un agent dura
 
 ## Présentement archivé
 
-- **NSEC 2026** - événement principal. Voir le [rapport d'événement](/posts/nsec26-event-report/) et [la conférence](/posts/nsec26-journey-talk/) pour la rétrospective longue.
+- **NSEC 2026** - événement principal. Voir le [rapport d'événement](/posts/nsec26-event-report/) pour la rétrospective complète.
 - **NSEC 2025** - archivage partiel, en cours.
 
 ## Navigation
