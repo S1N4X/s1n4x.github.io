@@ -3,7 +3,6 @@ title = "Monsatan - Deface the website — 6/6"
 date = 2026-05-20
 categories = ["nsec26"]
 tags = ["agent-slop", "devops", "solved", "web"]
-slop_level = "minor"
 model = "Sonnet (default)"
 draft = false
 +++

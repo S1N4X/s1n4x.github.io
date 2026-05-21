@@ -3,7 +3,6 @@ title = "Monsatan - Checkmate — 1/1"
 date = 2026-05-20
 categories = ["nsec26"]
 tags = ["agent-slop", "crypto", "solved", "web"]
-slop_level = "minor"
 model = "Opus 4.7"
 draft = false
 +++

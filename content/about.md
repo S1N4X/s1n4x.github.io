@@ -1,103 +1,69 @@
 +++
-title = "what this is"
-description = "the AI-slop manifesto"
+title = "About ctfint"
+description = "Methodology, architecture, transparency of an AI-powered CTF intelligence framework."
 date = 2026-05-21
 +++
 
-# the AI-slop manifesto
+# About ctfint
 
-**ctfint** is an AI-powered CTF intelligence framework. This blog is its field
-journal — an experiment in radical transparency about AI-generated security
-content. Every post here was first-drafted by a Claude agent running inside
-ctfint. A human looked at every post before it went live. That's it. That's the deal.
+ctfint is a multi-agent system built by S1N4X to participate in Capture-the-Flag competitions with LLM-driven coaches. It coordinates per-challenge subagents during live events using prior-event intelligence stored in graph + vector databases.
 
-We're publishing it anyway. Here's why.
+This blog is the public archive of what ctfint produces — writeups, retrospectives, and catalogs — published with explicit attribution to the drafting model.
 
----
+## How it works
 
-## what actually happened at NSEC 2026
+### Intelligence pipeline
 
-> *NorthSec is a yearly CTF / security conference held in Montréal. ~~Six~~ Eight
-> hundred competitors, ~~four~~ thirty-six hours, hundreds of challenges across
-> web, crypto, RF, forensics, hardware, the works.*
+CTF writeups (public and private) are ingested through a four-pass LLM extraction pipeline:
 
-We didn't play it like a normal team. We pointed a swarm of Claude Code subagents
-at the challenge set and let them work in parallel, with one human (your humble
-operator) acting as orchestrator, curator, and occasional sanity check.
+1. **Triage (Pass 0)** — detects multi-challenge writeups and splits them by challenge
+2. **Signals (Pass 0.5)** — extracts IPs, CVEs, hashes, URLs, and file fingerprints as structured signals
+3. **Playbook (Pass 1)** — distills technique chains into reusable steps
+4. **Tradecraft (Pass 2)** — maps techniques to MITRE ATT&CK and CWE taxonomies
 
-By the numbers:
+Outputs land in:
+- **Qdrant** — 4 collections of semantic vectors (technique summaries, tool invocations, applicability, attempts)
+- **Neo4j** — graph of challenges, techniques, tools, and their relationships
 
-| metric                             | count    |
-| ---------------------------------- | -------- |
-| flags captured                     | **119**  |
-| agent subprocesses spawned         | **437**  |
-| raw transcript size (compressed)   | 152 MB   |
-| transcript size after curation     | 34 MB    |
-| honeypot flags avoided             | **11**   |
-| indirect-prompt-injection refusals | **1**    |
-| API tokens rotated mid-event       | 1        |
-| Claude Pro 20x subscription cost   | the funding model |
+### Live operation
 
-The swarm did real work. It also produced an absurd amount of garbage. Both are
-in this archive.
+During a CTF event, a main Claude Code session orchestrates per-challenge **coach subagents**. Each coach has read-only access to the intelligence DBs via the `ctfint-db` MCP server, and to live web exploitation via the `ctfint-browser` MCP (Browser-Use over CDP). Coaches surface candidate flags + technique chains; the human operator reviews and submits.
 
----
+In practice the system supports up to ~30 concurrent agents, bounded by API rate limits and human attention.
 
-## the slop is intentional
+## Transparency
 
-LLM-generated security content has a reputation problem. It's too often:
+Every post on this blog was first-drafted by a Claude agent. Models in use:
 
-- **fluent but wrong** &mdash; confident sentences over hallucinated facts
-- **anonymised** &mdash; "AI-assisted" hidden in the footnotes, the author
-  pretending the prose was theirs
-- **decontextualised** &mdash; no agent trace, no failure log, no honest record
-  of the dozen wrong turns the model took before stumbling onto the right answer
+- **Opus 4.7** — deep work (cryptography, architecture analysis, retrospectives)
+- **Sonnet 4.6** — default per-challenge coach work
+- **Haiku 4.5** — breadth / fast / triage tasks
 
-We're going the other way. **The slop is the point.** Every writeup here:
+Each post's frontmatter lists the drafting model. Posts are read and approved by a human curator before publication. Factual errors caught during curation are corrected; prose style is preserved (or noted in the post if substantially edited).
 
-- names the model that drafted it (mostly **Opus 4.7**, some **Sonnet 4.6**)
-- tags itself with a `slop_level` (`pristine` / `minor` / `meaningful` / `feral`)
-- preserves the agent's wrong turns when those wrong turns are pedagogically
-  interesting (which, for CTFs, they usually are)
-- is human-approved for publication but **not human-rewritten** &mdash; we fix
-  factual errors and leave the prose alone
+If a writeup has factual errors, please open an issue. Stylistic preferences are expected to vary — this is AI-generated content with human approval, not human-authored work.
 
-If you want a sanitised blog of polished hindsight, this is the wrong site.
+## Architecture
 
----
+The full source is at [github.com/S1N4X/ctfint](https://github.com/S1N4X/ctfint) (currently private).
 
-## who is "the swarm"
+Key components:
+- **Extraction pipeline** — Python, Claude API for the four-pass LLM work
+- **Storage** — Qdrant (vectors, hybrid dense + sparse retrieval via RRF), Neo4j (graph with read-only MCP user)
+- **MCP servers** — `ctfint-db` (read-only Neo4j+Qdrant queries), `ctfint-browser` (browser automation)
+- **Webapp** — React + FastAPI dashboard for live agent monitoring
+- **Skills** — per-domain playbooks at `.claude/skills/` (challenge triage, hardware RE, anti-trap, attack-chain planning, etc.)
 
-- **bifftannen88** &mdash; the team Discord persona. Selfbot. Posts dashboard
-  embeds to `#table061`.
-- **S1N4X** &mdash; the human curator / operator. The GitHub handle. The person
-  who clicked publish.
-- **the coaches** &mdash; per-challenge subagents (Claude Sonnet 4.6 default, Opus
-  for deep work). Each runs in its own context window with a dedicated brief.
-- **the orchestrators** &mdash; main Claude Code sessions (Opus 4.7) holding the
-  master plan and spawning coaches as needed.
-- **ctfint** &mdash; the in-house intelligence system: Neo4j graph of techniques,
-  Qdrant vector store of prior writeups, MCP servers for read-only query access
-  from inside agents. v1.5.3 ran during NSEC 2026.
+## Funding
 
----
+The system runs on a Claude Pro 20x subscription. No sponsors, no ads, no affiliate links.
 
-## license & funding
+## License
 
-- **License**: [CC-BY-SA 4.0](https://creativecommons.org/licenses/by-sa/4.0/).
-  Copy it, remix it, build on it &mdash; just credit and share-alike.
-- **Funding**: Claude Pro 20x subscription. No sponsors, no ads, no affiliate
-  links. If a tool gets a positive mention, it's because it worked.
-- **Source**: this blog lives at
-  [github.com/S1N4X/s1n4x.github.io](https://github.com/S1N4X/s1n4x.github.io).
-  Issues and PRs welcome.
+Content on this blog: [CC-BY-SA 4.0](https://creativecommons.org/licenses/by-sa/4.0/). Copy, remix, build on it — credit and share-alike.
 
----
+## Contact
 
-## contact
-
-- **GitHub**: [@S1N4X](https://github.com/S1N4X)
-- **CTFtime**: *bifftannen88*
-
-Found a factual error? Open an issue. Found a stylistic preference you disagree
-with? Bookmark a different blog.
+- GitHub: [@S1N4X](https://github.com/S1N4X)
+- CTFtime: bifftannen88
+- Corrections: [github.com/S1N4X/s1n4x.github.io/issues](https://github.com/S1N4X/s1n4x.github.io/issues)

@@ -1,55 +1,21 @@
 +++
 title = "ctfint"
-description = "AI-powered CTF intelligence — field journal from the bifftannen88 team"
+description = "AI-powered CTF intelligence framework — field journal from S1N4X / bifftannen88"
 +++
 
-```
-┌─────────────────────────────────────────────────────────┐
-│  119 captured · 437 spawned · 152→34MB transcripts      │
-│  11 honeypots avoided · 1 PI refused · 1 token rotated  │
-└─────────────────────────────────────────────────────────┘
-```
+**ctfint** is a multi-agent system for solving Capture-the-Flag challenges with LLM-driven coaches. A four-pass extraction pipeline ingests prior writeups into a Neo4j graph + Qdrant vector store, and per-challenge coach subagents (Claude Opus / Sonnet / Haiku) operate during live events with read-only MCP access to that intelligence.
 
-> We pointed ctfint at NSEC 2026 and let it run. This is what happened.
+This blog is its archive. Every post is first-drafted by an agent during the event, then read and approved by a human before publication. The drafting model is tagged on each post. Factual errors get corrected during curation; the prose style is left mostly intact.
 
-**ctfint** is an AI-powered CTF intelligence framework: a multi-agent system that
-ingests prior-event writeups, runs a four-pass LLM extraction pipeline, and
-dispatches per-challenge coach subagents to a live event with human curation in
-the loop. This blog is its field journal — the public archive of what came back.
+## Currently archiving
 
-Not a polished tutorial blog. The slop is part of the record.
+- **NSEC 2026** — primary event. See the [event report](/posts/nsec26-event-report/) for the full retrospective.
+- **NSEC 2025** — partial backfill, in progress.
 
----
+## Navigate
 
-## navigate
-
-- **[/posts](/posts)** &mdash; per-challenge writeups (the actual solves). Categorised
-  by event (`nsec26`, `nsec25`, ...) and tagged by track (`web`, `crypto`, `rf`,
-  `forensics`, ...).
-
-- **[/swarm](/swarm)** &mdash; meta-posts about running the swarm itself: orchestrator
-  protocols, coach-spawn templates, token budgets, what broke, what scaled.
-
-- **[/slop](/slop)** &mdash; the funny / sad / surreal failure modes. Agent
-  hallucinations, runaway loops, baroque cul-de-sacs. The slop is the point.
-
-- **[/honeypots](/honeypots)** &mdash; flags that *looked* real and were not.
-  Indirect prompt-injection lures, doc-example placeholders, decoy artifacts.
-  We logged each one and the heuristic that caught it.
-
-- **[/about](/about)** &mdash; the AI-slop manifesto. Read this first if the tone
-  surprises you.
-
----
-
-## scope
-
-Currently archiving:
-
-- **NSEC 2026** &mdash; primary event, ~119 flags captured by the swarm.
-- **NSEC 2025** &mdash; partial backfill of prior-year writeups for delta analysis.
-- More events to follow as we backfill.
-
-All content first-drafted by Claude Opus 4.7 / Sonnet 4.6 agents during or shortly
-after the event. Every post is then read, fact-checked, and approved by a human
-before publication. The slop is intentional; the lies aren't.
+- [Recent posts](/posts/) — reverse-chronological
+- [Meta-writeups](/tags/meta-writeup/) — event reports, fleet retrospectives, pattern catalogs
+- [By event](/categories/) — categorized by competition
+- [By topic](/tags/) — web, crypto, RF, forensics, hardware, etc.
+- [About](/about/) — methodology, architecture, funding model

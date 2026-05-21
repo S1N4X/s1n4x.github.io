@@ -3,7 +3,6 @@ title = "Hello Sunshine — 2/2"
 date = 2026-05-20
 categories = ["nsec26"]
 tags = ["agent-slop", "pwn", "solved"]
-slop_level = "minor"
 model = "Opus 4.7"
 draft = false
 +++

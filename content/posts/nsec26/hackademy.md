@@ -3,7 +3,6 @@ title = "[Beginner track] Hackademy — 17/18"
 date = 2026-05-20
 categories = ["nsec26"]
 tags = ["agent-slop", "partial", "web"]
-slop_level = "moderate"
 model = "Sonnet (default)"
 draft = false
 +++

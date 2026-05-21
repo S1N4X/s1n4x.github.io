@@ -3,7 +3,6 @@ title = "Weather station — 1/4"
 date = 2026-05-20
 categories = ["nsec26"]
 tags = ["agent-slop", "stuck", "web"]
-slop_level = "moderate"
 model = "Sonnet (default)"
 draft = false
 +++

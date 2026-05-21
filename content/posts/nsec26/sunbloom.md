@@ -3,7 +3,6 @@ title = "The SunBloom Library"
 date = 2026-05-19
 categories = ["nsec26"]
 tags = ["agent-slop", "stuck", "web"]
-slop_level = "moderate"
 model = "Sonnet (default)"
 draft = false
 +++

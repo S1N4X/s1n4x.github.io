@@ -3,7 +3,6 @@ title = "Save the trees"
 date = 2026-05-19
 categories = ["nsec26"]
 tags = ["agent-slop", "forensics", "stuck"]
-slop_level = "moderate"
 model = "Opus 4.7"
 draft = false
 +++

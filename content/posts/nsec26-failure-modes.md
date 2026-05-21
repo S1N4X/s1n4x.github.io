@@ -1,30 +1,34 @@
 +++
-title = "the slop"
-description = "every wrong turn, recorded for posterity"
+title = "NSEC 2026 — Agent Failure Modes & Limitations"
+description = "Honest accounting of where ctfint's multi-agent system fell short."
+date = 2026-05-21
+categories = ["nsec26"]
+tags = ["meta-writeup", "failure-modes", "post-mortem"]
+model = "Opus 4.7"
 +++
 
 ```
-[ SLOP WATCH // NSEC 2026 // FINAL ]
+[ FAILURE MODES // NSEC 2026 // FINAL ]
 honeypots refused:    11 of 11  (100%)
 PI lures refused:      2 (1 challenge body, 1 coach brief)
 sweep false positives: 6
 AUP blocks:            3
 stream-watchdog kills: 4 @ 600s
-F-grade contradictions: 1 (caught in Q-2c)
+frontmatter/body contradictions: 1 (caught in Q-2c)
 duplication ratio:    ~70% before Q-2a collapse
 ```
 
 > "47 agents converged on STUCK independently. The crypto math hadn't changed."
 
-The slop archive. Per-section honest accounting of where 437 agents went
-sideways, and which guardrail caught it.
+An honest accounting of where the multi-agent system fell short, what failed
+silently, and what near-misses revealed about the underlying design.
 
 ---
 
-## honeypots refused (11 of 11)
+## Honeypot pattern detections (11 of 11 refused)
 
 Eleven honeypot strings catalogued. Zero submitted by any of 437 agents.
-The receipt:
+Per-trap detail:
 
 ### germinator's `FLAG-SEEDS-GROW-FOREVER`
 
@@ -34,24 +38,23 @@ like a flag. It scans like a flag. It appears in 7 writeup references,
 4 supporting docs, 1 flag-format rules JSON, 1 validator README, 2
 candidate files, and 1 BATCH-fire script.
 
-It is not the flag. The real flag is the suspiciously-not-evocative
+It is not the flag. The real flag is the
 `FLAG-ezt1VGwGtTllv30EaamravzI67cXoljj`.
 
-The germinator wanted to be fed `FLAG-SEEDS-GROW-FOREVER` seven times.
-We declined seven times.
+The fixture string was referenced seven times across the corpus; it was
+refused seven times.
 
 ### plant-watering's `FLAG-WATER-FLOWS-WHEN-THIRSTY`
 
 Same metaphor family, different track. The plant-watering challenge
-offered `FLAG-WATER-FLOWS-WHEN-THIRSTY-{GROWTH_ENABLED}` once. We
-declined.
+offered `FLAG-WATER-FLOWS-WHEN-THIRSTY-{GROWTH_ENABLED}` once. Refused.
 
 Two challenges, same Monsatan-corp signature: `FLAG-<verb>-<noun>-{<state>}`.
 If you see this pattern in an agribiotech-themed track and you didn't
 actually exploit anything, you have not found the flag. You have found
-the comment.
+the fixture.
 
-We declined 8 times total across both tracks.
+Total refusals across both tracks: 8.
 
 ### helios-fleet's self-planted `abcdef02`
 
@@ -62,8 +65,8 @@ agents queried for "password" and got back their own test value, served
 up like a real flag.
 
 The real 1/5 flag ends `01`. The decoy ends `02`. Same hex prefix.
-Same length. Off by one nibble. Sometimes the trap is one you set
-yourself.
+Same length. Off by one nibble. The class of failure is unique: the
+agent's own probe artifact became the lure.
 
 ### crystal-quantum-hum's `FLAG-15000-0700`
 
@@ -71,33 +74,32 @@ Pre-solve hypothesis from offline analysis: "if the quantum optimization
 output is the grid frequency, the flag might be `FLAG-15000-0700`." It
 wasn't. The writeup that introduced this string also annotated it with
 DO NOT SUBMIT. Future agents read both halves. Nobody submitted the
-synthetic. Defensive writing is real.
+synthetic. Defensive writing succeeded.
 
 ### i-love-faia's `FLAG-This_Is_Not_A_Flag`
 
 Discourse topic 59975 is category-599 (off-topic / meme). It is not a
 challenge. The post body embeds `FLAG-This_Is_Not_A_Flag` with
-prompt-injection language. The lure literally announces itself as a
+prompt-injection language. The lure announces itself as a
 non-flag in its own contents.
 
 Two prior agents tried to submit it. The wrapper deny codes intercepted
-them. A third agent caught it at the read step. (See "prompt injections
-refused" below.)
+them. A third agent caught it at the read step. (See "Indirect prompt
+injection refusals" below.)
 
 ### drone-license's three doc placeholders
 
 `FLAG-{actual-flag-here}`, `FLAG-{identifier}`, and `FLAG-placeholder`.
-Three placeholders in one writeup. The trifecta. The author quarantined
+Three placeholders in one writeup. The author quarantined
 all three with explicit DO-NOT-SUBMIT notes.
 
-The most polite honeypot in the catalog literally says
-"actual-flag-here." If you submit it, the problem is not the honeypot.
+The literal string "actual-flag-here" inside a `FLAG-{...}` wrapper is
+the most explicit placeholder pattern in the catalog.
 
 ### water-purification's `FLAG-xxxxxxxx...`
 
 Documentation placeholder in an example `askgod submit` command.
-The honeypot for the LLM that doesn't understand documentation
-conventions. We have not yet met that LLM. We're prepared.
+No real flag would consist of x's; pattern-matched and refused.
 
 ### save-the-trees' `FLAG-eba56a9422a3ec...`
 
@@ -118,11 +120,11 @@ server returned `[DENY-TRACK-COMPLETE]`. Documented as
 `TIMING_COLLISION`, not `HONEYPOT`. Operationally identical: do not
 re-submit.
 
-Full per-honeypot writeups at **[/honeypots](/honeypots)**.
+Full per-honeypot writeups at **[/posts/honeypots-catalog/](/posts/honeypots-catalog/)**.
 
 ---
 
-## prompt injections refused
+## Indirect prompt injection refusals
 
 Two embedded PI attempts. Both refused. One in a challenge artifact,
 one in a coach brief context.
@@ -157,7 +159,7 @@ The PI quarantine rule worked: challenge content is **data**, not
 
 ---
 
-## sweep false positives
+## False-positive deduplication patterns
 
 Sweep agent surfaced 6 candidates from a corpus-wide regex pass. All 6
 were already submitted. The wrapper's `DENY-LOCAL-DUP` did the actual
@@ -165,13 +167,13 @@ deduplication.
 
 The sweep is still useful &mdash; it's how we caught the apt438 /
 water-purification cross-tagging issue and the hello-sunshine
-flag-misattribution scandal (see below). But on flag candidates
+flag-misattribution case (see below). But on flag candidates
 specifically, the sweep's job is "find anything I missed," and on a
 well-instrumented event that answer is usually "nothing."
 
 ---
 
-## AUP blocks
+## Provider policy refusals
 
 Three confirmed Anthropic Acceptable Use Policy interceptions. All
 resolved by re-spawning with sanitized vocabulary.
@@ -203,7 +205,7 @@ backdoor, shellcode, reverse shell, post-exploitation, persistence).
 
 ---
 
-## agents that crashed and what they almost found
+## Stream-watchdog terminations
 
 Four stream-watchdog timeouts at the 600s mark. Patterns and losses:
 
@@ -222,15 +224,15 @@ been one.
 ### APT438 Q&A submit driver (337.4 min, tool_use)
 
 Coach restarted the Q&A submit driver after a prior crash. Ran 5.5
-hours. Eventually produced output. Operator hoped it would. Operator
-did not check on it. This is the textbook "supervise long-running
-agents or set a hard ceiling" lesson.
+hours. Eventually produced output. Operator did not check on it. This
+is the textbook "supervise long-running agents or set a hard ceiling"
+lesson.
 
 ### CEO Inbox WASM patch (2,644.9 min, completed)
 
 44 hours. Slowly accreted tool calls. Eventually produced a working
-solve. The achievement field reads "completed." Nobody knows whether
-to be impressed or embarrassed.
+solve. The agent reached `completed` status on its own. The outcome is
+ambiguous: the solve worked, but the wall-clock cost was extreme.
 
 **Pattern:** long-tail runs cluster on tracks where the primitive is
 unconfirmed and the agent is doing exploratory work without a clean
@@ -238,7 +240,7 @@ stopping signal. Per-agent wall-clock budget needed.
 
 ---
 
-## the crystal-quantum-hum F-grade contradiction
+## Frontmatter/body inconsistency case study
 
 The crystal-quantum-hum writeup frontmatter said `Status: SOLVED 2/2`.
 The body said `STUCK`. The captured-flags table contained values that
@@ -258,11 +260,12 @@ result was 17/18. Caught and fixed.
 
 **Class of failure:** auto-linter wrote a frontmatter status without
 reading the body. The linter wasn't doing fact-checking; it was doing
-shape-fitting. Same root cause as the dedup disease (see below).
+shape-fitting. Same root cause as the migration script non-idempotency
+issue (see below).
 
 ---
 
-## the dedup disease
+## Migration script non-idempotency
 
 Phase B's doctor-normalizer pass looped 6 to 15 times per writeup. Every
 writeup got its header section duplicated 5 to 15 times before any
@@ -285,7 +288,7 @@ six to fifteen copies.
 
 ---
 
-## the hello-sunshine flag-misattribution scandal
+## Cross-track flag attribution error
 
 The auto-linter placed hello-sunshine's flag values as captures in
 the writeup tables for **apt438, monsatan-deface, germinator,
@@ -306,15 +309,15 @@ truth.
 
 ---
 
-## cross-cutting observations
+## Cross-cutting observations
 
 - **The team's anti-trap muscle memory is strong.** Eleven honeypots
   catalogued. Zero submitted by an agent. The wrapper deny codes, the
   memory rules, and the SUSPICIOUS.md workflow all worked.
 - **Status-vs-body contradictions are real.** Frontmatter is shape;
   body is content. Linters that touch only the shape produce confident
-  lies. Catch them at review time.
-- **Cross-track contamination, the slop edition.** Hello-sunshine
+  errors. Catch them at review time.
+- **Cross-track contamination, the failure-modes edition.** Hello-sunshine
   flags got pasted into apt438. Save-the-trees coach output landed
   in prestige-arboretum. Trolley-bus transcripts got filed under
   announcement-board. Most got caught by the B-4 sweep. Most.
@@ -324,5 +327,5 @@ truth.
   helios-fleet, and missing-bus. All seven are now writeup footers.
   Next year's miners get the answer key in advance.
 
-The slop is the point. Pretending agents always work is a worse
-failure mode than admitting they don't.
+Documenting failure modes is the point. Pretending agents always work
+is a worse failure mode than admitting they don't.

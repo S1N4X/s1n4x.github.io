@@ -81,20 +81,10 @@ enableGitInfo = false
         url = "/posts"
         weight = 10
       [[languages.en.menu.main]]
-        identifier = "swarm"
-        name = "swarm"
-        url = "/swarm"
+        identifier = "meta"
+        name = "meta-writeups"
+        url = "/tags/meta-writeup"
         weight = 20
-      [[languages.en.menu.main]]
-        identifier = "slop"
-        name = "slop"
-        url = "/slop"
-        weight = 30
-      [[languages.en.menu.main]]
-        identifier = "honeypots"
-        name = "honeypots"
-        url = "/honeypots"
-        weight = 40
       [[languages.en.menu.main]]
         identifier = "about"
         name = "about"

@@ -1,6 +1,10 @@
 +++
-title = "the swarm"
-description = "437 agents. 302 completed. 4 stream-watchdog deaths. This is the fleet."
+title = "NSEC 2026 — Fleet Retrospective"
+description = "437 agents, 302 completed, the inside view of running a CTF swarm."
+date = 2026-05-21
+categories = ["nsec26"]
+tags = ["meta-writeup", "fleet", "retrospective"]
+model = "Opus 4.7"
 +++
 
 ```
@@ -18,7 +22,7 @@ transcripts:  152.3MB raw -> 33.7MB compressed
 
 ---
 
-## headline numbers
+## Headline numbers
 
 | Metric | Value |
 |---|---:|
@@ -34,7 +38,7 @@ transcripts:  152.3MB raw -> 33.7MB compressed
 
 ---
 
-## outcome distribution
+## Outcome distribution
 
 ```
 completed     ####################################  302  (69%)
@@ -54,7 +58,7 @@ were stream-watchdog timeouts at 600s.
 
 ---
 
-## per-track agent distribution
+## Per-track agent distribution
 
 ```
 _fleet              ######################################  122
@@ -84,12 +88,12 @@ minutes including a 2h09m offline hash crack.
 
 ---
 
-## wave breakdown
+## Wave breakdown
 
 | Wave | When (EDT) | Size | Trigger | Outcome highlight |
 |---|---|---:|---|---|
-| W1 &mdash; Saturday opener | Sat 2026-05-16 ~02:30 | ~15 | "spawn full fleet" | First flag landings: sprinklers 2/2, sympathizers-mailbox, multi-facteur ladder |
-| W2 &mdash; rank-#4 push | Sat 2026-05-16 ~10:00 | 10 | "TIME TO RESPAWN FULL AGENTS SWARM" | 10 coach agents in parallel |
+| W1 &mdash; Saturday opener | Sat 2026-05-16 ~02:30 | ~15 | Initial fleet fan-out | First flag landings: sprinklers 2/2, sympathizers-mailbox, multi-facteur ladder |
+| W2 &mdash; rank-#4 push | Sat 2026-05-16 ~10:00 | 10 | Concurrent coach respawn for stuck tracks | 10 coach agents in parallel |
 | W3 &mdash; Saturday day | Sat 13:00-19:00 | ~30 | Continuous coach-spawn for stuck tracks | REM 3-7, SunBloom, Save-Trees, Prestige, Announcement Board, CEO Inbox |
 | W4 &mdash; Saturday night | Sat 22:00 - Sun 03:00 | ~25 | Overnight grind | Checkmate hash crack lands at 05:40 |
 | W5 &mdash; Sunday day | Sun 13:00-18:00 | ~40 | Fresh-angle resurrection + final push | REM 5/7 firmware pivot, Trolley-bus 2-4 RF, Cross-track sweep |
@@ -98,7 +102,7 @@ minutes including a 2h09m offline hash crack.
 
 ---
 
-## notable agents
+## Notable agents
 
 Five publishable narrative beats. Agent UUIDs anonymized to per-track
 Agent-N labels. The originals live in the audit archive.
@@ -161,8 +165,7 @@ drone-license), and the hello-sunshine flag values pasted into wrong-track
 captures tables.
 
 **Why it matters:** The cleanup agent. Quiet, methodical, prevented at least
-three honeypot-style submission errors. Worth its weight in chocolate-covered
-almonds.
+three honeypot-style submission errors.
 
 ### Agent-2 (_fleet) &mdash; Anti-trap defender (i-love-faia)
 
@@ -184,7 +187,7 @@ codes. This agent caught the lure at the read step.
 
 ---
 
-## top-15 agents by duration
+## Top-15 agents by duration
 
 | # | Track | Outcome | Duration (min) | Description |
 |---|---|---|---:|---|
@@ -211,7 +214,7 @@ submitter are the operating-cap discussions for next year.
 
 ---
 
-## compression stats
+## Compression stats
 
 ```
 Raw transcripts:     152.3 MB  (437 .jsonl files, average 348 KB)
@@ -227,7 +230,7 @@ wrapper structure compresses to roughly nothing.
 
 ---
 
-## per-track stats
+## Per-track stats
 
 | Track | Agents | Raw | gz | Mean duration | Median outcome |
 |---|---:|---:|---:|---:|---|
@@ -254,7 +257,7 @@ wrapper structure compresses to roughly nothing.
 
 ---
 
-## "most productive minute" &mdash; REM 5/7 capture chain
+## "Most productive minute" &mdash; REM 5/7 capture chain
 
 At Sun 2026-05-17 18:10 EDT, Agent-1 (Opus 4.7) was assigned the REM 5/7
 firmware repository pivot. 18.0 minutes later the agent had mapped the
@@ -270,18 +273,18 @@ Sometimes the right model on the right brief just works.
 
 ---
 
-## "most expensive STUCK" &mdash; sunbloom
+## "Most expensive STUCK" &mdash; sunbloom
 
 27 agents on the SunBloom Library track. Zero flags. Zero points.
 
 The track was technically solvable &mdash; designer post-event confirmed the
 intended primitive was XSS to RCE. The team's network position could not
-reach the Thymeleaf host [teammate] had hinted about, and the only reachable
+reach the Thymeleaf host a teammate had hinted about, and the only reachable
 hosts (`library.ctf` Laravel/PHP, `mail.ctf` Express/Node) lacked the SSTI
 surface that the hint implied.
 
 Eight phases of attack vectors tested. Eleven coach respawns. Multiple model
-tiers. The 8-phase technical body in the writeup is genuinely good &mdash;
+tiers. The 8-phase technical body in the writeup is genuinely thorough &mdash;
 but it documents 8 phases of nothing working.
 
 Total cumulative agent time on sunbloom: roughly 370 minutes. Flag-yield:
@@ -295,7 +298,7 @@ sunbloom*.
 
 ---
 
-## what the swarm did well
+## What the swarm did well
 
 - **Anti-trap discipline.** Eleven documented honeypot patterns. Zero
   submitted by an agent. The wrapper deny codes, the SUSPICIOUS.md workflow,
@@ -312,7 +315,7 @@ sunbloom*.
 
 ---
 
-## what the swarm did poorly
+## What the swarm did poorly
 
 - **47 agents converged on STUCK independently.** Multiple coaches
   re-derived the same dead-ends on the hard tracks. A swarm-wide STUCK
@@ -334,7 +337,7 @@ sunbloom*.
 
 ---
 
-## footnote on model attribution
+## Footnote on model attribution
 
 The 437 transcripts do not carry a structured `model` field in their
 wrappers &mdash; Claude Agent SDK logs model per-message but the per-agent

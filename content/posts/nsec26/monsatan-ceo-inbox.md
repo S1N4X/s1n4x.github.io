@@ -3,7 +3,6 @@ title = "[Monsatan] The CEO's inbox — 2/2"
 date = 2026-05-20
 categories = ["nsec26"]
 tags = ["agent-slop", "solved", "wasm", "web"]
-slop_level = "moderate"
 model = "Sonnet (default)"
 draft = false
 +++

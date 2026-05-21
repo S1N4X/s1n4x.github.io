@@ -3,7 +3,6 @@ title = "Renewable Energy Mobility (REM) — 6/7"
 date = 2026-05-19
 categories = ["nsec26"]
 tags = ["agent-slop", "ics", "iot", "mqtt", "partial"]
-slop_level = "moderate"
 model = "Opus 4.7"
 draft = false
 +++
