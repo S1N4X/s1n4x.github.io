@@ -166,9 +166,15 @@ article small {
   flex: 0 0 auto;
   height: 84px;
   width: auto;          /* respect the PNG's native aspect ratio
-                          (825x1026 -> renders ~68x84 with shield filling
-                          all four edges, no transparent halo inside) */
+                          (825x1026 -> renders shield matching native shape) */
   display: block;
+  /* Theme defaults `img { border: 8px solid var(--accent); padding: 8px }`
+   * which renders a green frame around every image. Kill it for the team
+   * badge — the shield IS the logo, it doesn't need a chrome frame. */
+  border: 0 !important;
+  padding: 0 !important;
+  margin: 0;
+  border-radius: 0;
 }
 .team-credit__text {
   flex: 1 1 auto;
