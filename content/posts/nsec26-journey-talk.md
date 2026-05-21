@@ -15,7 +15,7 @@ model = "Opus 4.7 (drafting assist) - the narrative is mine"
 
 I built a system to play CTFs better than I could alone. Then I ran a real event with it. This is what happened.
 
-Four days. Forty-seven tracks touched. Twenty-five solved end-to-end, four partially, eight defeated us with documented reasons, four left untouched, three didn't count. A flag every 25 minutes during the productive stretch. Somewhere around two thousand individual LLM invocations across three orchestrators and a fleet of coach subagents, hitting an internal knowledge base built from prior events.
+Four days. Forty-seven tracks touched. **119 flags captured.** Twenty-five tracks solved end-to-end, four partially, eight defeated us with documented reasons, four left untouched, three didn't count. A flag every 25 minutes during the productive stretch. Somewhere around two thousand individual LLM invocations across three orchestrators and a fleet of coach subagents, hitting an internal knowledge base built from prior events.
 
 The point of this talk isn't the score. The score was fine. The point is what an honest report on multi-agent operation in an adversarial setting actually looks like - what worked, what broke spectacularly, and where the human in the loop was load-bearing in ways I hadn't planned for.
 
