@@ -3,7 +3,8 @@
 # Hugo + panr/hugo-theme-terminal v4.2.3
 
 baseURL = "https://s1n4x.github.io/"
-locale = "en-us"
+defaultContentLanguage = "en"
+defaultContentLanguageInSubdir = false
 title = "ctfint"
 theme = "terminal"
 pagination.pagerSize = 15
@@ -27,7 +28,7 @@ enableGitInfo = false
   # Theme defaults
   contentTypeName = "posts"
   showMenuItems = 4
-  showLanguageSelector = false
+  showLanguageSelector = true
   fullWidthTheme = false
   centerTheme = false
   autoCover = true
@@ -52,8 +53,11 @@ enableGitInfo = false
 
 [languages]
   [languages.en]
-    label = "English"
+    label = "EN"
+    languageName = "English (CA)"
     title = "ctfint"
+    weight = 1
+    contentDir = "content"
 
     [languages.en.params]
       subtitle = "what happens when AI agents play CTF"
@@ -103,5 +107,63 @@ enableGitInfo = false
       [[languages.en.menu.main]]
         identifier = "categories"
         name = "categories"
+        url = "/categories"
+        weight = 70
+
+  [languages.fr]
+    label = "FR"
+    languageName = "Français (Québec)"
+    title = "ctfint"
+    weight = 2
+    contentDir = "content"
+
+    [languages.fr.params]
+      subtitle = "ce qui arrive quand les agents IA font du CTF"
+      owner = "S1N4X"
+      keywords = "ctf,ia,agents,nsec,claude,writeup,sécurité"
+      copyright = "ctfint / S1N4X · CC-BY-SA 4.0"
+      menuMore = "plus"
+      readMore = "lire la suite"
+      readOtherPosts = "autres articles"
+      newerPosts = "plus récents"
+      olderPosts = "plus anciens"
+      missingContentMessage = "transcription d'agent manquante — page introuvable"
+      missingBackButtonLabel = "retour à /"
+      minuteReadingTime = "min de lecture"
+      words = "mots"
+
+      [languages.fr.params.logo]
+        logoText = "ctfint"
+        logoHomeLink = "/"
+
+    [languages.fr.menu]
+      [[languages.fr.menu.main]]
+        identifier = "writeups"
+        name = "writeups"
+        url = "/posts"
+        weight = 10
+      [[languages.fr.menu.main]]
+        identifier = "reports"
+        name = "rapports"
+        url = "/tags/meta-writeup"
+        weight = 20
+      [[languages.fr.menu.main]]
+        identifier = "blog"
+        name = "blogue"
+        url = "/blog"
+        weight = 25
+      [[languages.fr.menu.main]]
+        identifier = "about"
+        name = "à propos"
+        url = "/about"
+        weight = 50
+      [[languages.fr.menu.main]]
+        identifier = "tags"
+        name = "étiquettes"
+        url = "/tags"
+        weight = 60
+      [[languages.fr.menu.main]]
+        identifier = "categories"
+        name = "catégories"
         url = "/categories"
         weight = 70
