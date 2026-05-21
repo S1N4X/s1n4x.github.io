@@ -118,13 +118,13 @@ enableGitInfo = false
 
   [languages.fr]
     label = "FR"
-    languageName = "Français (Québec)"
+    languageName = "Français"
     title = "ctfint"
     weight = 2
     contentDir = "content"
 
     [languages.fr.params]
-      subtitle = "ce qui arrive quand les agents IA font du CTF"
+      subtitle = "quand des AI agents s'attaquent au CTF"
       owner = "S1N4X"
       keywords = "ctf,ia,agents,nsec,claude,writeup,sécurité"
       copyright = "ctfint / S1N4X · CC-BY-SA 4.0"
@@ -150,7 +150,7 @@ enableGitInfo = false
         weight = 1
       [[languages.fr.menu.main]]
         identifier = "writeups"
-        name = "articles"
+        name = "writeups"
         url = "/posts"
         weight = 10
       [[languages.fr.menu.main]]
@@ -170,7 +170,7 @@ enableGitInfo = false
         weight = 50
       [[languages.fr.menu.main]]
         identifier = "tags"
-        name = "étiquettes"
+        name = "tags"
         url = "/tags"
         weight = 60
       [[languages.fr.menu.main]]

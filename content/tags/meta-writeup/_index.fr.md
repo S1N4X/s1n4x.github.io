@@ -1,6 +1,6 @@
 +++
 title = "rapports"
-description = "Bilans d'événement, rétrospectives d'agents, catalogues de patterns - méta-writeups cross-événement."
+description = "Event reports, fleet retrospectives, pattern catalogs -- méta-writeups cross-événement."
 +++
 
-Rapports - méta-writeups cross-événement : bilans d'événement, rétrospectives d'agents, catalogues de patterns, notes anti-piège.
+Rapports -- méta-writeups cross-événement : event reports, fleet retrospectives, pattern catalogs, notes anti-trap.

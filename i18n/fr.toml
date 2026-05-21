@@ -1,4 +1,4 @@
-# Traductions françaises (Québec) pour les info-bulles des icônes de statut.
+# Traductions françaises pour les info-bulles et en-têtes.
 
 [status_solved]
 other = "résolu"
@@ -21,12 +21,12 @@ other = "hors défi"
 [status_meta]
 other = "méta"
 
-# En-têtes de colonnes de la table des writeups / pages de tag
+# En-têtes de colonnes
 [col_event]
-other = "Événement"
+other = "Event"
 
 [col_title]
 other = "Titre"
 
 [col_tags]
-other = "Étiquettes"
+other = "Tags"

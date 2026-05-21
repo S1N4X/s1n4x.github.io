@@ -5,21 +5,21 @@ description = "Cybersécurité, AI SecOps, purple teaming. Secteur énergétique
 date = 2026-05-21
 +++
 
-Praticien en cybersécurité, à l'intersection de l'**AI SecOps** et du **purple teaming** dans le **secteur énergétique**. Joignable sur [GitHub](https://github.com/S1N4X) - pseudonyme : `@S1N4X`.
+Praticien en cybersécurité, à l'intersection de l'**AI SecOps** et du **purple teaming** dans le **secteur énergétique**. Joignable sur [GitHub](https://github.com/S1N4X) -- pseudo : `@S1N4X`.
 
-**Expert en sécurité réseau** - travail approfondi sur les solutions de périmètre : pare-feux, proxies, infonuagique, WAF, et passerelles.
+**Expert en sécurité réseau** -- travail approfondi sur les solutions de périmètre : firewalls, proxies, cloud, WAF et gateways.
 
-Je fais le pont entre sécurité offensive et défensive : l'intuition de modélisation d'adversaire du red team, la rigueur d'ingénierie de détection du blue team, et un intérêt croissant pour les workflows pilotés par LLM des deux côtés de la clôture.
+Je fais le pont entre sécurité offensive et défensive : l'intuition d'adversary emulation du red team, la rigueur de detection engineering du blue team, et un intérêt croissant pour les workflows LLM-driven des deux côtés.
 
-## Sujets qui m'occupent
+## Ce qui m'occupe
 
-- **AI agent SecOps à l'échelle** - construire, déployer et auditer des systèmes agentiques dans des environnements de sécurité en production
-- **Purple-teaming avec IA** - l'émulation d'adversaire pilotée par LLM peut-elle révéler des angles morts de détection plus vite que le pentest traditionnel?
-- **Convergence OT / TI en énergie** - là où les modèles de menace modernes rencontrent les réalités des systèmes industriels hérités
+- **AI agent SecOps at scale** -- construire, déployer et auditer des systèmes agentiques dans des environnements de sécurité en production
+- **Purple teaming avec IA** -- est-ce que l'adversary emulation pilotée par LLM peut révéler des detection gaps plus vite que le pentest traditionnel?
+- **Convergence OT/IT en énergie** -- là où les threat models modernes rencontrent les réalités des systèmes industriels legacy
 
 ## Équipe
 
-Je participe aux CTF avec **Shellda: A Link To The Flag** - l'équipe derrière [bifftannen88](https://ctftime.org/team/bifftannen88) sur CTFtime. Les pseudonymes des coéquipiers seront listés ici au fur et à mesure qu'ils confirment.
+Je participe aux CTF avec **Shellda: A Link To The Flag** -- l'équipe derrière [bifftannen88](https://ctftime.org/team/bifftannen88) sur CTFtime. Les handles des coéquipiers seront listés ici au fur et à mesure qu'ils confirment.
 
 ## Contact
 
