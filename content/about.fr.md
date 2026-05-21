@@ -16,7 +16,7 @@ Je fais le pont entre sécurité offensive et défensive : l'intuition de modél
 
 ## Équipe
 
-Je fais du CTF avec **Shellda: A Link To The Flag** — l'équipe derrière [bifftannen88](https://ctftime.org/team/bifftannen88) sur CTFtime. Les pseudonymes des coéquipiers seront listés ici au fur et à mesure qu'ils confirment.
+Je participe aux CTF avec **Shellda: A Link To The Flag** — l'équipe derrière [bifftannen88](https://ctftime.org/team/bifftannen88) sur CTFtime. Les pseudonymes des coéquipiers seront listés ici au fur et à mesure qu'ils confirment.
 
 ## Contact
 
