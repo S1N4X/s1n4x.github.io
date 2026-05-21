@@ -1,0 +1,35 @@
+{{/* Theme picker — same .menu styling as language-menu (dropdown beside
+     the FR/EN selector in the header). Choice persists via localStorage;
+     extended_head.html does the early restore to prevent FOUC. */}}
+<ul class="menu menu--desktop menu--theme-selector">
+  <li class="menu__trigger" id="theme-trigger">theme&nbsp;▾</li>
+  <li>
+    <ul class="menu__dropdown">
+      <li><a href="#" data-theme="green">green</a></li>
+      <li><a href="#" data-theme="orange">orange</a></li>
+      <li><a href="#" data-theme="cyberpunk">cyberpunk</a></li>
+    </ul>
+  </li>
+</ul>
+<script>
+  (function () {
+    var KEY = 'ctfint-theme';
+    var trigger = document.getElementById('theme-trigger');
+    var saved = null;
+    try { saved = localStorage.getItem(KEY); } catch (e) {}
+    var current = saved || 'green';
+    function setTrigger(t) {
+      if (trigger) trigger.innerHTML = t + '&nbsp;▾';
+    }
+    setTrigger(current);
+    document.querySelectorAll('.menu--theme-selector a[data-theme]').forEach(function (a) {
+      a.addEventListener('click', function (e) {
+        e.preventDefault();
+        var t = a.dataset.theme;
+        document.documentElement.setAttribute('data-theme', t);
+        try { localStorage.setItem(KEY, t); } catch (e) {}
+        setTrigger(t);
+      });
+    });
+  })();
+</script>

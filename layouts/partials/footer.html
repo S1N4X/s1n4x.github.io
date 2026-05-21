@@ -18,35 +18,8 @@
       <span class="footer__sep">::</span>
       <span><a href="https://github.com/S1N4X" target="_blank" rel="noopener">github.com/S1N4X</a></span>
     </div>
-    <div class="theme-picker" role="radiogroup" aria-label="color theme">
-      <span class="theme-picker__label">--theme=</span>
-      <button class="theme-picker__btn" data-theme="green" aria-pressed="true">green</button>
-      <button class="theme-picker__btn" data-theme="orange" aria-pressed="false">orange</button>
-      <button class="theme-picker__btn" data-theme="cyberpunk" aria-pressed="false">cyberpunk</button>
-    </div>
   </div>
 </footer>
-<script>
-  (function () {
-    var KEY = 'ctfint-theme';
-    var saved = null;
-    try { saved = localStorage.getItem(KEY); } catch (e) {}
-    var initial = saved || 'green';
-    document.documentElement.setAttribute('data-theme', initial);
-    var btns = document.querySelectorAll('.theme-picker__btn');
-    btns.forEach(function (b) {
-      b.setAttribute('aria-pressed', b.dataset.theme === initial ? 'true' : 'false');
-      b.addEventListener('click', function () {
-        var t = b.dataset.theme;
-        document.documentElement.setAttribute('data-theme', t);
-        try { localStorage.setItem(KEY, t); } catch (e) {}
-        btns.forEach(function (other) {
-          other.setAttribute('aria-pressed', other === b ? 'true' : 'false');
-        });
-      });
-    });
-  })();
-</script>
 
 <!-- Built with Hugo + a modified panr/hugo-theme-terminal. Source: github.com/S1N4X -->
 
