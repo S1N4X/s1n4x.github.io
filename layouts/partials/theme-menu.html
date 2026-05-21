@@ -1,13 +1,13 @@
-{{/* Theme picker — same .menu styling as language-menu (dropdown beside
-     the FR/EN selector in the header). Choice persists via localStorage;
-     extended_head.html does the early restore to prevent FOUC. */}}
+{{/* Theme picker — same .menu chrome as language-menu.
+     Dropdown items are color swatches (circles filled with each theme's
+     accent), not text labels. Tooltip = theme name. */}}
 <ul class="menu menu--desktop menu--theme-selector">
-  <li class="menu__trigger" id="theme-trigger">theme&nbsp;▾</li>
+  <li class="menu__trigger" id="theme-trigger">green&nbsp;▾</li>
   <li>
-    <ul class="menu__dropdown">
-      <li><a href="#" data-theme="green">green</a></li>
-      <li><a href="#" data-theme="orange">orange</a></li>
-      <li><a href="#" data-theme="cyberpunk">cyberpunk</a></li>
+    <ul class="menu__dropdown menu__dropdown--swatches">
+      <li><a href="#" data-theme="green" title="green (phosphor CRT)" aria-label="green theme"><span class="theme-swatch theme-swatch--green"></span></a></li>
+      <li><a href="#" data-theme="orange" title="orange (amber CRT)" aria-label="orange theme"><span class="theme-swatch theme-swatch--orange"></span></a></li>
+      <li><a href="#" data-theme="cyberpunk" title="cyberpunk (magenta)" aria-label="cyberpunk theme"><span class="theme-swatch theme-swatch--cyberpunk"></span></a></li>
     </ul>
   </li>
 </ul>

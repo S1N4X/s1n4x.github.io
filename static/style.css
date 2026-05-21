@@ -164,9 +164,11 @@ article small {
 }
 .team-credit__logo {
   flex: 0 0 auto;
-  width: 84px;
   height: 84px;
-  object-fit: contain;
+  width: auto;          /* respect the PNG's native aspect ratio
+                          (825x1026 -> renders ~68x84 with shield filling
+                          all four edges, no transparent halo inside) */
+  display: block;
 }
 .team-credit__text {
   flex: 1 1 auto;
@@ -215,6 +217,41 @@ article small {
   margin-top: 8px;
   opacity: 0.75;
 }
+
+/* === Theme picker swatches (dropdown items in header) ================= */
+.menu__dropdown--swatches {
+  display: flex !important;
+  flex-direction: row !important;
+  gap: 6px;
+  padding: 6px 8px;
+}
+.menu__dropdown--swatches > li {
+  margin: 0;
+  padding: 0;
+  border: none;
+}
+.menu__dropdown--swatches > li > a {
+  display: inline-block;
+  padding: 0;
+  border: none;
+}
+.theme-swatch {
+  display: inline-block;
+  width: 16px;
+  height: 16px;
+  border-radius: 50%;
+  border: 1px solid color-mix(in srgb, var(--foreground) 40%, transparent);
+  transition: transform 100ms ease, border-color 100ms ease;
+  vertical-align: middle;
+  cursor: pointer;
+}
+.theme-swatch:hover {
+  transform: scale(1.15);
+  border-color: var(--foreground);
+}
+.theme-swatch--green     { background: #33ff66; }
+.theme-swatch--orange    { background: #ff9933; }
+.theme-swatch--cyberpunk { background: #ff00d4; }
 
 /* === Active nav highlight ============================================== */
 /* Current section in the top menu: green background, black text. Applied
