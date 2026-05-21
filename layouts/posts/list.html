@@ -58,6 +58,7 @@
           {{ else if eq $status "non-challenge" }}{{ $glyph = "·" }}
           {{ else if eq $status "meta" }}{{ $glyph = "◆" }}
           {{ end }}
+          {{ $foreign := ne .Lang $.Site.Language.Lang }}
           <tr class="post-row">
             <td class="col-event"><code>{{ $event }}</code></td>
             <td class="col-title">
@@ -71,7 +72,11 @@
               {{ range .Params.tags }}
                 {{/* Skip the status/meta tags -- they're already represented by the icon */}}
                 {{ if not (in (slice "solved" "partial" "stuck" "untouched" "honeypot" "non-challenge" "meta-writeup") .) }}
+                  {{- if $foreign }}
+                  <a class="tag" href="{{ (urlize (printf "tags/%s/" .)) | absURL }}">#{{ . }}</a>
+                  {{- else }}
                   <a class="tag" href="{{ (urlize (printf "tags/%s/" .)) | absLangURL }}">#{{ . }}</a>
+                  {{- end }}
                 {{ end }}
               {{ end }}
             </td>
