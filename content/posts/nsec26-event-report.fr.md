@@ -47,7 +47,7 @@ Notre équipe a opéré un système hybride humain + multi-agent, avec jusqu'à 
 
 ## 2. Chronologie des scores
 
-![Graphique cumulatif des scores NSEC 2026 -- la courbe Shellda est mise en évidence dans le cluster médian](/scoregraph.png)
+![Graphique cumulatif des scores NSEC 2026 -- la courbe Shellda est mise en évidence dans le cluster médian](/scoregraph-shellda.png)
 
 > **Visuel** : le graphique de scores cumulatifs publié par les organisateurs montre notre ligne « Shellda: A Link To The Flag » évoluant globalement dans le peloton médian, grimpant fortement Ven 21:00-Sam 02:00 puis progressant plus graduellement jusqu'à Dim 14:14 (soumission finale REM 6/7). Les courbes des meilleurs (OteriHack 713, Hubert Hackin' 711, Basilic de Torches 674) ont plafonné à ~700 pts vers Dim 13:00.
 
@@ -253,13 +253,6 @@ L'effort de l'équipe pour NSEC 2026 représentait l'aboutissement de ~3 mois de
 - **Ven 2026-05-15 21:58 EDT** -- Selfbot de l'équipe déployé -- la couche d'automatisation pour la coordination Discord est opérationnelle.
 
 L'implication stratégique : au moment de l'ouverture du CTF, l'équipe savait déjà (a) que la participation IA serait explicitement mesurée, (b) que le pipeline MCP `submit_flag` constituait le chemin canonique de soumission tagué agent, (c) que les scores CFSS par flag permettaient de cibler les cibles à haute valeur sans tâtonnement. Cela diffère matériellement de « nous sommes venus et avons essayé d'utiliser Claude » -- l'architecture a été conçue spécifiquement contre les règles publiées par les organisateurs.
-
-### Architecture
-
-- **Orchestrators** : 3 sessions principales Claude Code (ORCH-A = Opus, ORCH-B = Haiku, ORCH-C = Haiku) + CODEX (agent parallèle Codex CLI) coordonnés via un `OVERNIGHT-REPORT.md` partagé avec des clôtures de sections en commentaires HTML. Voir le skill `ctfint_orchestrators-sync`.
-- **Agents coach** : un sous-agent persistant par challenge (instances `ClaudeSDKClient`) avec le serveur MCP `ctfint-db` pour les requêtes d'intelligence. Coordination via `multi_agent_coordinator.py` utilisant `asyncio.gather`.
-- **Agents researcher / support** : agents one-shot pour la collecte de renseignements (Researcher) et l'automatisation navigateur (Support, avec `ctfint-browser`).
-- **Selfbot** : coordination côté Discord via les helpers `nsec/team-status/` (CRUD de claims, publications de status, watchdog) -- voir les skills `ctfint_team-status` et `ctfint_selfbot-coach`.
 
 ### Cadence de déploiement
 

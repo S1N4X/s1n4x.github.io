@@ -47,7 +47,7 @@ Our team operated a hybrid human + multi-agent system, with up to 30 concurrent 
 
 ## 2. Score Timeline
 
-![NSEC 2026 cumulative score graph - Shellda track is highlighted in the mid-tier curve cluster](/scoregraph.png)
+![NSEC 2026 cumulative score graph - Shellda track is highlighted in the mid-tier curve cluster](/scoregraph-shellda.png)
 
 > **Visual**: cumulative score graph published by organizers shows our "Shellda: A Link To The Flag" line tracking roughly mid-pack throughout, climbing steeply Fri 21:00-Sat 02:00 then continuing more gradually through Sun 14:14 (final REM 6/7 submission). Top-finisher curves (OteriHack 713, Hubert Hackin' 711, Basilic de Torches 674) plateaued at ~700 pts by Sun 13:00.
 
@@ -253,13 +253,6 @@ The team's NSEC 2026 effort was the culmination of ~3 months of deliberate compe
 - **Fri 2026-05-15 21:58 EDT** - Team selfbot deployed - automation layer for Discord coordination went live.
 
 The strategic implication: by the time CTF opened, the team already knew (a) AI participation would be explicitly measured, (b) the MCP `submit_flag` pipeline was the canonical agent-tagged submission path, (c) per-flag CFSS scores let them pick high-value targets without trial-and-error. This is materially different from "we showed up and tried to use Claude" - the architecture was designed-for-purpose against the organizer-published rules.
-
-### Architecture
-
-- **Orchestrators**: 3 main Claude Code sessions (ORCH-A = Opus, ORCH-B = Haiku, ORCH-C = Haiku) + CODEX (Codex CLI parallel agent) coordinating via a shared `OVERNIGHT-REPORT.md` with HTML-comment section fences. See the `ctfint_orchestrators-sync` skill.
-- **Coach agents**: One persistent per-challenge subagent (`ClaudeSDKClient` instances) with the `ctfint-db` MCP server for intelligence queries. Coordinated via `multi_agent_coordinator.py` using `asyncio.gather`.
-- **Researcher / Support agents**: One-shot agents for intel-gathering (Researcher) and browser automation (Support, with `ctfint-browser`).
-- **Selfbot**: Discord-side coordination via `nsec/team-status/` helpers (claim CRUD, status posts, watchdog) - see the `ctfint_team-status` and `ctfint_selfbot-coach` skills.
 
 ### Deployment cadence
 
