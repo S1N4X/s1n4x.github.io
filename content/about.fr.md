@@ -6,6 +6,8 @@ date = 2026-05-21
 
 Praticien en cybersécurité, à l'intersection de l'**AI SecOps** et du **purple teaming** dans le **secteur énergétique**. Joignable sur [GitHub](https://github.com/S1N4X) — pseudonyme : `@S1N4X`.
 
+**Expert en sécurité réseau** — travail approfondi sur les solutions de périmètre : pare-feux, proxies, infonuagique, WAF, et passerelles.
+
 Je fais le pont entre sécurité offensive et défensive : l'intuition de modélisation d'adversaire du red team, la rigueur d'ingénierie de détection du blue team, et un intérêt croissant pour les workflows pilotés par LLM des deux côtés de la clôture.
 
 ## Sujets qui m'occupent

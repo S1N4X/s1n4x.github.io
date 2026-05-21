@@ -1,13 +1,13 @@
 +++
-title = "Mes quatre lois de l'utilisation de l'IA au travail"
-description = "Quatre engagements personnels que je tiens quand j'utilise des LLM dans mon travail de sécurité et d'ingénierie."
+title = "Mes cinq lois de l'utilisation de l'IA au travail"
+description = "Cinq engagements personnels que je tiens quand j'utilise des LLM dans mon travail de sécurité et d'ingénierie."
 date = 2026-05-21
 tags = ["ai-secops", "opinion", "éthique"]
 draft = false
-model = "Opus 4.7 (aide à la rédaction) — les quatre lois sont les miennes"
+model = "Opus 4.7 (aide à la rédaction) — les cinq lois sont les miennes"
 +++
 
-Après un an à opérer des systèmes d'IA dans du travail de sécurité — pistes CTF, exercices purple team, triage d'anomalies — j'en suis arrivé à quatre engagements personnels. Je les garde courts exprès. Ce n'est pas de la politique. C'est ce que je dois aux gens avec qui je travaille.
+Après un an à opérer des systèmes d'IA dans du travail de sécurité — pistes CTF, exercices purple team, triage d'anomalies — j'en suis arrivé à cinq engagements personnels. Je les garde courts exprès. Ce n'est pas de la politique. C'est ce que je dois aux gens avec qui je travaille.
 
 ## 1. Je révise ce que le LLM me produit.
 
@@ -25,8 +25,14 @@ Dans le travail, dans les livrables, dans les conversations avec collègues et c
 
 Pas de « il » qui pense, pas de « elle » qui veut, pas de cadrage anthropomorphique. Le LLM ne pense pas, ne veut pas, ne mérite pas. Le traiter comme un collègue brouille qui est réellement responsable — moi. Un outil est un outil. Le nommer correctement est la première honnêteté.
 
+## 5. Je ne sous-traite pas le respect que je dois à mes collègues à un LLM.
+
+Le modèle n'est pas un substitut de collègue ni un évaluateur de collègue. Coller le travail d'un coéquipier dans un chatbot pour trouver des contre-arguments, pour pinailler, ou pour « vérifier » son raisonnement avant de répondre, c'est dire *que je fais plus confiance au modèle qu'à la personne avec qui je travaille*. Non. Et je ne ferai pas semblant.
+
+Si je suis en désaccord avec un coéquipier, je lui apporte le désaccord directement, avec ma propre réflexion — pas avec une transcription fraîche d'un modèle qui ne l'a jamais rencontré. La version paresseuse de moi se sert de l'IA pour être la personne la plus intelligente dans la pièce. La version honnête s'en sert pour mieux faire le travail, et gagne ensuite la pièce à l'ancienne.
+
 ---
 
-C'est toute la liste. Quatre lignes sur un post-it. Le difficile, ce n'est pas de les écrire, c'est de les vivre chaque fois que le modèle produit quelque chose d'utile et que la tentation de bâcler la révision est réelle.
+C'est toute la liste. Cinq lignes sur un post-it. Le difficile, ce n'est pas de les écrire, c'est de les vivre chaque fois que le modèle produit quelque chose d'utile et que la tentation de bâcler la révision est réelle.
 
 Si tu as une autre liste courte, ça m'intéresserait de comparer. [Écris-moi](/about/).

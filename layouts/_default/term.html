@@ -13,9 +13,9 @@
     <table class="posts-table">
       <thead>
         <tr>
-          <th class="col-event">Event</th>
-          <th class="col-title">Title</th>
-          <th class="col-tags">Tags</th>
+          <th class="col-event">{{ i18n "col_event" | default "Event" }}</th>
+          <th class="col-title">{{ i18n "col_title" | default "Title" }}</th>
+          <th class="col-tags">{{ i18n "col_tags" | default "Tags" }}</th>
         </tr>
       </thead>
       <tbody>
@@ -42,7 +42,7 @@
           <tr class="post-row">
             <td class="col-event"><code>{{ $event }}</code></td>
             <td class="col-title">
-              {{ if $glyph }}<span class="status-icon status-{{ $status }}" title="{{ $status }}">{{ $glyph }}</span>{{ end }}
+              {{ if $glyph }}{{ $tipKey := printf "status_%s" (replace $status "-" "_") }}<span class="status-icon status-{{ $status }}" title="{{ i18n $tipKey | default $status }}">{{ $glyph }}</span>{{ end }}
               <a href="{{ .Permalink }}">{{ .Title | markdownify }}</a>
               {{ with .Description }}
                 <div class="post-desc">{{ . | markdownify }}</div>

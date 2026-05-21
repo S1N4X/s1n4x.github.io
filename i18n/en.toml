@@ -1,0 +1,32 @@
+# English translations for status icon tooltips and other UI strings.
+
+[status_solved]
+other = "solved"
+
+[status_partial]
+other = "partial"
+
+[status_stuck]
+other = "stuck"
+
+[status_untouched]
+other = "untouched"
+
+[status_honeypot]
+other = "honeypot"
+
+[status_non_challenge]
+other = "non-challenge"
+
+[status_meta]
+other = "meta"
+
+# Posts/term table column headers
+[col_event]
+other = "Event"
+
+[col_title]
+other = "Title"
+
+[col_tags]
+other = "Tags"

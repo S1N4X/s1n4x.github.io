@@ -6,6 +6,8 @@ date = 2026-05-21
 
 Cybersecurity practitioner working at the intersection of **AI SecOps** and **purple teaming** in the **energy sector**. Reach me on [GitHub](https://github.com/S1N4X) — handle: `@S1N4X`.
 
+**Network security expert** — deep work on perimeter solutions: firewalls, proxies, cloud, WAFs, and gateways.
+
 I bridge offensive and defensive security: red-team intuition for adversary modeling, blue-team rigor for detection engineering, and a growing focus on LLM-driven workflows for both sides of the fence.
 
 ## What I'm thinking about

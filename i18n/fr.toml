@@ -1,0 +1,32 @@
+# Traductions françaises (Québec) pour les info-bulles des icônes de statut.
+
+[status_solved]
+other = "résolu"
+
+[status_partial]
+other = "partiel"
+
+[status_stuck]
+other = "bloqué"
+
+[status_untouched]
+other = "non commencé"
+
+[status_honeypot]
+other = "pot de miel"
+
+[status_non_challenge]
+other = "hors défi"
+
+[status_meta]
+other = "méta"
+
+# En-têtes de colonnes de la table des writeups / pages de tag
+[col_event]
+other = "Événement"
+
+[col_title]
+other = "Titre"
+
+[col_tags]
+other = "Étiquettes"
