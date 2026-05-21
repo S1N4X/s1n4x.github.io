@@ -1,18 +1,17 @@
 {{/* Dynamic site logo: sinax@<context>.
    Default: sinax@ctfint.
-   - /blog/      → sinax@lab
-   - /about/     → sinax@home
-   - /about-methodology/ → sinax@home (still about-section)
+   - /blog/      -> sinax@lab
+   - /about/     -> sinax@home
 */ -}}
 {{ $logoText := "sinax@ctfint" -}}
 {{ with .Page -}}
   {{ $rp := .RelPermalink -}}
-  {{ if or (eq .Section "blog") (hasPrefix $rp "/blog") -}}
+  {{ if or (eq .Section "blog") (hasPrefix $rp "/blog") (hasPrefix $rp "/fr/blog") -}}
     {{ $logoText = "sinax@lab" -}}
   {{ else if or (hasPrefix $rp "/about") (hasPrefix $rp "/fr/about") -}}
     {{ $logoText = "sinax@home" -}}
   {{ end -}}
 {{ end -}}
-<a href="{{ if $.Site.Params.Logo.LogoHomeLink }}{{ $.Site.Params.Logo.LogoHomeLink }}{{ else }}{{ $.Site.BaseURL }}{{ end }}">
+<a href="{{ "/" | relLangURL }}">
   <div class="logo">{{ $logoText }}</div>
 </a>

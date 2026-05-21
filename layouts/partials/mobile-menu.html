@@ -1,6 +1,6 @@
 {{/* Override of themes/terminal/layouts/partials/mobile-menu.html.
      Same active-section logic as menu.html (meta-writeup pin + longest
-     URL prefix). */}}
+     URL prefix). All menu URLs run through relLangURL for i18n. */}}
 
 {{ $current := .RelPermalink }}
 {{ $isMetaWriteup := false }}
@@ -11,14 +11,14 @@
 {{ $bestURL := "" }}
 {{ $bestLen := 0 }}
 {{ if $isMetaWriteup }}
-  {{ $bestURL = "/tags/meta-writeup" }}
+  {{ $bestURL = "/tags/meta-writeup" | relLangURL }}
 {{ else }}
   {{ range $.Site.Menus.main }}
-    {{ $u := .URL }}
+    {{ $u := .URL | relLangURL }}
     {{ if not (hasSuffix $u "/") }}{{ $u = printf "%s/" $u }}{{ end }}
     {{ if hasPrefix $current $u }}
       {{ if gt (len $u) $bestLen }}
-        {{ $bestURL = .URL }}
+        {{ $bestURL = .URL | relLangURL }}
         {{ $bestLen = len $u }}
       {{ end }}
     {{ end }}
@@ -31,14 +31,21 @@
     <ul class="menu__dropdown">
       {{ range $.Site.Menus.main }}
         {{ if not .HasChildren }}
-          <li{{ if eq .URL $bestURL }} class="active"{{ end }}><a href="{{ .URL }}">{{ .Name }}</a></li>
+          <li{{ if eq (.URL | relLangURL) $bestURL }} class="active"{{ end }}><a href="{{ .URL | relLangURL }}">{{ .Name }}</a></li>
         {{ end }}
       {{ end }}
       {{ if and $.Site.Params.showLanguageSelector (len $.Site.Home.AllTranslations) }}
         <hr />
         {{ range $.Site.Home.AllTranslations }}
+          {{ $lang := .Lang }}
+          {{ $url := .Permalink }}
+          {{ range $.AllTranslations }}
+            {{ if eq .Lang $lang }}
+              {{ $url = .Permalink }}
+            {{ end }}
+          {{ end }}
           <li>
-            <a href="{{ .Permalink }}">{{ .Language.LanguageName }}</a>
+            <a href="{{ $url }}">{{ .Language.LanguageName }}</a>
           </li>
         {{ end }}
       {{ end }}
