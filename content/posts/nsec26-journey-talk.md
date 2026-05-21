@@ -5,6 +5,7 @@ date = 2026-05-21
 categories = ["nsec26"]
 tags = ["meta-writeup", "retrospective", "talk"]
 model = "Opus 4.7 (drafting assist) - the narrative is mine"
+draft = true
 +++
 
 **A retrospective, in the shape of a talk.** Draft for an NSEC 2027 talk on what running a multi-agent CTF system actually looks like. Single-event scope (NSEC 2026 only). No stack names - the brakes are the interesting part.
