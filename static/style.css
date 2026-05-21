@@ -1,17 +1,34 @@
-/* ctfint - "green" variant (classic phosphor CRT)
- * Overrides the terminal theme's CSS custom properties.
- * The theme imports static/style.css after its own styles, so these win.
+/* ctfint - color theme variants.
+ * Three palettes: green (default phosphor CRT), orange (amber CRT),
+ * cyberpunk (magenta + dark purple). Picker in footer; selection
+ * persisted via localStorage. The terminal theme imports static/style.css
+ * after its own styles, so these win.
  */
 
-:root {
-  --background: #0a0f0a;       /* near-black with a green tint */
-  --foreground: #c8f0c8;       /* warm phosphor white */
-  --accent: #33ff66;            /* classic CRT green */
+/* --- Theme: green (default, terminal phosphor) -------------------- */
+:root,
+:root[data-theme="green"] {
+  --background: #0a0f0a;
+  --foreground: #c8f0c8;
+  --accent: #33ff66;
   --code-border: #1a3a1a;
-
-  /* Wider content column for tables + code blocks.
-   * Terminal theme defaults to ~720px which truncates wide tables. */
   --width: 1400px;
+}
+
+/* --- Theme: orange (amber CRT) ----------------------------------- */
+:root[data-theme="orange"] {
+  --background: #0f0a06;       /* near-black with warm tint */
+  --foreground: #f5dcb3;        /* warm cream */
+  --accent: #ff9933;            /* amber */
+  --code-border: #3a2a1a;
+}
+
+/* --- Theme: cyberpunk (magenta + dark purple) -------------------- */
+:root[data-theme="cyberpunk"] {
+  --background: #0d0218;       /* deep purple-black */
+  --foreground: #f0c8ff;        /* pinkish-white */
+  --accent: #ff00d4;            /* hot magenta */
+  --code-border: #2a0a3a;
 }
 
 /* Subtle phosphor scanline + glow on the main heading area */
@@ -89,6 +106,40 @@ article small {
 .post-content pre {
   overflow-x: auto;
   max-width: 100%;
+}
+
+/* === Theme picker (footer) ============================================= */
+.theme-picker {
+  font-family: "Fira Code", Monaco, Consolas, "Ubuntu Mono", monospace;
+  font-size: 0.82em;
+  opacity: 0.85;
+  display: flex;
+  gap: 8px;
+  align-items: baseline;
+  flex-wrap: wrap;
+}
+.theme-picker__label {
+  opacity: 0.6;
+}
+.theme-picker__btn {
+  background: none;
+  border: 1px solid color-mix(in srgb, var(--accent) 35%, transparent);
+  color: var(--foreground);
+  font-family: inherit;
+  font-size: inherit;
+  padding: 1px 8px;
+  cursor: pointer;
+  border-radius: 2px;
+  transition: background 80ms ease, color 80ms ease;
+}
+.theme-picker__btn:hover {
+  background: color-mix(in srgb, var(--accent) 12%, transparent);
+}
+.theme-picker__btn[aria-pressed="true"] {
+  background: var(--accent);
+  color: #000;
+  border-color: var(--accent);
+  font-weight: bold;
 }
 
 /* === Footer (ctfint-branded override) ================================== */

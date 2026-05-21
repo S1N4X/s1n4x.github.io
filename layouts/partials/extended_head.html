@@ -1,0 +1,13 @@
+{{/* Apply saved theme in <head> before page renders, to prevent
+     flash-of-default-theme. Footer's full picker handles persistence
+     + click events; this is just the early restore. */}}
+<script>
+  (function () {
+    try {
+      var t = localStorage.getItem('ctfint-theme');
+      if (t && (t === 'orange' || t === 'cyberpunk' || t === 'green')) {
+        document.documentElement.setAttribute('data-theme', t);
+      }
+    } catch (e) {}
+  })();
+</script>
