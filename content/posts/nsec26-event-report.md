@@ -15,7 +15,7 @@ agents spawned:  437
 duration:        2026-05-15 → 2026-05-19 (~4 days)
 ```
 
-**Team (scoreboard name):** Shellda: A Link To The Flag — **final placement #12 / 92 teams · 492 pts**
+**Team (scoreboard name):** `Shellda; link to the flag` — **final placement #12 / 92 teams · 492 pts**
 **Team (Discord / table assignment):** bifftannen88 / Table 061
 **Event:** NorthSec 2026 Conference CTF (Gaia / Solarpunk narrative)
 **Dates:** 2026-05-15 → 2026-05-19 (Friday open → Sunday close)
@@ -72,27 +72,28 @@ Our team operated a hybrid human + multi-agent system, with up to 30 concurrent 
 | Sat 01:32 | 93 | 321 | 🥈&nbsp;#2 | -97 † | Multi-facteur 6/6 |
 | Sat 01:55 | 99 | 359 | 🥈&nbsp;#2 | -79 † | Addressbook 2/2, Poubelle 8/8, APT438 3/9 — **peak rank for the event** |
 | Sat 02:30 | 99 | 359 | 🥈&nbsp;#2 | -79 † | **VPN drops — offline mode** (7-hour outage begins) |
-| Sat 05:40 | 99 | 359 | ~#5 ‡ | ~-110 ‡ | (still 359 — Monsatan-Checkmate crack lands but unsubmitted) |
-| Sat 09:04 | 100 | 362 | ~#7 ‡ | ~-130 ‡ | Crystal "Basic Electricity" 1/1 — VPN-return |
-| Sat 09:45 | 101 | 363 | ~#7 ‡ | ~-135 ‡ | Monsatan-Chatbot 1/3 (sys-prompt injection) |
-| Sat 10:08 | 102 | 372 | ~#7 ‡ | ~-140 ‡ | Monsatan-Orders 1/1 (Leptos WASM JWT intercept, credit [teammate]) |
-| Sat 10:30 | 103 | 374 | ~#8 ‡ | ~-145 ‡ | Tamper 4/6 (sunnikey + shelf-elevate) |
-| Sat 10:38 | 104 | 381 | ~#8 ‡ | ~-145 ‡ | Monsatan-Checkmate 1/1 (rockyou `<REDACTED:operational-detail>`) |
-| Sat 10:42 | 105 | 382 | ~#8 ‡ | ~-145 ‡ | Crystal Badge 2/5 (post-dock firmware string) |
-| Sat 11:08 | 106 | 384 | ~#9 ‡ | ~-150 ‡ | REM 2/7 (MQTT `get_flag` maintenance CLI) |
-| Sat 11:20 | 107 | 386 | ~#9 ‡ | ~-155 ‡ | Tamper 5/6 (envelope-postman tamper) |
-| Sat 12:53 | 108 | 390 | ~#10 ‡ | ~-170 ‡ | Tamper 6/6 (final envelope tamper) |
-| Sat 14:07 | 109 | 394 | ~#10 ‡ | ~-185 ‡ | Crystal Grid Alignment 1/2 (VQE) |
-| Sat 14:13 | 110 | 398 | ~#10 ‡ | ~-187 ‡ | Monsatan Kiosk 1/1 (Chrome kiosk escape) |
-| Sat 16:02 | 111 | 403 | ~#11 ‡ | ~-205 ‡ | Grid Alignment 2/2 (QAOA) |
-| Sat 17:17 | 112 | 419 | ~#11 ‡ | ~-215 ‡ | Monsatan-Mailserver 1/2 (DB root pwd via sign-all flaw) |
-| Sat 17:28 | 113 | 431 | ~#11 ‡ | ~-215 ‡ | Monsatan-Mailserver 2/2 (WASM+WASI sandbox abuse) |
-| Sun 10:28 | 114 | 436 | ~#12 ‡ | ~-245 ‡ | APT438 4/9 (PS history + Windows search) |
-| Sun 10:41 | 115 | 441 | ~#12 ‡ | ~-245 ‡ | APT438 6/9 (Defender + notifications) |
-| Sun 10:42 | 116 | 446 | ~#12 ‡ | ~-245 ‡ | APT438 5/9 (Registry + Defender logs) |
-| Sun 10:50 | 117 | 451 | ~#12 ‡ | ~-245 ‡ | APT438 7/9 (schtasks + MFT resident-file) |
-| Sun 11:04 | 118 | 456 | ~#12 ‡ | ~-245 ‡ | APT438 8/9 (event logs + URL cache) |
-| Sun 11:12 | 119 | 462 | ~#12 ‡ | ~-245 ‡ | APT438 9/9 (Windows Hello PIN crack) |
+| Sat 05:40 | 99 | 359 | 🥈&nbsp;#2 ‡ | ~-79 ‡ | (still 359 — Monsatan-Checkmate crack lands but unsubmitted; overnight dead-zone, no scoreboard movement) |
+| Sat 08:00 | 99 | 359 | 🥈&nbsp;#2 ‡ | ~-80 ‡ | **CTF reopens** — VPN restored, late-night offline period ends |
+| Sat 09:04 | 100 | 362 | ~#3 ‡ | ~-90 ‡ | Crystal "Basic Electricity" 1/1 — first post-reopen flag |
+| Sat 09:45 | 101 | 363 | ~#3 ‡ | ~-95 ‡ | Monsatan-Chatbot 1/3 (sys-prompt injection) |
+| Sat 10:08 | 102 | 372 | ~#3 ‡ | ~-100 ‡ | Monsatan-Orders 1/1 (Leptos WASM JWT intercept, credit [teammate]) |
+| Sat 10:30 | 103 | 374 | ~#4 ‡ | ~-105 ‡ | Tamper 4/6 (sunnikey + shelf-elevate) |
+| Sat 10:38 | 104 | 381 | ~#4 ‡ | ~-110 ‡ | Monsatan-Checkmate 1/1 (rockyou `<REDACTED:operational-detail>`) |
+| Sat 10:42 | 105 | 382 | ~#4 ‡ | ~-110 ‡ | Crystal Badge 2/5 (post-dock firmware string) |
+| Sat 11:08 | 106 | 384 | ~#5 ‡ | ~-120 ‡ | REM 2/7 (MQTT `get_flag` maintenance CLI) |
+| Sat 11:20 | 107 | 386 | ~#5 ‡ | ~-125 ‡ | Tamper 5/6 (envelope-postman tamper) |
+| Sat 12:53 | 108 | 390 | ~#6 ‡ | ~-145 ‡ | Tamper 6/6 (final envelope tamper) |
+| Sat 14:07 | 109 | 394 | ~#7 ‡ | ~-160 ‡ | Crystal Grid Alignment 1/2 (VQE) |
+| Sat 14:13 | 110 | 398 | ~#7 ‡ | ~-165 ‡ | Monsatan Kiosk 1/1 (Chrome kiosk escape) |
+| Sat 16:02 | 111 | 403 | ~#8 ‡ | ~-180 ‡ | Grid Alignment 2/2 (QAOA) |
+| Sat 17:17 | 112 | 419 | ~#8 ‡ | ~-190 ‡ | Monsatan-Mailserver 1/2 (DB root pwd via sign-all flaw) |
+| Sat 17:28 | 113 | 431 | ~#9 ‡ | ~-195 ‡ | Monsatan-Mailserver 2/2 (WASM+WASI sandbox abuse) |
+| Sun 10:28 | 114 | 436 | ~#11 ‡ | ~-235 ‡ | APT438 4/9 (PS history + Windows search) — Sun morning ramp |
+| Sun 10:41 | 115 | 441 | ~#11 ‡ | ~-235 ‡ | APT438 6/9 (Defender + notifications) |
+| Sun 10:42 | 116 | 446 | ~#11 ‡ | ~-235 ‡ | APT438 5/9 (Registry + Defender logs) |
+| Sun 10:50 | 117 | 451 | ~#11 ‡ | ~-240 ‡ | APT438 7/9 (schtasks + MFT resident-file) |
+| Sun 11:04 | 118 | 456 | ~#12 ‡ | ~-240 ‡ | APT438 8/9 (event logs + URL cache) |
+| Sun 11:12 | 119 | 462 | ~#12 ‡ | ~-240 ‡ | APT438 9/9 (Windows Hello PIN crack) — **final flag captured** |
 | Sun 11:22 | 119* | 467 | ~#12 ‡ | ~-243 ‡ | REM 3/7 (firmware_repo_api_key Bearer captured) |
 | Sun 12:36 | 119* | 470 | ~#12 ‡ | ~-240 ‡ | Monsatan-defacing 6/6 (teammate landed; ours 6 min late) |
 | Sun 13:24 | 119* | 478 | ~#12 ‡ | ~-235 ‡ | REM 4/7 (firmware repository DB access) |
