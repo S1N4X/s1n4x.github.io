@@ -1,16 +1,26 @@
 {{/* Override of themes/terminal/layouts/partials/mobile-menu.html.
-     Same active-section logic as menu.html. */}}
+     Same active-section logic as menu.html (meta-writeup pin + longest
+     URL prefix). */}}
 
 {{ $current := .RelPermalink }}
+{{ $isMetaWriteup := false }}
+{{ with .Params.tags }}
+  {{ if in . "meta-writeup" }}{{ $isMetaWriteup = true }}{{ end }}
+{{ end }}
+
 {{ $bestURL := "" }}
 {{ $bestLen := 0 }}
-{{ range $.Site.Menus.main }}
-  {{ $u := .URL }}
-  {{ if not (hasSuffix $u "/") }}{{ $u = printf "%s/" $u }}{{ end }}
-  {{ if hasPrefix $current $u }}
-    {{ if gt (len $u) $bestLen }}
-      {{ $bestURL = .URL }}
-      {{ $bestLen = len $u }}
+{{ if $isMetaWriteup }}
+  {{ $bestURL = "/tags/meta-writeup" }}
+{{ else }}
+  {{ range $.Site.Menus.main }}
+    {{ $u := .URL }}
+    {{ if not (hasSuffix $u "/") }}{{ $u = printf "%s/" $u }}{{ end }}
+    {{ if hasPrefix $current $u }}
+      {{ if gt (len $u) $bestLen }}
+        {{ $bestURL = .URL }}
+        {{ $bestLen = len $u }}
+      {{ end }}
     {{ end }}
   {{ end }}
 {{ end }}

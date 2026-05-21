@@ -1,18 +1,30 @@
 {{/* Override of themes/terminal/layouts/partials/menu.html.
-     Adds class="active" to the menu item whose URL is the longest prefix
-     match for the current page. Highlight is styled in static/style.css
-     (green background, black text). */}}
+     Marks the current menu item with class="active":
+     - For pages tagged "meta-writeup", pin to the reports menu item
+       (those posts live under /posts/ physically but belong under
+       /tags/meta-writeup/ semantically).
+     - Otherwise: longest-URL-prefix match.
+     Highlight styled in static/style.css (green bg, black text). */}}
 
 {{ $current := .RelPermalink }}
+{{ $isMetaWriteup := false }}
+{{ with .Params.tags }}
+  {{ if in . "meta-writeup" }}{{ $isMetaWriteup = true }}{{ end }}
+{{ end }}
+
 {{ $bestURL := "" }}
 {{ $bestLen := 0 }}
-{{ range $.Site.Menus.main }}
-  {{ $u := .URL }}
-  {{ if not (hasSuffix $u "/") }}{{ $u = printf "%s/" $u }}{{ end }}
-  {{ if hasPrefix $current $u }}
-    {{ if gt (len $u) $bestLen }}
-      {{ $bestURL = .URL }}
-      {{ $bestLen = len $u }}
+{{ if $isMetaWriteup }}
+  {{ $bestURL = "/tags/meta-writeup" }}
+{{ else }}
+  {{ range $.Site.Menus.main }}
+    {{ $u := .URL }}
+    {{ if not (hasSuffix $u "/") }}{{ $u = printf "%s/" $u }}{{ end }}
+    {{ if hasPrefix $current $u }}
+      {{ if gt (len $u) $bestLen }}
+        {{ $bestURL = .URL }}
+        {{ $bestLen = len $u }}
+      {{ end }}
     {{ end }}
   {{ end }}
 {{ end }}
