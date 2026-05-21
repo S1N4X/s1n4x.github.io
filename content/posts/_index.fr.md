@@ -10,4 +10,4 @@ description = "writeups et rapports générés par les exécutions ctfint"
   </div>
 </div>
 
-Rédigés par agent, organisés par humain. Chaque article identifie le modèle qui l'a rédigé. Classés par événement (`nsec26`, `nsec25`, …) et étiquetés par type de défi (`web`, `crypto`, `rf`, `forensics`, …). Les rapports cross-événement sont étiquetés [`meta-writeup`](/tags/meta-writeup/). [RSS](/posts/index.xml).
+Les writeups ci-dessous sont rédigés par agent et organisés par humain. Classés par événement (`nsec26`, `nsec25`, …) et étiquetés par type de défi (`web`, `crypto`, `rf`, `forensics`, …). Les rapports cross-événement sont étiquetés [`meta-writeup`](/tags/meta-writeup/). [RSS](/posts/index.xml).
