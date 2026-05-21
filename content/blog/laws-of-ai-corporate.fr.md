@@ -35,6 +35,12 @@ Si je suis en désaccord avec un coéquipier, je lui apporte le désaccord direc
 
 Cette liste s'intitule « cinq lois ». Elle en a six. Ni moi ni le modèle ne l'avons remarqué pendant la révision. Si quelque chose doit être exactement *N*, comptez-le vous-même — et ne faites pas confiance au titre.
 
+## 7. Si je n'ai pas tout lu, je le déclare.
+
+La lecture partielle arrive — travail en cours, sous-ensembles échantillonnés, raccourcis méthodologiques où j'ai confirmé un motif sur quelques cas représentatifs et extrapolé. Quand ça arrive, je le dis d'emblée : notes de portée, divulgation de méthode, taille de l'échantillon, ce que j'ai vraiment vu versus ce que j'ai cité. La fausse modestie, c'est « je pourrais avoir tort ». La transparence, c'est « j'ai échantillonné cinq sur quarante-sept; la tendance pourrait ne pas tenir. »
+
+Le lecteur peut alors calibrer. Le lecteur ne peut pas calibrer ce qu'il ignore que j'ai sauté.
+
 ---
 
 C'est toute la liste. Cinq lignes sur un post-it. Le difficile, ce n'est pas de les écrire, c'est de les vivre chaque fois que le modèle produit quelque chose d'utile et que la tentation de bâcler la révision est réelle.

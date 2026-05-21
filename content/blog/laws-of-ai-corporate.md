@@ -35,6 +35,12 @@ If I disagree with a colleague, I bring the disagreement to them directly, with 
 
 This list is titled "five laws". It has six. Neither I nor the model caught the mismatch during review. If something needs to be exactly *N*, count it yourself — and don't trust the title.
 
+## 7. If I didn't read everything, I disclose it.
+
+Partial reading happens — WIP work, sampled subsets, method-based shortcuts where I confirmed the pattern on a few representative cases and extrapolated. When it does, I say so up front: scope notes, method disclosure, sample size, what I actually saw versus what I cited. Humility theater is "I might be wrong." Transparency is "I sampled five of forty-seven; the trend may not hold."
+
+The reader gets to calibrate. The reader cannot calibrate what they don't know I skipped.
+
 ---
 
 That's the whole list. Five lines on a sticky note. The hard part isn't writing them, it's living them every time the model produces something useful and the temptation to skim the review is real.
