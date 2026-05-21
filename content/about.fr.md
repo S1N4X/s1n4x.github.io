@@ -4,6 +4,8 @@ description = "Cybersécurité, AI SecOps, purple teaming. Secteur énergétique
 date = 2026-05-21
 +++
 
+<p class="page-aka"><span class="aka-dim">aka</span> sinax</p>
+
 Praticien en cybersécurité, à l'intersection de l'**AI SecOps** et du **purple teaming** dans le **secteur énergétique**. Joignable sur [GitHub](https://github.com/S1N4X) — pseudonyme : `@S1N4X`.
 
 **Expert en sécurité réseau** — travail approfondi sur les solutions de périmètre : pare-feux, proxies, infonuagique, WAF, et passerelles.
