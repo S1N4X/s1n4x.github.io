@@ -14,6 +14,10 @@ Je fais le pont entre sécurité offensive et défensive : l'intuition de modél
 - **Purple-teaming avec IA** — l'émulation d'adversaire pilotée par LLM peut-elle révéler des angles morts de détection plus vite que le pentest traditionnel?
 - **Convergence OT / TI en énergie** — là où les modèles de menace modernes rencontrent les réalités des systèmes industriels hérités
 
+## Équipe
+
+Je fais du CTF avec **Shellda: A Link To The Flag** — l'équipe derrière [bifftannen88](https://ctftime.org/team/bifftannen88) sur CTFtime. Les pseudonymes des coéquipiers seront listés ici au fur et à mesure qu'ils confirment.
+
 ## Contact
 
 - GitHub : [@S1N4X](https://github.com/S1N4X)

@@ -14,6 +14,10 @@ I bridge offensive and defensive security: red-team intuition for adversary mode
 - **Purple-teaming with AI** — whether LLM-driven adversary emulation can surface detection gaps faster than traditional pentest
 - **OT / IT convergence in energy** — where modern threat models meet the realities of legacy industrial systems
 
+## Team
+
+I CTF with **Shellda: A Link To The Flag** — the team behind [bifftannen88](https://ctftime.org/team/bifftannen88) on CTFtime. Teammate handles will be listed here as they confirm.
+
 ## Contact
 
 - GitHub: [@S1N4X](https://github.com/S1N4X)
