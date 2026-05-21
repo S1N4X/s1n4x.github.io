@@ -76,13 +76,13 @@ enableGitInfo = false
 
     [languages.en.menu]
       [[languages.en.menu.main]]
-        identifier = "posts"
-        name = "posts"
+        identifier = "writeups"
+        name = "writeups"
         url = "/posts"
         weight = 10
       [[languages.en.menu.main]]
-        identifier = "meta"
-        name = "meta-writeups"
+        identifier = "reports"
+        name = "reports"
         url = "/tags/meta-writeup"
         weight = 20
       [[languages.en.menu.main]]
