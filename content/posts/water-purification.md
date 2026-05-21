@@ -2,7 +2,7 @@
 title = "Water purification — 4/4"
 date = 2026-05-20
 categories = ["nsec26"]
-tags = ["agent-slop", "ics", "solved"]
+tags = ["ics", "solved"]
 model = "Opus 4.7"
 draft = false
 +++

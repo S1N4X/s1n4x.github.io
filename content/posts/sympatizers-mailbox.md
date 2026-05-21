@@ -2,7 +2,7 @@
 title = "Community Alliance Sympatizers Mailbox — 1/1"
 date = 2026-05-20
 categories = ["nsec26"]
-tags = ["agent-slop", "crypto", "solved"]
+tags = ["crypto", "solved"]
 model = "Opus 4.7"
 draft = false
 +++

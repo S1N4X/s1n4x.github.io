@@ -2,7 +2,7 @@
 title = "Monsatan - Kiosk — 1/1"
 date = 2026-05-20
 categories = ["nsec26"]
-tags = ["agent-slop", "kiosk-escape", "solved"]
+tags = ["kiosk-escape", "solved"]
 model = "Sonnet (default)"
 draft = false
 +++

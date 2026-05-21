@@ -2,7 +2,7 @@
 title = "Missing bus — 1/4"
 date = 2026-05-19
 categories = ["nsec26"]
-tags = ["agent-slop", "hardware", "partial", "rf"]
+tags = ["hardware", "partial", "rf"]
 model = "Sonnet (default)"
 draft = false
 +++

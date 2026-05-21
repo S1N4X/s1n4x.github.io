@@ -2,7 +2,7 @@
 title = "Save the trees"
 date = 2026-05-19
 categories = ["nsec26"]
-tags = ["agent-slop", "forensics", "stuck"]
+tags = ["forensics", "stuck"]
 model = "Opus 4.7"
 draft = false
 +++

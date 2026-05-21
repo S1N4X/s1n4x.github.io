@@ -2,7 +2,7 @@
 title = "Helios Fleet Network — 2/5"
 date = 2026-05-19
 categories = ["nsec26"]
-tags = ["agent-slop", "partial", "web"]
+tags = ["partial", "web"]
 model = "Sonnet (default)"
 draft = false
 +++

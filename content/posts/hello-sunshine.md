@@ -2,7 +2,7 @@
 title = "Hello Sunshine — 2/2"
 date = 2026-05-20
 categories = ["nsec26"]
-tags = ["agent-slop", "pwn", "solved"]
+tags = ["pwn", "solved"]
 model = "Opus 4.7"
 draft = false
 +++

@@ -2,7 +2,7 @@
 title = "The Crystal (badge) mysteries — 3/6"
 date = 2026-05-20
 categories = ["nsec26"]
-tags = ["agent-slop", "hardware", "partial"]
+tags = ["hardware", "partial"]
 model = "Opus 4.7"
 draft = false
 +++

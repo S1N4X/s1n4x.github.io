@@ -2,7 +2,7 @@
 title = "Monsatan - Chatbot — 3/3"
 date = 2026-05-20
 categories = ["nsec26"]
-tags = ["agent-slop", "ai", "solved", "web"]
+tags = ["ai", "solved", "web"]
 model = "Sonnet (default)"
 draft = false
 +++

@@ -2,7 +2,7 @@
 title = "Radio beacon"
 date = 2026-05-19
 categories = ["nsec26"]
-tags = ["agent-slop", "rf", "stuck"]
+tags = ["rf", "stuck"]
 model = "Opus 4.7"
 draft = false
 +++

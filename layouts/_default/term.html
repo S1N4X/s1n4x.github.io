@@ -1,0 +1,59 @@
+{{ define "main" }}
+  {{ with .Content }}
+    <div class="index-content">
+      {{ . }}
+    </div>
+  {{ end }}
+
+  {{ $paginator := .Paginate .Pages }}
+
+  <div class="posts-detailed">
+    <table class="posts-table">
+      <thead>
+        <tr>
+          <th class="col-date">Date</th>
+          <th class="col-title">Title</th>
+          <th class="col-event">Event</th>
+          <th class="col-status">Status</th>
+          <th class="col-tags">Tags</th>
+        </tr>
+      </thead>
+      <tbody>
+        {{ range $paginator.Pages }}
+          {{ $event := index (.Params.categories | default (slice "—")) 0 }}
+          {{ $status := "" }}
+          {{ range .Params.tags }}
+            {{ if or (eq . "solved") (eq . "partial") (eq . "stuck") (eq . "untouched") (eq . "honeypot") (eq . "non-challenge") }}
+              {{ $status = . }}
+            {{ end }}
+            {{ if eq . "meta-writeup" }}
+              {{ $status = "meta" }}
+            {{ end }}
+          {{ end }}
+          <tr class="post-row">
+            <td class="col-date"><time>{{ .Date.Format "2006-01-02" }}</time></td>
+            <td class="col-title">
+              <a href="{{ .Permalink }}">{{ .Title | markdownify }}</a>
+              {{ with .Description }}
+                <div class="post-desc">{{ . | markdownify }}</div>
+              {{ end }}
+            </td>
+            <td class="col-event"><code>{{ $event }}</code></td>
+            <td class="col-status">
+              {{ if $status }}
+                <span class="status status-{{ $status }}">{{ $status }}</span>
+              {{ end }}
+            </td>
+            <td class="col-tags">
+              {{ range .Params.tags }}
+                <a class="tag" href="{{ (urlize (printf "tags/%s/" .)) | absLangURL }}">#{{ . }}</a>
+              {{ end }}
+            </td>
+          </tr>
+        {{ end }}
+      </tbody>
+    </table>
+
+    {{ partial "pagination.html" . }}
+  </div>
+{{ end }}

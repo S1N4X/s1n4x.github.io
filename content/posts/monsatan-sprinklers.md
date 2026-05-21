@@ -2,7 +2,7 @@
 title = "Monsatan - Sprinklers — 2/2"
 date = 2026-05-20
 categories = ["nsec26"]
-tags = ["agent-slop", "ics", "solved"]
+tags = ["ics", "solved"]
 model = "Sonnet (default)"
 draft = false
 +++

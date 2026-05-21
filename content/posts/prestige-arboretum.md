@@ -2,7 +2,7 @@
 title = "Prestige Arboretum"
 date = 2026-05-19
 categories = ["nsec26"]
-tags = ["agent-slop", "crypto", "stuck"]
+tags = ["crypto", "stuck"]
 model = "Sonnet (default)"
 draft = false
 +++

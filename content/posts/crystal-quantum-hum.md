@@ -2,7 +2,7 @@
 title = "The Crystal and the Grid - Part I: The Quantum Hum — 2/2"
 date = 2026-05-20
 categories = ["nsec26"]
-tags = ["agent-slop", "hardware", "quantum", "solved"]
+tags = ["hardware", "quantum", "solved"]
 model = "Opus 4.7"
 draft = false
 +++

@@ -2,7 +2,7 @@
 title = "Solar Grid Monitoring"
 date = 2026-05-19
 categories = ["nsec26"]
-tags = ["agent-slop", "stuck", "web"]
+tags = ["stuck", "web"]
 model = "Sonnet (default)"
 draft = false
 +++

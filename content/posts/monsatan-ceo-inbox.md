@@ -2,7 +2,7 @@
 title = "[Monsatan] The CEO's inbox — 2/2"
 date = 2026-05-20
 categories = ["nsec26"]
-tags = ["agent-slop", "solved", "wasm", "web"]
+tags = ["solved", "wasm", "web"]
 model = "Sonnet (default)"
 draft = false
 +++

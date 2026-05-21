@@ -2,7 +2,7 @@
 title = "Trading cards! — 4/4"
 date = 2026-05-20
 categories = ["nsec26"]
-tags = ["agent-slop", "misc", "solved"]
+tags = ["misc", "solved"]
 model = "Opus 4.7"
 draft = false
 +++

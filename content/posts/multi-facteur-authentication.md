@@ -2,7 +2,7 @@
 title = "Multi Facteur Authentication — 6/6"
 date = 2026-05-20
 categories = ["nsec26"]
-tags = ["agent-slop", "misc", "solved"]
+tags = ["misc", "solved"]
 model = "Opus 4.7"
 draft = false
 +++

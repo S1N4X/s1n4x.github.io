@@ -2,7 +2,7 @@
 title = "Monsatan Impact study — 2/5"
 date = 2026-05-20
 categories = ["nsec26"]
-tags = ["agent-slop", "stuck", "web"]
+tags = ["stuck", "web"]
 model = "Sonnet (default)"
 draft = false
 +++

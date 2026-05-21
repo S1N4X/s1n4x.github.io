@@ -2,7 +2,7 @@
 title = "[Monsatan] Pesticide Supply Chain — 1/1"
 date = 2026-05-20
 categories = ["nsec26"]
-tags = ["agent-slop", "solved", "wasm", "web"]
+tags = ["solved", "wasm", "web"]
 model = "Opus 4.7"
 draft = false
 +++

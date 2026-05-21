@@ -2,7 +2,7 @@
 title = "Fossilco — 6/8"
 date = 2026-05-19
 categories = ["nsec26"]
-tags = ["active-directory", "agent-slop", "forensics", "partial", "web"]
+tags = ["active-directory", "forensics", "partial", "web"]
 model = "Sonnet (default)"
 draft = false
 +++

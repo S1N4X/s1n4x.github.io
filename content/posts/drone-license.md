@@ -2,7 +2,7 @@
 title = "Drone license — 2/2"
 date = 2026-05-20
 categories = ["nsec26"]
-tags = ["agent-slop", "solved", "supply-chain"]
+tags = ["solved", "supply-chain"]
 model = "Opus 4.7"
 draft = false
 +++

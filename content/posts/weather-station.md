@@ -2,7 +2,7 @@
 title = "Weather station — 1/4"
 date = 2026-05-20
 categories = ["nsec26"]
-tags = ["agent-slop", "stuck", "web"]
+tags = ["stuck", "web"]
 model = "Sonnet (default)"
 draft = false
 +++

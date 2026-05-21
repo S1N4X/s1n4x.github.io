@@ -2,7 +2,7 @@
 title = "I love Faia (the prompt-injection honeypot)"
 date = 2026-05-20
 categories = ["nsec26"]
-tags = ["agent-slop", "anti-trap", "honeypot"]
+tags = ["anti-trap", "honeypot"]
 model = "Sonnet (default)"
 draft = false
 +++
