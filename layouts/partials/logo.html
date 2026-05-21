@@ -1,3 +1,12 @@
-<a href="{{ if $.Site.Params.Logo.LogoHomeLink }}{{ $.Site.Params.Logo.LogoHomeLink }}{{else}}{{ $.Site.BaseURL }}{{ end }}">
-  <div class="logo">sinax@ctfint</div>
+{{/* Dynamic site logo: sinax@<context>.
+   ctfint by default; switches to lab when browsing the /blog/ section.
+*/ -}}
+{{ $logoText := "sinax@ctfint" -}}
+{{ with .Page -}}
+  {{ if or (eq .Section "blog") (hasPrefix .RelPermalink "/blog") -}}
+    {{ $logoText = "sinax@lab" -}}
+  {{ end -}}
+{{ end -}}
+<a href="{{ if $.Site.Params.Logo.LogoHomeLink }}{{ $.Site.Params.Logo.LogoHomeLink }}{{ else }}{{ $.Site.BaseURL }}{{ end }}">
+  <div class="logo">{{ $logoText }}</div>
 </a>
