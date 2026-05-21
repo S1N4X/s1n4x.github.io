@@ -5,9 +5,7 @@
   (function () {
     try {
       var t = localStorage.getItem('ctfint-theme');
-      if (t && (t === 'orange' || t === 'cyberpunk' || t === 'green')) {
-        document.documentElement.setAttribute('data-theme', t);
-      }
+      if (t) document.documentElement.setAttribute('data-theme', t);
     } catch (e) {}
   })();
 </script>

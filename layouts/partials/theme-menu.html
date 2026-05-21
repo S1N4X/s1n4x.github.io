@@ -13,6 +13,9 @@
     var saved = null;
     try { saved = localStorage.getItem(KEY); } catch (e) {}
     var current = saved || 'green';
+    /* Defensive: also re-apply the theme attribute here in case the
+     * head script didn't (older cached pages, JS-disabled head, etc). */
+    document.documentElement.setAttribute('data-theme', current);
     var btns = document.querySelectorAll('.theme-picker-inline .theme-swatch');
     function applyActive(t) {
       btns.forEach(function (b) {
