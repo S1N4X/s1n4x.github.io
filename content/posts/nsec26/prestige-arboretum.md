@@ -18,7 +18,7 @@ Status: **STUCK** — 0/unknown sub-flags captured
 
 ## STUCK Rationale
 
-- | ~15:00 | Bast Prestige Arboretum stuck question | Replied with 3-strategy STUCK summary (A bit-flip math broken, B same, C ECB-splice requires absent plaintext) | Delivered |
+- | ~15:00 | [teammate] Prestige Arboretum stuck question | Replied with 3-strategy STUCK summary (A bit-flip math broken, B same, C ECB-splice requires absent plaintext) | Delivered |
 
 ## Artifacts
 

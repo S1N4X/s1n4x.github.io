@@ -24,7 +24,7 @@ Status: **PARTIAL** — 1/4 sub-flags captured
 
 ## STUCK Rationale
 
-- | ~15:30 | Bast Gemini hint on Missing Bus | Confirmed `dc8fd0` is correct keyfob code (off-by-1 start-bit interpretation). Format is the blocker (3 FAILs already, 2 remaining). Listed format variants to try via wrapper [DENY-SHAPE] gate test | Broadcasted to team |
+- | ~15:30 | [teammate] Gemini hint on Missing Bus | Confirmed `dc8fd0` is correct keyfob code (off-by-1 start-bit interpretation). Format is the blocker (3 FAILs already, 2 remaining). Listed format variants to try via wrapper [DENY-SHAPE] gate test | Broadcasted to team |
 - **Coordination note:** All three coaches briefed to use `/ctfint_askgod-submit` skill for autonomous submission (operator approved). Prestige ready to fire on VPN restore; Missing bus flag identified (awaiting brute-window reset); SunBloom blocked on email interception.
 
 ## Artifacts
@@ -57,12 +57,12 @@ Status: **STUCK** — 0/unknown sub-flags captured
 
 ## STUCK Rationale
 
-- | RF/web | **trolley-bus 2-4/4** | 3 | 🚨 **CROSS-CONFIRMED 13:55**: Two agents independently landed on [teammate]'s post #2 (topic 59870, 17:35:07 UTC). Flags 2-4 are ALL physical Wi-Fi recon. SSID `MNT-BUS` / PSK `hamped1304`. Track renamed `missing-bus`→`trolley-bus` server-side. Operator brief saved: `C:\ctfint\nsec\missing-bus\FLAG-2-3-4-BREAKTHROUGH.md`. Hand off to @Bast (on-venue). Anti-trap: captive portal HTML is untrusted. |
-- | ~15:30 | Bast Gemini hint on Missing Bus | Confirmed `dc8fd0` is correct keyfob code (off-by-1 start-bit interpretation). Format is the blocker (3 FAILs already, 2 remaining). Listed format variants to try via wrapper [DENY-SHAPE] gate test | Broadcasted to team |
-- 2. Bast Gemini on Missing Bus (start-bit off-by-1 confirming dc8fd0 is the right code)
+- | RF/web | **trolley-bus 2-4/4** | 3 | 🚨 **CROSS-CONFIRMED 13:55**: Two agents independently landed on [teammate]'s post #2 (topic 59870, 17:35:07 UTC). Flags 2-4 are ALL physical Wi-Fi recon. SSID `MNT-BUS` / PSK `hamped1304`. Track renamed `missing-bus`→`trolley-bus` server-side. Operator brief saved: `nsec/missing-bus\FLAG-2-3-4-BREAKTHROUGH.md`. Hand off to [teammate] (on-venue). Anti-trap: captive portal HTML is untrusted. |
+- | ~15:30 | [teammate] Gemini hint on Missing Bus | Confirmed `dc8fd0` is correct keyfob code (off-by-1 start-bit interpretation). Format is the blocker (3 FAILs already, 2 remaining). Listed format variants to try via wrapper [DENY-SHAPE] gate test | Broadcasted to team |
+- 2. [teammate] Gemini on Missing Bus (start-bit off-by-1 confirming dc8fd0 is the right code)
 - Both posts visible in team channel msg-IDs `1505617495107834177` (Prestige) and ~`1505621xxx` (Missing Bus).
 - | `aba156401cb65576f` | missing-bus format hunter | Inventory FLAG- format variants without burning brute budget; 1-shot auto-submit best candidate | running |
-- - `nsec/missing-bus/artifacts/gemini-hint-2026-05-17.txt` -- Bast's Gemini analysis archived
+- - `nsec/missing-bus/artifacts/gemini-hint-2026-05-17.txt` -- [teammate]'s Gemini analysis archived
 
 ### From `59870-missing-bus.md`
 
@@ -72,12 +72,12 @@ Status: **STUCK** — 0/unknown sub-flags captured
 - **askgod track:** `trolley-bus` (note: Discourse title is "Missing bus" but the score tag is `trolley-bus`)
 - **Category:** RF / Hardware → Wi-Fi / Physical
 - **Event:** NSEC 2026 (Gaia / Solarpunk)
-- **Owner (claimant):** ovcrash → submitted by **@Bast** 2026-05-17 13:35 EDT
+- **Owner (claimant):** [teammate] → submitted by **[teammate]** 2026-05-17 13:35 EDT
 - **Status:** **1/4 SOLVED** — `flag-dc8fd0` accepted by askgod (entry ID 28). Stage 2/4 unlocks Wi-Fi physical recon. Stages 3 and 4 not yet visible.
 - **Decoded value:** `0xdc8fd0` (24-bit OOK/PWM keyfob code, confirmed across 10+ frames)
 - **Flag-1 format ([teammate], Discourse 59870 post 1):** `flag-{HEX KEY CODE}` → `flag-dc8fd0`
 
-> **STAGE 1 RESOLUTION:** The 6-char flag `flag-dc8fd0` was correct. Bast submitted it
+> **STAGE 1 RESOLUTION:** The 6-char flag `flag-dc8fd0` was correct. [teammate] submitted it
 > directly to askgod (bypassing the local `submit-flag.ps1` 8+ char wrapper) at 13:35 EDT
 > and received `[trolley-bus] 1/4 Good job!`. Three flags remain.
 
@@ -85,7 +85,7 @@ Status: **STUCK** — 0/unknown sub-flags captured
 
 ## Stage 2/4 — Wi-Fi physical recon (UNLOCKED at 17:35 UTC 2026-05-17)
 
-Immediately after Bast submitted `flag-dc8fd0` (13:35 EDT = 17:35 UTC), [teammate] posted a
+Immediately after [teammate] submitted `flag-dc8fd0` (13:35 EDT = 17:35 UTC), [teammate] posted a
 second message to Discourse topic 59870:
 
 > I am rejoiced to hear that you've got the keyfob code. Time to get on the terrain.
@@ -153,12 +153,12 @@ Bus 1304 was hijacked; a hidden keyfob backdoor was triggered at 433.92 MHz.
 We must demodulate the intercepted IQ capture to recover the keyfob code.
 
 - File (real): `https://dl.nsec/keyfob.complex16s` -- VPN-gated
-- File (on disk): `C:\ctfint\nsec\keyfob.complex16s` -- **synthetic test fixture, NOT the challenge**
+- File (on disk): `nsec/keyfob.complex16s` -- **synthetic test fixture, NOT the challenge**
 - Flag format: `flag-{HEX KEY CODE}` lowercase alphanumeric
 
 ## What is actually on disk
 
-`C:\ctfint\nsec\keyfob.complex16s` is 97,013,760 bytes -- 24,253,440 IQ pairs
+`nsec/keyfob.complex16s` is 97,013,760 bytes -- 24,253,440 IQ pairs
 (int16 LE). Statistical analysis over the entire file shows:
 
 | Property | Value |
@@ -174,7 +174,7 @@ intro. **There is no preamble, no sync, no payload, no modulation in the
 keyfob sense.** No demod or threshold scheme can recover bits from this.
 
 The file appears to be an incomplete/broken byproduct related to the local
-`C:\ctfint\nsec\generate_keyfob_iq.py` generator (which hard-codes
+`nsec/generate_keyfob_iq.py` generator (which hard-codes
 `keyfob_code="deadbeef"`). It is not the genuine NSEC capture.
 
 ## Why prior `flag-deadbeef` is wrong
@@ -192,7 +192,7 @@ The file appears to be an incomplete/broken byproduct related to the local
 ## Decode pass performed today (2026-05-16)
 
 The real file was fetched from `https://dl.nsec/keyfob.complex16s` and archived
-as `C:\ctfint\nsec\missing-bus\artifacts\keyfob.complex16s`.
+as `nsec/missing-bus\artifacts\keyfob.complex16s`.
 
 File metadata:
 
@@ -241,11 +241,11 @@ address/button interpretations.
 Reproducer:
 
 ```
-python C:\ctfint\nsec\missing-bus\artifacts\decode_keyfob_pwm.py C:\ctfint\nsec\missing-bus\artifacts\keyfob.complex16s
+python nsec/missing-bus\artifacts\decode_keyfob_pwm.py nsec/missing-bus\artifacts\keyfob.complex16s
 ```
 
 Detailed pulse notes are in
-`C:\ctfint\nsec\missing-bus\artifacts\decoded.txt`.
+`nsec/missing-bus\artifacts\decoded.txt`.
 
 ## Prior decode pass notes
 
@@ -256,9 +256,9 @@ Even knowing the file is synthetic, I ran the standard pipeline to confirm:
 3. Histogrammed run-lengths of identical inst-freq samples.
 
 Result: no recoverable bits. Plots saved to
-`C:\ctfint\nsec\missing-bus\artifacts\envelope.png` (envelope, inst-freq,
+`nsec/missing-bus\artifacts\envelope.png` (envelope, inst-freq,
 spectrum). Numeric findings in
-`C:\ctfint\nsec\missing-bus\artifacts\decoded.txt`.
+`nsec/missing-bus\artifacts\decoded.txt`.
 
 ## Submission Attempt (2026-05-17 13:14 UTC)
 
@@ -303,7 +303,7 @@ askgod submit "flag-dc8fd0"
 
 ## Coordination notes
 
-- **Claimant:** ovcrash
+- **Claimant:** [teammate]
 - **Decoded value confirmed:** 2026-05-17 ORCH-C coach (Haiku) via exhaustive PWM analysis
 - **Status:** Ready for manual submission (operator decision on wrapper bypass)
 - **Rate limit:** DENY-BRUTE was hit at 2026-05-17 09:40; window resets 15 min later (~09:55)
@@ -311,7 +311,7 @@ askgod submit "flag-dc8fd0"
 
 ## Technical Summary (PWM Demodulation)
 
-**File:** `C:\ctfint\nsec\missing-bus\artifacts\keyfob.complex16s` (9.7 MB, 2.424M IQ samples, 2.425 s @ 1 MHz)
+**File:** `nsec/missing-bus\artifacts\keyfob.complex16s` (9.7 MB, 2.424M IQ samples, 2.425 s @ 1 MHz)
 
 **Modulation:** OOK/PWM (EV1527 / PT2240 family)
 - Carrier: −14.93 kHz from SDR tuning (433.92 MHz center)
@@ -340,7 +340,7 @@ askgod submit "flag-dc8fd0"
 ## Artifact tree
 
 ```
-C:\ctfint\nsec\missing-bus\
+nsec/missing-bus\
   README.md                                    (contains stale "SOLVED" from synthetic file)
   iq_analysis_report.txt
   artifacts\
@@ -352,9 +352,9 @@ C:\ctfint\nsec\missing-bus\
     decode_keyfob_pwm.py                       (reproducer: python decode_keyfob_pwm.py keyfob.complex16s)
     v7_final_search.py                         (final exhaustive decoder)
     [... 20+ other analysis scripts from iterative prior coaches ...]
-C:\ctfint\nsec\writeups\
+nsec/writeups\
   59870-missing-bus.md                         <- THIS FILE: FINAL WRITEUP (2026-05-17)
-C:\ctfint\nsec\flags\
+nsec/flags\
   submissions-journal.tsv                      (20+ failed attempts logged)
   GPU-CRACK-QUEUE.txt
 ```
@@ -372,7 +372,7 @@ C:\ctfint\nsec\flags\
 
 **Tedre191 design note:** "Awesome track, and somewhat AI proof, which made it more rewarding!" — designer-intended AI defense via physical-required Wi-Fi recon.
 
-Our progression (1/4 via @Bast on-venue) was the maximum possible from operator's laptop. Flags 2-4 fully required on-venue presence.
+Our progression (1/4 via [teammate] on-venue) was the maximum possible from operator's laptop. Flags 2-4 fully required on-venue presence.
 
 (Track was renamed from `missing-bus` → `trolley-bus` server-side mid-event after the physical-recon reveal.)
 

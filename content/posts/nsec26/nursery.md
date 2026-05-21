@@ -47,7 +47,7 @@ The challenge ships a single static HTML file (`nursery.html`, 920,922 bytes, 11
 
 ## Recon
 
-Triage (`C:\ctfint\nsec\nursery\artifacts\TRIAGE_REPORT.md`):
+Triage (`nsec/nursery\artifacts\TRIAGE_REPORT.md`):
 
 - One HTML file, 32 base64-encoded data-URI SVGs of L-system-style plant fractals
 - Each SVG has a numeric label; IDs are non-sequential and clustered in the 1000-1500 range
@@ -80,13 +80,13 @@ No honeypot strings observed in nursery artifacts. The "samples" wording in the 
 
 ## Artifacts
 
-- `C:\ctfint\nsec\nursery\nursery.html` — the challenge file (32 embedded SVG plant fractals)
-- `C:\ctfint\nsec\nursery\artifacts\TRIAGE_REPORT.md` — initial triage notes
-- `C:\ctfint\nsec\nursery\artifacts\svgs\` — extracted SVG samples (per-file)
-- `C:\ctfint\nsec\nursery\artifacts\analyze.py`, `analyze2.py`, `extract.py` — extraction / counting scripts
-- `C:\ctfint\nsec\nursery\artifacts\fetch-html.ps1`, `fetch-nursery.ps1` — fetch helpers
-- `C:\ctfint\nsec\nursery\artifacts\grid.html`, `grid_full.html`, `grid.png` — visual grid layouts
-- `C:\ctfint\nsec\nursery\artifacts\topic.json` — Discourse topic scrape
+- `nsec/nursery\nursery.html` — the challenge file (32 embedded SVG plant fractals)
+- `nsec/nursery\artifacts\TRIAGE_REPORT.md` — initial triage notes
+- `nsec/nursery\artifacts\svgs\` — extracted SVG samples (per-file)
+- `nsec/nursery\artifacts\analyze.py`, `analyze2.py`, `extract.py` — extraction / counting scripts
+- `nsec/nursery\artifacts\fetch-html.ps1`, `fetch-nursery.ps1` — fetch helpers
+- `nsec/nursery\artifacts\grid.html`, `grid_full.html`, `grid.png` — visual grid layouts
+- `nsec/nursery\artifacts\topic.json` — Discourse topic scrape
 
 
 ---

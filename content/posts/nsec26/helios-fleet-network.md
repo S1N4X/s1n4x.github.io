@@ -129,7 +129,7 @@ with exfil to `[9000:6666:6666:6666:216:3eff:feb1:8d80]:8889`.
 
 - - [CODEX-research/next-targets] Refreshed `nsec/.askgod-tracks.json` at `2026-05-16T17:35:44Z` and queued replacements for the active bench: Helios Fleet Network, Fossilco, Prestige Arboretum, Hackademy chal5, and Announcement Board. Excluded completed / dead-end lanes per current report notes (`weather-station`, `save-the-trees`, `monsatan-defacing`, `solar-grid`, `teamworking`, `monsatan-impact`). Queue artifact: `nsec/flags/next-targets-2026-05-16.md`.
 - - [CODEX-inventory] 2026-05-16 14:32 EDT: rebuilt askgod-first challenge inventory after repeated duplicate work. Fresh cache files: `nsec/.askgod-history.txt`, `nsec/.askgod-tracks.json`, `nsec/.challenge-inventory.json`, and `nsec/ASKGOD-INVENTORY.md`. Current open canonical askgod tracks are: `announcement-board` 3/4, `apt438` 3/9, `badge-firmware` 2/5, `fossilco` 6/8, `grid-alignment` 1/2, `helios-fleet-network` 2/5, `monsatan-defacing` 5/6, `monsatan-impact-study` 2/5, `renewable-energy-mobility` 2/7, `weather-station` 1/4. Completed aliases now explicitly map to askgod before work/submission: `monsatan-kiosk` 1/1, `lowcode`/Water purification 4/4, `tamper`/Seed Vault 6/6, `open-sunshine.mcp.ctf`/Hello Sunshine 2/2, `multi-facteur-authentication` 6/6, `teamworking` 1/1, `gh-agent`/Drone license 2/2, plus other complete tracks in `ASKGOD-INVENTORY.md`. `submit-flag.ps1` now refreshes askgod before submit and denies complete aliases before making the MCP call; `find-flag-gaps.ps1` suppresses candidates that live only under complete askgod tracks. One guard-test before the `lowcode` parser fix hit askgod with `FLAG-AAAAAAAAAAAAAAAA` under `water-purification` and got FAIL; subsequent guard tests denied locally as intended.
-- - [CODEX-workflow-fix] 2026-05-16 14:45 EDT: fixed both Codex and Claude Code CTFINT skills so future orchestrators/coaches must refresh askgod, rank by CFSS, skip completed aliases, and skip physical/device tracks unless explicitly requested. Patched skill mirrors: `C:\Users\chemi\.codex\skills\ctfint_workflow`, `ctfint_coach-spawn`, `ctfint_askgod-submit` and `C:\ctfint\.claude\skills\ctfint_workflow`, `ctfint_coach-spawn`, `ctfint_askgod-submit`. Also updated `nsec/team-status/challenge-inventory.py` to emit `open_priorities_nonphysical` in `nsec/.challenge-inventory.json` and a "Low-Hanging Open Tracks (non-physical)" section in `nsec/ASKGOD-INVENTORY.md`. Current CFSS queue: `renewable-energy-mobility` 2/7, `weather-station` 1/4, `helios-fleet-network` 2/5, `monsatan-impact-study` 2/5, `monsatan-defacing` 5/6, then `apt438`, `fossilco`, `announcement-board`. Physical excluded by default: `badge-firmware`, `crystal`, `grid-alignment`, `monsatan-kiosk`, `plant-watering`, `radio-beacon`, `infinite-energy`.
+- - [CODEX-workflow-fix] 2026-05-16 14:45 EDT: fixed both Codex and Claude Code CTFINT skills so future orchestrators/coaches must refresh askgod, rank by CFSS, skip completed aliases, and skip physical/device tracks unless explicitly requested. Patched skill mirrors: `<operator-codex-skills>/ctfint_workflow`, `ctfint_coach-spawn`, `ctfint_askgod-submit` and `<repo>/.claude/skills/ctfint_workflow`, `ctfint_coach-spawn`, `ctfint_askgod-submit`. Also updated `nsec/team-status/challenge-inventory.py` to emit `open_priorities_nonphysical` in `nsec/.challenge-inventory.json` and a "Low-Hanging Open Tracks (non-physical)" section in `nsec/ASKGOD-INVENTORY.md`. Current CFSS queue: `renewable-energy-mobility` 2/7, `weather-station` 1/4, `helios-fleet-network` 2/5, `monsatan-impact-study` 2/5, `monsatan-defacing` 5/6, then `apt438`, `fossilco`, `announcement-board`. Physical excluded by default: `badge-firmware`, `crystal`, `grid-alignment`, `monsatan-kiosk`, `plant-watering`, `radio-beacon`, `infinite-energy`.
 - - [CODEX-active-wave] 2026-05-16 14:47 EDT: refreshed askgod/inventory again before assigning work. Active non-physical wave: `renewable-energy-mobility` 2/7, `helios-fleet-network` 2/5, `monsatan-impact-study` 2/5. `weather-station` remains open 1/4 by askgod but is skipped for this wave because the known local easy candidate is askgod DUP and prior notes show no new fast path. All coaches must submit only through `nsec/submit-flag.ps1 -Track <slug>` and must stop on `DENY-*`.
 - - [CODEX-coach-wave] 2026-05-17: operator clarified CEO Inbox is teammate-owned/done; Opus owns Sunbloom Library, Prestige, and Missing Bus. Codex spawning bounded coaches only on uncertain non-Opus lanes after askgod refresh: APT438 `3/9`, Helios Fleet Network `2/5`, Fossilco `6/8`. Excluding CEO Inbox, Sunbloom, Prestige, Missing Bus from this wave to avoid duplication.
 - - [CODEX -> OPUS / TEAM] 2026-05-17 11:55 EDT: **Full track status refresh.** Fresh inventory cache generated at `2026-05-17T15:52:07Z` shows 115 submitted rows. Current open canonical askgod tracks: `renewable-energy-mobility` 3/7, `weather-station` 1/4, `helios-fleet-network` 2/5, `monsatan-impact-study` 2/5, `monsatan-defacing` 5/6, `fossilco` 6/8, `announcement-board` 3/4, and physical/device `badge-firmware` 2/5 plus `crystal` 1/1 under the Crystal topic. APT438 is complete 9/9 and documented; do not allocate more time. CEO Inbox is teammate-owned/done; do not duplicate. Opus/team lanes remain SunBloom, Prestige Arboretum, and Missing Bus.
@@ -198,7 +198,7 @@ FLAG-a3f1d2e4b5c6789012345678abcdef01
 
 ## New Attack Plan (Flags 3-5) — added 2026-05-16
 
-Full plan: `C:\ctfint\nsec\helios-fleet\artifacts\new-attack-PLAN.md`
+Full plan: `nsec/helios-fleet\artifacts\new-attack-PLAN.md`
 
 ### Key missed angle: 4-digit OTP brute via GraphQL aliased batching
 
@@ -374,10 +374,10 @@ Every bonus path (`operatorPanel{flag}`, SSRF via admin bot, `incidentReports`) 
 
 ## Artifacts
 
-- `C:\ctfint\nsec\helios-fleet\app.js` - client JS (full GraphQL ops)
-- `C:\ctfint\nsec\helios-fleet\page-*.html` - all page recon
-- `C:\ctfint\nsec\helios-fleet\req.json` - planted XSE createVehicle request
-- `C:\ctfint\nsec\helios-fleet\cookies.txt` - guest JWT (id=30, chemix@x.ctf)
+- `nsec/helios-fleet\app.js` - client JS (full GraphQL ops)
+- `nsec/helios-fleet\page-*.html` - all page recon
+- `nsec/helios-fleet\req.json` - planted XSE createVehicle request
+- `nsec/helios-fleet\cookies.txt` - guest JWT (id=30, chemix@x.ctf)
 - `shell.ctf:/tmp/hflog/log.txt` - SSRF/XSS listener log (empty)
 - `shell.ctf:/tmp/jwtbrute.py` - HS256 brute-force script
 

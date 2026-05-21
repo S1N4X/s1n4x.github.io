@@ -84,7 +84,7 @@ Status: **SOLVED** — 6/6 sub-flags captured
 
 ## Recommendation for the human / next agent
 
-- **4/6 and 6/6 cannot be progressed without an on-site teammate.** Ping `bastienh` / `gzuxix` (they have been pulling physical artefacts) and ask them to:
+- **4/6 and 6/6 cannot be progressed without an on-site teammate.** Ping `[teammate]` / `[teammate]` (they have been pulling physical artefacts) and ask them to:
   - photograph **both sides of the Goats Coffee newspaper** (high-resolution, well-lit), specifically the sudoku grid, any classified-ad section, and the margins;
   - check the venue mailbox / "postman" NPC for a sealed letter addressed to *victor.timberlake, 403 Reed Yrek Street, Panama, QC, H4X X0R*.
 - Once a newspaper photo is supplied, the 4/6 plan is:
@@ -102,10 +102,10 @@ Status: **SOLVED** — 6/6 sub-flags captured
 
 ## Files added/updated this session
 
-- `C:\ctfint\nsec\multi-facteur-auth\topic-v2.json` — fresh topic JSON via Chrome CDP (5 posts).
-- `C:\ctfint\nsec\multi-facteur-auth\raw-posts.json` (in `C:\ctfint\nsec\raw-posts.json`) — raw markdown of posts 1-5.
-- `C:\ctfint\nsec\multi-facteur-auth\news\` — Discord attachments pulled to check whether any was the newspaper (they are NPC cards / seed-vault plaques / memes — none are the newspaper).
-- `C:\ctfint\nsec\multi-facteur-auth\login-resp.html`, `mfa2.html`, `coffee-rewards-now.html` — fresh captures of the LIVE coffee-rewards pages (still hardcode `FLAG-YOUVE_GOT_MAIL_AT_HOME` and contain no newspaper href).
+- `nsec/multi-facteur-auth\topic-v2.json` — fresh topic JSON via Chrome CDP (5 posts).
+- `nsec/multi-facteur-auth\raw-posts.json` (in `nsec/raw-posts.json`) — raw markdown of posts 1-5.
+- `nsec/multi-facteur-auth\news\` — Discord attachments pulled to check whether any was the newspaper (they are NPC cards / seed-vault plaques / memes — none are the newspaper).
+- `nsec/multi-facteur-auth\login-resp.html`, `mfa2.html`, `coffee-rewards-now.html` — fresh captures of the LIVE coffee-rewards pages (still hardcode `FLAG-YOUVE_GOT_MAIL_AT_HOME` and contain no newspaper href).
 
 ## No flag submitted this session
 

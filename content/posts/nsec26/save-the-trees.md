@@ -174,14 +174,14 @@ Migration-map §5 row 10 lists this as a "Self-planted" honeypot.
 
 ## Artifacts
 
-- `C:\ctfint\nsec\save-the-trees\artifacts\` — PDF analysis scripts and rendered
+- `nsec/save-the-trees\artifacts\` — PDF analysis scripts and rendered
   panels (`stv_alt_*.py`, `stv_*.py`)
-- `C:\ctfint\nsec\save-the-trees\stv-work\` — working data
+- `nsec/save-the-trees\stv-work\` — working data
   (`dots_ctm.tsv`, `xor_h.txt`, `wides.pgm`, `groups_strip.png`)
-- `C:\ctfint\nsec\save-the-trees\analysis\15_input.txt` — **contains suspicious
+- `nsec/save-the-trees\analysis\15_input.txt` — **contains suspicious
   `FLAG-eba56a9422a3ecf27498c44b718b24c7` — DO NOT SUBMIT, see Anti-Trap Notes**
-- `C:\ctfint\nsec\flags\save-the-trees-PENDING.txt` — pending-status note
-- `C:\ctfint\nsec\OVERNIGHT-REPORT.md` §7.4 — STUCK confirmation
+- `nsec/flags\save-the-trees-PENDING.txt` — pending-status note
+- `nsec/OVERNIGHT-REPORT.md` §7.4 — STUCK confirmation
 
 ## Designer Intel (Discord, post-event 2026-05-19)
 

@@ -86,8 +86,8 @@ No technical exploitation required. The flag for this challenge is granted autom
 
 ## Artifacts
 
-- `C:\ctfint\nsec\welcome\recon.txt` — Team 061 recon notes
-- `C:\ctfint\nsec\shellctf_known_hosts` — SSH known_hosts entries
+- `nsec/welcome\recon.txt` — Team 061 recon notes
+- `nsec/shellctf_known_hosts` — SSH known_hosts entries
 
 
 ---

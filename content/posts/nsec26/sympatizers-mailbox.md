@@ -58,7 +58,7 @@ The askgod hint — "change to every byte to reveal the plaintext then XOR" — 
 
 ## Recon
 
-Source materials in `C:\ctfint\nsec\sympatizers-mailbox\`:
+Source materials in `nsec/sympatizers-mailbox\`:
 
 - `index.html` (Spring/Thymeleaf SPA) — confirms framework via `xmlns:sec="http://www.thymeleaf.org/extras/spring-security"`
 - `showLetter.html`, `loadLetter-empty.html`, `showLetter-full.html` — saved responses showing the token redirect flow
@@ -119,11 +119,11 @@ No honeypot strings or PI lures observed. The `padding_oracle_exploit.py` filena
 
 ## Artifacts
 
-- `C:\ctfint\nsec\sympatizers-mailbox\artifacts\padding_oracle_exploit.py` — **THE** working exploit (despite the filename)
-- `C:\ctfint\nsec\sympatizers-mailbox\exploit_traversal.py` — earlier path-traversal probe (no crypto component) for the parameter-name enumeration phase
-- `C:\ctfint\nsec\sympatizers-mailbox\index.html`, `showLetter.html`, `loadLetter-empty.html` — captured Spring/Thymeleaf surface
-- `C:\ctfint\nsec\sympatizers-mailbox\advanced_exploit.py`, `exploit_mailbox.py`, `exploit_mailbox.ps1`, `template_injection.py`, `find_flag.py`, `find_download.py`, `explore_endpoints.py` — exploration scripts
-- `C:\ctfint\nsec\sympatizers-mailbox\topic.json`, `topic-raw.json` — Discourse scrape
+- `nsec/sympatizers-mailbox\artifacts\padding_oracle_exploit.py` — **THE** working exploit (despite the filename)
+- `nsec/sympatizers-mailbox\exploit_traversal.py` — earlier path-traversal probe (no crypto component) for the parameter-name enumeration phase
+- `nsec/sympatizers-mailbox\index.html`, `showLetter.html`, `loadLetter-empty.html` — captured Spring/Thymeleaf surface
+- `nsec/sympatizers-mailbox\advanced_exploit.py`, `exploit_mailbox.py`, `exploit_mailbox.ps1`, `template_injection.py`, `find_flag.py`, `find_download.py`, `explore_endpoints.py` — exploration scripts
+- `nsec/sympatizers-mailbox\topic.json`, `topic-raw.json` — Discourse scrape
 - `nsec/flags/submissions-journal.tsv` row 2026-05-16T00:55:50 — submission attribution
 
 

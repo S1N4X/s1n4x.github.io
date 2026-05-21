@@ -139,15 +139,15 @@ The secret lives in container memory at `supply.monsatan.ctf` only. Recovery req
 
 ## Artifacts
 
-- `C:\ctfint\nsec\monsatan-pesticide\artifacts\app.wasm` (608 896 B) — Pesticide client
-- `C:\ctfint\nsec\monsatan-pesticide\artifacts\strings.txt`, `app.js`, `login_page.html`
-- `C:\ctfint\nsec\monsatan-pesticide\artifacts\analyze.py|analyze2.py|analyze3.py` — offline WASM analyzers
-- `C:\ctfint\nsec\monsatan-pesticide\artifacts\hmac-candidates.txt` — top-50 dead-end key candidates
-- `C:\ctfint\nsec\monsatan-pesticide\artifacts\cross-track-secret-hunt.md` — sibling-track sweep
-- `C:\ctfint\nsec\monsatan-pesticide\artifacts\coach-opus-2026-05-16\STUCK_REPORT.md` — 1st PAT-chain pass STUCK proof
-- `C:\ctfint\nsec\monsatan-pesticide\artifacts\gitlab-clone-attempt\REPLAY_2026-05-16T14Z.md` — 2nd PAT-chain pass STUCK proof (this run)
-- `C:\ctfint\nsec\monsatan-pesticide\artifacts\gitlab-clone-attempt\exhaustive_listing.txt` — 25 GitLab API queries + responses
-- `C:\ctfint\nsec\monsatan-pesticide\artifacts\gitlab-clone-attempt\website\` — full clone of monsatan/website (read-only inspection)
+- `nsec/monsatan-pesticide\artifacts\app.wasm` (608 896 B) — Pesticide client
+- `nsec/monsatan-pesticide\artifacts\strings.txt`, `app.js`, `login_page.html`
+- `nsec/monsatan-pesticide\artifacts\analyze.py|analyze2.py|analyze3.py` — offline WASM analyzers
+- `nsec/monsatan-pesticide\artifacts\hmac-candidates.txt` — top-50 dead-end key candidates
+- `nsec/monsatan-pesticide\artifacts\cross-track-secret-hunt.md` — sibling-track sweep
+- `nsec/monsatan-pesticide\artifacts\coach-opus-2026-05-16\STUCK_REPORT.md` — 1st PAT-chain pass STUCK proof
+- `nsec/monsatan-pesticide\artifacts\gitlab-clone-attempt\REPLAY_2026-05-16T14Z.md` — 2nd PAT-chain pass STUCK proof (this run)
+- `nsec/monsatan-pesticide\artifacts\gitlab-clone-attempt\exhaustive_listing.txt` — 25 GitLab API queries + responses
+- `nsec/monsatan-pesticide\artifacts\gitlab-clone-attempt\website\` — full clone of monsatan/website (read-only inspection)
 
 Writeup finalised 2026-05-16 ~14:05Z (replay coach pass).
 
@@ -241,7 +241,7 @@ Three Python analyzers run (`analyze.py`, `analyze2.py`, `analyze3.py` in artifa
 - See `artifacts/hmac-candidates.txt` for the prepared top-50 keys in the (unlikely) case some downstream tool wants to mass-test them against a captured signed token.
 
 ## Artifacts
-- `C:\ctfint\nsec\monsatan-pesticide\artifacts\app.wasm` (608896 bytes), `app.js`, `login_page.html`, `strings.txt`, `STUCK_NOTES.md`
+- `nsec/monsatan-pesticide\artifacts\app.wasm` (608896 bytes), `app.js`, `login_page.html`, `strings.txt`, `STUCK_NOTES.md`
 - NEW: `artifacts\analyze.py`, `analyze2.py`, `analyze3.py` - reproducible offline analyzers
 - NEW: `artifacts\hmac-candidates.txt` - top-50 deduped HS256 key candidates with memOffs (for morning forge-and-test only if a signed-token sample appears)
 - This writeup updated 2026-05-16 ~03:50 local.

@@ -77,7 +77,7 @@ Status: **PARTIAL** — 6/8 sub-flags captured
 ## Artifact Inventory
 
 ### Source Code Artifacts
-Located in: `C:\ctfint\nsec\fossilco\`
+Located in: `nsec/fossilco\`
 
 #### Core Application Files
 - **app.py.html** - Flask application source code (HTML render)
@@ -531,18 +531,18 @@ Exhausted credentialed attacks with Paul.Leclerc TGT, MGMT local admin, and know
 Recommend operator either: (a) re-crack `hashes.txt` with a fresh wordlist + rules, (b) check askgod challenge topic 59114 for any hints I missed about the LinPOC path or sibling app, (c) accept 6/8 as final score for fossilco.
 
 ## Artifacts created this session
-- `C:\ctfint\nsec\fossilco\artifacts\laps_exfil_v2.py` — parameterised LDAP-injection LAPS extractor
-- `C:\ctfint\nsec\fossilco\artifacts\ldap_grep_all.py` — full-attribute LDAP sweep over base/configuration/schema NCs
-- `C:\ctfint\nsec\fossilco\artifacts\ldap_inj_probe.py` — probe many LDAP attrs via cmdb injection
-- `C:\ctfint\nsec\fossilco\artifacts\walk_mgmt_deep.py`, `walk_mgmt_users.py`, `walk_special.py` — MGMT SMB exhaustive walk
-- `C:\ctfint\nsec\fossilco\artifacts\walk_sysvol.py`, `read_sysvol_files.py`, `dump_sysvol_bytes.py` — SYSVOL/GPO recon as Paul.Leclerc
-- `C:\ctfint\nsec\fossilco\artifacts\local_dump2.py` — secretsdump LocalOperations on pulled MGMT hives
-- `C:\ctfint\nsec\fossilco\artifacts\try_fossiladmin.py` — FossilAdmin pwd test
-- `C:\ctfint\nsec\fossilco\artifacts\reuse_test.py` — MGMT pwd reuse across hosts
-- `C:\ctfint\nsec\fossilco\artifacts\read_admin_ssh.py`, `read_powershell_hist.py` — Administrator profile recon on MGMT
+- `nsec/fossilco\artifacts\laps_exfil_v2.py` — parameterised LDAP-injection LAPS extractor
+- `nsec/fossilco\artifacts\ldap_grep_all.py` — full-attribute LDAP sweep over base/configuration/schema NCs
+- `nsec/fossilco\artifacts\ldap_inj_probe.py` — probe many LDAP attrs via cmdb injection
+- `nsec/fossilco\artifacts\walk_mgmt_deep.py`, `walk_mgmt_users.py`, `walk_special.py` — MGMT SMB exhaustive walk
+- `nsec/fossilco\artifacts\walk_sysvol.py`, `read_sysvol_files.py`, `dump_sysvol_bytes.py` — SYSVOL/GPO recon as Paul.Leclerc
+- `nsec/fossilco\artifacts\local_dump2.py` — secretsdump LocalOperations on pulled MGMT hives
+- `nsec/fossilco\artifacts\try_fossiladmin.py` — FossilAdmin pwd test
+- `nsec/fossilco\artifacts\reuse_test.py` — MGMT pwd reuse across hosts
+- `nsec/fossilco\artifacts\read_admin_ssh.py`, `read_powershell_hist.py` — Administrator profile recon on MGMT
 
 ## Submission log (session 2026-05-16)
-- `FLAG-04da3c7ece62a86607a3484970998683` → DUP (was 6/8). Wrapper logged at `C:\ctfint\nsec\flags\.submit-history.jsonl`.
+- `FLAG-04da3c7ece62a86607a3484970998683` → DUP (was 6/8). Wrapper logged at `nsec/flags\.submit-history.jsonl`.
 - Remaining attempts: 2/3.
 
 ## Coach Investigation (2026-05-17)
@@ -886,7 +886,7 @@ The gastro container has only:
 2. PostgreSQL (parameterized everywhere; no flag rows).
 3. No LDAP daemon listening, no python-ldap import, no `ldap3.Connection`, no bundled directory mock.
 
-The prior LDAP recon under `C:/ctfint/nsec/fossilco/ldap_*.py` and `ldap_*.txt` was
+The prior LDAP recon under `nsec/fossilco/ldap_*.py` and `ldap_*.txt` was
 against the SEPARATE `tier2.fossil.co.ctf` corp AD (real domain controller, not part
 of this challenge container). The task rules forbid touching that host, so the LDAP
 hint - if it really applies to challenge 59114 - must apply to a DIFFERENT track or a

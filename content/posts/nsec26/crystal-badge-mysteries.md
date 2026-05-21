@@ -25,7 +25,7 @@ This writeup covers the Crystal Badge track (Discourse topic 59510) including it
 **CTF**: NorthSec 2026 — "Gaïa / Solarpunk Guardians"
 **Category**: Hardware / OSINT / Badge RE
 **Difficulty**: Easy (puzzle 1) → Medium-Hard (bonus tracks via on-badge serial / NFC / SAO / venue dock)
-**Working dir**: `C:\ctfint\nsec\crystal-badge\`
+**Working dir**: `nsec/crystal-badge\`
 
 ## Recon
 
@@ -234,7 +234,7 @@ The `crystal` askgod tag (separate from `badge-firmware`) is a single-flag track
 
 ## Artifacts
 
-All under `C:\ctfint\nsec\crystal-badge\artifacts\`:
+All under `nsec/crystal-badge\artifacts\`:
 
 | File | Purpose |
 |---|---|
@@ -280,7 +280,7 @@ Parent dir (`crystal-badge/`):
 - `BADGE-STATUS-20260517.md` — day-2 status snapshot
 - `SUSPICIOUS.md` — anomaly log
 
-Flag values archive: `C:\ctfint\nsec\flags\crystal-badge.txt`.
+Flag values archive: `nsec/flags\crystal-badge.txt`.
 
 ## Techniques Used
 

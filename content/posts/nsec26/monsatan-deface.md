@@ -100,7 +100,7 @@ The commit sequence (newest first) shows the attacker's progression:
 - `http://gitlab.monsatan.ctf/monsatan/website/-/jobs/<ID>/artifacts/download` — zipped artifact (worked for 118 build, 119 sbom)
 - `http://gitlab.monsatan.ctf/monsatan/website/-/jobs/<ID>/artifacts/raw/<PATH>` — single artifact file
 - `http://gitlab.monsatan.ctf/api/v4/projects/3` — project metadata (no auth)
-- `http://gitlab.monsatan.ctf/api/v4/projects/3/trigger/pipeline` — works with the README-leaked trigger token `glptt-XB3sCPDYsUKV2Z1-EQoh` to run any ref including non-default branches
+- `http://gitlab.monsatan.ctf/api/v4/projects/3/trigger/pipeline` — works with the README-leaked trigger token `<REDACTED:gitlab-trigger-token>` to run any ref including non-default branches
 
 ## Things that did NOT work
 
@@ -165,14 +165,14 @@ Pushed single commit with improved port 8888 probe script. Dartreg was fixed by 
 **Submission attempt:**
 Submit was rejected with `[DENY-TRACK-COMPLETE] monsatan-defacing maps to askgod 'monsatan-defacing' which is already 6/6 complete.` This indicates the track was completed before this probe, meaning this flag was likely submitted earlier by a prior agent (possibly via a different path). The flag `FLAG-{2247bff241800150a5ebb00288dc050d}` does not appear in the local submission history JSON, suggesting it may have been submitted through a direct API path or by another team member.
 
-**Trace artifact:** `C:\ctfint\nsec\monsatan-deface\artifacts\probe-8888-2026-05-17.txt`
+**Trace artifact:** `nsec/monsatan-deface\artifacts\probe-8888-2026-05-17.txt`
 
 ## Key file paths (absolute)
 
-- `C:\ctfint\nsec\monsatan-deface\artifacts\website\` — local clone (with build-deface-recon fetched)
-- `C:\ctfint\nsec\monsatan-deface\artifacts\website\.gitlab-ci.yml` — CI definition
-- `C:\ctfint\nsec\flags\.submit-history.jsonl` — local submission log (all 7 prior attempts visible)
-- `C:\ctfint\nsec\monsatan-deface\artifacts\probe-8888-2026-05-17.txt` — job 350 trace with 8888 probe output
+- `nsec/monsatan-deface\artifacts\website\` — local clone (with build-deface-recon fetched)
+- `nsec/monsatan-deface\artifacts\website\.gitlab-ci.yml` — CI definition
+- `nsec/flags\.submit-history.jsonl` — local submission log (all 7 prior attempts visible)
+- `nsec/monsatan-deface\artifacts\probe-8888-2026-05-17.txt` — job 350 trace with 8888 probe output
 
 
 ---

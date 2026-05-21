@@ -72,7 +72,7 @@ plants them next year.
 
 ---
 
-## #3 &mdash; `FLAG-a3f1d2e4b5c6789012345678abcdef02`
+## #3 &mdash; `FLAG-...abcdef02`
 
 - **Track:** helios-fleet (59762)
 - **Where seen:** the anti-trap workflow's own quarantine file,

@@ -40,7 +40,7 @@ Status: **STUCK** — 0/unknown sub-flags captured
 
 ## STUCK Rationale
 
-- - [CODEX-workflow-fix] 2026-05-16 14:45 EDT: fixed both Codex and Claude Code CTFINT skills so future orchestrators/coaches must refresh askgod, rank by CFSS, skip completed aliases, and skip physical/device tracks unless explicitly requested. Patched skill mirrors: `C:\Users\chemi\.codex\skills\ctfint_workflow`, `ctfint_coach-spawn`, `ctfint_askgod-submit` and `C:\ctfint\.claude\skills\ctfint_workflow`, `ctfint_coach-spawn`, `ctfint_askgod-submit`. Also updated `nsec/team-status/challenge-inventory.py` to emit `open_priorities_nonphysical` in `nsec/.challenge-inventory.json` and a "Low-Hanging Open Tracks (non-physical)" section in `nsec/ASKGOD-INVENTORY.md`. Current CFSS queue: `renewable-energy-mobility` 2/7, `weather-station` 1/4, `helios-fleet-network` 2/5, `monsatan-impact-study` 2/5, `monsatan-defacing` 5/6, then `apt438`, `fossilco`, `announcement-board`. Physical excluded by default: `badge-firmware`, `crystal`, `grid-alignment`, `monsatan-kiosk`, `plant-watering`, `radio-beacon`, `infinite-energy`.
+- - [CODEX-workflow-fix] 2026-05-16 14:45 EDT: fixed both Codex and Claude Code CTFINT skills so future orchestrators/coaches must refresh askgod, rank by CFSS, skip completed aliases, and skip physical/device tracks unless explicitly requested. Patched skill mirrors: `<operator-codex-skills>/ctfint_workflow`, `ctfint_coach-spawn`, `ctfint_askgod-submit` and `<repo>/.claude/skills/ctfint_workflow`, `ctfint_coach-spawn`, `ctfint_askgod-submit`. Also updated `nsec/team-status/challenge-inventory.py` to emit `open_priorities_nonphysical` in `nsec/.challenge-inventory.json` and a "Low-Hanging Open Tracks (non-physical)" section in `nsec/ASKGOD-INVENTORY.md`. Current CFSS queue: `renewable-energy-mobility` 2/7, `weather-station` 1/4, `helios-fleet-network` 2/5, `monsatan-impact-study` 2/5, `monsatan-defacing` 5/6, then `apt438`, `fossilco`, `announcement-board`. Physical excluded by default: `badge-firmware`, `crystal`, `grid-alignment`, `monsatan-kiosk`, `plant-watering`, `radio-beacon`, `infinite-energy`.
 
 ### From `59798-radio-beacon.md`
 
@@ -53,7 +53,7 @@ need access. The challenge is physical — no remote artifact, no remote endpoin
 ## Recon
 
 - Discourse topic 59798 inspected: no URL, no filename, no attachment.
-- `C:\ctfint\nsec\` search for `radio`, `beacon`, `59798` — only unrelated audio
+- `nsec/` search for `radio`, `beacon`, `59798` — only unrelated audio
   (`team-status/ole-celebration.wav`) and Missing-Bus artifacts.
 - No `radio-beacon/` directory exists.
 - `CANDIDATE_FLAGS.txt` previously listed "RADIO BEACON (59798)" but the candidates
@@ -78,7 +78,7 @@ Cannot proceed without a venue SDR pickup at 146.565 MHz. Operator must:
 1. Carry an SDR or handheld receiver to the RF table.
 2. Capture the transmission live (Morse / DTMF / APRS / AFSK / FSK / SSTV /
    spectrogram-text are all plausible — Discourse mentions "two message types").
-3. Save the recording to `C:\ctfint\nsec\radio-beacon\` and triage offline.
+3. Save the recording to `nsec/radio-beacon\` and triage offline.
 
 ## Anti-Trap Notes
 
@@ -90,10 +90,10 @@ rejected as out-of-scope (it decodes to `0xdc8fd0` for trolley-bus 1/4).
 
 ## Artifacts
 
-- `C:\ctfint\nsec\.challenge-inventory.json` — `untouched_inventory[topic_id=59798]`
-- `C:\ctfint\nsec\writeups\59798-radio-beacon.md` — this file (replaces earlier stub)
-- Misattribution context: `C:\ctfint\nsec\CANDIDATE_FLAGS.txt`, see also
-  `C:\ctfint\nsec\missing-bus\artifacts\keyfob.complex16s`
+- `nsec/.challenge-inventory.json` — `untouched_inventory[topic_id=59798]`
+- `nsec/writeups\59798-radio-beacon.md` — this file (replaces earlier stub)
+- Misattribution context: `nsec/CANDIDATE_FLAGS.txt`, see also
+  `nsec/missing-bus\artifacts\keyfob.complex16s`
 
 ## Designer Intel (Discord, post-event 2026-05-19)
 

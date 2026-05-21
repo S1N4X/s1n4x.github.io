@@ -276,7 +276,7 @@ Sometimes the right model on the right brief just works.
 
 The track was technically solvable &mdash; designer post-event confirmed the
 intended primitive was XSS to RCE. The team's network position could not
-reach the Thymeleaf host EricChMtl had hinted about, and the only reachable
+reach the Thymeleaf host [teammate] had hinted about, and the only reachable
 hosts (`library.ctf` Laravel/PHP, `mail.ctf` Express/Node) lacked the SSTI
 surface that the hint implied.
 

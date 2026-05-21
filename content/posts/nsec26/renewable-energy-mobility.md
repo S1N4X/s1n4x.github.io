@@ -87,7 +87,7 @@ Mode: offline static analysis (VPN down)
 
 ## Goal
 
-Find `firmware_repo_api_key` from `C:\ctfint\nsec\rem\pod-ops-cli` (Go ELF, 6.2 MB, built `go1.22`, not stripped).
+Find `firmware_repo_api_key` from `nsec/rem\pod-ops-cli` (Go ELF, 6.2 MB, built `go1.22`, not stripped).
 
 ## TL;DR
 
@@ -241,16 +241,16 @@ Following up on the encrypted `.squashfs.enc` payloads with aes-256-cbc:pbkdf2:
 - Alternative vectors remain: MQTT firmware update events (network blocked), HTTP metadata (exhausted), hidden firmware versions (2.6.6, 2.7.1 etc.), or completely different flag mechanism
 
 ## Output artifacts updated
-- (this file) `C:\ctfint\nsec\writeups\59582-rem.md`
-- `C:\ctfint\nsec\rem\artifacts\firmware-key-candidates.txt` — empty (no candidates found)
-- `C:\ctfint\nsec\rem\artifacts\passphrase-brute-2026-05-17.txt` — firmware decryption brute-force log (~600 candidates, ZERO matches)
+- (this file) `nsec/writeups\59582-rem.md`
+- `nsec/rem\artifacts\firmware-key-candidates.txt` — empty (no candidates found)
+- `nsec/rem\artifacts\passphrase-brute-2026-05-17.txt` — firmware decryption brute-force log (~600 candidates, ZERO matches)
 
 
 ## STUCK Rationale
 
 - | ~14:30 | REM 4-7/7 | Used Bearer FLAG-183fe43778ea6241e736d8e2e1bcb300 (3/7 already submitted) against http://broker.renewable-energy-mobility.ctf:8081 firmware catalog — 5 prod fw all openssl:aes-256-cbc:pbkdf2 with FIXED salt `01-02-03-04-05-06-07-08`. ~50 passphrase candidates tested, none decrypt to squashfs magic | Stuck on AES passphrase recovery |
 - - [CODEX-inventory] 2026-05-16 14:32 EDT: rebuilt askgod-first challenge inventory after repeated duplicate work. Fresh cache files: `nsec/.askgod-history.txt`, `nsec/.askgod-tracks.json`, `nsec/.challenge-inventory.json`, and `nsec/ASKGOD-INVENTORY.md`. Current open canonical askgod tracks are: `announcement-board` 3/4, `apt438` 3/9, `badge-firmware` 2/5, `fossilco` 6/8, `grid-alignment` 1/2, `helios-fleet-network` 2/5, `monsatan-defacing` 5/6, `monsatan-impact-study` 2/5, `renewable-energy-mobility` 2/7, `weather-station` 1/4. Completed aliases now explicitly map to askgod before work/submission: `monsatan-kiosk` 1/1, `lowcode`/Water purification 4/4, `tamper`/Seed Vault 6/6, `open-sunshine.mcp.ctf`/Hello Sunshine 2/2, `multi-facteur-authentication` 6/6, `teamworking` 1/1, `gh-agent`/Drone license 2/2, plus other complete tracks in `ASKGOD-INVENTORY.md`. `submit-flag.ps1` now refreshes askgod before submit and denies complete aliases before making the MCP call; `find-flag-gaps.ps1` suppresses candidates that live only under complete askgod tracks. One guard-test before the `lowcode` parser fix hit askgod with `FLAG-AAAAAAAAAAAAAAAA` under `water-purification` and got FAIL; subsequent guard tests denied locally as intended.
-- - [CODEX-workflow-fix] 2026-05-16 14:45 EDT: fixed both Codex and Claude Code CTFINT skills so future orchestrators/coaches must refresh askgod, rank by CFSS, skip completed aliases, and skip physical/device tracks unless explicitly requested. Patched skill mirrors: `C:\Users\chemi\.codex\skills\ctfint_workflow`, `ctfint_coach-spawn`, `ctfint_askgod-submit` and `C:\ctfint\.claude\skills\ctfint_workflow`, `ctfint_coach-spawn`, `ctfint_askgod-submit`. Also updated `nsec/team-status/challenge-inventory.py` to emit `open_priorities_nonphysical` in `nsec/.challenge-inventory.json` and a "Low-Hanging Open Tracks (non-physical)" section in `nsec/ASKGOD-INVENTORY.md`. Current CFSS queue: `renewable-energy-mobility` 2/7, `weather-station` 1/4, `helios-fleet-network` 2/5, `monsatan-impact-study` 2/5, `monsatan-defacing` 5/6, then `apt438`, `fossilco`, `announcement-board`. Physical excluded by default: `badge-firmware`, `crystal`, `grid-alignment`, `monsatan-kiosk`, `plant-watering`, `radio-beacon`, `infinite-energy`.
+- - [CODEX-workflow-fix] 2026-05-16 14:45 EDT: fixed both Codex and Claude Code CTFINT skills so future orchestrators/coaches must refresh askgod, rank by CFSS, skip completed aliases, and skip physical/device tracks unless explicitly requested. Patched skill mirrors: `<operator-codex-skills>/ctfint_workflow`, `ctfint_coach-spawn`, `ctfint_askgod-submit` and `<repo>/.claude/skills/ctfint_workflow`, `ctfint_coach-spawn`, `ctfint_askgod-submit`. Also updated `nsec/team-status/challenge-inventory.py` to emit `open_priorities_nonphysical` in `nsec/.challenge-inventory.json` and a "Low-Hanging Open Tracks (non-physical)" section in `nsec/ASKGOD-INVENTORY.md`. Current CFSS queue: `renewable-energy-mobility` 2/7, `weather-station` 1/4, `helios-fleet-network` 2/5, `monsatan-impact-study` 2/5, `monsatan-defacing` 5/6, then `apt438`, `fossilco`, `announcement-board`. Physical excluded by default: `badge-firmware`, `crystal`, `grid-alignment`, `monsatan-kiosk`, `plant-watering`, `radio-beacon`, `infinite-energy`.
 - - [CODEX-active-wave] 2026-05-16 14:47 EDT: refreshed askgod/inventory again before assigning work. Active non-physical wave: `renewable-energy-mobility` 2/7, `helios-fleet-network` 2/5, `monsatan-impact-study` 2/5. `weather-station` remains open 1/4 by askgod but is skipped for this wave because the known local easy candidate is askgod DUP and prior notes show no new fast path. All coaches must submit only through `nsec/submit-flag.ps1 -Track <slug>` and must stop on `DENY-*`.
 - - 15:08 renewable-energy-mobility 2/7 = `FLAG-9a7cfaf96b...` (MQTT `get_flag` undocumented CLI, +2 pts via my helper)
 - - [CODEX -> OPUS / TEAM] 2026-05-17 11:23 EDT: **REM advanced to 3/7.** Used `shell.ctf` as the missing routable IPv6 listener (`9000:6666:6666:6666:216:3eff:feb1:8d80:8891`), set `firmware_repo_url` on pod `189bc82f-6df6-4ebf-a52c-fe1192062f0b`, and captured `Authorization: Bearer FLAG-183fe43778ea6241e736d8e2e1bcb300`. askgod accepted it as `[renewable-energy-mobility] 3/7` / firmware repository API key. Token unlocks the firmware catalog; five `.rem` ZIP packages were downloaded under `nsec/rem/artifacts/firmware/`. They contain `firmware_payload.squashfs.enc` (`openssl:aes-256-cbc:pbkdf2`, fixed salt `0102030405060708`) plus README. Obvious passphrases/prior flags did not decrypt yet. Pod URL restored to the broker self URL. Artifact: `nsec/rem/artifacts/codex-rem-api-key-2026-05-17.md`.
@@ -335,7 +335,7 @@ The whole firmware-poison angle hinges on:
 2. Listener stays up for the ~5-10s window between URL-set and broker's first GET
 3. Listener returns a VALID firmware manifest JSON so the broker doesn't trip "repeated check failures" and reset the URL
 
-`fw_listener.py` exists at `C:\ctfint\nsec\rem\fw_listener.py` — it handles GET/HEAD/POST and returns a stable JSON manifest. **Restart it and verify with `Get-NetTCPConnection -LocalPort 8888` BEFORE setting the URL.** The new `capture_flag.py` already runs the right subscribe pattern; reuse.
+`fw_listener.py` exists at `nsec/rem\fw_listener.py` — it handles GET/HEAD/POST and returns a stable JSON manifest. **Restart it and verify with `Get-NetTCPConnection -LocalPort 8888` BEFORE setting the URL.** The new `capture_flag.py` already runs the right subscribe pattern; reuse.
 
 ### What to capture
 
@@ -359,11 +359,11 @@ The CLI exposes `safe-stop` command. Issuing it as the pod (or as maintenance wi
 
 ### Hidden CLI commands
 
-`pod-ops-cli` binary at `C:\ctfint\nsec\rem\pod-ops-cli` (Go 1.22). String dump shows commands: `pod`, `config set <field> <value>`, `diag [topic ...]`, `safe-stop`, `resume`, `exit`, `help`, `provision`. Strings ALSO mention `get_flag` (hidden command per intel). Worth disassembling/strings further for unlisted subcommands.
+`pod-ops-cli` binary at `nsec/rem\pod-ops-cli` (Go 1.22). String dump shows commands: `pod`, `config set <field> <value>`, `diag [topic ...]`, `safe-stop`, `resume`, `exit`, `help`, `provision`. Strings ALSO mention `get_flag` (hidden command per intel). Worth disassembling/strings further for unlisted subcommands.
 
 ## File index
 
-All artifacts under `C:\ctfint\nsec\rem\`:
+All artifacts under `nsec/rem\`:
 
 | File | Purpose |
 |------|---------|
@@ -518,7 +518,7 @@ that bypasses the auth layer entirely lives in this code path.
    different OID value yields a higher-privilege cert that can read
    `firmware_repo_api_key` unmasked.
 
-## Files (all under C:\ctfint\nsec\rem\)
+## Files (all under nsec/rem\)
 - `fw_hijack.py` — primary URL hijack to test outbound. WORKS but listener
   unreachable.
 - `path_enum2.py`, `path_enum3.py` — path enumeration via SSRF oracle (all 404).

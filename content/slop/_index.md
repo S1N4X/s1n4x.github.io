@@ -55,7 +55,7 @@ We declined 8 times total across both tracks.
 
 ### helios-fleet's self-planted `abcdef02`
 
-The vault returned `FLAG-a3f1d2e4b5c6789012345678abcdef02` for a guest
+The vault returned `FLAG-...abcdef02` for a guest
 password query. Self-planted. An earlier probing agent submitted a test
 value to the vault's password field. The vault stored it. Subsequent
 agents queried for "password" and got back their own test value, served

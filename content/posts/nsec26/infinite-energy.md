@@ -60,7 +60,7 @@ Doc Wonka NPC track. Discourse body:
 - DNS lookup over the VPN for every plausible host name → all NXDOMAIN
   (`infinite-energy.ctf`, `infiniteenergy.ctf`, `wonka.ctf`, `docwonka.ctf`,
   `energy.ctf`, plus AAAA variants).
-- No artifacts under `C:\ctfint\nsec\` containing `wonka`, `docwonka`, or `infinite-energy`.
+- No artifacts under `nsec/` containing `wonka`, `docwonka`, or `infinite-energy`.
 - Discourse topic 58754 confirmed onsite-only.
 
 ## Attempted Exploitation Chains
@@ -86,8 +86,8 @@ row from this topic. Do not confuse the two — Infinite Energy track score is s
 
 ## Artifacts
 
-- `C:\ctfint\nsec\.challenge-inventory.json` — `untouched_inventory[topic_id=58754]`
-- `C:\ctfint\nsec\writeups\58754-infinite-energy.md` — this file (replaces earlier stub)
+- `nsec/.challenge-inventory.json` — `untouched_inventory[topic_id=58754]`
+- `nsec/writeups\58754-infinite-energy.md` — this file (replaces earlier stub)
 
 
 ---

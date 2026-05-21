@@ -66,7 +66,7 @@ Status: **STUCK** — 0/unknown sub-flags captured
 ### 1. `admin@sunbloom.ctf` is **RESERVED on mail.ctf** (`alert-error: This address is reserved.`)
 This is the fundamental block on every reset-poisoning vector that needs admin's mail to land in our inbox. Confirmed by `curl POST http://mail.ctf/register email=admin%40sunbloom.ctf` returning that exact alert. Vectors 1-3 of the dossier all assume an attacker mailbox catches the reset; with admin's address reserved and no SMTP-out leak, **no reset-link interception is possible without a Mail::to() host or recipient rewrite**.
 
-### 2. `admin+x@sunbloom.ctf` was registered (by ovcrash overnight) on **both** library.ctf and mail.ctf with password `ABCDEF123`
+### 2. `admin+x@sunbloom.ctf` was registered (by [teammate] overnight) on **both** library.ctf and mail.ctf with password `ABCDEF123`
 - Mail.ctf inbox contains a `SunBloom Library — Password Reset Request` email dated `Sat, 16 May 2026 05:07:57 +0000`.
 - Reset URL: `http://library.ctf/reset-password?email=admin%2Bx%40sunbloom.ctf&token=294f09da468b255ad0e83ac37ab9ba4ea77ff30f3daae2876f1f388962c2f438`.
 - The plus-trick **does NOT canonicalize on library.ctf**: registering `admin+x@sunbloom.ctf` creates a separate user row. The reset token is bound to the literal email string — submitting it with `email=admin@sunbloom.ctf` returns `Invalid or expired password reset token`.
@@ -96,8 +96,8 @@ The `/admin/books` POST route exists but is gated by the `Gate::define('admin', 
 3. **Check if `admin@sunbloom.ctf` was ever issued a reset that's still pending in any inbox we own** — re-fire forgot-password for admin with `X-Forwarded-For: 127.0.0.1` and `X-Real-IP: 127.0.0.1` simultaneously (some Laravel apps trust localhost for diagnostic email reflection). Untested this run due to time.
 
 ## Files written
-- Scratch artifacts: `C:\ctfint\nsec\sunbloom\artifacts\followup-2026-05-16\`
-- SUSPICIOUS scan: `C:\ctfint\nsec\sunbloom\SUSPICIOUS.md` (only internal hits, no adversarial content)
+- Scratch artifacts: `nsec/sunbloom\artifacts\followup-2026-05-16\`
+- SUSPICIOUS scan: `nsec/sunbloom\SUSPICIOUS.md` (only internal hits, no adversarial content)
 
 ## Submission state
 NO flag candidate extracted. Nothing to submit.
@@ -138,8 +138,8 @@ NOT SOLVED — extensive testing of email-confusion attack didn't break the pass
 5. **Library code path** with token verification using `LIKE` query (wildcard injection) — `admin%@sunbloom.ctf` registered fine on mail; reset POST with email=`admin%@sunbloom.ctf` and a token from another reset may match admin row.
 
 ## Artifacts
-- C:\ctfint\nsec\sunbloom\STUCK.md (updated with 2026-05-16 findings)
-- C:\ctfint\nsec\sunbloom-library\artifacts\probe_session.sh
+- nsec/sunbloom\STUCK.md (updated with 2026-05-16 findings)
+- nsec/sunbloom-library\artifacts\probe_session.sh
 
 
 ### From `59150-sunbloom-library.md`
@@ -374,9 +374,9 @@ Status: In Progress
 
 ## Writeup/Artifacts
 
-- **Full dossier:** `C:\ctfint\nsec\sunbloom\artifacts\morning-attack-dossier.md`
-- **Novel vectors research:** `C:\ctfint\nsec\sunbloom\artifacts\NOVEL_VECTORS_RESEARCH_2026-05-17.md`
-- **Test logs:** `C:\ctfint\nsec\sunbloom\artifacts\morning-dossier-work/*.html`
+- **Full dossier:** `nsec/sunbloom\artifacts\morning-attack-dossier.md`
+- **Novel vectors research:** `nsec/sunbloom\artifacts\NOVEL_VECTORS_RESEARCH_2026-05-17.md`
+- **Test logs:** `nsec/sunbloom\artifacts\morning-dossier-work/*.html`
 
 ---
 

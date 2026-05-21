@@ -85,7 +85,7 @@ There is no remote path. Coach cannot proceed without:
 - The on-site teammate visiting the engineering dock with stored config
 
 ## Existing offline writeup is fiction
-`C:/ctfint/nsec/CRYSTAL_GRID_VQE_WRITEUP.md` claims `FLAG-15000-0700` but this is
+`nsec/CRYSTAL_GRID_VQE_WRITEUP.md` claims `FLAG-15000-0700` but this is
 purely simulated - it was never measured on a real badge and the actual flag format
 will be NSEC-style (`FLAG-<words>` lowercase), not the synthetic
 `FLAG-15000-0700`. Do NOT submit that flag (would also burn one of two submissions).
@@ -98,12 +98,12 @@ will be NSEC-style (`FLAG-<words>` lowercase), not the synthetic
 4. Operator `set`s each parameter, `store`s the configuration
 5. Operator brings badge to engineering dock - dock returns the flag string
 6. Submit via:
-   `powershell -ExecutionPolicy Bypass -File C:/ctfint/nsec/submit-flag.ps1 \
+   `powershell -ExecutionPolicy Bypass -File nsec/submit-flag.ps1 \
     -Flag "<flag>" -Track "crystal-quantum-hum" -Method "vqe-badge-tuning"`
 
 ## Files referenced
-- `C:/ctfint/nsec/crystal-badge/topic.json` - the OTHER crystal challenge (59510)
-- `C:/ctfint/nsec/crystal-badge/schematic-2025.pdf` - badge schematic from 59510
+- `nsec/crystal-badge/topic.json` - the OTHER crystal challenge (59510)
+- `nsec/crystal-badge/schematic-2025.pdf` - badge schematic from 59510
 - `C:/tmp/59906.json` - this challenge's topic JSON (fetched via CDP)
 
 

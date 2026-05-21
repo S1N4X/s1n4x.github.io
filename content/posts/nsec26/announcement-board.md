@@ -235,14 +235,14 @@ captured strings verified DUP-safe via `flags/.submit-history.jsonl`).
 
 ## Artifacts
 
-- `C:\ctfint\nsec\announcement-board\artifacts\flag4-runner.ps1` — 10-step automated sweep
-- `C:\ctfint\nsec\announcement-board\artifacts\flag4-deep.ps1` — SQLi deep follow-up
-- `C:\ctfint\nsec\announcement-board\artifacts\flag4-responses\` — 109 per-probe HTTP responses
-- `C:\ctfint\nsec\announcement-board\artifacts\flag4-runner.log`, `flag4-deep.log` — full run logs
-- `C:\ctfint\nsec\announcement-board\artifacts\flag4-2026-05-17\comprehensive-results.txt` — Session 2 full log
-- `C:\ctfint\nsec\announcement-board\artifacts\flag4-2026-05-17-final\STUCK-REPORT.md` — final STUCK + contamination evidence
-- `C:\ctfint\nsec\announcement-board\artifacts\sqli-dump-results.json` — full users.password dump (post-contamination)
-- `C:\ctfint\nsec\announcement-board\artifacts\logo_trans.png` / `logo_opac.png` — mod_speling-leaked PNG logos (clean)
+- `nsec/announcement-board\artifacts\flag4-runner.ps1` — 10-step automated sweep
+- `nsec/announcement-board\artifacts\flag4-deep.ps1` — SQLi deep follow-up
+- `nsec/announcement-board\artifacts\flag4-responses\` — 109 per-probe HTTP responses
+- `nsec/announcement-board\artifacts\flag4-runner.log`, `flag4-deep.log` — full run logs
+- `nsec/announcement-board\artifacts\flag4-2026-05-17\comprehensive-results.txt` — Session 2 full log
+- `nsec/announcement-board\artifacts\flag4-2026-05-17-final\STUCK-REPORT.md` — final STUCK + contamination evidence
+- `nsec/announcement-board\artifacts\sqli-dump-results.json` — full users.password dump (post-contamination)
+- `nsec/announcement-board\artifacts\logo_trans.png` / `logo_opac.png` — mod_speling-leaked PNG logos (clean)
 
 ## Designer Intel (Discord, post-event 2026-05-19)
 

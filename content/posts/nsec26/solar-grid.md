@@ -115,10 +115,10 @@ path before re-submitting (see memory `oob_flag_verification`).
 
 ## Artifacts
 
-- `C:\ctfint\nsec\.challenge-inventory.json` — `untouched_inventory[topic_id=59690]`
-- `C:\ctfint\nsec\solar-grid\artifacts\` — staged scripts and step responses
-- `C:\ctfint\nsec\solar-grid\CHALLENGE_PACKAGE.md` — candidate flag `FLAG-d2093796...`
-- `C:\ctfint\nsec\writeups\59690-solar-grid.md` — this file (consolidated)
+- `nsec/.challenge-inventory.json` — `untouched_inventory[topic_id=59690]`
+- `nsec/solar-grid\artifacts\` — staged scripts and step responses
+- `nsec/solar-grid\CHALLENGE_PACKAGE.md` — candidate flag `FLAG-d2093796...`
+- `nsec/writeups\59690-solar-grid.md` — this file (consolidated)
 
 ## Designer Intel (Discord, post-event 2026-05-19)
 

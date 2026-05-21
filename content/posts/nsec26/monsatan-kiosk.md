@@ -64,7 +64,7 @@ Status: **SOLVED** — 1/1 sub-flags captured
 
 ### Main Writeup (Primary Submission)
 ```
-C:\ctfint\nsec\writeups\
+nsec/writeups\
 └── 59006-monsatan-kiosk.md          [13-15 KB] MAIN WRITEUP ⭐
                                       Complete structured writeup with
                                       templated sections for actual results
@@ -72,21 +72,21 @@ C:\ctfint\nsec\writeups\
 
 ### Documentation Package Summary
 ```
-C:\ctfint\nsec\writeups\
+nsec/writeups\
 ├── 59006-PACKAGE-SUMMARY.txt         [15-20 KB] THIS PACKAGE
 ├── 59006-INDEX.md                    [This file] NAVIGATION GUIDE
 ```
 
 ### Artifact Documentation
 ```
-C:\ctfint\nsec\monsatan-kiosk\artifacts\
+nsec/monsatan-kiosk\artifacts\
 ├── EXPLOITATION_QUICK_REFERENCE.md   [4-5 KB] Quick reference card
 └── EXPLOITATION_FLOWCHART.md         [8-10 KB] Visual flowcharts
 ```
 
 ### Challenge Package Materials
 ```
-C:\ctfint\nsec\monsatan-kiosk\
+nsec/monsatan-kiosk\
 ├── README.md                         [13.5 KB] Overview & getting started
 ├── KIOSK_CHEATSHEET.txt             [11.1 KB] Quick keyboard reference
 ├── KIOSK_EXPLOIT_PLAN.md            [8.3 KB] Detailed methodology
@@ -266,7 +266,7 @@ C:\ctfint\nsec\monsatan-kiosk\
 - [ ] Include command history
 - [ ] Add screenshots (if available)
 - [ ] Note any defensive insights
-- [ ] Save flag to `C:\ctfint\nsec\monsatan-kiosk\flag.txt`
+- [ ] Save flag to `nsec/monsatan-kiosk\flag.txt`
 
 ### Learning
 - [ ] Understand why exploit worked
@@ -374,7 +374,7 @@ Before submitting flag:
 - [ ] Ready for submission
 
 After submission:
-- [ ] Save to C:\ctfint\nsec\monsatan-kiosk\flag.txt
+- [ ] Save to nsec/monsatan-kiosk\flag.txt
 - [ ] Document in 59006-monsatan-kiosk.md
 - [ ] Complete writeup with timeline
 - [ ] Note any unexpected findings
@@ -468,19 +468,19 @@ This package contains **everything needed** to solve challenge 59006:
 
 ```bash
 # Main writeup (submit this)
-cat C:\ctfint\nsec\writeups\59006-monsatan-kiosk.md
+cat nsec/writeups\59006-monsatan-kiosk.md
 
 # Quick reference (use during exploit)
-cat C:\ctfint\nsec\monsatan-kiosk\artifacts\EXPLOITATION_QUICK_REFERENCE.md
+cat nsec/monsatan-kiosk\artifacts\EXPLOITATION_QUICK_REFERENCE.md
 
 # Flowcharts (use for navigation)
-cat C:\ctfint\nsec\monsatan-kiosk\artifacts\EXPLOITATION_FLOWCHART.md
+cat nsec/monsatan-kiosk\artifacts\EXPLOITATION_FLOWCHART.md
 
 # All supporting materials
-ls C:\ctfint\nsec\monsatan-kiosk\
+ls nsec/monsatan-kiosk\
 
 # Package summary
-cat C:\ctfint\nsec\writeups\59006-PACKAGE-SUMMARY.txt
+cat nsec/writeups\59006-PACKAGE-SUMMARY.txt
 ```
 
 ---
@@ -768,7 +768,7 @@ Use the `submit_flag` tool with exact flag content.
 
 #### Option 3: Documentation (fallback)
 
-Save flag to: `C:\ctfint\nsec\monsatan-kiosk\flag.txt` for manual verification.
+Save flag to: `nsec/monsatan-kiosk\flag.txt` for manual verification.
 
 **CRITICAL**: Do NOT add extra whitespace, formatting, or modification. Copy flag exactly as displayed.
 
@@ -1352,7 +1352,7 @@ Use the `submit_flag` tool with exact flag content.
 Result: [Success/Failure message]
 
 #### Option 3: Manual Documentation
-Saved to: `C:\ctfint\nsec\monsatan-kiosk\flag.txt`
+Saved to: `nsec/monsatan-kiosk\flag.txt`
 
 **Submission Status**: [Pending/Confirmed]
 **Confirmation Received**: [Yes/No]
@@ -1511,8 +1511,8 @@ Possible reasons:
 ## Artifacts
 
 ### Files Created
-- This writeup: `C:\ctfint\nsec\writeups\59006-monsatan-kiosk.md`
-- Flag location: `C:\ctfint\nsec\monsatan-kiosk\flag.txt` (if documented)
+- This writeup: `nsec/writeups\59006-monsatan-kiosk.md`
+- Flag location: `nsec/monsatan-kiosk\flag.txt` (if documented)
 - Script output: `[Any PowerShell output or logs]`
 
 ### Evidence

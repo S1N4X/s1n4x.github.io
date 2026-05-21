@@ -89,7 +89,7 @@ None. No flags exist for this topic.
 
 ## Artifacts
 
-- `C:\ctfint\nsec\faia\topic-59975.json` — full Discourse topic scrape (7 posts)
+- `nsec/faia\topic-59975.json` — full Discourse topic scrape (7 posts)
 - `archives/staging/yaml-migration-map.md` §5 entry #5 — cross-reference for the `FLAG-This_Is_Not_A_Flag` honeypot string
 
 

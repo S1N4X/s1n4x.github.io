@@ -179,8 +179,8 @@ FATAL ERROR: FLAG-{4c7022450e7e5f58e3f2187c4fb4d5c3}
 
 ## Key Files
 
-- Binary: `C:\ctfint\nsec\monsatan-sprinklers\sprinklerbotctl`
-- Disassemblies (from prior agent): `C:\ctfint\nsec\monsatan-sprinklers\disasm.txt`, `disasm3.txt`
+- Binary: `nsec/monsatan-sprinklers\sprinklerbotctl`
+- Disassemblies (from prior agent): `nsec/monsatan-sprinklers\disasm.txt`, `disasm3.txt`
 - CMD_TABLE dumper: `/tmp/dumptable.py` on `shell.ctf`
 - Final exploit: `/tmp/exploit3.py` on `shell.ctf`
 

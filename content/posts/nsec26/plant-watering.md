@@ -85,22 +85,22 @@ OOB-verification policy (per `feedback_oob_flag_verification.md`) applies: any c
 
 ## Artifacts
 
-- `C:\ctfint\nsec\plant-watering\00_START_HERE.md` — navigation guide, 7-step recipe
-- `C:\ctfint\nsec\plant-watering\COACH_BRIEFING.md` — full technical briefing
-- `C:\ctfint\nsec\plant-watering\COACH_SESSION_SUMMARY.md` — risk assessment
-- `C:\ctfint\nsec\plant-watering\EXECUTION_CHECKLIST.md` — step-by-step with checkboxes
-- `C:\ctfint\nsec\plant-watering\CHEAT_SHEET.txt` — 1-page quick reference
-- `C:\ctfint\nsec\plant-watering\README_COACH.md` — context and file navigation
-- `C:\ctfint\nsec\plant-watering\SESSION_COMPLETE.txt` — session summary (does NOT mean solve completed)
-- `C:\ctfint\nsec\plant-watering\artifacts\EXPLOITATION_WRITEUP.md` — **CONTAMINATED with honeypot fixture; do NOT trust its "SOLVED" header**
-- `C:\ctfint\nsec\plant-watering\artifacts\create_mock_firmware.py` — **SOURCE of the honeypot fixture string** (lines 43-44)
-- `C:\ctfint\nsec\plant-watering\artifacts\firmware.bin`, `firmware.patched.bin` — synthetic mock firmware artifacts, NOT real badge dumps
-- `C:\ctfint\nsec\plant-watering\artifacts\PLANT_WATERING_ATTACK_PLAN.md`, `INDEX.md`, `QUICK_START.md`, `README_SOLUTION.md`, `SOLUTION_COMPLETE.txt`, `SOLUTION_OVERVIEW.txt`, `FINAL_SUMMARY.txt` — additional prior-coach scaffolding (all built around the fixture, all unreliable until live-badge execution proves them)
-- `C:\ctfint\nsec\plant-watering\artifacts\exploit_plant_watering.py` — script targeting the mock firmware, not the live badge
-- `C:\ctfint\nsec\plant-watering\artifacts\exploitation_report.json` — synthetic report
-- `C:\ctfint\nsec\plant-watering\artifacts\fetch_topic.py`, `topic.json`, `metadata.json` — Discourse scrape utilities
-- `C:\ctfint\nsec\crystal-badge\artifacts\badge_mqtt_broker.py` — **the actual broker script that would be used for a real solve attempt**
-- `C:\ctfint\nsec\crystal-badge\artifacts\ICS-MQTT-SETUP.md` — real setup documentation
+- `nsec/plant-watering\00_START_HERE.md` — navigation guide, 7-step recipe
+- `nsec/plant-watering\COACH_BRIEFING.md` — full technical briefing
+- `nsec/plant-watering\COACH_SESSION_SUMMARY.md` — risk assessment
+- `nsec/plant-watering\EXECUTION_CHECKLIST.md` — step-by-step with checkboxes
+- `nsec/plant-watering\CHEAT_SHEET.txt` — 1-page quick reference
+- `nsec/plant-watering\README_COACH.md` — context and file navigation
+- `nsec/plant-watering\SESSION_COMPLETE.txt` — session summary (does NOT mean solve completed)
+- `nsec/plant-watering\artifacts\EXPLOITATION_WRITEUP.md` — **CONTAMINATED with honeypot fixture; do NOT trust its "SOLVED" header**
+- `nsec/plant-watering\artifacts\create_mock_firmware.py` — **SOURCE of the honeypot fixture string** (lines 43-44)
+- `nsec/plant-watering\artifacts\firmware.bin`, `firmware.patched.bin` — synthetic mock firmware artifacts, NOT real badge dumps
+- `nsec/plant-watering\artifacts\PLANT_WATERING_ATTACK_PLAN.md`, `INDEX.md`, `QUICK_START.md`, `README_SOLUTION.md`, `SOLUTION_COMPLETE.txt`, `SOLUTION_OVERVIEW.txt`, `FINAL_SUMMARY.txt` — additional prior-coach scaffolding (all built around the fixture, all unreliable until live-badge execution proves them)
+- `nsec/plant-watering\artifacts\exploit_plant_watering.py` — script targeting the mock firmware, not the live badge
+- `nsec/plant-watering\artifacts\exploitation_report.json` — synthetic report
+- `nsec/plant-watering\artifacts\fetch_topic.py`, `topic.json`, `metadata.json` — Discourse scrape utilities
+- `nsec/crystal-badge\artifacts\badge_mqtt_broker.py` — **the actual broker script that would be used for a real solve attempt**
+- `nsec/crystal-badge\artifacts\ICS-MQTT-SETUP.md` — real setup documentation
 
 ## Designer Intel (Discord, post-event 2026-05-19)
 

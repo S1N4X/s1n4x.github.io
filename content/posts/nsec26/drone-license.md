@@ -117,7 +117,7 @@ The real flag lives in the **private** `support_topics` row. Python-side filter 
 ### Step 1 — Provision attacker-controlled GitHub repository
 
 ```powershell
-cd C:\ctfint\nsec\drone-license\extracted\gh-agent
+cd nsec/drone-license\extracted\gh-agent
 gh repo create drone-v061-31982b --private --source . --remote origin --push
 ```
 

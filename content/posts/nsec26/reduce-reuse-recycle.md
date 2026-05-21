@@ -471,7 +471,7 @@ Eight flags chain together forensics (Recycle Bin parsing, NTFS ADS), crypto (cu
 
 `subvention_audit.pdf` contains an "Approved by:" line followed by a redaction rectangle and the disclaimer "personnel identifier redacted under internal privacy policy." The redaction is a vector-drawn overlay; the original signature text is preserved underneath and can be recovered by re-rendering with the overlay removed (or by extracting the underlying text streams via a PDF tool that doesn't honor the overlay).
 
-The teammate's submission credited "ovcrash" / [teammate]. Flag value not directly captured locally — see the askgod history entry (id 143) for record.
+The teammate's submission credited "[teammate]" / [teammate]. Flag value not directly captured locally — see the askgod history entry (id 143) for record.
 
 ## Flag 2 — Alternate data stream + Paint layers
 

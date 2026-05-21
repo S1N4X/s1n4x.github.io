@@ -74,8 +74,8 @@ Status: **SOLVED** — 6/6 sub-flags captured
 
 - Discourse topic 59402 post body fetched via authenticated headed Chrome CDP (`fetch-topic-59402.ps1`)
 - Stealer log URL: `https://dl.nsec/ASHFATHER_HWID-9F2C-DEADBEEF.zip` (4.33 MB)
-- Saved to `C:\ctfint\nsec\tamper\stealer-log\ASHFATHER_HWID-9F2C-DEADBEEF.zip`
-- Extracted to `C:\ctfint\nsec\tamper\stealer-log\extracted\` — full LummaC2 dump (browsers, autofill, comms, FileGrabber, Wallets, Screen.png 4.3MB)
+- Saved to `nsec/tamper\stealer-log\ASHFATHER_HWID-9F2C-DEADBEEF.zip`
+- Extracted to `nsec/tamper\stealer-log\extracted\` — full LummaC2 dump (browsers, autofill, comms, FileGrabber, Wallets, Screen.png 4.3MB)
 
 ### Credentials confirmed working
 
@@ -164,14 +164,14 @@ If operator returns with envelope contents (admin code + any new web URLs), this
 
 ## Files produced this session
 
-- `C:\ctfint\nsec\fetch-topic-59402.ps1` — CDP fetcher for Discourse topic JSON
-- `C:\ctfint\nsec\tamper\topic-59402.json` — full topic 59402 content (5 posts, 18.8 KB)
-- `C:\ctfint\nsec\tamper\stealer-log\ASHFATHER_HWID-9F2C-DEADBEEF.zip` — original zip (4.33 MB)
-- `C:\ctfint\nsec\tamper\stealer-log\extracted\` — full extraction tree (Passwords, Autofills, browsers, FileGrabber, etc.)
-- `C:\ctfint\nsec\tamper\home-authed.html` — authenticated catalog snapshot (40 KB)
-- `C:\ctfint\nsec\tamper\elevate-anon-look.html` — elevate.php form snapshot
-- `C:\ctfint\nsec\tamper\elevate-bad-attempt.html` — elevate.php failure response (with `riddle=test&token=000000`)
-- `C:\ctfint\nsec\tamper\login-result.html`, `home-codex-session.html` — auxiliary recon
+- `nsec/fetch-topic-59402.ps1` — CDP fetcher for Discourse topic JSON
+- `nsec/tamper\topic-59402.json` — full topic 59402 content (5 posts, 18.8 KB)
+- `nsec/tamper\stealer-log\ASHFATHER_HWID-9F2C-DEADBEEF.zip` — original zip (4.33 MB)
+- `nsec/tamper\stealer-log\extracted\` — full extraction tree (Passwords, Autofills, browsers, FileGrabber, etc.)
+- `nsec/tamper\home-authed.html` — authenticated catalog snapshot (40 KB)
+- `nsec/tamper\elevate-anon-look.html` — elevate.php form snapshot
+- `nsec/tamper\elevate-bad-attempt.html` — elevate.php failure response (with `riddle=test&token=000000`)
+- `nsec/tamper\login-result.html`, `home-codex-session.html` — auxiliary recon
 
 ## Submission log
 
@@ -251,7 +251,7 @@ So:
 
 **Hard blocker**: the actual outsider credentials from the stealer log.
 
-The stealer log file is referenced in the NSEC platform Discourse topic 59402 ("Seed Vault"), with a link labeled "Stealer log". This file is **not** on disk anywhere under `C:\ctfint\nsec\`. It must be downloaded from the NSEC platform (Discourse attachment / `dl.nsec` link) by the previous agent who did 1-3/6.
+The stealer log file is referenced in the NSEC platform Discourse topic 59402 ("Seed Vault"), with a link labeled "Stealer log". This file is **not** on disk anywhere under `nsec/`. It must be downloaded from the NSEC platform (Discourse attachment / `dl.nsec` link) by the previous agent who did 1-3/6.
 
 `dl.nsec` browse is 403 / 404 for `/seedvault/`, `/stealer/`, `/seed-vault/`. The exact filename is unknown.
 
@@ -266,11 +266,11 @@ The stealer log file is referenced in the NSEC platform Discourse topic 59402 ("
 
 ## Files produced this session
 
-- `C:\ctfint\nsec\tamper\recon\index-anon.html` — anon landing snapshot
-- `C:\ctfint\nsec\tamper\recon\index-anon.headers` — response headers
-- `C:\ctfint\nsec\tamper\recon\login-fresh.html` — login form snapshot
-- `C:\ctfint\nsec\tamper\recon\data-listing.html` — `/data/` directory listing
-- `C:\ctfint\nsec\tamper\recon\includes-listing.html` — `/includes/` directory listing  
+- `nsec/tamper\recon\index-anon.html` — anon landing snapshot
+- `nsec/tamper\recon\index-anon.headers` — response headers
+- `nsec/tamper\recon\login-fresh.html` — login form snapshot
+- `nsec/tamper\recon\data-listing.html` — `/data/` directory listing
+- `nsec/tamper\recon\includes-listing.html` — `/includes/` directory listing  
 - (8 stub files for each PHP include, all 0-byte / 500 — confirms they're include-only)
 
 ## Submission history this session

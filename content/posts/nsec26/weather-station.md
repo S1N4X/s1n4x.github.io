@@ -24,7 +24,7 @@ Status: **STUCK** — 1/4 sub-flags captured (free flag from error oracle; 2/4�
 
 ## STUCK Rationale
 
-- | ~14:00 | Weather Station 2-4/4 | Discovered mission `seed_server`/`seed_endpoint`/`direct_flag` fields ARE writable but NOT consumed by /api/command (still 503). WS upgrades 101 but no server-push. Confirmed app.js schema {balloon_id, cmd, value} | STUCK. ovcrash hint "correct JSON triggers connector" but no shape produces non-503 |
+- | ~14:00 | Weather Station 2-4/4 | Discovered mission `seed_server`/`seed_endpoint`/`direct_flag` fields ARE writable but NOT consumed by /api/command (still 503). WS upgrades 101 but no server-push. Confirmed app.js schema {balloon_id, cmd, value} | STUCK. [teammate] hint "correct JSON triggers connector" but no shape produces non-503 |
 - - **Weather 1/4:** hard blocker confirmed: valid `/api/command` returns `503 SEED SERVER UNAVAILABLE`; `/api/balloons` is `200 []`; `/api/sensor-data?id=NSEC-01` is `404`. Evidence: `nsec/weather-station/deterministic-sidecar-2026-05-17.md`.
 - | a1242252f23fa3b46 | Weather Station VECTOR A | ✅ **COMPLETED** | 🛑 **STUCK** — VECTOR A blocked (JSON-only upload validation); Seed Server blocker hardcoded (cannot bypass from client side) |
 - - Weather Station: VECTOR A 🛑 (infrastructure blocker)
@@ -53,7 +53,7 @@ Status: **PARTIAL** — 1/4 sub-flags captured
 **Status**: STUCK after 15-min targeted probe budget. No new flag captured. Session 3 of 3 on this challenge — the upload error oracle yields only ONE flag string, which was already submitted as 1/4.
 
 ## Session goal
-Investigate ovcrash hint: "Hmm, that's weird. Interesting behavior. It might be worth investigating more." This phrase matches the askgod-recorded message for weather-station 1/4 ("That's an interesting behavior") — implying the upload primitive has more leakage potential.
+Investigate [teammate] hint: "Hmm, that's weird. Interesting behavior. It might be worth investigating more." This phrase matches the askgod-recorded message for weather-station 1/4 ("That's an interesting behavior") — implying the upload primitive has more leakage potential.
 
 ## Already-confirmed facts (from prior sessions)
 - 1/4 = `FLAG-4db975944910fbec42ab9d62431186ec` (already submitted; see askgod history line 151)
@@ -111,7 +111,7 @@ The storage error template **always contains the same flag string** regardless o
 ## What I DIDN'T try (next session candidates)
 1. **Race condition on `/mission/current.json`** — two simultaneous uploads racing the lighttpd file-serve; could expose partial-write content during serialization window. Worth ~2 min.
 2. **`/tmp` write-then-symlink race** — `../../tmp/x.json` succeeds. If app reads it later, could exploit symlink TOCTOU. Not investigated.
-3. **Verify ovcrash hint at venue** — message him for clarification. Three plausible meanings: (a) same oracle leaks DIFFERENT content I missed; (b) different oracle entirely; (c) flag-1 was already known by him as the only "easy" leak and the hint covers what we already have.
+3. **Verify [teammate] hint at venue** — message him for clarification. Three plausible meanings: (a) same oracle leaks DIFFERENT content I missed; (b) different oracle entirely; (c) flag-1 was already known by him as the only "easy" leak and the hint covers what we already have.
 4. **Balloon dispatch via mission-file weaponization when seed server comes online** — prior agent's recommendation. Time-gated.
 5. **/upload PUT/DELETE/PATCH method bypass** — prior recon shows 405, but only checked basic methods. No CONNECT, TRACE, or arbitrary method tested.
 
@@ -119,7 +119,7 @@ The storage error template **always contains the same flag string** regardless o
 **None.** Submission budget preserved (0/3). The only flag string the upload-error oracle yields is `FLAG-4db97594...`, which was already submitted as 1/4 and would be a guaranteed DUP rejection.
 
 ## Recommendation
-- Ask ovcrash at venue for clarification — the hint may be referring to an oracle we ALREADY found, not a new one
+- Ask [teammate] at venue for clarification — the hint may be referring to an oracle we ALREADY found, not a new one
 - If seed server comes online (currently 503 on /api/command), revisit balloon-WS impersonation + mission-file weaponization combo
 - Multi-track integration angle still untested — check if another NSEC challenge ("seed-server", "ground-control", "mission-control") provides the upstream that flips /api/command from 503 → 200
 
@@ -128,10 +128,10 @@ The storage error template **always contains the same flag string** regardless o
 - `probes-2026-05-16/` — all test files
 
 ## Key file paths
-- `C:\ctfint\nsec\weather-station\artifacts\probes-2026-05-16\raw_upload.py`
-- `C:\ctfint\nsec\weather-station\artifacts\probes-2026-05-16\` (probe workspace)
-- `C:\ctfint\nsec\weather-station\artifacts\opus-coach-report-2026-05-16.md` (prior session)
-- `C:\ctfint\nsec\weather-station\artifacts\helper-recon-2026-05-16.md` (helper recon)
+- `nsec/weather-station\artifacts\probes-2026-05-16\raw_upload.py`
+- `nsec/weather-station\artifacts\probes-2026-05-16\` (probe workspace)
+- `nsec/weather-station\artifacts\opus-coach-report-2026-05-16.md` (prior session)
+- `nsec/weather-station\artifacts\helper-recon-2026-05-16.md` (helper recon)
 
 ---
 
@@ -158,14 +158,14 @@ The storage error template **always contains the same flag string** regardless o
 | 13 | Range header on /mission/current to leak partial writes | LOW | PLANNED |
 
 ### Test harness created
-- Location: `/tmp/nsec-rce-pass-2026-05-17/` (or `C:\ctfint\nsec\weather-station\artifacts\rce-pass-2026-05-17\` when executed)
+- Location: `/tmp/nsec-rce-pass-2026-05-17/` (or `nsec/weather-station\artifacts\rce-pass-2026-05-17\` when executed)
 - Socket-level tests (WebSocket upgrade, Host header variations, multipart boundary edge cases)
 - Network issue: Current environment does not have DNS resolution for `weather-station.ctf` (pending venue access)
 
 ### Test harness location & artifacts created
-- `C:\ctfint\nsec\weather-station\artifacts\rce-pass-2026-05-17\rce_angles_tester.py` — comprehensive socket-level tester (all 13 angles)
-- `C:\ctfint\nsec\weather-station\artifacts\rce-pass-2026-05-17\quick-test.sh` — bash/curl version for fast venue testing
-- `C:\ctfint\nsec\weather-station\artifacts\rce-pass-2026-05-17\lighttpd-1.4.79-research.md` — CVE research + testing priorities
+- `nsec/weather-station\artifacts\rce-pass-2026-05-17\rce_angles_tester.py` — comprehensive socket-level tester (all 13 angles)
+- `nsec/weather-station\artifacts\rce-pass-2026-05-17\quick-test.sh` — bash/curl version for fast venue testing
+- `nsec/weather-station\artifacts\rce-pass-2026-05-17\lighttpd-1.4.79-research.md` — CVE research + testing priorities
 
 ### Execution plan
 When venue network access is restored:
@@ -180,7 +180,7 @@ When venue network access is restored:
 If **ANY** angle returns non-404 status or shows file-write behavior:
 - Immediate GET request to verify accessibility
 - Attempt to trigger code execution
-- Document exact payload + response for ovcrash consultation
+- Document exact payload + response for [teammate] consultation
 
 ### Analysis & strategy
 Created `STRATEGY.md` (detailed breakdown):
@@ -203,7 +203,7 @@ Created `STRATEGY.md` (detailed breakdown):
 2. **Prioritize Phase 1 testing** (angles 3-4 = CGI/PHP upload + lighttpd recon) — highest ROI (65% confidence)
 3. Document all responses (200/400/403/405/500/503) + body + timing
 4. For any CANDIDATE, immediately chain to exploitation phase
-5. Report findings to ovcrash with exact payloads + STRATEGY context if vectors blocked
+5. Report findings to [teammate] with exact payloads + STRATEGY context if vectors blocked
 
 ### Session 4 conclusion
 **Status**: READY FOR EXECUTION  
@@ -297,10 +297,10 @@ This means:
 
 ### Artifacts created
 
-- `C:\ctfint\nsec\weather-station\artifacts\shape-hunt.py` — Phase 1 tester (119 tests)
-- `C:\ctfint\nsec\weather-station\artifacts\shape-hunt-v2.py` — Phase 2 tester (73 tests)
-- `C:\ctfint\nsec\weather-station\artifacts\shape-hunt-v3.py` — Phase 3 tester (44 tests)
-- `C:\ctfint\nsec\weather-station\artifacts\shape-hunt-2026-05-17.md` — Results log (240+ tests)
+- `nsec/weather-station\artifacts\shape-hunt.py` — Phase 1 tester (119 tests)
+- `nsec/weather-station\artifacts\shape-hunt-v2.py` — Phase 2 tester (73 tests)
+- `nsec/weather-station\artifacts\shape-hunt-v3.py` — Phase 3 tester (44 tests)
+- `nsec/weather-station\artifacts\shape-hunt-2026-05-17.md` — Results log (240+ tests)
 
 ### Next steps / Stuck points
 
@@ -506,7 +506,7 @@ bash RUN-ALL-MISSION-TESTS.sh http://weather-station.ctf
 
 ## Files Delivered
 
-**Location**: `C:\ctfint\nsec\weather-station\artifacts\`
+**Location**: `nsec/weather-station\artifacts\`
 
 1. `mission-full-enable-flags.py` (355 lines, executable)
 2. `mission-extreme-values-test.py` (189 lines, executable)
@@ -528,7 +528,7 @@ Execute test suite at venue ASAP. If mission JSON tricks work, it should show as
 ## STUCK Rationale
 
 - | `aa18e13b191f8e1b6` | Weather-station 2-4/4 — WebSocket /ws + PUT/DELETE on /mission/current | my recon notes |
-- | ~14:00 | Weather Station 2-4/4 | Discovered mission `seed_server`/`seed_endpoint`/`direct_flag` fields ARE writable but NOT consumed by /api/command (still 503). WS upgrades 101 but no server-push. Confirmed app.js schema {balloon_id, cmd, value} | STUCK. ovcrash hint "correct JSON triggers connector" but no shape produces non-503 |
+- | ~14:00 | Weather Station 2-4/4 | Discovered mission `seed_server`/`seed_endpoint`/`direct_flag` fields ARE writable but NOT consumed by /api/command (still 503). WS upgrades 101 but no server-push. Confirmed app.js schema {balloon_id, cmd, value} | STUCK. [teammate] hint "correct JSON triggers connector" but no shape produces non-503 |
 - | `ae89d2b3722e97bcb` | weather-station JSON shape blast | Enumerate cmd names, schema fields, headers, WS handshake variants for non-503 response | running |
 - - `nsec/weather-station/artifacts/rce-pass-2026-05-17/` -- STRATEGY.md, test harness, ANGLES rankings
 - - weather-station 1/4: 503 is hardcoded; seed server is internal-only

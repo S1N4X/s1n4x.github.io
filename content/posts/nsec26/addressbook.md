@@ -39,7 +39,7 @@ Status: **SOLVED** — 2/2 sub-flags captured
 
 Topic 59438 — "The address book", askgod tag `addressbook`. A two-flag web challenge tagged `B/E:L` (1/2, 3 points) and `B/E:M` (2/2, 4 points). The application is an address-book front-end backed by an XML-database query layer, and the entire chain leans on XPath injection — a textbook NSEC web category for the lower-difficulty bracket.
 
-No track directory exists under `C:\ctfint\nsec\` for this challenge; both flags were submitted directly by a teammate via askgod within a five-minute window. This writeup reconstructs the chain from the askgod history message text and the inventory data in the YAML migration map §2 (rows #90 and #92).
+No track directory exists under `nsec/` for this challenge; both flags were submitted directly by a teammate via askgod within a five-minute window. This writeup reconstructs the chain from the askgod history message text and the inventory data in the YAML migration map §2 (rows #90 and #92).
 
 ## Recon
 

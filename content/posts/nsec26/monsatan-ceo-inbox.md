@@ -118,14 +118,14 @@ No honeypot strings observed for this track. The `SUSPICIOUS.md` file in the tra
 
 ## Artifacts
 
-- `C:\ctfint\nsec\writeups\60034-monsatan-ceo-inbox.md` — **primary file (recon-only LOW-STUB)** — Phase B-1 will fold this writeup's narrative into it
-- `C:\ctfint\nsec\monsatan-ceo-inbox\opus-coach-notes.md` — Opus session hypothesis catalog (the "promising angles" list pre-dates the solve)
-- `C:\ctfint\nsec\monsatan-ceo-inbox\SUSPICIOUS.md` — anti-trap log (clean)
-- `C:\ctfint\nsec\monsatan-ceo-inbox\artifacts\` — recon evidence
-- `C:\ctfint\nsec\monsatan-ceo-inbox\domain-plugin*.wasm`, `quote-plugin.wat` — captured/built plugin samples
-- `C:\ctfint\nsec\monsatan-ceo-inbox\wasm-patch-authz.py`, `parserdiff-attack.py`, `fix_crc*.py`, `craft-ceo-inbox-exploit.py` — manifest/plugin tamper helpers
-- `C:\ctfint\nsec\monsatan-ceo-inbox\register*.http`, `login*.http`, `api-*.http`, `inbox-unauth.http`, `plugins-unauth.http` — HTTP request fixtures
-- `C:\ctfint\nsec\monsatan-ceo-inbox\jwt-tamper.txt`, `static-key-probes.txt`, `sign-endpoint-posts.txt` — JWT/key probing notes
+- `nsec/writeups\60034-monsatan-ceo-inbox.md` — **primary file (recon-only LOW-STUB)** — Phase B-1 will fold this writeup's narrative into it
+- `nsec/monsatan-ceo-inbox\opus-coach-notes.md` — Opus session hypothesis catalog (the "promising angles" list pre-dates the solve)
+- `nsec/monsatan-ceo-inbox\SUSPICIOUS.md` — anti-trap log (clean)
+- `nsec/monsatan-ceo-inbox\artifacts\` — recon evidence
+- `nsec/monsatan-ceo-inbox\domain-plugin*.wasm`, `quote-plugin.wat` — captured/built plugin samples
+- `nsec/monsatan-ceo-inbox\wasm-patch-authz.py`, `parserdiff-attack.py`, `fix_crc*.py`, `craft-ceo-inbox-exploit.py` — manifest/plugin tamper helpers
+- `nsec/monsatan-ceo-inbox\register*.http`, `login*.http`, `api-*.http`, `inbox-unauth.http`, `plugins-unauth.http` — HTTP request fixtures
+- `nsec/monsatan-ceo-inbox\jwt-tamper.txt`, `static-key-probes.txt`, `sign-endpoint-posts.txt` — JWT/key probing notes
 - `archives/staging/yaml-migration-map.md` §2 rows #105, #106, #107 — submission evidence
 - `archives/staging/yaml-migration-map.md` §6 row #2 — contradiction record (status-correction recommendation for the primary file)
 - `archives/staging/yaml-migration-map.md` §7 row #3 — askgod-alias mapping (`monsatan-mailserver` → 60034)
