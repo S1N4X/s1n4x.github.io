@@ -143,6 +143,22 @@ article small {
   opacity: 0.4;
 }
 
+/* === Event badge (shown before post title on single pages) ============ */
+.event-badge {
+  font-family: "Fira Code", Monaco, Consolas, "Ubuntu Mono", monospace;
+  font-size: 0.45em;
+  font-weight: bold;
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+  vertical-align: 0.3em;
+  margin-right: 0.5em;
+  padding: 2px 8px;
+  background: color-mix(in srgb, var(--accent) 15%, transparent);
+  border: 1px solid color-mix(in srgb, var(--accent) 40%, transparent);
+  border-radius: 3px;
+  color: var(--accent);
+}
+
 /* === Page-level "aka <handle>" rendering ============================== */
 /* Used as an inline suffix beside the H1 title when frontmatter has an
  * `aka` field (e.g., /about/). Sized down from the H1, mono font, dimmed

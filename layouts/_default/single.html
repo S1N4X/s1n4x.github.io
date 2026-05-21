@@ -1,7 +1,7 @@
 {{ define "main" }}
 <article class="post">
   <h1 class="post-title">
-    <a href="{{ .Permalink }}">{{ .Title | markdownify }}{{ with .Params.aka }} <span class="aka-suffix"><span class="aka-dim">aka</span> {{ . }}</span>{{ end }}</a>
+    <a href="{{ .Permalink }}">{{ with .Params.categories }}{{ with index . 0 }}<span class="event-badge">{{ . }}</span> {{ end }}{{ end }}{{ .Title | markdownify }}{{ with .Params.aka }} <span class="aka-suffix"><span class="aka-dim">aka</span> {{ . }}</span>{{ end }}</a>
   </h1>
   <div class="post-meta">
     {{- if .Date -}}
