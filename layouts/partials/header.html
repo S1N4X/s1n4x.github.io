@@ -1,5 +1,5 @@
 {{/* Override of themes/terminal/layouts/partials/header.html.
-     Adds the theme-menu beside the language-menu (same dropdown chrome). */}}
+     Order: logo · (mobile menu) · language picker · theme picker. */}}
 <header class="header">
   <div class="header__inner">
     <div class="header__logo">
@@ -8,10 +8,10 @@
     {{ if len $.Site.Menus }}
       {{ partial "mobile-menu.html" . }}
     {{ end }}
-    {{ partial "theme-menu.html" . }}
     {{ if and $.Site.Params.showLanguageSelector (len $.Site.Home.AllTranslations) }}
       {{ partial "language-menu.html" . }}
     {{ end }}
+    {{ partial "theme-menu.html" . }}
   </div>
   {{ if len $.Site.Menus }}
     {{ partial "menu.html" . }}
