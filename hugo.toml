@@ -6,7 +6,7 @@ baseURL = "https://s1n4x.github.io/"
 locale = "en-us"
 title = "ctfint"
 theme = "terminal"
-pagination.pagerSize = 5
+pagination.pagerSize = 60
 # enableGitInfo flipped on AFTER first commit lands (Hugo refuses to build on
 # an unborn branch otherwise). Toggle to true once the initial push completes.
 enableGitInfo = false
