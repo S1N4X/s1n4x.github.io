@@ -267,6 +267,7 @@ article small {
 .theme-swatch--green     { background: #33ff66; }
 .theme-swatch--orange    { background: #ff9933; }
 .theme-swatch--cyberpunk { background: #ff00d4; }
+.theme-swatch--solarpunk { background: #94d63b; }
 
 /* === Active nav highlight ============================================== */
 /* Current section in the top menu: green background, black text. Applied
