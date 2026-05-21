@@ -159,17 +159,8 @@ article small {
   word-break: break-word;
 }
 
-.posts-table .col-date,
-.posts-table .col-event,
-.posts-table .col-status {
+.posts-table .col-event {
   white-space: nowrap;
-}
-
-.posts-table .col-date {
-  font-family: "Fira Code", Monaco, Consolas, monospace;
-  font-size: 0.9em;
-  opacity: 0.85;
-  width: 95px;
 }
 
 .posts-table .col-title a {
@@ -191,27 +182,26 @@ article small {
   border-radius: 3px;
 }
 
-.posts-table .col-status {
-  font-size: 0.85em;
-  width: 80px;
-}
-
-.posts-table .status {
+/* Status icon next to title (replaces the old Status column).
+ * Title attribute provides the textual status on hover. */
+.posts-table .status-icon {
   display: inline-block;
-  padding: 2px 8px;
-  border-radius: 3px;
-  font-size: 0.85em;
-  text-transform: lowercase;
-  letter-spacing: 0.03em;
+  width: 1.1em;
+  margin-right: 6px;
+  font-size: 1.05em;
+  vertical-align: -1px;
+  text-align: center;
+  font-weight: bold;
+  cursor: help;
 }
 
-.posts-table .status-solved      { background: color-mix(in srgb, #33ff66 25%, transparent); }
-.posts-table .status-partial     { background: color-mix(in srgb, #ffcc33 25%, transparent); }
-.posts-table .status-stuck       { background: color-mix(in srgb, #ff5555 25%, transparent); }
-.posts-table .status-untouched   { background: color-mix(in srgb, #888888 18%, transparent); opacity: 0.7; }
-.posts-table .status-honeypot    { background: color-mix(in srgb, #ff5555 35%, transparent); }
-.posts-table .status-non-challenge { background: color-mix(in srgb, #888888 18%, transparent); opacity: 0.6; }
-.posts-table .status-meta        { background: color-mix(in srgb, #66ccff 22%, transparent); }
+.posts-table .status-icon.status-solved        { color: #33ff66; }
+.posts-table .status-icon.status-partial       { color: #ffcc33; }
+.posts-table .status-icon.status-stuck         { color: #ff5555; }
+.posts-table .status-icon.status-untouched     { color: #888888; opacity: 0.8; }
+.posts-table .status-icon.status-honeypot      { color: #ff5555; }
+.posts-table .status-icon.status-non-challenge { color: #888888; opacity: 0.6; }
+.posts-table .status-icon.status-meta          { color: #66ccff; }
 
 .posts-table .tag {
   display: inline-block;
@@ -232,8 +222,5 @@ article small {
   }
   .posts-table .col-tags {
     display: none;
-  }
-  .posts-table .col-status {
-    width: auto;
   }
 }

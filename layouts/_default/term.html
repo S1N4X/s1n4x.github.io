@@ -11,10 +11,8 @@
     <table class="posts-table">
       <thead>
         <tr>
-          <th class="col-date">Date</th>
-          <th class="col-title">Title</th>
           <th class="col-event">Event</th>
-          <th class="col-status">Status</th>
+          <th class="col-title">Title</th>
           <th class="col-tags">Tags</th>
         </tr>
       </thead>
@@ -30,23 +28,29 @@
               {{ $status = "meta" }}
             {{ end }}
           {{ end }}
+          {{ $glyph := "" }}
+          {{ if eq $status "solved" }}{{ $glyph = "✓" }}
+          {{ else if eq $status "partial" }}{{ $glyph = "◐" }}
+          {{ else if eq $status "stuck" }}{{ $glyph = "✗" }}
+          {{ else if eq $status "untouched" }}{{ $glyph = "○" }}
+          {{ else if eq $status "honeypot" }}{{ $glyph = "⚠" }}
+          {{ else if eq $status "non-challenge" }}{{ $glyph = "·" }}
+          {{ else if eq $status "meta" }}{{ $glyph = "◆" }}
+          {{ end }}
           <tr class="post-row">
-            <td class="col-date"><time>{{ .Date.Format "2006-01-02" }}</time></td>
+            <td class="col-event"><code>{{ $event }}</code></td>
             <td class="col-title">
+              {{ if $glyph }}<span class="status-icon status-{{ $status }}" title="{{ $status }}">{{ $glyph }}</span>{{ end }}
               <a href="{{ .Permalink }}">{{ .Title | markdownify }}</a>
               {{ with .Description }}
                 <div class="post-desc">{{ . | markdownify }}</div>
               {{ end }}
             </td>
-            <td class="col-event"><code>{{ $event }}</code></td>
-            <td class="col-status">
-              {{ if $status }}
-                <span class="status status-{{ $status }}">{{ $status }}</span>
-              {{ end }}
-            </td>
             <td class="col-tags">
               {{ range .Params.tags }}
-                <a class="tag" href="{{ (urlize (printf "tags/%s/" .)) | absLangURL }}">#{{ . }}</a>
+                {{ if not (in (slice "solved" "partial" "stuck" "untouched" "honeypot" "non-challenge" "meta-writeup") .) }}
+                  <a class="tag" href="{{ (urlize (printf "tags/%s/" .)) | absLangURL }}">#{{ . }}</a>
+                {{ end }}
               {{ end }}
             </td>
           </tr>
