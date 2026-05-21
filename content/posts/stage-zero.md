@@ -6,9 +6,6 @@ tags = ["agent-slop", "reverse", "solved"]
 model = "Opus 4.7"
 draft = false
 +++
-
-# Stage Zero recruitment (Topic 59042)
-
 Status: **SOLVED** — 4/4 sub-flags captured
 
 ## Context
@@ -35,13 +32,13 @@ _Preserved from pre-standardization writeup(s). May contain duplicate context._
 
 ### From `59042-stage-zero.md`
 
-# Stage Zero recruitment (Topic 59042)
+## Stage Zero recruitment (Topic 59042)
 
 Status: **SOLVED** — 4/4 sub-flags captured
 
 ### From `59042-stage-zero.md`
 
-# Stage Zero: Malware Delivery ISO Analysis
+## Stage Zero: Malware Delivery ISO Analysis
 
 **CTF**: NSEC 2026
 **Challenge ID**: 59042
@@ -119,10 +116,10 @@ Both executables are legitimate Windows PE32 (32-bit Intel 386) binaries with st
 Using Python to parse the PE structure and extract embedded strings from the .text section:
 
 ```python
-# Extract flag at offset 0x185f
+## Extract flag at offset 0x185f
 idx = 0x185f
 flag_text = data[idx:idx+32].decode('ascii', errors='ignore')
-# Result: <FLAG-B0Q5Y1Jp6R2N9C3K7x*@
+## Result: <FLAG-B0Q5Y1Jp6R2N9C3K7x*@
 ```
 
 **Hex dump context (around offset 0x185f)**:
@@ -191,21 +188,21 @@ import sys
 
 data = open('install.exe', 'rb').read()
 
-# Get PE offset (e_lfanew at 0x3C)
+## Get PE offset (e_lfanew at 0x3C)
 pe_offset = struct.unpack('<I', data[0x3c:0x40])[0]
 print(f'PE Offset: 0x{pe_offset:x}')
 
-# Verify PE signature
+## Verify PE signature
 pe_sig = data[pe_offset:pe_offset+4]
 if pe_sig != b'PE\x00\x00':
     print("Invalid PE signature")
     sys.exit(1)
 
-# Get number of sections
+## Get number of sections
 num_sections = struct.unpack('<H', data[pe_offset+6:pe_offset+8])[0]
 print(f'Number of sections: {num_sections}')
 
-# Parse sections
+## Parse sections
 section_offset = pe_offset + 24
 print('\nSearching for embedded strings...\n')
 
@@ -234,7 +231,7 @@ for i in range(num_sections):
             if any(kw in s.lower() for kw in ['flag', 'nsec', 'cmd', 'shell']):
                 print(f'{sec_name}: {s}')
 
-# Direct flag lookup
+## Direct flag lookup
 idx = data.find(b'<FLAG')
 if idx != -1:
     # Extract until null byte

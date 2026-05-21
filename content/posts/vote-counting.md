@@ -6,9 +6,6 @@ tags = ["agent-slop", "crypto", "solved"]
 model = "Opus 4.7"
 draft = false
 +++
-
-# Vote Counting (Topic 59474)
-
 Status: **SOLVED** — 1/1 sub-flags captured
 
 ## Context
@@ -26,13 +23,13 @@ _Preserved from pre-standardization writeup(s). May contain duplicate context._
 
 ### From `59474-vote-counting.md`
 
-# Vote Counting (Topic 59474)
+## Vote Counting (Topic 59474)
 
 Status: **SOLVED** — 1/1 sub-flags captured
 
 ### From `59474-vote-counting.md`
 
-# Vote Counting (Challenge 59474)
+## Vote Counting (Challenge 59474)
 
 ## Context
 

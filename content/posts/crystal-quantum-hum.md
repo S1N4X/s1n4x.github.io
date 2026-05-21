@@ -6,9 +6,6 @@ tags = ["agent-slop", "hardware", "quantum", "solved"]
 model = "Opus 4.7"
 draft = false
 +++
-
-# The Crystal and the Grid - Part I: The Quantum Hum (Topic 59906)
-
 Status: **SOLVED** — 2/2 sub-flags captured
 
 ## Context
@@ -30,7 +27,7 @@ _Preserved from pre-standardization writeup(s). May contain duplicate context._
 
 ### From `59906-crystal-quantum-hum.md`
 
-# The Crystal and the Grid - Part I: The Quantum Hum (Topic 59906)
+## The Crystal and the Grid - Part I: The Quantum Hum (Topic 59906)
 
 Status: **SOLVED** — 2/2 sub-flags captured
 
@@ -43,7 +40,7 @@ Status: **SOLVED** — 2/2 sub-flags captured
 
 ### From `59906-crystal-quantum-hum.md`
 
-# The Crystal and the Grid - Part I: The Quantum Hum (59906)
+## The Crystal and the Grid - Part I: The Quantum Hum (59906)
 
 ## Status
 STUCK - Badge-only challenge. No remote endpoint exists. Requires physical badge serial

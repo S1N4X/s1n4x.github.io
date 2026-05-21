@@ -6,9 +6,6 @@ tags = ["agent-slop", "stuck", "web"]
 model = "Opus 4.7"
 draft = false
 +++
-
-# Announcement Board (Topic 58898)
-
 Status: **STUCK** — 3/4 sub-flags captured
 
 ## Context
@@ -40,7 +37,7 @@ _Preserved from pre-standardization writeup(s). May contain duplicate context._
 
 ### From `58898-announcement-board.md`
 
-# Announcement Board (Topic 58898)
+## Announcement Board (Topic 58898)
 
 Status: **STUCK** — 3/4 sub-flags captured
 

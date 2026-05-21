@@ -6,9 +6,6 @@ tags = ["agent-slop", "solved", "supply-chain"]
 model = "Opus 4.7"
 draft = false
 +++
-
-# Drone license (Topic 58646)
-
 Status: **SOLVED** — 2/2 sub-flags captured
 
 ## Context
@@ -32,7 +29,7 @@ _Preserved from pre-standardization writeup(s). May contain duplicate context._
 
 ### From `58646-drone-license.md`
 
-# Drone license (Topic 58646)
+## Drone license (Topic 58646)
 
 Status: **SOLVED** — 2/2 sub-flags captured
 
@@ -50,7 +47,7 @@ Status: **SOLVED** — 2/2 sub-flags captured
 
 ### From `58646-drone-license.md`
 
-# Drone License Challenge (58646)
+## Drone License Challenge (58646)
 
 ## Context
 
@@ -71,11 +68,11 @@ The challenge ships a private GitHub repo template (`gh-agent.zip`) with workflo
 ### Vulnerability Analysis — `support_agent/db.py`
 
 ```python
-# Line 20-21: CORRECT - Escapes single quotes
+## Line 20-21: CORRECT - Escapes single quotes
 def quote(value: str) -> str:
     return f"'{value.replace(\"'\", \"''\")}'"
 
-# Line 65-66: OVERRIDES - NO ESCAPING!
+## Line 65-66: OVERRIDES - NO ESCAPING!
 def quote(value: str) -> str:
     return f"'{value}'"
 ```

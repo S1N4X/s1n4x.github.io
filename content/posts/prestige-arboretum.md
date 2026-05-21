@@ -6,9 +6,6 @@ tags = ["agent-slop", "crypto", "stuck"]
 model = "Sonnet (default)"
 draft = false
 +++
-
-# Prestige Arboretum (Topic 59834)
-
 Status: **STUCK** — 0/unknown sub-flags captured
 
 ## Context
@@ -29,7 +26,7 @@ _Preserved from pre-standardization writeup(s). May contain duplicate context._
 
 ### From `59834-prestige-arboretum.md`
 
-# Prestige Arboretum (Topic 59834)
+## Prestige Arboretum (Topic 59834)
 
 Status: **STUCK** — 0/unknown sub-flags captured
 

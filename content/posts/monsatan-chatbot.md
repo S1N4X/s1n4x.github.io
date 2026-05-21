@@ -6,9 +6,6 @@ tags = ["agent-slop", "ai", "solved", "web"]
 model = "Sonnet (default)"
 draft = false
 +++
-
-# Monsatan - Chatbot (Topic 58682)
-
 Status: **SOLVED** — 3/3 sub-flags captured
 
 ## Context
@@ -34,13 +31,13 @@ _Preserved from pre-standardization writeup(s). May contain duplicate context._
 
 ### From `58682-monsatan-chatbot.md`
 
-# Monsatan - Chatbot (Topic 58682)
+## Monsatan - Chatbot (Topic 58682)
 
 Status: **SOLVED** — 3/3 sub-flags captured
 
 ### From `58682-monsatan-chatbot.md`
 
-# Monsatan - Chatbot
+## Monsatan - Chatbot
 
 **CTF**: NSEC 2026  
 **Category**: Web / LLM Security  
@@ -109,7 +106,7 @@ FLAG-{085a1ccb46afb053063f2e73dce5f298}       [Database query via authenticated 
 
 ### From `monsatan-chatbot.md`
 
-# Monsatan - Chatbot (NSEC 2026)
+## Monsatan - Chatbot (NSEC 2026)
 
 - **CTF:** NSEC 2026
 - **Category:** Web / LLM / prompt injection

@@ -6,9 +6,6 @@ tags = ["agent-slop", "forensics", "stuck"]
 model = "Opus 4.7"
 draft = false
 +++
-
-# Save the trees (Topic 59654)
-
 Status: **STUCK** — 0/unknown sub-flags captured
 
 ## Context
@@ -29,7 +26,7 @@ _Preserved from pre-standardization writeup(s). May contain duplicate context._
 
 ### From `59654-save-the-trees.md`
 
-# Save the trees (Topic 59654)
+## Save the trees (Topic 59654)
 
 Status: **STUCK** — 0/unknown sub-flags captured
 

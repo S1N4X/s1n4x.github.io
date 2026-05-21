@@ -6,9 +6,6 @@ tags = ["agent-slop", "hardware", "partial"]
 model = "Opus 4.7"
 draft = false
 +++
-
-# The Crystal (badge) mysteries (Topic 59510)
-
 Status: **PARTIAL** — 3/6 sub-flags captured (1/5 OCR + 2/5 post-dock firmware string + 1/1 Basic Electricity physical onsite)
 
 This writeup covers the Crystal Badge track (Discourse topic 59510) including its two paired askgod tags: `badge-firmware` (5-flag bonus track tied to the badge itself) and `crystal` (1-flag Basic Electricity physical-onsite). The separate `grid-alignment` track (Discourse topic 59906, VQE + QAOA quantum hum) is documented in `59906-crystal-quantum-hum.md` and is NOT covered here.

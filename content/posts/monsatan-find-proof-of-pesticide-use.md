@@ -6,9 +6,6 @@ tags = ["agent-slop", "solved", "web"]
 model = "Opus 4.7"
 draft = false
 +++
-
-# [Monsatan] Find proof of pesticide use (Topic 58862)
-
 Status: **SOLVED** — 1/1 sub-flags captured
 
 ## Context

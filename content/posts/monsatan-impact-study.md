@@ -6,9 +6,6 @@ tags = ["agent-slop", "stuck", "web"]
 model = "Sonnet (default)"
 draft = false
 +++
-
-# Monsatan Impact study (Topic 59546)
-
 Status: **STUCK** — 2/5 sub-flags captured
 
 ## Context
@@ -38,7 +35,7 @@ _Preserved from pre-standardization writeup(s). May contain duplicate context._
 
 ### From `59546-monsatan-impact-study.md`
 
-# Monsatan Impact study (Topic 59546)
+## Monsatan Impact study (Topic 59546)
 
 Status: **STUCK** — 2/5 sub-flags captured
 
@@ -66,7 +63,7 @@ Status: **STUCK** — 2/5 sub-flags captured
 
 ### From `59546-monsatan-impact.md`
 
-# 59546 - Monsatan Impact Study
+## 59546 - Monsatan Impact Study
 
 ## Status
 - **3/5 still open** (1/5 and 2/5 captured by prior work)

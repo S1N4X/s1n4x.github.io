@@ -6,9 +6,6 @@ tags = ["agent-slop", "misc", "solved"]
 model = "Opus 4.7"
 draft = false
 +++
-
-# Multi Facteur Authentication (Topic 59258)
-
 Status: **SOLVED** — 6/6 sub-flags captured
 
 ## Context
@@ -32,7 +29,7 @@ _Preserved from pre-standardization writeup(s). May contain duplicate context._
 
 ### From `59258-multi-facteur-authentication.md`
 
-# Multi Facteur Authentication (Topic 59258)
+## Multi Facteur Authentication (Topic 59258)
 
 Status: **SOLVED** — 6/6 sub-flags captured
 
@@ -49,7 +46,7 @@ Status: **SOLVED** — 6/6 sub-flags captured
 
 ### From `59258-multi-facteur.md`
 
-# 59258 - Multi Facteur Authentication
+## 59258 - Multi Facteur Authentication
 
 ## Status at end of this session (2026-05-16 ~01:30 EDT)
 

@@ -6,9 +6,6 @@ tags = ["agent-slop", "devops", "solved", "web"]
 model = "Sonnet (default)"
 draft = false
 +++
-
-# Monsatan - Deface the website (Topic 59981)
-
 Status: **SOLVED** — 6/6 sub-flags captured
 
 ## Context
@@ -35,7 +32,7 @@ _Preserved from pre-standardization writeup(s). May contain duplicate context._
 
 ### From `59981-monsatan-deface.md`
 
-# Monsatan - Deface the website (Topic 59981)
+## Monsatan - Deface the website (Topic 59981)
 
 Status: **SOLVED** — 6/6 sub-flags captured
 
@@ -55,7 +52,7 @@ Status: **SOLVED** — 6/6 sub-flags captured
 
 ### From `monsatan-defacing-3-6-v2.md`
 
-# monsatan-defacing 3/6 v2 — build-deface-recon branch exploration
+## monsatan-defacing 3/6 v2 — build-deface-recon branch exploration
 
 **Date:** 2026-05-16
 **Team:** 061 ([operator])

@@ -6,9 +6,6 @@ tags = ["agent-slop", "reverse", "solved"]
 model = "Opus 4.7"
 draft = false
 +++
-
-# The Germinator (Topic 59186)
-
 Status: **SOLVED** — 1/1 sub-flags captured
 
 ## Context
@@ -33,13 +30,13 @@ _Preserved from pre-standardization writeup(s). May contain duplicate context._
 
 ### From `59186-germinator.md`
 
-# The Germinator (Topic 59186)
+## The Germinator (Topic 59186)
 
 Status: **SOLVED** — 1/1 sub-flags captured
 
 ### From `59186-germinator.md`
 
-# The Germinator — SOLVED 2/2 (Topic 59186)
+## The Germinator — SOLVED 2/2 (Topic 59186)
 
 **Status: SOLVED — 2/2 sub-flags captured** (per migration map §6 #1; per `flags/.submit-history.jsonl` 2026-05-16T17:42:59 DUP submission of real flag value)
 
@@ -51,13 +48,13 @@ See artifacts for in-progress investigation notes.
 
 ### From `59186-germinator.md`
 
-# The Germinator (Topic 59186)
+## The Germinator (Topic 59186)
 
 Status: **STUCK** — 1/1 sub-flags captured
 
 ### From `59186-germinator.md`
 
-# The Germinator (Topic 59186)
+## The Germinator (Topic 59186)
 
 Status: **SOLVED** — 2/2 sub-flags captured
 
@@ -75,7 +72,7 @@ Status: **SOLVED** — 2/2 sub-flags captured
 
 ### From `59186-germinator.md`
 
-# The Germinator — Firmware License Check Defeat (Challenge 59186)
+## The Germinator — Firmware License Check Defeat (Challenge 59186)
 
 ## Context
 

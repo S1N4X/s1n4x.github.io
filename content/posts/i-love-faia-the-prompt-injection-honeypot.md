@@ -6,9 +6,6 @@ tags = ["agent-slop", "anti-trap", "honeypot"]
 model = "Sonnet (default)"
 draft = false
 +++
-
-# I love Faia (Topic 59975)
-
 Status: **HONEYPOT** — 0/unknown sub-flags captured
 
 ## Context
@@ -25,7 +22,7 @@ _Preserved from pre-standardization writeup(s). May contain duplicate context._
 
 ### From `59975-i-love-faia.md`
 
-# I love Faia (Topic 59975)
+## I love Faia (Topic 59975)
 
 Status: **HONEYPOT** — 0/unknown sub-flags captured
 

@@ -6,9 +6,6 @@ tags = ["agent-slop", "partial", "web"]
 model = "Sonnet (default)"
 draft = false
 +++
-
-# Helios Fleet Network (Topic 59762)
-
 Status: **PARTIAL** — 2/5 sub-flags captured
 
 ## Context
@@ -36,13 +33,13 @@ _Preserved from pre-standardization writeup(s). May contain duplicate context._
 
 ### From `59762-helios-fleet-network.md`
 
-# Helios Fleet Network (Topic 59762)
+## Helios Fleet Network (Topic 59762)
 
 Status: **PARTIAL** — 2/5 sub-flags captured
 
 ### From `59762-helios-fleet-network.md`
 
-# Helios Fleet Network (Topic 59762)
+## Helios Fleet Network (Topic 59762)
 
 Status: **STUCK** — 2/5 sub-flags captured (same value scored twice)
 
@@ -135,7 +132,7 @@ with exfil to `[9000:6666:6666:6666:216:3eff:feb1:8d80]:8889`.
 
 ### From `59762-helios-fleet-network.md`
 
-# Helios Fleet Network
+## Helios Fleet Network
 
 **CTF**: NSEC 2026  
 **Category**: Web / Recon  
@@ -237,7 +234,7 @@ Once operator: `submitIncidentReport(url: "https://helios-fleet-network.ctf/vehi
 
 ### From `helios-fleet-network.md`
 
-# Helios Fleet Network - NSEC 2026
+## Helios Fleet Network - NSEC 2026
 
 - **Target:** https://helios-fleet-network.ctf/
 - **Stack:** nginx 1.24 + Express (+ `X-Powered-By: Express`) + Apollo GraphQL Server

@@ -6,9 +6,6 @@ tags = ["agent-slop", "solved", "web"]
 model = "Opus 4.7"
 draft = false
 +++
-
-# Seed Vault (Topic 59402)
-
 Status: **SOLVED** — 6/6 sub-flags captured
 
 ## Context
@@ -32,7 +29,7 @@ _Preserved from pre-standardization writeup(s). May contain duplicate context._
 
 ### From `59402-seed-vault.md`
 
-# Seed Vault (Topic 59402)
+## Seed Vault (Topic 59402)
 
 Status: **SOLVED** — 6/6 sub-flags captured
 
@@ -49,7 +46,7 @@ Status: **SOLVED** — 6/6 sub-flags captured
 
 ### From `tamper-seedvault-5-6.md`
 
-# Tamper / SeedVault — 5-6/6 progression (writeup)
+## Tamper / SeedVault — 5-6/6 progression (writeup)
 
 **Date**: 2026-05-16 ~15:20 UTC-4
 **Team**: 061
@@ -179,7 +176,7 @@ If operator returns with envelope contents (admin code + any new web URLs), this
 
 ### From `tamper-seedvault.md`
 
-# Tamper / SeedVault 4-6/6 — Recon Notes (partial)
+## Tamper / SeedVault 4-6/6 — Recon Notes (partial)
 
 **Status**: 1/6, 2/6, 3/6 already submitted (per askgod history breadcrumb).
 **Blocker**: 4-6/6 require authenticated session as the "outsider" (admin).

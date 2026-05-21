@@ -6,9 +6,6 @@ tags = ["agent-slop", "crypto", "solved"]
 model = "Opus 4.7"
 draft = false
 +++
-
-# Community Alliance Sympatizers Mailbox (Topic 58790)
-
 Status: **SOLVED** — 1/1 sub-flags captured
 
 ## Context
@@ -31,7 +28,7 @@ _Preserved from pre-standardization writeup(s). May contain duplicate context._
 
 ### From `58790-sympatizers-mailbox.md`
 
-# Community Alliance Sympatizers Mailbox (Topic 58790)
+## Community Alliance Sympatizers Mailbox (Topic 58790)
 
 Status: **SOLVED** — 1/1 sub-flags captured
 

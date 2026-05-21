@@ -6,9 +6,6 @@ tags = ["agent-slop", "solved", "wasm", "web"]
 model = "Sonnet (default)"
 draft = false
 +++
-
-# [Monsatan] The CEO's inbox (Topic 60034)
-
 Status: **SOLVED** — 2/2 sub-flags captured (askgod_tag `monsatan-mailserver` — server-side alias for this Discourse topic)
 
 ## Context
@@ -37,13 +34,13 @@ _Preserved from pre-standardization writeup(s). May contain duplicate context._
 
 ### From `60034-monsatan-ceo-inbox.md`
 
-# [Monsatan] The CEO's inbox (Topic 60034)
+## [Monsatan] The CEO's inbox (Topic 60034)
 
 Status: **SOLVED** — 2/2 sub-flags captured
 
 ### From `60034-monsatan-ceo-inbox.md`
 
-# [Monsatan] The CEO's inbox (Topic 60034)
+## [Monsatan] The CEO's inbox (Topic 60034)
 
 Status: **STUCK** — 0/unknown sub-flags captured
 
@@ -138,7 +135,7 @@ No honeypot strings observed for this track. The `SUSPICIOUS.md` file in the tra
 
 ### From `60034-monsatan-ceo-inbox.md`
 
-# [Monsatan] The CEO's Inbox - Recon Report
+## [Monsatan] The CEO's Inbox - Recon Report
 
 ## Challenge Brief
 Topic 60034: Access CEO Johann Elke's inbox at mail.monsatan.ctf  

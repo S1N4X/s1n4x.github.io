@@ -6,9 +6,6 @@ tags = ["agent-slop", "ics", "iot", "mqtt", "partial"]
 model = "Opus 4.7"
 draft = false
 +++
-
-# Renewable Energy Mobility (REM) (Topic 59582)
-
 Status: **PARTIAL** — 6/7 sub-flags captured
 
 ## Context
@@ -42,7 +39,7 @@ _Preserved from pre-standardization writeup(s). May contain duplicate context._
 
 ### From `59582-renewable-energy-mobility.md`
 
-# Renewable Energy Mobility (REM) (Topic 59582)
+## Renewable Energy Mobility (REM) (Topic 59582)
 
 Status: **PARTIAL** — 6/7 sub-flags captured
 
@@ -79,7 +76,7 @@ Status: **PARTIAL** — 6/7 sub-flags captured
 
 ### From `59582-rem.md`
 
-# NSEC 2026 — Topic 59582 — REM (Renewable Energy Mobility) — Static analysis pass 2/7
+## NSEC 2026 — Topic 59582 — REM (Renewable Energy Mobility) — Static analysis pass 2/7
 
 Date: 2026-05-16
 Mode: offline static analysis (VPN down)
@@ -256,7 +253,7 @@ Following up on the encrypted `.squashfs.enc` payloads with aes-256-cbc:pbkdf2:
 
 ### From `renewable-energy-mobility-2of7-v2.md`
 
-# Renewable Energy Mobility (REM) — 2/7 — STUCK (v2 attempt)
+## Renewable Energy Mobility (REM) — 2/7 — STUCK (v2 attempt)
 
 **Track**: renewable-energy-mobility
 **Flag #**: 2/7
@@ -393,7 +390,7 @@ Did NOT submit a flag. 3 attempts on `submit-flag.ps1` budget remains untouched 
 
 ### From `renewable-energy-mobility-2of7.md`
 
-# NSEC 2026 — Renewable Energy Mobility (REM) — Flag 2/7 — PARTIAL / STUCK
+## NSEC 2026 — Renewable Energy Mobility (REM) — Flag 2/7 — PARTIAL / STUCK
 
 Date: 2026-05-16
 Status: **STUCK** — significant new findings but flag not extracted within time budget.

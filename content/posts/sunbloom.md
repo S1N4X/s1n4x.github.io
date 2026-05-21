@@ -6,9 +6,6 @@ tags = ["agent-slop", "stuck", "web"]
 model = "Sonnet (default)"
 draft = false
 +++
-
-# The SunBloom Library (Topic 59150)
-
 Status: **STUCK** — 0/unknown sub-flags captured
 
 ## Context
@@ -33,7 +30,7 @@ _Preserved from pre-standardization writeup(s). May contain duplicate context._
 
 ### From `59150-sunbloom.md`
 
-# The SunBloom Library (Topic 59150)
+## The SunBloom Library (Topic 59150)
 
 Status: **STUCK** — 0/unknown sub-flags captured
 
@@ -45,7 +42,7 @@ Status: **STUCK** — 0/unknown sub-flags captured
 
 ### From `59150-sunbloom-followup.md`
 
-# SunBloom Library - Challenge 59150 - Followup (2026-05-16)
+## SunBloom Library - Challenge 59150 - Followup (2026-05-16)
 
 ## Status: STUCK after ~55 min run, 0 flags extracted
 
@@ -104,7 +101,7 @@ NO flag candidate extracted. Nothing to submit.
 
 ### From `59150-sunbloom-library-attempt-2026-05-16.md`
 
-# SunBloom Library - Challenge 59150 (Attempt 2)
+## SunBloom Library - Challenge 59150 (Attempt 2)
 
 ## Status
 NOT SOLVED — extensive testing of email-confusion attack didn't break the password reset.
@@ -143,7 +140,7 @@ NOT SOLVED — extensive testing of email-confusion attack didn't break the pass
 
 ### From `59150-sunbloom-library.md`
 
-# SunBloom Library - Challenge 59150
+## SunBloom Library - Challenge 59150
 
 ## Summary
 Attempted exploitation of Laravel + Express.js integrated web application requiring admin access.
@@ -187,7 +184,7 @@ Status: In Progress
 
 ### From `59150-sunbloom-orch-c-research.md`
 
-# SunBloom Library (59150) — ORCH-C Exploitation Research Summary
+## SunBloom Library (59150) — ORCH-C Exploitation Research Summary
 
 **Challenge:** The SunBloom Library  
 **Topic:** 59150  
@@ -400,7 +397,7 @@ Status: In Progress
 
 ### From `59150-sunbloom.md`
 
-# SunBloom Library — Challenge 59150
+## SunBloom Library — Challenge 59150
 **Status:** STUCK — All attack vectors exhausted, no flag obtained  
 **Date:** 2026-05-17  
 **Submissions made:** 0 / 5

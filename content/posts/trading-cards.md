@@ -6,9 +6,6 @@ tags = ["agent-slop", "misc", "solved"]
 model = "Opus 4.7"
 draft = false
 +++
-
-# Trading cards! (Topic 59726)
-
 Status: **SOLVED** — 4/4 sub-flags captured
 
 ## Context
@@ -34,13 +31,13 @@ _Preserved from pre-standardization writeup(s). May contain duplicate context._
 
 ### From `59726-trading-cards.md`
 
-# Trading cards! (Topic 59726)
+## Trading cards! (Topic 59726)
 
 Status: **SOLVED** — 4/4 sub-flags captured
 
 ### From `59726-trading-cards.md`
 
-# Trading cards! (Topic 59726)
+## Trading cards! (Topic 59726)
 
 Status: **STUCK** — 4/4 sub-flags captured
 
@@ -50,7 +47,7 @@ See artifacts for in-progress investigation notes.
 
 ### From `59726-trading-cards.md`
 
-# Trading cards! (Topic 59726)
+## Trading cards! (Topic 59726)
 
 Status: **STUCK** — 0/unknown sub-flags captured
 
@@ -65,7 +62,7 @@ Status: **STUCK** — 0/unknown sub-flags captured
 
 ### From `59726-trading-cards.md`
 
-# Trading Cards! (Challenge 59726)
+## Trading Cards! (Challenge 59726)
 
 ## Context
 

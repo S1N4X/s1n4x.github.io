@@ -6,9 +6,6 @@ tags = ["agent-slop", "hardware", "partial", "rf"]
 model = "Sonnet (default)"
 draft = false
 +++
-
-# Missing bus (Topic 59870)
-
 Status: **PARTIAL** — 1/4 sub-flags captured
 
 ## Context
@@ -38,13 +35,13 @@ _Preserved from pre-standardization writeup(s). May contain duplicate context._
 
 ### From `59870-missing-bus.md`
 
-# Missing bus (Topic 59870)
+## Missing bus (Topic 59870)
 
 Status: **PARTIAL** — 1/4 sub-flags captured
 
 ### From `59870-missing-bus.md`
 
-# Missing bus (Topic 59870)
+## Missing bus (Topic 59870)
 
 Status: **STUCK** — 0/unknown sub-flags captured
 
@@ -65,7 +62,7 @@ Status: **STUCK** — 0/unknown sub-flags captured
 
 ### From `59870-missing-bus.md`
 
-# Missing Bus (59870 / askgod track `trolley-bus`) - Writeup
+## Missing Bus (59870 / askgod track `trolley-bus`) - Writeup
 
 - **Challenge ID:** 59870
 - **askgod track:** `trolley-bus` (note: Discourse title is "Missing bus" but the score tag is `trolley-bus`)
@@ -288,8 +285,8 @@ This rejects `flag-dc8fd0` (only 6 chars) with `[DENY-SHAPE]`, never reaching as
 **The solution:** Operator submits directly to askgod, bypassing the local wrapper:
 ```bash
 askgod submit "flag-dc8fd0"
-# OR via MCP:
-# Submit flag: flag-dc8fd0, Track: missing-bus
+## OR via MCP:
+## Submit flag: flag-dc8fd0, Track: missing-bus
 ```
 
 **Why this is the right answer:**

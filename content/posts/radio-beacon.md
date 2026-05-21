@@ -6,9 +6,6 @@ tags = ["agent-slop", "rf", "stuck"]
 model = "Opus 4.7"
 draft = false
 +++
-
-# Radio beacon (Topic 59798)
-
 Status: **STUCK** — 0/unknown sub-flags captured
 
 ## Context
@@ -29,7 +26,7 @@ _Preserved from pre-standardization writeup(s). May contain duplicate context._
 
 ### From `59798-radio-beacon.md`
 
-# Radio beacon (Topic 59798)
+## Radio beacon (Topic 59798)
 
 Status: **STUCK** — 0/unknown sub-flags captured
 

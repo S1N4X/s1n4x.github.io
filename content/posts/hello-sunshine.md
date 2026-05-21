@@ -6,9 +6,6 @@ tags = ["agent-slop", "pwn", "solved"]
 model = "Opus 4.7"
 draft = false
 +++
-
-# Hello Sunshine (Topic 58826)
-
 Status: **SOLVED** — 2/2 sub-flags captured
 
 ## Context
@@ -33,13 +30,13 @@ _Preserved from pre-standardization writeup(s). May contain duplicate context._
 
 ### From `58826-hello-sunshine.md`
 
-# Hello Sunshine (Topic 58826)
+## Hello Sunshine (Topic 58826)
 
 Status: **SOLVED** — 2/2 sub-flags captured
 
 ### From `58826-hello-sunshine.md`
 
-# Hello Sunshine (Challenge 58826)
+## Hello Sunshine (Challenge 58826)
 
 ## Context
 

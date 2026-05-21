@@ -6,9 +6,6 @@ tags = ["agent-slop", "ics"]
 model = "Opus 4.7"
 draft = false
 +++
-
-# Plant Watering ICS (Topic 58970)
-
 Status: **UNTOUCHED** — 0 sub-flags captured (badge-gated, anti-trap honeypot fixture present in artifacts; see Anti-Trap Notes)
 
 ## Context
@@ -29,7 +26,7 @@ _Preserved from pre-standardization writeup(s). May contain duplicate context._
 
 ### From `58970-plant-watering.md`
 
-# Plant Watering ICS (Topic 58970)
+## Plant Watering ICS (Topic 58970)
 
 Status: **UNTOUCHED** — 0 sub-flags captured (badge-gated; honeypot fixture present, not submittable)
 

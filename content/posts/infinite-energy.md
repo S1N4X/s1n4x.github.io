@@ -6,9 +6,6 @@ tags = ["agent-slop", "info", "stuck"]
 model = "Opus 4.7"
 draft = false
 +++
-
-# Infinite Energy (Topic 58754)
-
 Status: **STUCK** — 0/unknown sub-flags captured
 
 ## Context
@@ -29,7 +26,7 @@ _Preserved from pre-standardization writeup(s). May contain duplicate context._
 
 ### From `58754-infinite-energy.md`
 
-# Infinite Energy (Topic 58754)
+## Infinite Energy (Topic 58754)
 
 Status: **STUCK** — 0/unknown sub-flags captured
 

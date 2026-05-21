@@ -6,9 +6,6 @@ tags = ["agent-slop", "solved", "wasm", "web"]
 model = "Opus 4.7"
 draft = false
 +++
-
-# [Monsatan] Pesticide Supply Chain (Topic 59982)
-
 Status: **SOLVED** — 1/1 sub-flag captured (askgod_tag `monsatan-orders`, askgod #14 — 9 pts, 2026-05-16 10:08 EDT)
 
 ## Context
@@ -46,7 +43,7 @@ _Preserved from pre-standardization writeup(s). May contain duplicate context._
 
 ### From `59982-monsatan-pesticide-supply-chain.md`
 
-# [Monsatan] Pesticide Supply Chain (Topic 59982)
+## [Monsatan] Pesticide Supply Chain (Topic 59982)
 
 Status: **SOLVED** — 1/1 sub-flags captured
 
@@ -57,7 +54,7 @@ Status: **SOLVED** — 1/1 sub-flags captured
 
 ### From `59982-monsatan-pesticide-SOLVED.md`
 
-# 59982 — Monsatan Pesticide Supply Chain
+## 59982 — Monsatan Pesticide Supply Chain
 
 ## Status: NOT SOLVED (STUCK confirmed by 3rd independent pass)
 
@@ -153,7 +150,7 @@ Writeup finalised 2026-05-16 ~14:05Z (replay coach pass).
 
 ### From `59982-monsatan-pesticide.md`
 
-# 59982 - Monsatan Pesticide Supply Chain
+## 59982 - Monsatan Pesticide Supply Chain
 
 ## Status
 - **NOT SOLVED** — token forgery blocked by server-side HS256 signature

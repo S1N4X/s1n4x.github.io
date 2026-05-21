@@ -6,9 +6,6 @@ tags = ["agent-slop", "ics", "solved"]
 model = "Opus 4.7"
 draft = false
 +++
-
-# Water purification (Topic 59078)
-
 Status: **SOLVED** — 4/4 sub-flags captured
 
 ## Context
@@ -30,7 +27,7 @@ _Preserved from pre-standardization writeup(s). May contain duplicate context._
 
 ### From `59078-water-purification.md`
 
-# Water purification (Topic 59078)
+## Water purification (Topic 59078)
 
 Status: **SOLVED** — 4/4 sub-flags captured
 
@@ -45,7 +42,7 @@ Status: **SOLVED** — 4/4 sub-flags captured
 
 ### From `59078-water-purification.md`
 
-# Water Purification (59078) - SCADA Dashboard Exploitation
+## Water Purification (59078) - SCADA Dashboard Exploitation
 
 ## Challenge Overview
 **Challenge ID:** 59078  

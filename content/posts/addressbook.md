@@ -6,9 +6,6 @@ tags = ["agent-slop", "solved", "web"]
 model = "Opus 4.7"
 draft = false
 +++
-
-# The address book (Topic 59438)
-
 Status: **SOLVED** — 2/2 sub-flags captured
 
 ## Context
@@ -28,7 +25,7 @@ _Preserved from pre-standardization writeup(s). May contain duplicate context._
 
 ### From `59438-addressbook.md`
 
-# The address book (Topic 59438)
+## The address book (Topic 59438)
 
 Status: **SOLVED** — 2/2 sub-flags captured
 

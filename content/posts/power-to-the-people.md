@@ -6,9 +6,6 @@ tags = ["agent-slop", "solved", "web"]
 model = "Opus 4.7"
 draft = false
 +++
-
-# Power to the People Election Platform (Topic 59366)
-
 Status: **SOLVED** — 2/2 sub-flags captured
 
 ## Context
@@ -32,7 +29,7 @@ _Preserved from pre-standardization writeup(s). May contain duplicate context._
 
 ### From `59366-power-to-the-people.md`
 
-# Power to the People Election Platform (Topic 59366)
+## Power to the People Election Platform (Topic 59366)
 
 Status: **SOLVED** — 2/2 sub-flags captured
 
@@ -50,7 +47,7 @@ Status: **SOLVED** — 2/2 sub-flags captured
 
 ### From `59366-power-to-the-people.md`
 
-# Power to the People (Challenge 59366)
+## Power to the People (Challenge 59366)
 
 ## Context
 

@@ -6,9 +6,6 @@ tags = ["agent-slop", "kiosk-escape", "solved"]
 model = "Sonnet (default)"
 draft = false
 +++
-
-# Monsatan - Kiosk (Topic 59006)
-
 Status: **SOLVED** — 1/1 sub-flags captured
 
 ## Context
@@ -31,7 +28,7 @@ _Preserved from pre-standardization writeup(s). May contain duplicate context._
 
 ### From `59006-monsatan-kiosk.md`
 
-# Monsatan - Kiosk (Topic 59006)
+## Monsatan - Kiosk (Topic 59006)
 
 Status: **SOLVED** — 1/1 sub-flags captured
 
@@ -47,7 +44,7 @@ Status: **SOLVED** — 1/1 sub-flags captured
 
 ### From `59006-INDEX.md`
 
-# NSEC 2026 CTF Challenge 59006 — Complete Documentation Index
+## NSEC 2026 CTF Challenge 59006 — Complete Documentation Index
 
 ## Challenge: Monsatan Kiosk Escape
 
@@ -301,16 +298,16 @@ nsec/monsatan-kiosk\
 
 ### Key Commands
 ```powershell
-# Quick search
+## Quick search
 type C:\flag.txt
 
-# Deep search
+## Deep search
 Get-ChildItem C:\ -Filter '*flag*' -Recurse -Force
 
-# Registry search
+## Registry search
 reg query HKEY_LOCAL_MACHINE\Software\Monsatan
 
-# Environment check
+## Environment check
 echo %FLAG% && set | findstr flag
 ```
 
@@ -466,19 +463,19 @@ This package contains **everything needed** to solve challenge 59006:
 ## 📋 File Access Quick Reference
 
 ```bash
-# Main writeup (submit this)
+## Main writeup (submit this)
 cat nsec/writeups\59006-monsatan-kiosk.md
 
-# Quick reference (use during exploit)
+## Quick reference (use during exploit)
 cat nsec/monsatan-kiosk\artifacts\EXPLOITATION_QUICK_REFERENCE.md
 
-# Flowcharts (use for navigation)
+## Flowcharts (use for navigation)
 cat nsec/monsatan-kiosk\artifacts\EXPLOITATION_FLOWCHART.md
 
-# All supporting materials
+## All supporting materials
 ls nsec/monsatan-kiosk\
 
-# Package summary
+## Package summary
 cat nsec/writeups\59006-PACKAGE-SUMMARY.txt
 ```
 
@@ -499,7 +496,7 @@ cat nsec/writeups\59006-PACKAGE-SUMMARY.txt
 
 ### From `59006-monsatan-kiosk-complete.md`
 
-# NSEC 2026 CTF Challenge 59006: Monsatan Kiosk Escape
+## NSEC 2026 CTF Challenge 59006: Monsatan Kiosk Escape
 
 **CTF**: NorthSec 2026  
 **Challenge ID**: 59006  
@@ -658,19 +655,19 @@ Lists all files in C:\ including hidden files (flag may be hidden).
 #### Step 3: Search Common Locations
 
 ```powershell
-# Check root directory for flag files
+## Check root directory for flag files
 dir C:\*.txt
 dir C:\flag*
 
-# Check user directories
+## Check user directories
 dir C:\Users\*/Desktop/
 dir C:\Users\*/Documents/
 
-# Check Windows temporary directories
+## Check Windows temporary directories
 dir C:\Temp\
 dir C:\Windows\Temp\
 
-# Check ProgramData
+## Check ProgramData
 dir C:\ProgramData\
 ```
 
@@ -679,21 +676,21 @@ dir C:\ProgramData\
 If flag not found in common locations, use PowerShell's recursive search:
 
 ```powershell
-# PowerShell method (most flexible)
+## PowerShell method (most flexible)
 Get-ChildItem -Path C:\ -Filter '*flag*' -Recurse -Force -ErrorAction SilentlyContinue | Select-Object FullName
 
-# Alternative: findstr
+## Alternative: findstr
 findstr /s "flag\|FLAG\|Flag" C:\
 ```
 
 #### Step 5: Check Environment Variables and Registry
 
 ```powershell
-# Check for flag in environment variables
+## Check for flag in environment variables
 echo %FLAG%
 set | findstr /i flag
 
-# Check registry for Monsatan entries
+## Check registry for Monsatan entries
 reg query "HKEY_LOCAL_MACHINE\Software\Monsatan"
 reg query "HKEY_CURRENT_USER\Software\Monsatan"
 ```
@@ -1076,7 +1073,7 @@ The Monsatan Kiosk challenge demonstrates how easily default Windows configurati
 ## Appendix: Quick Command Reference
 
 ```powershell
-# Phase 2: Keyboard Shortcuts (try in order)
+## Phase 2: Keyboard Shortcuts (try in order)
 Alt+Tab
 Ctrl+Alt+Delete
 Win+R
@@ -1088,13 +1085,13 @@ Win+D
 Ctrl+W
 Win+Pause/Break
 
-# Phase 3: Command Execution
+## Phase 3: Command Execution
 cmd.exe           # Command prompt
 powershell.exe    # PowerShell
 explorer.exe      # File explorer
 taskmgr.exe       # Task Manager alternate
 
-# Phase 4: Flag Discovery
+## Phase 4: Flag Discovery
 whoami                                    # Check user
 cd C:\                                    # Go to root
 dir /a:h                                  # Show hidden files
@@ -1103,7 +1100,7 @@ Get-ChildItem -Path C:\ -Recurse -Filter '*flag*'  # PowerShell search
 findstr /s "flag" C:\                     # Find string "flag"
 reg query "HKEY_LOCAL_MACHINE\Software\Monsatan"    # Registry search
 
-# Phase 5: Flag Extraction
+## Phase 5: Flag Extraction
 type C:\flag.txt                          # Display flag (CMD)
 Get-Content -Path C:\flag.txt             # Display flag (PowerShell)
 ```
@@ -1122,7 +1119,7 @@ Challenge Management Suite v1.5.3
 
 ### From `59006-monsatan-kiosk.md`
 
-# NSEC 2026 CTF Writeup: Monsatan Kiosk Escape (59006)
+## NSEC 2026 CTF Writeup: Monsatan Kiosk Escape (59006)
 
 **Challenge ID**: 59006  
 **Challenge Name**: Monsatan - Kiosk  
@@ -1257,22 +1254,22 @@ An electronic advertising kiosk controlled by Monsatan displays corporate propag
 Once command prompt/PowerShell access is gained:
 
 ```powershell
-# Verify user context
+## Verify user context
 whoami
 
-# Navigate to root directory
+## Navigate to root directory
 cd C:\
 
-# List files including hidden ones
+## List files including hidden ones
 dir /a:h
 
-# List text files in root
+## List text files in root
 dir C:\*.txt
 
-# Check user directories
+## Check user directories
 dir C:\Users\*\Desktop\
 
-# Check if flag.txt exists in common locations
+## Check if flag.txt exists in common locations
 type C:\flag.txt
 type C:\Users\*\Desktop\flag.txt
 ```
@@ -1291,18 +1288,18 @@ type C:\Users\*\Desktop\flag.txt
 #### Advanced Search (if flag not in common locations)
 
 ```powershell
-# PowerShell recursive search
+## PowerShell recursive search
 Get-ChildItem -Path C:\ -Filter '*flag*' -Recurse -Force | Select-Object FullName
 
-# Environment variable check
+## Environment variable check
 echo %FLAG%
 set | findstr flag
 
-# Registry search
+## Registry search
 reg query "HKEY_LOCAL_MACHINE\Software\Monsatan"
 reg query "HKEY_CURRENT_USER\Software\Monsatan"
 
-# Deep file search with findstr
+## Deep file search with findstr
 findstr /r /s "monsatan\|flag\|secret" C:\
 ```
 
@@ -1316,11 +1313,11 @@ findstr /r /s "monsatan\|flag\|secret" C:\
 
 **Commands**:
 ```powershell
-# Read flag content
+## Read flag content
 type C:\[flag-location]
 
-# Copy flag content (do NOT add extra whitespace)
-# [EXACT FLAG CONTENT]:
+## Copy flag content (do NOT add extra whitespace)
+## [EXACT FLAG CONTENT]:
 ```
 
 **Flag Content**: 
@@ -1575,13 +1572,13 @@ Win+Pause/Break       | System properties            | (physical onsite — team
 ## Appendix B: Command History
 
 ```powershell
-# [Document all commands executed]
+## [Document all commands executed]
 whoami
 cd C:\
 dir /a:h
 dir C:\*.txt
 type C:\flag.txt
-# [Continue with all relevant commands]
+## [Continue with all relevant commands]
 ```
 
 ---

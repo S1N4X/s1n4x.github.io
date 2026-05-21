@@ -6,9 +6,6 @@ tags = ["agent-slop", "crypto", "solved", "web"]
 model = "Opus 4.7"
 draft = false
 +++
-
-# Monsatan - Checkmate (Topic 59983)
-
 Status: **SOLVED** — 1/1 sub-flags captured
 
 ## Context
@@ -31,7 +28,7 @@ _Preserved from pre-standardization writeup(s). May contain duplicate context._
 
 ### From `59983-monsatan-checkmate.md`
 
-# Monsatan - Checkmate (Topic 59983)
+## Monsatan - Checkmate (Topic 59983)
 
 Status: **SOLVED** — 1/1 sub-flags captured
 
@@ -43,7 +40,7 @@ Status: **SOLVED** — 1/1 sub-flags captured
 
 ### From `59983-monsatan-checkmate.md`
 
-# Monsatan - Checkmate (Topic 59983)
+## Monsatan - Checkmate (Topic 59983)
 
 Status: **SOLVED** — 1/1 sub-flag captured
 

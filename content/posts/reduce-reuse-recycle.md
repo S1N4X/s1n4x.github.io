@@ -6,9 +6,6 @@ tags = ["agent-slop", "forensics", "solved"]
 model = "Opus 4.7"
 draft = false
 +++
-
-# Reduce, reuse, recycle (Topic 59330)
-
 Status: **SOLVED** — 8/8 sub-flags captured
 
 ## Context
@@ -38,7 +35,7 @@ _Preserved from pre-standardization writeup(s). May contain duplicate context._
 
 ### From `59330-reduce-reuse-recycle.md`
 
-# Reduce, reuse, recycle (Topic 59330)
+## Reduce, reuse, recycle (Topic 59330)
 
 Status: **SOLVED** — 8/8 sub-flags captured
 
@@ -48,7 +45,7 @@ Status: **SOLVED** — 8/8 sub-flags captured
 
 ### From `59330-reduce-reuse-recycle.md`
 
-# NSEC 2026 — Reduce, Reuse, Recycle (59330) Writeup
+## NSEC 2026 — Reduce, Reuse, Recycle (59330) Writeup
 
 **Challenge ID**: 59330  
 **Category**: Forensics / Windows Incident Response  
@@ -82,10 +79,10 @@ A Point-of-Sale (POS) Windows system image in WIM (Windows Imaging Format) conta
 
 #### 1.1 Identify WIM Structure
 ```bash
-# List contents of WIM file
+## List contents of WIM file
 wimlib-imagex info reduce-reuse-recycle.wim
 
-# Or using 7z
+## Or using 7z
 7z l reduce-reuse-recycle.wim | head -50
 ```
 
@@ -93,17 +90,17 @@ wimlib-imagex info reduce-reuse-recycle.wim
 
 #### 1.2 Mount the Image
 ```bash
-# Create mount directory
+## Create mount directory
 mkdir -p /mnt/wim_mount
 
-# Using wimlib (Linux/Mac)
+## Using wimlib (Linux/Mac)
 wimlib-imagex mount reduce-reuse-recycle.wim 1 /mnt/wim_mount
 
-# Or extract using 7z
+## Or extract using 7z
 7z x reduce-reuse-recycle.wim -o/extracted_wim/
 
-# Or on Windows, mount directly
-# Right-click WIM → Mount image (Windows 10/11)
+## Or on Windows, mount directly
+## Right-click WIM → Mount image (Windows 10/11)
 ```
 
 **Expected**: Full Windows filesystem accessible for inspection.
@@ -114,23 +111,23 @@ wimlib-imagex mount reduce-reuse-recycle.wim 1 /mnt/wim_mount
 
 #### 2.1 Locate Registry Hives
 ```bash
-# From mounted filesystem
+## From mounted filesystem
 ls -la /mnt/wim_mount/Windows/System32/config/
 
-# Key files:
-# - SAM (user accounts & password hashes)
-# - SYSTEM (encryption keys for SAM)
-# - SECURITY (additional credentials)
-# - NTDS.DIT (if domain controller)
+## Key files:
+## - SAM (user accounts & password hashes)
+## - SYSTEM (encryption keys for SAM)
+## - SECURITY (additional credentials)
+## - NTDS.DIT (if domain controller)
 ```
 
 #### 2.2 Extract SAM/SYSTEM
 ```bash
-# Copy to working directory
+## Copy to working directory
 cp /mnt/wim_mount/Windows/System32/config/SAM ./
 cp /mnt/wim_mount/Windows/System32/config/SYSTEM ./
 
-# Verify extraction
+## Verify extraction
 file SAM
 file SYSTEM
 ```
@@ -143,7 +140,7 @@ from impacket.examples import secretsdump
 secretsdump.main(['-sam', 'SAM', '-system', 'SYSTEM', '-hashes', 'LMHASH:NTHASH', 'LOCAL'])
 "
 
-# Or using secretsdump.py directly
+## Or using secretsdump.py directly
 secretsdump.py -sam SAM -system SYSTEM LOCAL
 ```
 
@@ -157,12 +154,12 @@ User1:1000:00000000000000000000000000000000:e52cac67419a6a5a6f8345c7fcadc1c1:::
 #### 2.4 Crack NTLM Hashes
 **Using Hashcat (GPU-accelerated)**:
 ```bash
-# Format: hashcat -m 1000 <hash_file> <wordlist>
+## Format: hashcat -m 1000 <hash_file> <wordlist>
 echo "8846f7eaee8fb117ad06bdd830b7586c" > hashes.txt
 
 hashcat -m 1000 hashes.txt /usr/share/wordlists/rockyou.txt --force
 
-# Or with rules
+## Or with rules
 hashcat -m 1000 hashes.txt /usr/share/wordlists/rockyou.txt -r /usr/share/hashcat/rules/best64.rule
 ```
 
@@ -170,7 +167,7 @@ hashcat -m 1000 hashes.txt /usr/share/wordlists/rockyou.txt -r /usr/share/hashca
 ```bash
 john --format=NT --wordlist=/usr/share/wordlists/rockyou.txt hashes.txt
 
-# Show cracked passwords
+## Show cracked passwords
 john --format=NT --show hashes.txt
 ```
 
@@ -182,38 +179,38 @@ john --format=NT --show hashes.txt
 
 #### 3.1 Scan Configuration Files
 ```bash
-# Windows event logs
+## Windows event logs
 find /mnt/wim_mount/Windows/System32/winevt/Logs -name "*.evtx" -exec strings {} \; | grep -i "password\|credential\|api_key\|secret" | head -50
 
-# IIS logs (if POS web interface)
+## IIS logs (if POS web interface)
 cat /mnt/wim_mount/Windows/System32/LogFiles/W3SVC1/u_ex*.log | grep -i "password\|auth"
 
-# Registry text exports
+## Registry text exports
 reg export HKLM\Software registry_export.txt 2>/dev/null
 grep -r "password\|credential\|key" registry_export.txt
 ```
 
 #### 3.2 Application Data Search
 ```bash
-# Common credential storage locations
+## Common credential storage locations
 find /mnt/wim_mount/Users -name "*.config" -o -name "*.xml" -o -name "*.ini" | xargs grep -l "password\|cred" 2>/dev/null
 
-# ProgramFiles search (POS software)
+## ProgramFiles search (POS software)
 find /mnt/wim_mount/"Program Files" -type f \( -name "*.exe" -o -name "*.dll" -o -name "*.config" -o -name "*.xml" \) -exec strings {} \; | grep -E "password|api_key|token|secret" | sort -u
 ```
 
 #### 3.3 Browser & Database Credentials
 ```bash
-# Firefox stored logins
+## Firefox stored logins
 strings /mnt/wim_mount/Users/*/AppData/Roaming/Mozilla/Firefox/*/logins.json
 
-# Chrome stored passwords (encrypted, may require additional extraction)
+## Chrome stored passwords (encrypted, may require additional extraction)
 find /mnt/wim_mount/Users -name "Local State" -path "*/Chrome/*" -exec cat {} \;
 
-# SQL Server / MySQL connection strings
+## SQL Server / MySQL connection strings
 find /mnt/wim_mount -name "*.config" -exec grep -i "connection" {} + | grep -i "password"
 
-# RDP history
+## RDP history
 strings /mnt/wim_mount/Users/*/NTUSER.DAT | grep -i "rdp\|server"
 ```
 
@@ -223,42 +220,42 @@ strings /mnt/wim_mount/Users/*/NTUSER.DAT | grep -i "rdp\|server"
 
 #### 4.1 File Extension & Binary Signature Analysis
 ```bash
-# Search for unusual file extensions
+## Search for unusual file extensions
 find /mnt/wim_mount -type f ! -name ".*" | sed 's/.*\.//' | sort | uniq -c | sort -rn
 
-# Look for custom crypto indicators
+## Look for custom crypto indicators
 find /mnt/wim_mount -type f -name "*.enc" -o -name "*.crypt" -o -name "*.cipher" -o -name "*.key" -o -name "*.priv"
 
-# Hex dump suspicious files
+## Hex dump suspicious files
 xxd /mnt/wim_mount/path/to/suspicious.bin | head -50
 ```
 
 #### 4.2 Source Code & Script Analysis
 ```bash
-# Search for crypto-related keywords
+## Search for crypto-related keywords
 find /mnt/wim_mount -type f \( -name "*.py" -o -name "*.js" -o -name "*.cs" -o -name "*.vb" \) -exec grep -l "encrypt\|decrypt\|cipher\|aes\|rsa\|des" {} \;
 
-# Extract and analyze
+## Extract and analyze
 strings /mnt/wim_mount/path/to/crypto_app.exe | grep -E "encrypt|decrypt|key|cipher|algorithm"
 ```
 
 #### 4.3 Executable String Analysis
 ```bash
-# Search binaries for hardcoded crypto keys, algorithms
+## Search binaries for hardcoded crypto keys, algorithms
 strings /mnt/wim_mount/"Program Files"/*/bin/*.exe | grep -E "^[A-Fa-f0-9]{16,}$|^[A-Za-z0-9+/]{20,}$" | head -50
 
-# Look for crypto library imports
+## Look for crypto library imports
 strings /mnt/wim_mount/"Program Files"/*/bin/*.dll | grep -i "crypto\|cipher\|bcrypt\|openssl"
 ```
 
 #### 4.4 Reverse Engineering Suspect Binaries
 ```bash
-# If custom executable found
+## If custom executable found
 file /mnt/wim_mount/path/to/custom_crypto.exe
 strings /mnt/wim_mount/path/to/custom_crypto.exe > crypto_strings.txt
 
-# Use Ghidra or IDA to analyze
-# Look for: key derivation functions, encryption loops, hardcoded constants
+## Use Ghidra or IDA to analyze
+## Look for: key derivation functions, encryption loops, hardcoded constants
 ```
 
 ---
@@ -267,10 +264,10 @@ strings /mnt/wim_mount/path/to/custom_crypto.exe > crypto_strings.txt
 
 #### 5.1 Parse Windows Event Logs
 ```bash
-# Extract event logs (EVTX format)
+## Extract event logs (EVTX format)
 find /mnt/wim_mount/Windows/System32/winevt/Logs -name "*.evtx"
 
-# Convert to text (using python-evtx or Tools)
+## Convert to text (using python-evtx or Tools)
 python3 -m pip install python-evtx
 python3 -c "
 from Evtx.Evtx import Evtx
@@ -282,14 +279,14 @@ for record in log.records():
 
 #### 5.2 Recent Files & Temp Directories
 ```bash
-# Recently used files
+## Recently used files
 strings /mnt/wim_mount/Users/*/AppData/Roaming/Microsoft/Windows/Recent/*.lnk
 
-# Temp directories
+## Temp directories
 find /mnt/wim_mount/Windows/Temp -type f | xargs ls -lah
 find /mnt/wim_mount/Users/*/AppData/Local/Temp -type f | xargs ls -lah
 
-# Recycle Bin
+## Recycle Bin
 find /mnt/wim_mount/'$Recycle.Bin' -type f
 ```
 
@@ -299,17 +296,17 @@ find /mnt/wim_mount/'$Recycle.Bin' -type f
 
 #### 6.1 Identify Encrypted Data
 ```bash
-# High-entropy files (likely encrypted/compressed)
+## High-entropy files (likely encrypted/compressed)
 find /mnt/wim_mount -type f -exec sh -c 'entropy=$(xxd {} | awk "{s+=\$2} END {print s/NR}" | grep -oE "[0-9.]{1,5}"); if [ \$entropy -gt 7 ]; then echo "{} (entropy: \$entropy)"; fi' \; 2>/dev/null | head -20
 ```
 
 #### 6.2 Attempt Decryption
 ```bash
-# If passphrase/key found, decrypt using identified algorithm
-# Example: AES-256-CBC with extracted key
+## If passphrase/key found, decrypt using identified algorithm
+## Example: AES-256-CBC with extracted key
 openssl enc -aes-256-cbc -d -in encrypted_file -K <hex_key> -iv <hex_iv> -out decrypted_file
 
-# Or use custom decryption script if algorithm identified
+## Or use custom decryption script if algorithm identified
 python3 decrypt_custom.py --input encrypted_data --key <passphrase>
 ```
 
@@ -353,40 +350,40 @@ python3 decrypt_custom.py --input encrypted_data --key <passphrase>
 
 ### Pre-requisites
 ```bash
-# Registry hive parsing
+## Registry hive parsing
 pip3 install impacket python-evtx
 
-# Password cracking
+## Password cracking
 sudo apt-get install hashcat john
 
-# WIM mounting
+## WIM mounting
 sudo apt-get install wimtools     # Linux
 brew install wimlib              # macOS
-# Windows: built-in mount capability
+## Windows: built-in mount capability
 
-# Binary analysis
-# Ghidra (https://ghidra-sre.org/)
-# IDA Free (https://www.hex-rays.com/ida-free/)
+## Binary analysis
+## Ghidra (https://ghidra-sre.org/)
+## IDA Free (https://www.hex-rays.com/ida-free/)
 ```
 
 ### Command Reference
 ```bash
-# Mount WIM
+## Mount WIM
 wimlib-imagex mount image.wim 1 /mnt/wim
 
-# Extract hashes
+## Extract hashes
 secretsdump.py -sam SAM -system SYSTEM LOCAL
 
-# Crack with hashcat
+## Crack with hashcat
 hashcat -m 1000 hashes.txt rockyou.txt
 
-# Crack with John
+## Crack with John
 john --format=NT hashes.txt
 
-# Search for keywords
+## Search for keywords
 grep -r "password\|credential\|key" /mnt/wim --include="*.xml" --include="*.config" --include="*.ini"
 
-# Entropy analysis
+## Entropy analysis
 find . -type f -exec sh -c 'entropy=$(...); [ $entropy -gt 7 ] && echo ...' \;
 ```
 
@@ -417,7 +414,7 @@ find . -type f -exec sh -c 'entropy=$(...); [ $entropy -gt 7 ] && echo ...' \;
 
 ### From `poubelle.md`
 
-# NSEC 2026 — Poubelle / Reduce, Reuse, Recycle (59330) Writeup
+## NSEC 2026 — Poubelle / Reduce, Reuse, Recycle (59330) Writeup
 
 **Track**: poubelle  
 **Topic ID**: 59330  
@@ -486,7 +483,7 @@ PowerShell confirms a single ADS named `promo` of 4 263 002 bytes:
 
 ```powershell
 Get-Item '$RVH3NKM.png' -Stream * | Where Stream -ne ':$DATA'
-# promo  4263002
+## promo  4263002
 ```
 
 Extracted with `Get-Content -Encoding Byte` and saved as `promo.heic`.
@@ -564,7 +561,7 @@ data: flag-up_up_down_down_flag_flag
 b64 = "JSMnIWg2LCIjMi0sLSgZIDcgJhArIyQrMBAyLiQxHDYpMxokMSoZMi0gHD80KSEwIDs="
 key = b"COFFEE"
 coupon = bytes(b ^ key[i % 6] for i, b in enumerate(base64.b64decode(b64))).decode()
-# 'flag-something_free_means_that_you_are_the_product'
+## 'flag-something_free_means_that_you_are_the_product'
 ```
 
 ## Flag 8 — Manager flag (Goat rental)
@@ -600,7 +597,7 @@ inner_rc4 = cipher.decrypt_and_verify(blob[:-16], blob[-16:])
 
 free_coupon = "flag-something_free_means_that_you_are_the_product"
 flag = rc4(inner_rc4, free_coupon.encode()).decode()
-# 'flag-turn_grass_into_fertilizer_4_cheap'
+## 'flag-turn_grass_into_fertilizer_4_cheap'
 ```
 
 Both the TOTP secret (`MANAGER_TOTP_SECRET_B32`) and the KDF timestep (`MANAGER_FLAG_KDF_TIMESTEP = 59051769`) are mixed into the key material, so live TOTP isn't needed — the static constants are sufficient.

@@ -6,9 +6,6 @@ tags = ["agent-slop", "info", "solved"]
 model = "Opus 4.7"
 draft = false
 +++
-
-# Welcome to the CTF! (Topic 59942)
-
 Status: **SOLVED** — 1/1 sub-flags captured
 
 ## Context
@@ -25,7 +22,7 @@ _Preserved from pre-standardization writeup(s). May contain duplicate context._
 
 ### From `59942-welcome.md`
 
-# Welcome to the CTF! (Topic 59942)
+## Welcome to the CTF! (Topic 59942)
 
 Status: **SOLVED** — 1/1 sub-flags captured
 
@@ -35,7 +32,7 @@ Status: **SOLVED** — 1/1 sub-flags captured
 
 ### From `59942-welcome-ctf.md`
 
-# Welcome to the CTF (Challenge 59942)
+## Welcome to the CTF (Challenge 59942)
 
 ## Context
 

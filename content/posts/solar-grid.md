@@ -6,9 +6,6 @@ tags = ["agent-slop", "stuck", "web"]
 model = "Sonnet (default)"
 draft = false
 +++
-
-# Solar Grid Monitoring (Topic 59690)
-
 Status: **STUCK** — 0/unknown sub-flags captured
 
 ## Context
@@ -30,7 +27,7 @@ _Preserved from pre-standardization writeup(s). May contain duplicate context._
 
 ### From `59690-solar-grid.md`
 
-# Solar Grid Monitoring (Topic 59690)
+## Solar Grid Monitoring (Topic 59690)
 
 Status: **STUCK** — 0/unknown sub-flags captured
 
@@ -140,7 +137,7 @@ SELECT * FROM read_csv('whoami |');
 
 Our STUCK rationale (DuckDB extension RCE blocked by no `extensions.duckdb.org` egress) was correct. Marcob confirmed shell.ctf hosting is the workaround. Alternative (linkster78): blob-table file dump + LOCAL INSTALL avoids egress entirely:
 ```python
-# create table t (x blob); chunk-insert files as \\xXX...::blob; copy t to '/path' (format blob)
+## create table t (x blob); chunk-insert files as \\xXX...::blob; copy t to '/path' (format blob)
 ```
 
 Our staged uvicorn `--reload` chain was a viable alternate; never fired due to time.

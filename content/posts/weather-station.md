@@ -6,9 +6,6 @@ tags = ["agent-slop", "stuck", "web"]
 model = "Sonnet (default)"
 draft = false
 +++
-
-# Weather station (Topic 59294)
-
 Status: **STUCK** — 1/4 sub-flags captured (free flag from error oracle; 2/4–4/4 blocked by Seed Server hardcoded `503` infrastructure response)
 
 ## Context
@@ -41,13 +38,13 @@ _Preserved from pre-standardization writeup(s). May contain duplicate context._
 
 ### From `59294-weather-station.md`
 
-# Weather station (Topic 59294)
+## Weather station (Topic 59294)
 
 Status: **PARTIAL** — 1/4 sub-flags captured
 
 ### From `59294-weather-station-2-4-STUCK.md`
 
-# NSEC 2026 - Weather Station 2/4 - PARTIAL (NOT solved this session)
+## NSEC 2026 - Weather Station 2/4 - PARTIAL (NOT solved this session)
 
 **Status**: STUCK after 15-min targeted probe budget. No new flag captured. Session 3 of 3 on this challenge — the upload error oracle yields only ONE flag string, which was already submitted as 1/4.
 
@@ -367,7 +364,7 @@ This means we can only write **valid JSON objects** to disk via the upload path.
 
 ### From `59294-weather-station-session-7-mission-tricks.md`
 
-# NSEC 2026 - Weather Station 2/4 — Session 7 Mission JSON Tricks
+## NSEC 2026 - Weather Station 2/4 — Session 7 Mission JSON Tricks
 **Status**: Test suite created and ready for venue execution  
 **Date**: 2026-05-17  
 **Time spent**: Design + implementation  
@@ -443,15 +440,15 @@ The prior 240+ payload variations (Session 6) all returned 503 because the seed 
 ## Execution Plan (Venue)
 
 ```bash
-# Copy test suite to venue machine
+## Copy test suite to venue machine
 scp artifacts/*.py venue:/tmp/
 scp artifacts/*.sh venue:/tmp/
 
-# Run master test
+## Run master test
 cd /tmp
 bash RUN-ALL-MISSION-TESTS.sh http://weather-station.ctf
 
-# Results saved to: mission-test-logs-<timestamp>/ with per-phase logs
+## Results saved to: mission-test-logs-<timestamp>/ with per-phase logs
 ```
 
 **Expected output**: 
@@ -535,7 +532,7 @@ Execute test suite at venue ASAP. If mission JSON tricks work, it should show as
 
 ### From `59294-weather-station.md`
 
-# NSEC 2026 - Weather Station (Challenge #59294)
+## NSEC 2026 - Weather Station (Challenge #59294)
 
 ## Challenge Overview
 
@@ -629,10 +626,10 @@ The `/mission/` endpoint does not properly validate or sanitize request paths. U
 
 **Proof of Concept**:
 ```bash
-# Normal request
+## Normal request
 curl http://weather-station.ctf/mission/current
 
-# Path traversal attempts
+## Path traversal attempts
 curl http://weather-station.ctf/mission/../mission/current
 curl http://weather-station.ctf/mission/..%2Fmission%2Fcurrent
 curl http://weather-station.ctf/mission/../../../etc/passwd
@@ -661,7 +658,7 @@ The `/upload` endpoint accepts configuration file uploads without proper authent
 ```bash
 echo '{"test":"data"}' > /tmp/NSEC-01.json
 curl -F "config=@/tmp/NSEC-01.json" http://weather-station.ctf/upload
-# Response: CONFIGURATION ACCEPTED. UNIT WILL SYNCHRONIZE ON NEXT CONTACT.
+## Response: CONFIGURATION ACCEPTED. UNIT WILL SYNCHRONIZE ON NEXT CONTACT.
 ```
 
 **Vulnerabilities**:
