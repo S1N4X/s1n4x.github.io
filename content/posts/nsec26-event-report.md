@@ -47,7 +47,7 @@ Our team operated a hybrid human + multi-agent system, with up to 30 concurrent 
 
 ## 2. Score Timeline
 
-![NSEC 2026 cumulative score graph - Shellda track is highlighted in the mid-tier curve cluster](/scoregraph-shellda.png)
+![NSEC 2026 cumulative score graph - Shellda track is highlighted in the mid-tier curve cluster](/scoregraph.png)
 
 > **Visual**: cumulative score graph published by organizers shows our "Shellda: A Link To The Flag" line tracking roughly mid-pack throughout, climbing steeply Fri 21:00-Sat 02:00 then continuing more gradually through Sun 14:14 (final REM 6/7 submission). Top-finisher curves (OteriHack 713, Hubert Hackin' 711, Basilic de Torches 674) plateaued at ~700 pts by Sun 13:00.
 

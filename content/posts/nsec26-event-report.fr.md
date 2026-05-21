@@ -47,7 +47,7 @@ Notre équipe a opéré un système hybride humain + multi-agent, avec jusqu'à 
 
 ## 2. Chronologie des scores
 
-![Graphique cumulatif des scores NSEC 2026 -- la courbe Shellda est mise en évidence dans le cluster médian](/scoregraph-shellda.png)
+![Graphique cumulatif des scores NSEC 2026 -- la courbe Shellda est mise en évidence dans le cluster médian](/scoregraph.png)
 
 > **Visuel** : le graphique de scores cumulatifs publié par les organisateurs montre notre ligne « Shellda: A Link To The Flag » évoluant globalement dans le peloton médian, grimpant fortement Ven 21:00-Sam 02:00 puis progressant plus graduellement jusqu'à Dim 14:14 (soumission finale REM 6/7). Les courbes des meilleurs (OteriHack 713, Hubert Hackin' 711, Basilic de Torches 674) ont plafonné à ~700 pts vers Dim 13:00.
 
