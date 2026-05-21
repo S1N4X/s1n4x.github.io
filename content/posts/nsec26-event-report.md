@@ -67,11 +67,11 @@ Our team operated a hybrid human + multi-agent system, with up to 30 concurrent 
 | Sat 00:33 | 73 | 267 | ~#3 ‡ | ~-110 ‡ | Drone License 2/2 (attestation.yml supply chain) + Teamworking + Stage-Zero |
 | Sat 00:52 | 75 | 287 | ~#3 ‡ | ~-100 ‡ | **Germinator 1/1** (binary signature key emulation, 15pts) |
 | Sat 00:58 | 77 | 300 | ~#3 ‡ | ~-95 ‡ | Drone License `support_agent.yml` (8pts) + Power-to-the-People dash-format 1/2 |
-| Sat 01:19 | 80 | 316 | 🥈 #2 | -102 † | **Monsatan Sprinklers 2/2** (HMAC empty-key bypass) |
-| Sat 01:20 | 92 | 320 | 🥈 #2 | -98 † | Sprinklers 2/2 lands |
-| Sat 01:32 | 93 | 321 | 🥈 #2 | -97 † | Multi-facteur 6/6 |
-| Sat 01:55 | 99 | 359 | 🥈 #2 | -79 † | Addressbook 2/2, Poubelle 8/8, APT438 3/9 — **peak rank for the event** |
-| Sat 02:30 | 99 | 359 | 🥈 #2 | -79 † | **VPN drops — offline mode** (7-hour outage begins) |
+| Sat 01:19 | 80 | 316 | 🥈&nbsp;#2 | -102 † | **Monsatan Sprinklers 2/2** (HMAC empty-key bypass) |
+| Sat 01:20 | 92 | 320 | 🥈&nbsp;#2 | -98 † | Sprinklers 2/2 lands |
+| Sat 01:32 | 93 | 321 | 🥈&nbsp;#2 | -97 † | Multi-facteur 6/6 |
+| Sat 01:55 | 99 | 359 | 🥈&nbsp;#2 | -79 † | Addressbook 2/2, Poubelle 8/8, APT438 3/9 — **peak rank for the event** |
+| Sat 02:30 | 99 | 359 | 🥈&nbsp;#2 | -79 † | **VPN drops — offline mode** (7-hour outage begins) |
 | Sat 05:40 | 99 | 359 | ~#5 ‡ | ~-110 ‡ | (still 359 — Monsatan-Checkmate crack lands but unsubmitted) |
 | Sat 09:04 | 100 | 362 | ~#7 ‡ | ~-130 ‡ | Crystal "Basic Electricity" 1/1 — VPN-return |
 | Sat 09:45 | 101 | 363 | ~#7 ‡ | ~-135 ‡ | Monsatan-Chatbot 1/3 (sys-prompt injection) |
