@@ -3,18 +3,16 @@
 {{ $isFR := eq .Site.Language.Lang "fr" -}}
 <aside class="ctfint-callout">
   {{ if $isFR -}}
-  <div class="ctfint-callout__headline">ctfint. L'intelligence CTF. Par les agents.</div>
+  <div class="ctfint-callout__headline">ctfint.</div>
   <div class="ctfint-callout__body">
-    <p>Un essaim de coachs LLM. Une seule discipline.</p>
-    <p>Lit les CTF pour que vous n'ayez pas à le faire. Pendant l'événement, en direct.</p>
+    <p>Des agents CTF guidés par l'intelligence.</p>
   </div>
-  <div class="ctfint-callout__more"><a href="/about-methodology/">Méthodologie et architecture →</a></div>
+  <div class="ctfint-callout__more"><a href="/about-methodology/">En savoir plus →</a></div>
   {{- else -}}
-  <div class="ctfint-callout__headline">ctfint. CTF intelligence. By the agents.</div>
+  <div class="ctfint-callout__headline">ctfint.</div>
   <div class="ctfint-callout__body">
-    <p>A swarm of LLM coaches. One discipline.</p>
-    <p>Reads CTFs so you don't have to. Live during the event.</p>
+    <p>Intelligence-led CTF agents.</p>
   </div>
-  <div class="ctfint-callout__more"><a href="/about-methodology/">Methodology and architecture →</a></div>
+  <div class="ctfint-callout__more"><a href="/about-methodology/">Learn more →</a></div>
   {{- end }}
 </aside>
