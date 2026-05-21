@@ -34,11 +34,20 @@
 </article>
 <script>
   (function () {
-    if (location.pathname.startsWith('/fr/')) {
-      document.getElementById('not-found-en').style.display = 'none';
-      document.getElementById('not-found-fr').style.display = 'block';
-      document.documentElement.lang = 'fr';
-    }
+    if (!location.pathname.startsWith('/fr/')) return;
+    document.getElementById('not-found-en').style.display = 'none';
+    document.getElementById('not-found-fr').style.display = 'block';
+    document.documentElement.lang = 'fr';
+    var logo = document.querySelector('.header__logo a');
+    if (logo) logo.href = '/fr/';
+    var nameMap = {reports:'rapports', lab:'labo', 'about me':'à propos', categories:'catégories'};
+    document.querySelectorAll('.navigation-menu a').forEach(function (a) {
+      if (!a.getAttribute('href').startsWith('/fr/')) a.href = '/fr' + a.getAttribute('href');
+      var t = a.textContent.trim().toLowerCase();
+      if (nameMap[t]) a.textContent = nameMap[t];
+    });
+    var trigger = document.querySelector('.menu__trigger');
+    if (trigger) trigger.innerHTML = 'plus&nbsp;▾';
   })();
 </script>
 {{ end }}

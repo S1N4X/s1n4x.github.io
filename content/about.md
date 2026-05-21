@@ -11,14 +11,14 @@ Cybersecurity practitioner working at the intersection of **AI SecOps** and **pu
 
 I bridge offensive and defensive security: red-team intuition for adversary modeling, blue-team rigor for detection engineering, and a growing focus on LLM-driven workflows for both sides of the fence.
 
-**Sovereign AI advocate.** I believe organizations should own their AI stack, not rent it. Frontier model practitioner -- I use the best commercial models for production work AND run local infrastructure to keep skills, data, and optionality in-house.
+**Hybrid AI practitioner.** I use the best frontier models for production work AND run local infrastructure to keep skills, data, and optionality in-house. The right answer isn't own-everything or rent-everything -- it's knowing which layers to control and which to delegate.
 
 ## What I'm thinking about
 
 - **AI agent SecOps at scale** -- building, deploying, and auditing agentic systems in production security environments
 - **Purple teaming with AI** -- whether LLM-driven adversary emulation can surface detection gaps faster than traditional pentest
 - **OT/IT convergence in energy** -- where modern threat models meet the realities of legacy industrial systems
-- **Sovereign AI infrastructure** -- running local model stacks alongside frontier APIs; keeping the option to go independent
+- **Hybrid AI infrastructure** -- running local model stacks alongside frontier APIs; knowing which layers to own and which to rent
 
 ## AI home lab
 
