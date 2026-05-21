@@ -1,0 +1,111 @@
+# swarm.tracks - NSEC 2026 archive blog
+# Hugo + panr/hugo-theme-terminal v4.2.3
+
+baseURL = "https://s1n4x.github.io/"
+locale = "en-us"
+title = "swarm.tracks"
+theme = "terminal"
+pagination.pagerSize = 5
+# enableGitInfo flipped on AFTER first commit lands (Hugo refuses to build on
+# an unborn branch otherwise). Toggle to true once the initial push completes.
+enableGitInfo = false
+
+# Required for Chroma syntax highlighting
+[markup]
+  [markup.highlight]
+    noClasses = false
+  [markup.goldmark.renderer]
+    unsafe = true
+
+# Per-event grouping (categories) + cross-event topic (tags)
+[taxonomies]
+  category = "categories"
+  tag = "tags"
+
+[params]
+  # Theme defaults
+  contentTypeName = "posts"
+  showMenuItems = 4
+  showLanguageSelector = false
+  fullWidthTheme = false
+  centerTheme = false
+  autoCover = true
+  showLastUpdated = false
+  readingTime = true
+  Toc = false
+
+  # swarm.tracks meta
+  # variant = "green" - classic phosphor; implemented via static/style.css override
+  variant = "green"
+  description = "what happens when AI agents play CTF"
+  keywords = "ctf,ai,agents,nsec,claude,writeup,security"
+
+  # Author block - referenced by per-post footer partial as fallback
+  [params.author]
+    name = "S1N4X + the swarm"
+    url = "https://github.com/S1N4X"
+
+  [params.logo]
+    logoText = "swarm.tracks"
+    logoHomeLink = "/"
+
+[languages]
+  [languages.en]
+    label = "English"
+    title = "swarm.tracks"
+
+    [languages.en.params]
+      subtitle = "what happens when AI agents play CTF"
+      owner = "S1N4X"
+      keywords = "ctf,ai,agents,nsec,claude,writeup,security"
+      copyright = "S1N4X + the swarm - CC-BY-SA 4.0"
+      menuMore = "more"
+      readMore = "read more"
+      readOtherPosts = "other posts"
+      newerPosts = "newer"
+      olderPosts = "older"
+      missingContentMessage = "agent transcript missing - page not found"
+      missingBackButtonLabel = "back to /"
+      minuteReadingTime = "min read"
+      words = "words"
+
+      [languages.en.params.logo]
+        logoText = "swarm.tracks"
+        logoHomeLink = "/"
+
+    [languages.en.menu]
+      [[languages.en.menu.main]]
+        identifier = "posts"
+        name = "posts"
+        url = "/posts"
+        weight = 10
+      [[languages.en.menu.main]]
+        identifier = "swarm"
+        name = "swarm"
+        url = "/swarm"
+        weight = 20
+      [[languages.en.menu.main]]
+        identifier = "slop"
+        name = "slop"
+        url = "/slop"
+        weight = 30
+      [[languages.en.menu.main]]
+        identifier = "honeypots"
+        name = "honeypots"
+        url = "/honeypots"
+        weight = 40
+      [[languages.en.menu.main]]
+        identifier = "about"
+        name = "about"
+        url = "/about"
+        weight = 50
+      [[languages.en.menu.main]]
+        identifier = "tags"
+        name = "tags"
+        url = "/tags"
+        weight = 60
+      [[languages.en.menu.main]]
+        identifier = "categories"
+        name = "categories"
+        url = "/categories"
+        weight = 70

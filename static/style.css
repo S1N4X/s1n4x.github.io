@@ -1,0 +1,43 @@
+/* swarm.tracks - "green" variant (classic phosphor CRT)
+ * Overrides the terminal theme's CSS custom properties.
+ * The theme imports static/style.css after its own styles, so these win.
+ */
+
+:root {
+  --background: #0a0f0a;       /* near-black with a green tint */
+  --foreground: #c8f0c8;       /* warm phosphor white */
+  --accent: #33ff66;            /* classic CRT green */
+  --code-border: #1a3a1a;
+}
+
+/* Subtle phosphor scanline + glow on the main heading area */
+.logo a,
+.post-title a,
+.posts .post .post-title a {
+  text-shadow: 0 0 6px color-mix(in srgb, var(--accent) 55%, transparent),
+               0 0 14px color-mix(in srgb, var(--accent) 25%, transparent);
+}
+
+/* Make blockquotes feel like agent transcript blocks */
+blockquote {
+  font-family: "Fira Code", Monaco, Consolas, "Ubuntu Mono", monospace;
+  font-size: calc(var(--font-size) * 0.95);
+}
+
+/* Slop / honeypot pull-quotes */
+.slop-callout {
+  border-left: 4px solid var(--accent);
+  padding: 10px 16px;
+  background: color-mix(in srgb, var(--accent) 8%, transparent);
+  margin: 20px 0;
+}
+
+/* Per-post footer styling */
+.post hr + small,
+article small {
+  display: block;
+  opacity: 0.75;
+  font-size: calc(var(--font-size) * 0.85);
+  line-height: 1.5;
+  padding-top: 6px;
+}
