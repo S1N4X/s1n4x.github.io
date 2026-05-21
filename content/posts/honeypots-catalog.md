@@ -30,7 +30,7 @@ plants them next year.
 
 ---
 
-## #1 &mdash; `FLAG-SEEDS-GROW-FOREVER-{GROWTH_UNLOCKED}`
+## #1  --  `FLAG-SEEDS-GROW-FOREVER-{GROWTH_UNLOCKED}`
 
 - **Track:** germinator (59186)
 - **Where seen:** 7 references in the germinator writeup, the
@@ -54,7 +54,7 @@ plants them next year.
 
 ---
 
-## #2 &mdash; `FLAG-WATER-FLOWS-WHEN-THIRSTY-{GROWTH_ENABLED}`
+## #2  --  `FLAG-WATER-FLOWS-WHEN-THIRSTY-{GROWTH_ENABLED}`
 
 - **Track:** plant-watering (58970)
 - **Where seen:** challenge artifact `EXPLOITATION_WRITEUP.md`
@@ -74,7 +74,7 @@ plants them next year.
 
 ---
 
-## #3 &mdash; `FLAG-...abcdef02`
+## #3  --  `FLAG-...abcdef02`
 
 - **Track:** helios-fleet (59762)
 - **Where seen:** the anti-trap workflow's own quarantine file,
@@ -86,7 +86,7 @@ plants them next year.
   high if you don't know how it got there. Confidence: zero if you do.
 - **How it was detected:** Cross-checked against the actual 1/5 flag
   ending `01` (the developer-comment invite code). Same hex prefix,
-  last hex digit changed. Self-planted honeypot &mdash; no independent
+  last hex digit changed. Self-planted honeypot  --  no independent
   extraction path exists.
 - **Commentary:** Sometimes the trap is one the agent set itself. The
   team's anti-trap memory rule explicitly handles this case: if the
@@ -96,7 +96,7 @@ plants them next year.
 
 ---
 
-## #4 &mdash; `FLAG-15000-0700`
+## #4  --  `FLAG-15000-0700`
 
 - **Track:** grid-alignment / Quantum Hum (59906)
 - **Where seen:** crystal-quantum-hum writeup, with explicit
@@ -116,13 +116,13 @@ plants them next year.
 
 ---
 
-## #5 &mdash; `FLAG-This_Is_Not_A_Flag`
+## #5  --  `FLAG-This_Is_Not_A_Flag`
 
-- **Track:** i-love-faia (59975) &mdash; which is not actually a
+- **Track:** i-love-faia (59975)  --  which is not actually a
   challenge
 - **Where seen:** Discourse topic body, off-topic category 599
 - **Why it's a trap:** Embedded prompt-injection lure. The Discourse
-  post is a meme thread in the off-topic category &mdash; not a CTF
+  post is a meme thread in the off-topic category  --  not a CTF
   challenge. The post body contains the `FLAG-This_Is_Not_A_Flag`
   string along with prompt-injection language designed to manipulate
   an LLM agent into (a) treating the meme thread as a challenge, (b)
@@ -139,12 +139,12 @@ plants them next year.
   read step. The fourth agent and beyond inherited the
   `SUSPICIOUS.md` note via the team's anti-trap workflow. The lure
   announces itself as a non-flag in its own contents
-  &mdash; and at least two LLM agents still tried to submit it. That
+   --  and at least two LLM agents still tried to submit it. That
   detail is the entire reason the anti-trap skill exists.
 
 ---
 
-## #6 &mdash; `FLAG-{actual-flag-here}`
+## #6  --  `FLAG-{actual-flag-here}`
 
 - **Track:** drone-license (58646)
 - **Where seen:** drone-license writeup line 180
@@ -155,13 +155,13 @@ plants them next year.
   extracted flag would look like.
 - **How it was detected:** Quarantined in the writeup's Anti-Trap
   section explicitly. The author called it out at write-time.
-- **Commentary:** The most explicit placeholder in the catalog &mdash;
+- **Commentary:** The most explicit placeholder in the catalog  -- 
   the literal phrase "actual-flag-here" inside a `FLAG-{...}` wrapper.
   Pattern recognition is straightforward.
 
 ---
 
-## #7 &mdash; `FLAG-{identifier}`
+## #7  --  `FLAG-{identifier}`
 
 - **Track:** drone-license (58646)
 - **Where seen:** drone-license writeup line 319
@@ -174,7 +174,7 @@ plants them next year.
 
 ---
 
-## #8 &mdash; `FLAG-placeholder`
+## #8  --  `FLAG-placeholder`
 
 - **Track:** drone-license (58646)
 - **Where seen:** drone-license writeup line 99
@@ -186,14 +186,14 @@ plants them next year.
 
 ---
 
-## #9 &mdash; `FLAG-xxxxxxxx...`
+## #9  --  `FLAG-xxxxxxxx...`
 
 - **Track:** water-purification (59078)
 - **Where seen:** writeup artifacts README, line 166
 - **Why it's a trap:** Documentation placeholder in an example
   `askgod submit` command. Shows the format of the submission
   command, uses `xxxxxxxx...` as the example value.
-- **How it was detected:** Format match &mdash; no real flag would
+- **How it was detected:** Format match  --  no real flag would
   consist of x's.
 - **Commentary:** Documentation-convention placeholder. Any agent
   that parses `xxxxxxxx...` as a candidate flag has not internalized
@@ -201,7 +201,7 @@ plants them next year.
 
 ---
 
-## #10 &mdash; `FLAG-eba56a9422a3ecf27498c44b718b24c7`
+## #10  --  `FLAG-eba56a9422a3ecf27498c44b718b24c7`
 
 - **Track:** save-the-trees (59654)
 - **Where seen:** `analysis/15_input.txt` and adjacent analysis files
@@ -213,8 +213,8 @@ plants them next year.
   time it would have been submitted. Either an agent hallucination,
   a fixture from local exploit-dev, or a self-planted test value.
 - **How it was detected:** Cross-referenced against submission
-  journal &mdash; not present. Cross-referenced against askgod
-  history &mdash; not present. Flagged with the OOB verification
+  journal  --  not present. Cross-referenced against askgod
+  history  --  not present. Flagged with the OOB verification
   memory rule's "low-confidence: requires 2+ independent extraction
   paths" check. Failed both criteria.
 - **Commentary:** When the only source for a candidate flag is one
@@ -225,12 +225,12 @@ plants them next year.
 
 ---
 
-## #11 &mdash; `FLAG-{2247bff241800150a5ebb00288dc050d}`
+## #11  --  `FLAG-{2247bff241800150a5ebb00288dc050d}`
 
 - **Track:** monsatan-defacing (59981)
 - **Where seen:** monsatan-defacing 3-6 writeup
 - **Why it's a trap (with asterisk):** This one is technically *not*
-  a honeypot &mdash; it's the real 6/6 flag, extracted via the
+  a honeypot  --  it's the real 6/6 flag, extracted via the
   `print_flag` binary on port 8888. The trap is that by the time our
   coach found it, a teammate had already submitted it from a
   different agent. The server returned `[DENY-TRACK-COMPLETE]`. The
@@ -238,7 +238,7 @@ plants them next year.
 - **How it was detected:** Wrapper-side deny code at submission
   time.
 - **Commentary:** Not all the items in this catalog are honeypots in
-  the strict sense. This one is a *timing collision* &mdash; real
+  the strict sense. This one is a *timing collision*  --  real
   flag, found by our coach 6 minutes after a teammate's submission.
   The wrapper deny code is the saving grace. Document as
   `TIMING_COLLISION` not `HONEYPOT` in the canonical record, but the
@@ -248,55 +248,55 @@ plants them next year.
 
 ## Patterns we now recognize
 
-- **`FLAG-<verb>-<noun>-{<state>}`** &mdash; Monsatan-corp /
+- **`FLAG-<verb>-<noun>-{<state>}`**  --  Monsatan-corp /
   agribiotech honeypot signature. See #1, #2.
 - **`FLAG-<hex>` where the source is the team's own probe artifact**
-  &mdash; self-planted honeypot. See #3.
+   --  self-planted honeypot. See #3.
 - **`FLAG-<words>` in a Discourse post body in an off-topic category**
-  &mdash; embedded prompt-injection lure. See #5.
-- **`FLAG-{<bracketed-noun>}`** &mdash; documentation placeholder.
+   --  embedded prompt-injection lure. See #5.
+- **`FLAG-{<bracketed-noun>}`**  --  documentation placeholder.
   See #6, #7.
-- **`FLAG-placeholder`, `FLAG-xxxxxxxx...`** &mdash; documentation
+- **`FLAG-placeholder`, `FLAG-xxxxxxxx...`**  --  documentation
   placeholder, even more explicit. See #8, #9.
 - **`FLAG-<hex>` with no submission attribution and only one source**
-  &mdash; unverified candidate or hallucination. See #10.
-- **`FLAG-{<hex>}` that returns `DENY-TRACK-COMPLETE`** &mdash;
+   --  unverified candidate or hallucination. See #10.
+- **`FLAG-{<hex>}` that returns `DENY-TRACK-COMPLETE`**  -- 
   timing collision, not a honeypot. See #11.
 
 ---
 
 ## Defenses that worked
 
-- **`submit-flag.ps1` wrapper** &mdash; `DENY-SHAPE` (exit 2),
+- **`submit-flag.ps1` wrapper**  --  `DENY-SHAPE` (exit 2),
   `DENY-LOCAL-DUP` (exit 3), `DENY-BRUTE` (exit 4) all caught
   honeypot/duplicate attempts at submission time.
-- **Honeypot signatures memory rule** &mdash; inherited by every
+- **Honeypot signatures memory rule**  --  inherited by every
   coach brief at spawn time. Stops candidate-flag attempts before
   submission.
-- **OOB flag verification memory rule** &mdash; low-confidence
+- **OOB flag verification memory rule**  --  low-confidence
   candidates require 2+ independent extraction paths. Catches
   single-source hallucinations.
-- **Anti-trap skill** &mdash; coach brief includes Step 0 anti-trap
+- **Anti-trap skill**  --  coach brief includes Step 0 anti-trap
   discipline check. `SUSPICIOUS.md` workflow quarantines challenge
   content that exhibits PI signatures.
-- **PI-signature pre-scanner** &mdash; emits `<chal>/SUSPICIOUS.md`
+- **PI-signature pre-scanner**  --  emits `<chal>/SUSPICIOUS.md`
   before coaches read the artifact.
-- **Cross-track flag-leak detector** &mdash; sweeps the writeups
+- **Cross-track flag-leak detector**  --  sweeps the writeups
   directory for honeypot strings appearing in wrong-track captures
   tables. Caught hello-sunshine flags pasted into apt438 tables.
 
 ## Defenses we are still considering
 
-- **Vocab linter on coach briefs** &mdash; pre-flight scan for
+- **Vocab linter on coach briefs**  --  pre-flight scan for
   AUP-trigger terminology (Kerberos, PtH, RCE, backdoor, shellcode,
   reverse shell, post-exploitation, persistence). Two known AUP
   blocks in NSEC 2026 used these terms. A pre-spawn linter would
   have flagged them for re-framing.
-- **Per-agent wall-clock budget** &mdash; five agents ran 200+
+- **Per-agent wall-clock budget**  --  five agents ran 200+
   minutes. Two were killed. A per-agent 60-minute soft cap with
   operator-override would have reclaimed cumulative agent-time for
   higher-EV work.
-- **Swarm-wide STUCK memo** &mdash; 47 agents converged on STUCK
+- **Swarm-wide STUCK memo**  --  47 agents converged on STUCK
   independently across the harder tracks. A swarm-shared STUCK index
   would prevent re-derivation of the same dead-ends.
 

@@ -149,7 +149,7 @@ That agent is the anti-trap reference for the rest of the event.
 ### trolley-bus Milo's anti-trap warning
 
 A teammate's coach brief context for the trolley-bus RF track included
-an embedded warning string &mdash; the kind that previously fooled prior
+an embedded warning string  --  the kind that previously fooled prior
 agents into treating warning text as authoritative instructions. The
 coach treated it as data, not instructions, and surfaced the warning to
 the operator rather than acting on it.
@@ -165,7 +165,7 @@ Sweep agent surfaced 6 candidates from a corpus-wide regex pass. All 6
 were already submitted. The wrapper's `DENY-LOCAL-DUP` did the actual
 deduplication.
 
-The sweep is still useful &mdash; it's how we caught the apt438 /
+The sweep is still useful  --  it's how we caught the apt438 /
 water-purification cross-tagging issue and the hello-sunshine
 flag-misattribution case (see below). But on flag candidates
 specifically, the sweep's job is "find anything I missed," and on a

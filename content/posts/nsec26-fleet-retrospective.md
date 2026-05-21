@@ -50,7 +50,7 @@ unknown       |                                       2   (<1%)
 ```
 
 The 302 "completed" agents reached `stop_reason=end_turn`. The 92 "tool_use"
-agents output-capped mid-tool-call &mdash; typically long-running coaches that
+agents output-capped mid-tool-call  --  typically long-running coaches that
 produced useful artifacts but never wrote a final conclusion message. The 30
 "stop_sequence" hits are guardrail terminations, mostly from coaches that
 tried to spawn child agents or write to denied paths. The four `killed` agents
@@ -83,7 +83,7 @@ monsatan-checkmate  |                                         1
 
 The largest per-track allocation (`_fleet` at 122) is the initial fan-out wave
 plus the rank-#4 push. The smallest non-meta single allocation is
-`monsatan-checkmate` at 1 &mdash; one Opus agent solved the whole track in 15.6
+`monsatan-checkmate` at 1  --  one Opus agent solved the whole track in 15.6
 minutes including a 2h09m offline hash crack.
 
 ---
@@ -92,13 +92,13 @@ minutes including a 2h09m offline hash crack.
 
 | Wave | When (EDT) | Size | Trigger | Outcome highlight |
 |---|---|---:|---|---|
-| W1 &mdash; Saturday opener | Sat 2026-05-16 ~02:30 | ~15 | Initial fleet fan-out | First flag landings: sprinklers 2/2, sympathizers-mailbox, multi-facteur ladder |
-| W2 &mdash; rank-#4 push | Sat 2026-05-16 ~10:00 | 10 | Concurrent coach respawn for stuck tracks | 10 coach agents in parallel |
-| W3 &mdash; Saturday day | Sat 13:00-19:00 | ~30 | Continuous coach-spawn for stuck tracks | REM 3-7, SunBloom, Save-Trees, Prestige, Announcement Board, CEO Inbox |
-| W4 &mdash; Saturday night | Sat 22:00 - Sun 03:00 | ~25 | Overnight grind | Checkmate hash crack lands at 05:40 |
-| W5 &mdash; Sunday day | Sun 13:00-18:00 | ~40 | Fresh-angle resurrection + final push | REM 5/7 firmware pivot, Trolley-bus 2-4 RF, Cross-track sweep |
-| W6 &mdash; Sunday final swarms | Sun 16:40-18:15 | 3x ~15 | Last-hour gap-candidate validation | Coach 1-11 + Coach A-F lettered swarms |
-| W7 &mdash; Phase B / archival | Tue 23:00 - Wed 01:00 | ~5 | Post-event writeup standardization | YAML migration, batch standardization, transcript compression |
+| W1  --  Saturday opener | Sat 2026-05-16 ~02:30 | ~15 | Initial fleet fan-out | First flag landings: sprinklers 2/2, sympathizers-mailbox, multi-facteur ladder |
+| W2  --  rank-#4 push | Sat 2026-05-16 ~10:00 | 10 | Concurrent coach respawn for stuck tracks | 10 coach agents in parallel |
+| W3  --  Saturday day | Sat 13:00-19:00 | ~30 | Continuous coach-spawn for stuck tracks | REM 3-7, SunBloom, Save-Trees, Prestige, Announcement Board, CEO Inbox |
+| W4  --  Saturday night | Sat 22:00 - Sun 03:00 | ~25 | Overnight grind | Checkmate hash crack lands at 05:40 |
+| W5  --  Sunday day | Sun 13:00-18:00 | ~40 | Fresh-angle resurrection + final push | REM 5/7 firmware pivot, Trolley-bus 2-4 RF, Cross-track sweep |
+| W6  --  Sunday final swarms | Sun 16:40-18:15 | 3x ~15 | Last-hour gap-candidate validation | Coach 1-11 + Coach A-F lettered swarms |
+| W7  --  Phase B / archival | Tue 23:00 - Wed 01:00 | ~5 | Post-event writeup standardization | YAML migration, batch standardization, transcript compression |
 
 ---
 
@@ -107,22 +107,22 @@ minutes including a 2h09m offline hash crack.
 Five publishable narrative beats. Agent UUIDs anonymized to per-track
 Agent-N labels. The originals live in the audit archive.
 
-### Agent-1 (rem) &mdash; REM 5/7 firmware repository pivot
+### Agent-1 (rem)  --  REM 5/7 firmware repository pivot
 
 - **Track:** rem
 - **Model:** Opus 4.7
 - **Duration:** 18.0 minutes
 - **Outcome:** tool_use (output-capped mid-pivot)
 
-Identified that the deployable firmware key &mdash; masked broker-side in the
-live config &mdash; could be reached via the firmware-repo URL handler. Mapped
+Identified that the deployable firmware key  --  masked broker-side in the
+live config  --  could be reached via the firmware-repo URL handler. Mapped
 the SSRF surface in the `firmware_repo_url` config field. The next two agents
 used this finding to land flags 5/7 and 6/7.
 
 **Why it matters:** Single most productive 18 minutes of the swarm. Three
 flags downstream of one pivot.
 
-### Agent-1 (announcement-board) &mdash; Trolley-bus Discourse breakthrough
+### Agent-1 (announcement-board)  --  Trolley-bus Discourse breakthrough
 
 - **Track:** announcement-board (cross-filed from missing-bus / trolley-bus)
 - **Model:** Sonnet (default)
@@ -138,7 +138,7 @@ body.
 agents only paid off when one of them slowed down and read it. Reading the
 brief twice is a feature.
 
-### Agent-1 (_fleet) &mdash; Fresh-angle strategist
+### Agent-1 (_fleet)  --  Fresh-angle strategist
 
 - **Track:** _fleet
 - **Model:** Sonnet (default)
@@ -151,7 +151,7 @@ minutes. Output reused as the seed brief for four downstream coach agents.
 **Why it matters:** Cheapest-per-minute agent of the event. A 138-second
 strategic pass that unblocked several downstream solves.
 
-### Agent-1 (_framework) &mdash; Cross-track flag candidate sweep
+### Agent-1 (_framework)  --  Cross-track flag candidate sweep
 
 - **Track:** _framework
 - **Model:** Sonnet (default)
@@ -167,7 +167,7 @@ captures tables.
 **Why it matters:** The cleanup agent. Quiet, methodical, prevented at least
 three honeypot-style submission errors.
 
-### Agent-2 (_fleet) &mdash; Anti-trap defender (i-love-faia)
+### Agent-2 (_fleet)  --  Anti-trap defender (i-love-faia)
 
 - **Track:** _fleet (briefed as "I love Faia fresh probe")
 - **Model:** Sonnet (default)
@@ -201,7 +201,7 @@ codes. This agent caught the lure at the read step.
 | 8 | _fleet | tool_use | 138.3 | REM MQTT + firmware exploitation |
 | 9 | ceo-inbox | completed | 106.3 | CEO inbox IDOR retry |
 | 10 | fossilco | tool_use | 102.9 | Fossilco fresh AD/credential path |
-| 11 | rem | tool_use | 101.2 | REM firmware decryption &mdash; flags 4-7 |
+| 11 | rem | tool_use | 101.2 | REM firmware decryption  --  flags 4-7 |
 | 12 | prestige | completed | 90.3 | Prestige ECB block-splice |
 | 13 | monsatan-impact | completed | 87.0 | Impact Study flags 3-5 exploitation |
 | 14 | hackademy | stop_sequence | 81.2 | Hackademy chal5 webhook.site |
@@ -257,7 +257,7 @@ wrapper structure compresses to roughly nothing.
 
 ---
 
-## "Most productive minute" &mdash; REM 5/7 capture chain
+## "Most productive minute"  --  REM 5/7 capture chain
 
 At Sun 2026-05-17 18:10 EDT, Agent-1 (Opus 4.7) was assigned the REM 5/7
 firmware repository pivot. 18.0 minutes later the agent had mapped the
@@ -273,18 +273,18 @@ Sometimes the right model on the right brief just works.
 
 ---
 
-## "Most expensive STUCK" &mdash; sunbloom
+## "Most expensive STUCK"  --  sunbloom
 
 27 agents on the SunBloom Library track. Zero flags. Zero points.
 
-The track was technically solvable &mdash; designer post-event confirmed the
+The track was technically solvable  --  designer post-event confirmed the
 intended primitive was XSS to RCE. The team's network position could not
 reach the Thymeleaf host a teammate had hinted about, and the only reachable
 hosts (`library.ctf` Laravel/PHP, `mail.ctf` Express/Node) lacked the SSTI
 surface that the hint implied.
 
 Eight phases of attack vectors tested. Eleven coach respawns. Multiple model
-tiers. The 8-phase technical body in the writeup is genuinely thorough &mdash;
+tiers. The 8-phase technical body in the writeup is genuinely thorough  -- 
 but it documents 8 phases of nothing working.
 
 Total cumulative agent time on sunbloom: roughly 370 minutes. Flag-yield:
@@ -327,7 +327,7 @@ sunbloom*.
   Haiku = breadth, Sonnet = default, Opus = deep/creative. In practice
   many coach spawns defaulted to Sonnet even for tasks that warranted Opus.
 - **Cross-track contamination at file level.** Two coach briefs got their
-  working directories crossed &mdash; save-the-trees agent output landed in
+  working directories crossed  --  save-the-trees agent output landed in
   prestige-arboretum; trolley-bus agent transcripts ended up under
   announcement-board.
 - **AUP blocks were under-anticipated.** Three confirmed blocks (Fossilco
@@ -340,7 +340,7 @@ sunbloom*.
 ## Footnote on model attribution
 
 The 437 transcripts do not carry a structured `model` field in their
-wrappers &mdash; Claude Agent SDK logs model per-message but the per-agent
+wrappers  --  Claude Agent SDK logs model per-message but the per-agent
 rollup doesn't surface it. Where this report claims Opus 4.7, attribution
 is inferred from:
 

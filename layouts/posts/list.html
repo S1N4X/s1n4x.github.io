@@ -20,7 +20,7 @@
       </thead>
       <tbody>
         {{ range $paginator.Pages }}
-          {{ $event := index .Params.categories 0 | default "—" }}
+          {{ $event := index .Params.categories 0 | default "--" }}
           {{ $status := "" }}
           {{ range .Params.tags }}
             {{ if or (eq . "solved") (eq . "partial") (eq . "stuck") (eq . "untouched") (eq . "honeypot") (eq . "non-challenge") }}
@@ -50,7 +50,7 @@
             </td>
             <td class="col-tags">
               {{ range .Params.tags }}
-                {{/* Skip the status/meta tags — they're already represented by the icon */}}
+                {{/* Skip the status/meta tags -- they're already represented by the icon */}}
                 {{ if not (in (slice "solved" "partial" "stuck" "untouched" "honeypot" "non-challenge" "meta-writeup") .) }}
                   <a class="tag" href="{{ (urlize (printf "tags/%s/" .)) | absLangURL }}">#{{ . }}</a>
                 {{ end }}

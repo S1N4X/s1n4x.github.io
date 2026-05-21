@@ -18,7 +18,7 @@
       </thead>
       <tbody>
         {{ range $paginator.Pages }}
-          {{ $event := index (.Params.categories | default (slice "—")) 0 }}
+          {{ $event := index (.Params.categories | default (slice "--")) 0 }}
           {{ $status := "" }}
           {{ range .Params.tags }}
             {{ if or (eq . "solved") (eq . "partial") (eq . "stuck") (eq . "untouched") (eq . "honeypot") (eq . "non-challenge") }}

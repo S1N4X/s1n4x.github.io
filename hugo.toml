@@ -165,7 +165,7 @@ enableGitInfo = false
         weight = 25
       [[languages.fr.menu.main]]
         identifier = "about"
-        name = "à propos de moi"
+        name = "à propos"
         url = "/about"
         weight = 50
       [[languages.fr.menu.main]]
