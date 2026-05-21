@@ -18,7 +18,7 @@ Status: **SOLVED** - 6/6 sub-flags captured
 |---|---|---|---|
 | 1/6 | `FLAG-<not-recorded-locally>` | Stealerlog data stolen from the outsider in autofill | 2026-05-15T21:58:00-04:00 |
 | 2/6 | `FLAG-<not-recorded-locally>` | Stealerlog data stolen from the outsider in desktop screenshot | 2026-05-15T22:23:00-04:00 |
-| 3/6 | `FLAG-<not-recorded-locally>` | Stealerlog data leveraged to login into seedvault.ctf | 2026-05-15T22:42:00-04:00 |
+| 3/6 | `FLAG-<not-recorded-locally>` | Stealerlog creds used to login to seedvault.ctf | 2026-05-15T22:42:00-04:00 |
 | 4/6 | `FLAG-<not-recorded-locally>` | Elevated to staff. You figured out the puzzle. | 2026-05-16T10:30:00-04:00 |
 | 5/6 | `FLAG-<not-recorded-locally>` | Elevated to admin. However, did you tamper well enough? Time will tell | 2026-05-16T11:20:00-04:00 |
 | 6/6 | `FLAG-<not-recorded-locally>` | Perfectly tampered envelopped. | 2026-05-16T12:53:00-04:00 |
@@ -39,7 +39,7 @@ Status: **SOLVED** - 6/6 sub-flags captured
 |---|---|---|---|
 | 1/6 | `FLAG-outs1der_st3aler_from_the_fu7ure` | Stealerlog data stolen from the outsider in autofill | 2026-05-15T21:58:00-04:00 |
 | 2/6 | `FLAG-<not-recorded-locally>` | Stealerlog data stolen from the outsider in desktop screenshot | 2026-05-15T22:23:00-04:00 |
-| 3/6 | `FLAG-<not-recorded-locally>` | Stealerlog data leveraged to login into seedvault.ctf | 2026-05-15T22:42:00-04:00 |
+| 3/6 | `FLAG-<not-recorded-locally>` | Stealerlog creds used to login to seedvault.ctf | 2026-05-15T22:42:00-04:00 |
 | 4/6 | `FLAG-<not-recorded-locally>` | Elevated to staff. You figured out the puzzle. | 2026-05-16T10:30:00-04:00 |
 | 5/6 | `FLAG-<not-recorded-locally>` | Elevated to admin. However, did you tamper well enough? Time will tell | 2026-05-16T11:20:00-04:00 |
 | 6/6 | `FLAG-<not-recorded-locally>` | Perfectly tampered envelopped. | 2026-05-16T12:53:00-04:00 |

@@ -233,9 +233,8 @@ Content-Length: 42
 4. Extracted flags from the system logs
 
 ## Conclusion
-The Water Purification challenge demonstrates a real-world SCADA security vulnerability: the exposure of sensitive operational data through an unauthenticated API endpoint. The vulnerability allows an attacker to gather detailed information about water treatment system operations, which could be used for reconnaissance in a larger attack scenario.
 
-The flags are intentionally embedded in the log messages, indicating that the system operators left debugging/development flags in production code that was later discovered and marked with comment tags for CTF purposes.
+Real-world SCADA vulnerability: an unauthenticated API endpoint leaks operational data from the water treatment system. Flags are embedded in log messages -- debugging/development artifacts left in production code, tagged with comment markers for CTF purposes.
 
 
 ---

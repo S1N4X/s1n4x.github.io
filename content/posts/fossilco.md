@@ -513,7 +513,7 @@ The SUSPICIOUS.md pre-flight scan flagged 3352 PI-pattern hits, all in impacket 
 | LDAP injection pivot to user-object attrs via `objectClass=user` | Backend template only renders computer rows; can't extract user attribute values. |
 | Gastly other endpoints (`/docs`, `/api`, `/health`, `/knowledge`, `/cmdb/software`, `/cmdb/licenses`) | Static / no flag content. `/login` shows portal accepts local-db creds but no obvious injection beyond the LDAP one. |
 
-## Network observation worth noting
+## Network observations
 - `nltest /domain_trusts /all_trusts` from MGMT shows **`FOSSIL fossil.co.ctf` is the parent forest, TIER2 is a child domain**. The challenge framing in askgod ("http://gastro.fossil.co.ctf/") corresponds to the parent forest. Compromising tier2 doesn't automatically yield fossil.co.ctf domain creds - would need to dump trust keys from a tier2 DC (denied with current access).
 - MGMT `\ProgramData\Incus-Agent` confirms this is a NSEC-managed VM running under Incus on `infra04.hosts.internal.nsec.io` - challenge infra, in-scope.
 

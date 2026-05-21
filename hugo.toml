@@ -1,4 +1,4 @@
-# ctfint — AI-powered CTF intelligence blog
+# ctfint -- AI-powered CTF intelligence blog
 # Site identity: the ctfint framework. The swarm is what ctfint does, not what it is.
 # Hugo + panr/hugo-theme-terminal v4.2.3
 
@@ -37,7 +37,7 @@ enableGitInfo = false
   readingTime = true
   Toc = false
 
-  # ctfint meta — AI-powered CTF intelligence framework
+  # ctfint meta -- AI-powered CTF intelligence framework
   # variant = "green" - classic phosphor; implemented via static/style.css override
   variant = "green"
   description = "what happens when AI agents play CTF"
@@ -133,7 +133,7 @@ enableGitInfo = false
       readOtherPosts = "autres articles"
       newerPosts = "plus récents"
       olderPosts = "plus anciens"
-      missingContentMessage = "transcription d'agent manquante — page introuvable"
+      missingContentMessage = "transcription d'agent manquante -- page introuvable"
       missingBackButtonLabel = "retour à /"
       minuteReadingTime = "min de lecture"
       words = "mots"

@@ -560,7 +560,7 @@ curl -s "http://chal4.hackademy.ctf/" -X POST \
 
 ## Conclusion
 
-The Hackademy challenge successfully demonstrates fundamental web application security vulnerabilities in a progressive difficulty structure. The four extracted flags showcase classic attack vectors:
+Progressive web security challenge. Four flags, four classic attack vectors:
 
 1. **Information Disclosure** - Hardcoded secrets in HTML comments
 2. **Local File Inclusion (LFI)** - Path traversal attacks on file inclusion parameters

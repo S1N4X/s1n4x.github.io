@@ -9,13 +9,27 @@ Praticien en cybersécurité, à l'intersection de l'**AI SecOps** et du **purpl
 
 **Expert en sécurité réseau** -- travail approfondi sur les solutions de périmètre : firewalls, proxies, cloud, WAF et gateways.
 
-Je fais le pont entre sécurité offensive et défensive : l'intuition d'adversary emulation du red team, la rigueur de detection engineering du blue team, et un intérêt croissant pour les workflows LLM-driven des deux côtés.
+Je relie sécurité offensive et défensive : l'intuition d'adversary emulation du red team, la rigueur de detection engineering du blue team, et un intérêt croissant pour les workflows LLM-driven des deux côtés.
+
+**Partisan de l'IA souveraine.** Je crois que les organisations devraient posséder leur stack IA, pas le louer. Praticien de frontier models -- j'utilise les meilleurs modèles commerciaux pour le travail en production ET j'opère de l'infrastructure locale pour garder compétences, données et options en interne.
 
 ## Ce qui m'occupe
 
 - **AI agent SecOps at scale** -- construire, déployer et auditer des systèmes agentiques dans des environnements de sécurité en production
 - **Purple teaming avec IA** -- est-ce que l'adversary emulation pilotée par LLM peut révéler des detection gaps plus vite que le pentest traditionnel?
 - **Convergence OT/IT en énergie** -- là où les threat models modernes rencontrent les réalités des systèmes industriels legacy
+- **Infrastructure IA souveraine** -- opérer des model stacks locaux en parallèle des API frontier; garder l'option d'indépendance
+
+## AI home lab
+
+J'opère de l'infrastructure IA locale en parallèle des API cloud. Le stack :
+
+- **Inférence** : llama.cpp, whisper.cpp
+- **MLOps** : MLflow, Azure AI Foundry, Databricks
+- **Orchestration** : AutoGen, LangChain/LangSmith
+- **Self-hosted** : Nono.sh (déploiement privé)
+
+Frontier models pour la production. Modèles locaux pour l'expérimentation, la vie privée, et le plaisir d'opérer son propre hardware.
 
 ## Équipe
 

@@ -1059,7 +1059,7 @@ After solving this challenge, you will understand:
 
 ## Conclusion
 
-The Monsatan Kiosk challenge demonstrates how easily default Windows configurations can be exploited in restricted/kiosk environments. By systematically trying keyboard shortcuts and leveraging standard Windows utilities (Task Manager, Run dialog, PowerShell), users can escape locked environments and access the underlying system.
+Default Windows kiosk configurations fall apart fast. Keyboard shortcuts (Ctrl+Shift+Esc, Win+R) and standard utilities (Task Manager, Run dialog, PowerShell) are enough to escape a locked environment and reach the underlying system.
 
 **Key Takeaway**: Proper kiosk hardening requires multiple defensive layers including group policy restrictions, process whitelisting, proper ACL configuration, and physical security measures. A single-layer approach (such as fullscreen application only) is insufficient against even moderate attackers.
 
@@ -1540,7 +1540,7 @@ Possible reasons:
 
 ## Conclusion
 
-The Monsatan Kiosk challenge demonstrates how easily default Windows configurations can be exploited when running in restricted/kiosk mode. By systematically trying keyboard shortcuts and leveraging standard Windows utilities (Task Manager, Run dialog), we were able to escape from the locked environment and retrieve the flag.
+Default Windows kiosk mode broke to keyboard shortcuts and standard utilities (Task Manager, Run dialog). Escape, flag retrieved.
 
 **Key Takeaway**: Proper kiosk hardening requires multiple layers of security controls, including proper Group Policy configuration, process whitelisting, and physical security measures. A single-layer approach (such as fullscreen browser only) is insufficient against determined attackers.
 

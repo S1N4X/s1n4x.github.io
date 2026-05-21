@@ -34,6 +34,7 @@ Coaches surface candidate chains and proposed flags. The human reviews and submi
 
 ## Track record
 
+- **The Great Canadian CTF 2026** (CCN / Hack The Box) -- 32-team nationwide bracket. **Round 1 winner**: 3500 pts, **10/10 flags**, 10/10 scenarios, **6 first bloods**. **Round 2**: 2700 pts, 10/10 flags, 4 first bloods (2nd on first-blood tiebreaker). 5-player team.
 - **NSEC 2026** -- **119 flags** captured across **47 tracks**. 25 solved end-to-end, 4 partial, 8 STUCK with documented blockers. Mid-pack finish in a 200+ team field. **11 distinct anti-AI traps identified and refused.** See the [event report](/posts/nsec26-event-report/) for the full retrospective and the [fleet retrospective](/posts/nsec26-fleet-retrospective/) for the agent stats.
 - **NSEC 2025 archive** -- partial backfill, in progress.
 
