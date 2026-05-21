@@ -1,10 +1,9 @@
 +++
 title = "Alain Yamin"
+aka = "sinax"
 description = "Cybersecurity, AI SecOps, purple teaming. Energy sector."
 date = 2026-05-21
 +++
-
-<p class="page-aka"><span class="aka-dim">aka</span> sinax</p>
 
 Cybersecurity practitioner working at the intersection of **AI SecOps** and **purple teaming** in the **energy sector**. Reach me on [GitHub](https://github.com/S1N4X) — handle: `@S1N4X`.
 

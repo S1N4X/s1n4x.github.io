@@ -1,13 +1,13 @@
 +++
-title = "My five laws of using AI at work"
-description = "Five personal commitments I work from when I use LLMs in security and engineering work."
+title = "My six laws of using AI at work"
+description = "Six personal commitments I work from when I use LLMs in security and engineering work."
 date = 2026-05-21
 tags = ["ai-secops", "opinion", "ethics"]
 draft = false
-model = "Opus 4.7 (drafting assist) — the five laws are mine"
+model = "Opus 4.7 (drafting assist) — the six laws are mine"
 +++
 
-After a year of running AI systems in security work — CTF tracks, purple-team exercises, anomaly triage — I've ended up with five personal commitments. I keep them short on purpose. They're not policy. They're what I owe the people I work with.
+After a year of running AI systems in security work — CTF tracks, purple-team exercises, anomaly triage — I've ended up with six personal commitments. I keep them short on purpose. They're not policy. They're what I owe the people I work with.
 
 ## 1. I review what the LLM produces for me.
 
@@ -33,7 +33,7 @@ If I disagree with a colleague, I bring the disagreement to them directly, with 
 
 ## 6. LLMs can't count.
 
-This list is titled "five laws". It has six. Neither I nor the model caught the mismatch during review. If something needs to be exactly *N*, count it yourself — and don't trust the title.
+This list is titled "six laws". It has seven. Neither I nor the model caught the mismatch during review. If something needs to be exactly *N*, count it yourself — and don't trust the title.
 
 ## 7. If I didn't read everything, I disclose it.
 
@@ -43,6 +43,6 @@ The reader gets to calibrate. The reader cannot calibrate what they don't know I
 
 ---
 
-That's the whole list. Five lines on a sticky note. The hard part isn't writing them, it's living them every time the model produces something useful and the temptation to skim the review is real.
+That's the whole list. Six lines on a sticky note. The hard part isn't writing them, it's living them every time the model produces something useful and the temptation to skim the review is real.
 
 If you have a different short list, I'd be interested in comparing. [Reach out](/about/).

@@ -113,16 +113,27 @@ article small {
   opacity: 0.4;
 }
 
-/* === Page-level "aka" subtitle (used on /about/) ====================== */
+/* === Page-level "aka <handle>" rendering ============================== */
+/* Used as an inline suffix beside the H1 title when frontmatter has an
+ * `aka` field (e.g., /about/). Sized down from the H1, mono font, dimmed
+ * "aka" word. The .page-aka block is the older paragraph-level fallback. */
+.aka-suffix {
+  font-family: "Fira Code", Monaco, Consolas, "Ubuntu Mono", monospace;
+  font-size: 0.55em;
+  font-weight: normal;
+  letter-spacing: 0.03em;
+  vertical-align: 0.25em;
+  margin-left: 0.4em;
+}
+.aka-dim {
+  opacity: 0.4;
+  font-style: italic;
+}
 .page-aka {
   font-family: "Fira Code", Monaco, Consolas, "Ubuntu Mono", monospace;
   font-size: 1.1em;
   margin: -0.6em 0 1.2em 0;
   letter-spacing: 0.02em;
-}
-.aka-dim {
-  opacity: 0.4;
-  font-style: italic;
 }
 
 /* === Team credit block (logo + bilingual credit paragraph) ============ */
@@ -131,9 +142,8 @@ article small {
   align-items: center;
   gap: 16px;
   margin: 14px 0 18px 0;
-  padding: 12px 14px;
+  padding: 12px 0 12px 14px;
   border-left: 3px solid var(--accent);
-  background: color-mix(in srgb, var(--accent) 5%, transparent);
 }
 .team-credit__logo {
   flex: 0 0 auto;

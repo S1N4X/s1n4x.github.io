@@ -1,13 +1,13 @@
 +++
-title = "Mes cinq lois de l'utilisation de l'IA au travail"
-description = "Cinq engagements personnels que je tiens quand j'utilise des LLM dans mon travail de sécurité et d'ingénierie."
+title = "Mes six lois de l'utilisation de l'IA au travail"
+description = "Six engagements personnels que je tiens quand j'utilise des LLM dans mon travail de sécurité et d'ingénierie."
 date = 2026-05-21
 tags = ["ai-secops", "opinion", "éthique"]
 draft = false
-model = "Opus 4.7 (aide à la rédaction) — les cinq lois sont les miennes"
+model = "Opus 4.7 (aide à la rédaction) — les six lois sont les miennes"
 +++
 
-Après un an à opérer des systèmes d'IA dans du travail de sécurité — pistes CTF, exercices purple team, triage d'anomalies — j'en suis arrivé à cinq engagements personnels. Je les garde courts exprès. Ce n'est pas de la politique. C'est ce que je dois aux gens avec qui je travaille.
+Après un an à opérer des systèmes d'IA dans du travail de sécurité — pistes CTF, exercices purple team, triage d'anomalies — j'en suis arrivé à six engagements personnels. Je les garde courts exprès. Ce n'est pas de la politique. C'est ce que je dois aux gens avec qui je travaille.
 
 ## 1. Je révise ce que le LLM me produit.
 
@@ -33,7 +33,7 @@ Si je suis en désaccord avec un coéquipier, je lui apporte le désaccord direc
 
 ## 6. Les LLM ne savent pas compter.
 
-Cette liste s'intitule « cinq lois ». Elle en a six. Ni moi ni le modèle ne l'avons remarqué pendant la révision. Si quelque chose doit être exactement *N*, comptez-le vous-même — et ne faites pas confiance au titre.
+Cette liste s'intitule « six lois ». Elle en a sept. Ni moi ni le modèle ne l'avons remarqué pendant la révision. Si quelque chose doit être exactement *N*, comptez-le vous-même — et ne faites pas confiance au titre.
 
 ## 7. Si je n'ai pas tout lu, je le déclare.
 
@@ -43,6 +43,6 @@ Le lecteur peut alors calibrer. Le lecteur ne peut pas calibrer ce qu'il ignore 
 
 ---
 
-C'est toute la liste. Cinq lignes sur un post-it. Le difficile, ce n'est pas de les écrire, c'est de les vivre chaque fois que le modèle produit quelque chose d'utile et que la tentation de bâcler la révision est réelle.
+C'est toute la liste. Six lignes sur un post-it. Le difficile, ce n'est pas de les écrire, c'est de les vivre chaque fois que le modèle produit quelque chose d'utile et que la tentation de bâcler la révision est réelle.
 
 Si tu as une autre liste courte, ça m'intéresserait de comparer. [Écris-moi](/about/).
