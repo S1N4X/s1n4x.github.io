@@ -113,6 +113,42 @@ article small {
   opacity: 0.4;
 }
 
+/* === Team credit block (logo + bilingual credit paragraph) ============ */
+.team-credit {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  margin: 14px 0 18px 0;
+  padding: 12px 14px;
+  border-left: 3px solid var(--accent);
+  background: color-mix(in srgb, var(--accent) 5%, transparent);
+}
+.team-credit__logo {
+  flex: 0 0 auto;
+  width: 84px;
+  height: 84px;
+  object-fit: contain;
+  filter: drop-shadow(0 0 4px color-mix(in srgb, var(--accent) 30%, transparent));
+}
+.team-credit__text {
+  flex: 1 1 auto;
+  font-size: 0.94em;
+  line-height: 1.5;
+}
+.team-credit__text p {
+  margin: 0;
+}
+@media (max-width: 600px) {
+  .team-credit {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+  .team-credit__logo {
+    width: 64px;
+    height: 64px;
+  }
+}
+
 /* === ctfint callout (intro block above writeups/reports lists) ========= */
 .ctfint-callout {
   border-left: 3px solid var(--accent);
