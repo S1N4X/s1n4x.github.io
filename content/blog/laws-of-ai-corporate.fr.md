@@ -31,6 +31,10 @@ Le modèle n'est pas un substitut de collègue ni un évaluateur de collègue. C
 
 Si je suis en désaccord avec un coéquipier, je lui apporte le désaccord directement, avec ma propre réflexion — pas avec une transcription fraîche d'un modèle qui ne l'a jamais rencontré. La version paresseuse de moi se sert de l'IA pour être la personne la plus intelligente dans la pièce. La version honnête s'en sert pour mieux faire le travail, et gagne ensuite la pièce à l'ancienne.
 
+## 6. Les LLM ne savent pas compter.
+
+Cette liste s'intitule « cinq lois ». Elle en a six. Ni moi ni le modèle ne l'avons remarqué pendant la révision. Si quelque chose doit être exactement *N*, comptez-le vous-même — et ne faites pas confiance au titre.
+
 ---
 
 C'est toute la liste. Cinq lignes sur un post-it. Le difficile, ce n'est pas de les écrire, c'est de les vivre chaque fois que le modèle produit quelque chose d'utile et que la tentation de bâcler la révision est réelle.

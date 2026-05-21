@@ -1,19 +1,44 @@
 {{ define "main" }}
-{{ $isFR := eq .Site.Language.Lang "fr" }}
+{{/* GH Pages serves a single /404.html for all 404s — Hugo can't route
+     /fr/* fallback to /fr/404.html. We compromise: render BOTH variants
+     in the markup, hide the irrelevant one via a one-line inline JS that
+     reads the URL path. No-JS users see the default-language variant. */}}
 <article class="post">
   <h1>404</h1>
-  <pre>
-&#9484;&#9472; {{ if $isFR }}TRANSCRIPTION D'AGENT // STATUT&nbsp;: TUÉ{{ else }}AGENT TRANSCRIPT // STATUS: KILLED{{ end }} &#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9488;
-&#9474;  {{ if $isFR }}L'agent a-X a épuisé son stream-watchdog à 600s.{{ else }}Agent a-X exhausted stream-watchdog at 600s.        {{ end }}&#9474;
-&#9474;  {{ if $isFR }}La page était ici. Maintenant elle ne l'est plus. {{ else }}The page was here. Now it isn't.                    {{ end }}&#9474;
-&#9474;                                                     &#9474;
-&#9474;  &#9656; {{ if $isFR }}essayez{{ else }}try{{ end }} <a href="{{ if $isFR }}/fr/posts/{{ else }}/posts/{{ end }}">{{ if $isFR }}/fr/posts/{{ else }}/posts/{{ end }}</a>                              &#9474;
-&#9474;  &#9656; {{ if $isFR }}essayez{{ else }}try{{ end }} <a href="/tags/meta-writeup/">/tags/meta-writeup/</a>                       &#9474;
-&#9474;  &#9656; {{ if $isFR }}blâmez l'essaim{{ else }}blame the swarm{{ end }}                                  &#9474;
+  <div id="not-found-en" class="lang-en">
+    <pre>
+&#9484;&#9472; AGENT TRANSCRIPT // STATUS: KILLED &#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9488;
+&#9474;  Agent a-X exhausted stream-watchdog at 600s.        &#9474;
+&#9474;  The page was here. Now it isn't.                    &#9474;
+&#9474;                                                      &#9474;
+&#9474;  &#9656; try <a href="/posts/">/posts/</a>                              &#9474;
+&#9474;  &#9656; try <a href="/tags/meta-writeup/">/tags/meta-writeup/</a>                  &#9474;
+&#9474;  &#9656; blame the swarm                                   &#9474;
 &#9492;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9496;
-  </pre>
-  <p>
-    <a href="{{ if $isFR }}/fr/{{ else }}/{{ end }}">&#9656; {{ if $isFR }}retour à{{ else }}back to{{ end }} /</a>
-  </p>
+    </pre>
+    <p><a href="/">&#9656; back to /</a></p>
+  </div>
+  <div id="not-found-fr" class="lang-fr" style="display:none">
+    <pre>
+&#9484;&#9472; TRANSCRIPTION D'AGENT // STATUT&nbsp;: TUÉ &#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9488;
+&#9474;  L'agent a-X a épuisé son stream-watchdog à 600s.    &#9474;
+&#9474;  La page était ici. Maintenant elle ne l'est plus.   &#9474;
+&#9474;                                                      &#9474;
+&#9474;  &#9656; essayez <a href="/fr/posts/">/fr/posts/</a>                      &#9474;
+&#9474;  &#9656; essayez <a href="/tags/meta-writeup/">/tags/meta-writeup/</a>              &#9474;
+&#9474;  &#9656; blâmez l'essaim                                   &#9474;
+&#9492;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9496;
+    </pre>
+    <p><a href="/fr/">&#9656; retour à /</a></p>
+  </div>
 </article>
+<script>
+  (function () {
+    if (location.pathname.startsWith('/fr/')) {
+      document.getElementById('not-found-en').style.display = 'none';
+      document.getElementById('not-found-fr').style.display = 'block';
+      document.documentElement.lang = 'fr';
+    }
+  })();
+</script>
 {{ end }}

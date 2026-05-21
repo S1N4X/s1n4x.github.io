@@ -31,6 +31,10 @@ The model is not a colleague-substitute and not a colleague-grader. Pasting a te
 
 If I disagree with a colleague, I bring the disagreement to them directly, with my own thinking — not with a fresh transcript from a model that has never met them. The lazy version of me uses AI to be the smartest person in the room. The honest version uses it to do the work better, then earns the room the old way.
 
+## 6. LLMs can't count.
+
+This list is titled "five laws". It has six. Neither I nor the model caught the mismatch during review. If something needs to be exactly *N*, count it yourself — and don't trust the title.
+
 ---
 
 That's the whole list. Five lines on a sticky note. The hard part isn't writing them, it's living them every time the model produces something useful and the temptation to skim the review is real.
