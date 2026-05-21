@@ -92,8 +92,16 @@ article small {
 }
 
 /* === Posts detailed-list table (Hubert-Hackin-style + status column) === */
+/* Break the table out of the centered content column to use the full
+ * viewport width. The intro paragraphs above stay centered at --width;
+ * only .posts-detailed escapes. */
 .posts-detailed {
   margin-top: 0.5em;
+  margin-left: calc(-50vw + 50%);
+  margin-right: calc(-50vw + 50%);
+  padding-left: 16px;
+  padding-right: 16px;
+  box-sizing: border-box;
 }
 
 /* Tighten the intro paragraph block above the posts table */
