@@ -5,6 +5,10 @@
     </div>
   {{ end }}
 
+  {{/* Filter out meta-writeups (reports). They live under /tags/meta-writeup/ (menu: "reports"). */}}
+  {{ $writeups := where .Pages "Params.tags" "intersect" (slice "meta-writeup") | symdiff .Pages }}
+  {{ $paginator := .Paginate $writeups }}
+
   <div class="posts-detailed">
     <table class="posts-table">
       <thead>
@@ -17,7 +21,7 @@
         </tr>
       </thead>
       <tbody>
-        {{ range .Paginator.Pages }}
+        {{ range $paginator.Pages }}
           {{ $event := index .Params.categories 0 | default "—" }}
           {{/* Extract status (SOLVED / PARTIAL / STUCK / UNTOUCHED / meta) from tags if present, else from title heuristic */}}
           {{ $status := "" }}
