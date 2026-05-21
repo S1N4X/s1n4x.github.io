@@ -1,0 +1,37 @@
+{{/* Override of themes/terminal/layouts/partials/mobile-menu.html.
+     Same active-section logic as menu.html. */}}
+
+{{ $current := .RelPermalink }}
+{{ $bestURL := "" }}
+{{ $bestLen := 0 }}
+{{ range $.Site.Menus.main }}
+  {{ $u := .URL }}
+  {{ if not (hasSuffix $u "/") }}{{ $u = printf "%s/" $u }}{{ end }}
+  {{ if hasPrefix $current $u }}
+    {{ if gt (len $u) $bestLen }}
+      {{ $bestURL = .URL }}
+      {{ $bestLen = len $u }}
+    {{ end }}
+  {{ end }}
+{{ end }}
+
+<ul class="menu menu--mobile">
+  <li class="menu__trigger">Menu&nbsp;▾</li>
+  <li>
+    <ul class="menu__dropdown">
+      {{ range $.Site.Menus.main }}
+        {{ if not .HasChildren }}
+          <li{{ if eq .URL $bestURL }} class="active"{{ end }}><a href="{{ .URL }}">{{ .Name }}</a></li>
+        {{ end }}
+      {{ end }}
+      {{ if and $.Site.Params.showLanguageSelector (len $.Site.Home.AllTranslations) }}
+        <hr />
+        {{ range $.Site.Home.AllTranslations }}
+          <li>
+            <a href="{{ .Permalink }}">{{ .Language.LanguageName }}</a>
+          </li>
+        {{ end }}
+      {{ end }}
+    </ul>
+  </li>
+</ul>

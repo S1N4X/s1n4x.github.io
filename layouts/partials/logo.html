@@ -1,10 +1,16 @@
 {{/* Dynamic site logo: sinax@<context>.
-   ctfint by default; switches to lab when browsing the /blog/ section.
+   Default: sinax@ctfint.
+   - /blog/      → sinax@lab
+   - /about/     → sinax@home
+   - /about-methodology/ → sinax@home (still about-section)
 */ -}}
 {{ $logoText := "sinax@ctfint" -}}
 {{ with .Page -}}
-  {{ if or (eq .Section "blog") (hasPrefix .RelPermalink "/blog") -}}
+  {{ $rp := .RelPermalink -}}
+  {{ if or (eq .Section "blog") (hasPrefix $rp "/blog") -}}
     {{ $logoText = "sinax@lab" -}}
+  {{ else if or (hasPrefix $rp "/about") (hasPrefix $rp "/fr/about") -}}
+    {{ $logoText = "sinax@home" -}}
   {{ end -}}
 {{ end -}}
 <a href="{{ if $.Site.Params.Logo.LogoHomeLink }}{{ $.Site.Params.Logo.LogoHomeLink }}{{ else }}{{ $.Site.BaseURL }}{{ end }}">

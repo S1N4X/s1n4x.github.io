@@ -1,0 +1,52 @@
+{{/* Override of themes/terminal/layouts/partials/menu.html.
+     Adds class="active" to the menu item whose URL is the longest prefix
+     match for the current page. Highlight is styled in static/style.css
+     (green background, black text). */}}
+
+{{ $current := .RelPermalink }}
+{{ $bestURL := "" }}
+{{ $bestLen := 0 }}
+{{ range $.Site.Menus.main }}
+  {{ $u := .URL }}
+  {{ if not (hasSuffix $u "/") }}{{ $u = printf "%s/" $u }}{{ end }}
+  {{ if hasPrefix $current $u }}
+    {{ if gt (len $u) $bestLen }}
+      {{ $bestURL = .URL }}
+      {{ $bestLen = len $u }}
+    {{ end }}
+  {{ end }}
+{{ end }}
+
+<nav class="navigation-menu">
+  <ul class="navigation-menu__inner menu--desktop">
+    {{ if or $.Site.Params.showMenuItems ( eq .Site.Params.showMenuItems 0 ) }}
+      {{ range first $.Site.Params.showMenuItems $.Site.Menus.main }}
+        {{ if not .HasChildren }}
+          <li{{ if eq .URL $bestURL }} class="active"{{ end }}><a href="{{ .URL }}" {{ if .Params.NewTab -}} target="_blank" {{- end }}>{{ .Name }}</a></li>
+        {{ end }}
+      {{ end }}
+      {{ if gt (len $.Site.Menus.main) $.Site.Params.showMenuItems }}
+        <li>
+          <ul class="menu">
+            <li class="menu__trigger">{{ $.Site.Params.menuMore }}&nbsp;▾</li>
+            <li>
+              <ul class="menu__dropdown">
+                {{ range last (sub (len $.Site.Menus.main) $.Site.Params.showMenuItems) $.Site.Menus.main }}
+                  {{ if not .HasChildren }}
+                    <li{{ if eq .URL $bestURL }} class="active"{{ end }}><a href="{{ .URL }}" {{ if .Params.NewTab -}} target="_blank" {{- end }}>{{ .Name }}</a></li>
+                  {{ end }}
+                {{ end }}
+              </ul>
+            </li>
+          </ul>
+        </li>
+      {{ end }}
+    {{ else }}
+      {{ range $.Site.Menus.main }}
+        {{ if not .HasChildren }}
+          <li{{ if eq .URL $bestURL }} class="active"{{ end }}><a href="{{ .URL }}" {{ if .Params.NewTab -}} target="_blank" {{- end }}>{{ .Name }}</a></li>
+        {{ end }}
+      {{ end }}
+    {{ end }}
+  </ul>
+</nav>

@@ -1,5 +1,5 @@
 +++
-title = "writeups"
+title = "articles"
 description = "writeups et rapports générés par les exécutions ctfint"
 +++
 

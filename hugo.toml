@@ -139,7 +139,7 @@ enableGitInfo = false
     [languages.fr.menu]
       [[languages.fr.menu.main]]
         identifier = "writeups"
-        name = "writeups"
+        name = "articles"
         url = "/posts"
         weight = 10
       [[languages.fr.menu.main]]

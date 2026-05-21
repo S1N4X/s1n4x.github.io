@@ -91,6 +91,27 @@ article small {
   max-width: 100%;
 }
 
+/* === Active nav highlight ============================================== */
+/* Current section in the top menu: green background, black text. Applied
+ * to the <li class="active"> wrapper rendered by layouts/partials/menu.html
+ * and layouts/partials/mobile-menu.html (both override the theme). */
+.navigation-menu li.active > a,
+.menu__dropdown li.active > a {
+  background: var(--accent);
+  color: #000;
+  padding: 1px 6px;
+  border-radius: 2px;
+  text-decoration: none;
+  font-weight: bold;
+}
+
+.navigation-menu li.active > a:hover,
+.menu__dropdown li.active > a:hover {
+  background: var(--accent);
+  color: #000;
+  opacity: 0.92;
+}
+
 /* === Posts detailed-list table (Hubert-Hackin-style + status column) === */
 .posts-detailed {
   margin-top: 0.5em;
