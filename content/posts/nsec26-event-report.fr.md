@@ -47,9 +47,9 @@ Notre équipe a opéré un système hybride humain + multi-agent, avec jusqu'à 
 
 ## 2. Chronologie des scores
 
-![Graphique cumulatif des scores NSEC 2026 -- la courbe Shellda est mise en évidence dans le cluster médian](/scoregraph.png)
+![Graphique cumulatif des scores NSEC 2026 -- Shellda termine dans le top 12](/scoregraph.png)
 
-> **Visuel** : le graphique de scores cumulatifs publié par les organisateurs montre notre ligne « Shellda: A Link To The Flag » évoluant globalement dans le peloton médian, grimpant fortement Ven 21:00-Sam 02:00 puis progressant plus graduellement jusqu'à Dim 14:14 (soumission finale REM 6/7). Les courbes des meilleurs (OteriHack 713, Hubert Hackin' 711, Basilic de Torches 674) ont plafonné à ~700 pts vers Dim 13:00.
+> **Visuel** : le graphique de scores cumulatifs publié par les organisateurs montre notre ligne « Shellda: A Link To The Flag » terminant dans le **top 12**, grimpant fortement Ven 21:00-Sam 02:00 puis progressant plus graduellement jusqu'à Dim 14:14 (soumission finale REM 6/7). Les courbes des meilleurs (OteriHack 713, Hubert Hackin' 711, Basilic de Torches 674) ont plafonné à ~700 pts vers Dim 13:00.
 
 > **Statistiques officielles de l'événement** (présentation de la closing ceremony) : NSEC 2026 comptait **161 flags / 754 pts / 41 tracks / 60 services / 35 fichiers / 27 challenge designers** -- contre 165 flags / 412 pts / 37 tracks / 49 services / 48 fichiers / 32 designers pour NSEC 2025. Le **delta de +342 pts / +83 % de total de points en glissement annuel** reflète la pondération délibérée des organisateurs vers des challenges plus difficiles en 2026.
 
