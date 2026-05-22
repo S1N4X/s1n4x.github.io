@@ -8,7 +8,7 @@ defaultContentLanguageInSubdir = false
 title = "ctfint"
 theme = "terminal"
 pagination.pagerSize = 15
-copyright = "© 2026 ctfint · S1N4X · CC-BY-SA 4.0"
+copyright = "© 2026 ctfint · S1N4X · CC BY-NC-ND 4.0"
 # enableGitInfo flipped on AFTER first commit lands (Hugo refuses to build on
 # an unborn branch otherwise). Toggle to true once the initial push completes.
 enableGitInfo = false
@@ -64,7 +64,7 @@ enableGitInfo = false
       subtitle = "what happens when AI agents play CTF"
       owner = "S1N4X"
       keywords = "ctf,ai,agents,nsec,claude,writeup,security"
-      copyright = "ctfint / S1N4X · CC-BY-SA 4.0"
+      copyright = "ctfint / S1N4X · CC BY-NC-ND 4.0"
       menuMore = "more"
       readMore = "read more"
       readOtherPosts = "other posts"
@@ -127,7 +127,7 @@ enableGitInfo = false
       subtitle = "quand des AI agents s'attaquent au CTF"
       owner = "S1N4X"
       keywords = "ctf,ia,agents,nsec,claude,writeup,sécurité"
-      copyright = "ctfint / S1N4X · CC-BY-SA 4.0"
+      copyright = "ctfint / S1N4X · CC BY-NC-ND 4.0"
       menuMore = "plus"
       readMore = "lire la suite"
       readOtherPosts = "autres articles"

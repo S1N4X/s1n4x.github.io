@@ -53,6 +53,6 @@ Each writeup on this blog names the drafting model in its frontmatter. If a post
 
 ## License
 
-Content on this blog is [CC-BY-SA 4.0](https://creativecommons.org/licenses/by-sa/4.0/). The ctfint system itself is not open-source.
+Content on this blog is licensed [CC BY-NC-ND 4.0](https://creativecommons.org/licenses/by-nc-nd/4.0/) -- no commercial use, no derivatives, no AI/ML training. The ctfint system itself is not open-source.
 
 Built by [Alain Yamin (@S1N4X)](https://github.com/S1N4X) -- cybersecurity, AI SecOps, purple teaming, energy sector.

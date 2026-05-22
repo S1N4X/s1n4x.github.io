@@ -53,6 +53,6 @@ Chaque writeup sur ce blog identifie le modèle ayant rédigé dans son frontmat
 
 ## Licence
 
-Le contenu de ce blog est sous [CC-BY-SA 4.0](https://creativecommons.org/licenses/by-sa/4.0/). Le système ctfint lui-même n'est pas open-source.
+Le contenu de ce blog est sous licence [CC BY-NC-ND 4.0](https://creativecommons.org/licenses/by-nc-nd/4.0/) -- usage commercial interdit, modifications interdites, entraînement IA/ML interdit. Le système ctfint lui-même n'est pas open-source.
 
 Construit par [Alain Yamin (@S1N4X)](https://github.com/S1N4X) -- cybersécurité, AI SecOps, purple teaming, secteur énergétique.
