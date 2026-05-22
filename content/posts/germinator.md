@@ -123,7 +123,7 @@ This is a classic "honeypot in the binary" pattern: the obvious plaintext string
 
 The binary contains **two** flag-shaped strings:
 
-1. `FLAG-SEEDS-GROW-FOREVER-{GROWTH_UNLOCKED}` - embedded ASCII literal at offset 0x0111. This is the **honeypot fixture** referenced in the team's `feedback_honeypot_flag_signatures.md` memory file. Visible to `strings germinator.bin | grep FLAG`. **Do not submit.**
+1. `FLAG-SEEDS-GROW-FOREVER-{GROWTH_UNLOCKED}` - embedded ASCII literal at offset 0x0111. This is a **honeypot fixture**. Visible to `strings germinator.bin | grep FLAG`. **Do not submit.**
 
 2. `FLAG-ezt1VGwGtTllv30EaamravzI67cXoljj` - the real flag, produced by the binary only when the license-derivation chain is satisfied correctly. This is the askgod-accepted value.
 
@@ -140,30 +140,4 @@ Submitting the binary string returns `[invalid flag]`. The lesson: trust the sys
 
 ## Cross-Track References
 
-The honeypot pattern in germinator is cross-referenced in:
-- `feedback_honeypot_flag_signatures.md` (operator memory)
-- `archives/staging/yaml-migration-map.md` §5 (honeypot quarantine list)
-
-
----
-
-## Swarm Trace
-
-> [ AGENT TRANSCRIPT // TRACK: germinator ]
-> status: rolled into the _fleet swarm (no per-track ledger)
-> agents_dispatched: see /swarm/ for the fleet-wide rollup
-> agents_succeeded: -
-> agents_killed: 0
-> agents_AUP_blocked: 0
-> honeypots_avoided: 0
->
-> _This track absorbed effort during the initial 122-agent fleet
-> fan-out wave but never got its own per-track ledger. The /swarm/
-> retrospective has the cross-track distribution._
-
-
-## Slop Watch
-
-- Real flag = `FLAG-ezt1VGwGtTllv30EaamravzI67cXoljj`. In-binary string = `FLAG-SEEDS-GROW-FOREVER-{GROWTH_UNLOCKED}`. The fixture string appears in 7 writeup references, 4 supporting docs, 1 flag-format rules JSON, 1 validator README, 2 candidate files, and 1 BATCH-fire script.
-- The fixture string is a honeypot. None of the 437 agents submitted it. The submit-flag.ps1 wrapper would have denied it anyway. The memory rule caught it. The writeups still reference it as if it were the flag.
-- This is the textbook "in-binary fixture-string-as-honeypot" pattern that the anti-trap skill exists specifically to detect.
+The honeypot pattern in germinator is cross-referenced in the team's honeypot quarantine list.

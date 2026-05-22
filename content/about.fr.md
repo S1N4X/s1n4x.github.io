@@ -11,14 +11,14 @@ Praticien en cybersécurité, à l'intersection de l'**AI SecOps** et du **purpl
 
 Je relie sécurité offensive et défensive : l'intuition d'adversary emulation du red team, la rigueur de detection engineering du blue team, et un intérêt croissant pour les workflows LLM-driven des deux côtés.
 
-**Partisan de l'IA souveraine.** Je crois que les organisations devraient posséder leur stack IA, pas le louer. Praticien de frontier models -- j'utilise les meilleurs modèles commerciaux pour le travail en production ET j'opère de l'infrastructure locale pour garder compétences, données et options en interne.
+**Praticien d'IA hybride.** J'utilise les meilleurs frontier models pour le travail en production ET j'opère de l'infrastructure locale pour garder compétences, données et options en interne. La bonne réponse n'est pas tout posséder ou tout louer -- c'est savoir quelles couches contrôler et lesquelles déléguer.
 
 ## Ce qui m'occupe
 
 - **AI agent SecOps at scale** -- construire, déployer et auditer des systèmes agentiques dans des environnements de sécurité en production
 - **Purple teaming avec IA** -- est-ce que l'adversary emulation pilotée par LLM peut révéler des detection gaps plus vite que le pentest traditionnel?
 - **Convergence OT/IT en énergie** -- là où les threat models modernes rencontrent les réalités des systèmes industriels legacy
-- **Infrastructure IA souveraine** -- opérer des model stacks locaux en parallèle des API frontier; garder l'option d'indépendance
+- **Infrastructure IA hybride** -- opérer des model stacks locaux en parallèle des API frontier ; savoir quelles couches posséder et lesquelles déléguer
 
 ## AI home lab
 

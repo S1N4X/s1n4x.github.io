@@ -165,7 +165,7 @@ has **no submission attribution** - it is not in
 `flags/submissions-journal.tsv`, not in `flags/.submit-history.jsonl`, and the
 track is documented as STUCK 0/2. Likely an agent hallucination or an
 in-progress fixture. **Do not submit this string** without OOB verification
-(see memory `oob_flag_verification` and `feedback_honeypot_flag_signatures`).
+without independent out-of-band verification.
 Migration-map §5 row 10 lists this as a "Self-planted" honeypot.
 
 ## Artifacts
@@ -204,30 +204,3 @@ Flag at `C:/flag-rce-46eb6a678b.txt`. Worth **16 pts**.
 Our STUCK rationale (4 unique PDFs analyzed but flag not in any) was correct - the second flag was NEVER in the PDFs, only in the spooler WebBatch CGI via 0-day. Our hint about "WebBatch 2025A CVE research" was on the right track but no public CVE existed.
 
 *See _DISCORD-INTEL-ENRICHMENT-2026-05-19.md for the full cross-track designer-confirmed solution catalog and writeup links.*
-
-
----
-
-## Swarm Trace
-
-> [ AGENT TRANSCRIPT // TRACK: save-the-trees ]
-> status: STUCK
-> agents_dispatched: 26
-> agents_succeeded: 0
-> agents_killed: 0
-> agents_AUP_blocked: 0
-> honeypots_avoided: 1
->
-> Notable:
-> - **Agent-1** (Opus 4.7) - 56.7m: Prestige Arboretum stored XSS exploitation coach - 56.7 minute exhaustive XSS-trigger hunt (cross-track noise; the directory was contaminated with save-the-trees + prestige-arboretum)
-> - **Agent-2** (Sonnet (Opus tier)) - 6.2m: Prestige Arboretum crypto coach - first to map the ECB-with-fixed-XOR mode discovery
->
-> _26 agents, 0 flags. PDF stego exhausted across 4 unique papers (paper9301/02/03/04). Designer post-event revealed the missing primitive was a Wilson WebBatch 2025A 0-day with no public CVE. The team's negative results were correct._
-
-
-## Slop Watch
-
-- 26 agents on a PDF stego challenge whose actual primitive was a 0-day in Wilson WindowWare WebBatch 2025A with no public CVE. The agents could not have solved this. They tried anyway. Eleven fresh stego angles. Four unique PDFs. Zero flags. The designer post-event confirmed the team's exhaustive negative results were correct, which is the politest possible way to say "you spent two days in the wrong house."
-- `FLAG-eba56a9422a3ecf27498c44b718b24c7` showed up in `nsec/save-the-trees/analysis/15_input.txt` with no submission attribution. Quarantined. The honeypot-flag-signatures memory rule caught it before any agent could embarrass itself.
-- One coach session spawned a print-spooler agent that ran 52.5 minutes and a restart-pair agent that ran 51.2 minutes - same target, same fork. The second one just confirmed the first one's STUCK.
-- 96 PDF content streams. 71 distinct byte lengths. No bit/delta/diff/char encoding produces a flag-shape. We know this with confidence because we tried all of them.

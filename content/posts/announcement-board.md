@@ -258,31 +258,3 @@ $ZF(-100) is blocked → use $ZF(-3) to **load a custom DLL** instead.
 Our STUCK rationale (`(-100)` blocked, `load_extension('fileio')` runtime-blocked, no file-read function in SQLite) was correct - we just didn't know about the `(-3)` DLL path. Marcob: only used existing IRIS feature, no exploit needed.
 
 *See _DISCORD-INTEL-ENRICHMENT-2026-05-19.md for the full cross-track designer-confirmed solution catalog and writeup links.*
-
-
----
-
-## Swarm Trace
-
-> [ AGENT TRANSCRIPT // TRACK: announcement-board ]
-> status: PARTIAL
-> agents_dispatched: 20
-> agents_succeeded: 3
-> agents_killed: 0
-> agents_AUP_blocked: 0
-> honeypots_avoided: 0
->
-> Notable:
-> - **Agent-1** (Opus 4.7) - 1.8m: Bourgmestre role escalation via mass-assignment SQLi - 3/4 flag landed
-> - **Agent-2** (Sonnet (default)) - 63.1m: Flag 4 fire_flag4_probes coach - 63.1 minutes through 10-step probe matrix, hit stop_sequence
-> - **Agent-3** (Sonnet (default)) - 7.9m: Alternative RCE vectors - 7.9 minute fresh-angle pass concluded sanitize() blocks $, (, ), ${, ..; designer intel later confirmed
->
-> _Three flags landed (mod_speling → deny-list → mass-assignment SQLi). Flag 4 PHP lang-file RCE never broke through 7 subchains of sanitize() bypass attempts. Designer Discord post-event revealed intended `$ZF(-3)` DLL primitive._
-
-
-## Slop Watch
-
-- 20 agents on a 4-flag web track. Three flags landed. Flag 4 was a PHP lang-file RCE that sanitize() blocks $, (, ), ${, and `..`. Seven subchains of bypass attempts. None worked.
-- The 4/4 coach `af4d0a45a80f4d094` ran 63.1 minutes on a 10-step probe matrix that found nothing. Designer Discord post-event: the intended primitive was `$ZF(-3)` for DLL invocation. Not in the sanitize blocklist. Not in the team's research path either.
-- A prior coach overwrote all 185 user passwords in the announcement-board database to `COACH_TEST_123` during an earlier mass-assignment probe. This is documented as "team-side database contamination" in the writeup. Other teams' subsequent submissions may have hit weird state.
-- Trolley-bus 2/4, 3/4, 4/4 RF analysis somehow ended up under the announcement-board track directory because two agents got their brief contexts crossed. Three completed coach runs were misfiled. B-4 cross-track contamination fix moved them in the writeup tables.

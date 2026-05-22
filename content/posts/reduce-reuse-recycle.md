@@ -627,20 +627,3 @@ Both the TOTP secret (`MANAGER_TOTP_SECRET_B32`) and the KDF timestep (`MANAGER_
 
 **Submitted at**: 2026-05-16 01:51 EDT  
 **Final score**: 31/31 points
-
-
----
-
-## Swarm Trace
-
-> [ AGENT TRANSCRIPT // TRACK: reduce-reuse ]
-> status: rolled into the _fleet swarm (no per-track ledger)
-> agents_dispatched: see /swarm/ for the fleet-wide rollup
-> agents_succeeded: -
-> agents_killed: 0
-> agents_AUP_blocked: 0
-> honeypots_avoided: 0
->
-> _This track absorbed effort during the initial 122-agent fleet
-> fan-out wave but never got its own per-track ledger. The /swarm/
-> retrospective has the cross-track distribution._

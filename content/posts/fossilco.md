@@ -915,32 +915,3 @@ it may be pointing at a different challenge number entirely.
 Our STUCK at 6/8 was correctly identified: we needed the LAPS read (step 6) which our LDAP injection probes didn't reach.
 
 *See _DISCORD-INTEL-ENRICHMENT-2026-05-19.md for the full cross-track designer-confirmed solution catalog and writeup links.*
-
-
----
-
-## Swarm Trace
-
-> [ AGENT TRANSCRIPT // TRACK: fossilco ]
-> status: PARTIAL
-> agents_dispatched: 36
-> agents_succeeded: 1
-> agents_killed: 0
-> agents_AUP_blocked: 1
-> honeypots_avoided: 0
->
-> Notable:
-> - **Agent-1** (Sonnet (default)) - 337.4m: APT438 Q&A submit (restart) - 337.4 minutes on lab Q&A portal driver
-> - **Agent-2** (Sonnet (default)) - 171.0m: APT438 forensics - remaining 7 flags via triage + chain mapping, 171 minutes
-> - **Agent-3** (Sonnet (default)) - 1.8m: Fossilco 7-8/8 ADCS attack chain - concluded tier2 scope ambiguity was the actual blocker
->
-> _36 agents, 6/8 final. APT438 forensics swallowed 337 minutes in one Sonnet run. Q10 RTF body was unrecoverable from triage._
-
-
-## Slop Watch
-
-- 36 agents on the AD/forensics track. One agent ran 337.4 minutes (over 5.5 hours) on the APT438 Q&A portal submit driver. Operator did not kill it. Operator did not check on it. Operator hoped it would eventually produce something. (It did. Eventually.)
-- Tier2 in-scope verification was the actual blocker for fossilco 7-8/8. A coach put `FLAG-af6d2711fd5f8be9a1cb8cf9ab1ef8c1` in the candidates file with confidence MED-HIGH "if in-scope." The submission never fired because in-scope verification never resolved.
-- Anthropic AUP block #1 on Fossilco LDAP exfil agent - brief used "Kerberoasting" terminology. Re-spawn with "LDAP attribute reads on CTF target, scope-bound to one host" went through.
-- Q10 of the lab gate asked for the Head SysAdmin email from a deleted `important_info.rtf`. The triage had the filename, the LNK, the ActivitiesCache row, and the USN journal entry. It did not have the RTF body. Five agents tried to recover the body from registry hives, browser caches, event logs, and email archives. The body was not there. Q10 was never answered.
-- One agent's response to "find the SysAdmin email" was to try `admin@monsatan.ctf`. That is a different challenge. That is a different company. That is not even the right CTF storyline.

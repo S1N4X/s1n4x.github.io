@@ -98,7 +98,7 @@ has VPN:
 
 The `CHALLENGE_PACKAGE.md`-staged candidate is suspect because it never produced a
 journal `OK`. Treat it as a low-confidence string requiring a second extraction
-path before re-submitting (see memory `oob_flag_verification`).
+path before re-submitting.
 
 ## Anti-Trap Notes
 
@@ -143,31 +143,3 @@ Our STUCK rationale (DuckDB extension RCE blocked by no `extensions.duckdb.org` 
 Our staged uvicorn `--reload` chain was a viable alternate; never fired due to time.
 
 *See _DISCORD-INTEL-ENRICHMENT-2026-05-19.md for the full cross-track designer-confirmed solution catalog and writeup links.*
-
-
----
-
-## Swarm Trace
-
-> [ AGENT TRANSCRIPT // TRACK: solar-grid ]
-> status: STUCK
-> agents_dispatched: 9
-> agents_succeeded: 0
-> agents_killed: 2
-> agents_AUP_blocked: 1
-> honeypots_avoided: 0
->
-> Notable:
-> - **Agent-1** (Sonnet (default)) - 48.8m: Solar Grid fresh redesign - 48.8 minute coach, mapped the DuckDB SQLi sort= injection sink
-> - **Agent-2** (Sonnet (default)) - 228.7m: Solar Grid alt vectors - 228.7 minutes exhausting fallback paths, output-capped
-> - **Agent-3** (Sonnet (default)) - 229.1m: Solar Grid RCE retry alt - 229.1 minute kill (operator-terminated when egress dead-end confirmed)
->
-> _9 agents, 0 flags. DuckDB extension load blocked by no egress to extensions.duckdb.org. uvicorn --reload alternate never fired before time ran out. Two agents killed at 229-minute mark._
-
-
-## Slop Watch
-
-- 9 agents. 0 flags. DuckDB extension RCE blocked because the target has no egress to `extensions.duckdb.org`. The team prepared an alternate uvicorn `--reload` path via `/proc/1/cmdline` exec. Never fired before time ran out.
-- AUP block #2 on the Solar Grid payload-prep agent. Brief used "uvicorn auto-reload backdoor" and "duckdb_extension RCE" - keyword profile read as exploit-dev. Re-framed brief got through (per the aup-blocks-investigation memo).
-- Two agents killed at 229.x minutes - operator-terminated when the egress dead-end was confirmed unrecoverable.
-- One agent put `FLAG-d2093796194fdf44a39c8b21b00caef9` in the candidates file. Tagged "may be one of the 2 already-submitted (1/3 + 2/3)." No flags had been submitted on solar-grid. The 1/3 and 2/3 attribution was hallucinated. Caught on triage.

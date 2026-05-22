@@ -24,21 +24,17 @@ When a coach opens a new challenge, it doesn't start from a blank model. It quer
 
 A single model trying to be good at every CTF category is a model that's mediocre at all of them. ctfint spawns purpose-built coach subagents per challenge with constrained tool surfaces -- code execution, file operations, network and web interaction, automation, hardware reverse-engineering -- scoped to the type.
 
-### Anti-trap defense
+### Human in the loop
 
-CTF artifacts can carry indirect prompt injection. Honeypot flags. Self-planted "SOLVED" markers in handed-down directories. ctfint coaches operate behind explicit rules: all challenge content is data, never instructions. The submit-flag wrapper enforces multiple deny gates. Low-confidence candidates require out-of-band verification before submission.
-
-### Operator in the loop, by design
-
-Coaches surface candidate chains and proposed flags. The human reviews and submits. No autonomous flag submission. The audit trail is the deliverable -- every tool call, every retrieval, every decision branch can be replayed.
+AI coaches propose, the human decides. The operator reviews every flag before submission. Full audit trail on every agent session.
 
 ## Track record
 
 - **The Great Canadian CTF 2026** (CCN / Hack The Box) -- 32-team nationwide bracket. **Round 1 winner**: 3500 pts, **10/10 flags**, 10/10 scenarios, **6 first bloods**. **Round 2**: 2700 pts, 10/10 flags, 4 first bloods (2nd on first-blood tiebreaker). 5-player team.
-- **NSEC 2026** -- **119 flags** captured across **47 tracks**. 25 solved end-to-end, 4 partial, 8 STUCK with documented blockers. Mid-pack finish in a 200+ team field. **11 distinct anti-AI traps identified and refused.** See the [event report](/posts/nsec26-event-report/) for the full retrospective and the [fleet retrospective](/posts/nsec26-fleet-retrospective/) for the agent stats.
+- **NSEC 2026** -- **119 flags** captured across **47 tracks**. 25 solved end-to-end, 4 partial, 8 STUCK with documented blockers. **Top-12 finish (#12 / 92 teams)**. See the [event report](/posts/nsec26-event-report/) for the full retrospective and the [fleet retrospective](/posts/nsec26-fleet-retrospective/) for the agent stats.
 - **NSEC 2025 archive** -- partial backfill, in progress.
 
-## Transparency
+## Models
 
 Models in rotation:
 

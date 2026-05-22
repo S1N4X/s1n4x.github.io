@@ -865,29 +865,3 @@ The application's `/api/command` endpoint is hard-gated by an external Seed Serv
 Our STUCK at 1/4 was correctly identified - we had path traversal arbitrary write but couldn't find anything interesting to write because we treated it as path traversal instead of command injection.
 
 *See _DISCORD-INTEL-ENRICHMENT-2026-05-19.md for the full cross-track designer-confirmed solution catalog and writeup links.*
-
-
----
-
-## Swarm Trace
-
-> [ AGENT TRANSCRIPT // TRACK: weather-station ]
-> status: PARTIAL
-> agents_dispatched: 10
-> agents_succeeded: 1
-> agents_killed: 0
-> agents_AUP_blocked: 0
-> honeypots_avoided: 0
->
-> Notable:
-> - **Agent-1** (Sonnet (default)) - 38.6m: Weather-station 2-4 - 38.6 minute coach, full 7-vulnerability assessment + endpoint matrix
-> - **Agent-2** (Sonnet (default)) - 9.6m: VECTOR A exploitation execution - mission.json poisoning angle, output-capped at 9.6 minutes
->
-> _1/4 landed via path traversal in /upload filename (askgod #151). Flags 2-4 STUCK - designer post-event revealed flag 2 was `$(cmd)/path` shell injection, not the path traversal we suspected._
-
-
-## Slop Watch
-
-- 10 agents. 1 flag (path traversal in /upload filename). Designer post-event revealed flag 2 was `$(cmd)/path` shell injection. The team tried path traversal. The team tried directory traversal. The team tried filename injection. The team did not try shell command substitution because the prior writeups suggested path traversal was the trick.
-- One STUCK Rationale block was raw Discord DM bullets embedded in the writeup with markdown tables that don't render properly. The Q-1b reviewer flagged it. The fix is mechanical. The fix has not happened.
-- "VECTOR A exploitation execution" ran 9.6 minutes on mission.json poisoning. Output-capped. Nothing got poisoned. The vector was named A because there was no Vector B yet.

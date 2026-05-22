@@ -301,9 +301,7 @@ sunbloom*.
 ## What the swarm did well
 
 - **Anti-trap discipline.** Eleven documented honeypot patterns. Zero
-  submitted by an agent. The wrapper deny codes, the SUSPICIOUS.md workflow,
-  the `feedback_honeypot_flag_signatures` memory rule, and the OOB flag
-  verification rule all worked.
+  submitted by an agent.
 - **Cross-track contamination cleanup.** The B-4 cross-track sweep caught
   most of the misfiled writeup content before the archive was finalized.
 - **Designer intel weaving.** Post-event Discord enrichment landed in 14

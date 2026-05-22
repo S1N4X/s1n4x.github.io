@@ -186,23 +186,3 @@ FATAL ERROR: FLAG-{4c7022450e7e5f58e3f2187c4fb4d5c3}
 +3  FLAG-{1b45263069e94ad25747109944e889bb}  (cmd 0x3ea legacy)
 +7  FLAG-{4c7022450e7e5f58e3f2187c4fb4d5c3}  (sprinklersbleed empty-HMAC bypass)
 ```
-
-
----
-
-## Swarm Trace
-
-> [ AGENT TRANSCRIPT // TRACK: monsatan ]
-> status: PARTIAL
-> agents_dispatched: 25
-> agents_succeeded: 3
-> agents_killed: 0
-> agents_AUP_blocked: 0
-> honeypots_avoided: 0
->
-> Notable:
-> - **Agent-1** (Sonnet (default)) - 10.6m: Cross-track Monsatan secret matrix - mapped HMAC reuse hypothesis across 5 Monsatan tracks
-> - **Agent-2** (Opus 4.7) - 7.1m: Monsatan Defacing - final flag 6/6 via deface manifesto injection chain
-> - **Agent-3** (Sonnet (default)) - 3.9m: Monsatan Pesticide WASM JWT crypto chain - confirmed WASM has no crypto symbols (negative result locked in)
->
-> _Cross-track HMAC secret hunt + GitLab PAT pivot + WASM crypto absence - multi-pronged solve._

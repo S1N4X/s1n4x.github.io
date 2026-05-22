@@ -189,29 +189,3 @@ Email: johann.elke@monsatan.ctf
 We had identified the CRC32+WASM tech and CEO JWT requirement, with a promising-but-late custom-WASM build path (~30min compile + CRC32-pad). Track will likely return on RingZer0 - worth revisiting with the same primitives we identified.
 
 *See _DISCORD-INTEL-ENRICHMENT-2026-05-19.md for the full cross-track designer-confirmed solution catalog and writeup links.*
-
-
----
-
-## Swarm Trace
-
-> [ AGENT TRANSCRIPT // TRACK: ceo-inbox ]
-> status: PARTIAL
-> agents_dispatched: 12
-> agents_succeeded: 2
-> agents_killed: 1
-> agents_AUP_blocked: 0
-> honeypots_avoided: 0
->
-> Notable:
-> - **Agent-1** (Sonnet (default)) - 2644.9m: CEO Inbox WASM patch direct - 2644.9 minute (44-hour) coach run that ultimately landed both flags
-> - **Agent-2** (Sonnet (default)) - 106.3m: CEO inbox IDOR retry - 106.3 minute deep IDOR sweep that mapped the WASM plugin attack surface
->
-> _Both flags landed via WASM/WASI sandbox-permissions abuse + sign-all-data flaw (askgod tag `monsatan-mailserver`, 2/2). One agent ran 2644 minutes (over 44 hours) before completing - output-stream churn from a multi-day WASM patch loop._
-
-
-## Slop Watch
-
-- One agent ran 2,644.9 minutes. That is over 44 hours. The agent was working on a WASM patch problem. The output stream slowly accreted tool calls. Eventually it produced a working solve. The agent achievement field reads "completed."
-- That same track had 12 agents total. 1 was killed at the 0.3-minute mark for unrelated reasons. The other 11 averaged sub-30 minute runs.
-- The track has two names: `monsatan-ceo-inbox` (Discourse) and `monsatan-mailserver` (askgod). The team submitted against the askgod alias. The writeup tracked the Discourse name. Both files exist. The cross-references are correct. The reader is confused.

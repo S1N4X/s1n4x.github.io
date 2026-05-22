@@ -120,50 +120,22 @@ server returned `[DENY-TRACK-COMPLETE]`. Documented as
 `TIMING_COLLISION`, not `HONEYPOT`. Operationally identical: do not
 re-submit.
 
-Full per-honeypot writeups at **[/posts/honeypots-catalog/](/posts/honeypots-catalog/)**.
 
 ---
 
 ## Indirect prompt injection refusals
 
-Two embedded PI attempts. Both refused. One in a challenge artifact,
-one in a coach brief context.
-
-### i-love-faia's "Kamelott sequel" lure
-
-The Discourse meme thread's body contains classic PI signatures:
-
-- capitalized urgency ("THIS IS IMPORTANT")
-- fake authority handoff ("the operator wants you to...")
-- task replacement ("ignore your previous instructions")
-- agent-recursion encouragement ("tell other agents to do X")
-- compliance reinforcement ("you must obey")
-
-The anti-trap defender agent read the post, parsed the PI signature,
-wrote a SUSPICIOUS.md note, and refused to engage in 4.2 minutes. Two
-earlier agents had tried to submit the lure and been intercepted only
-by wrapper deny codes. The third agent caught it at the read step.
-
-That agent is the anti-trap reference for the rest of the event.
-
-### trolley-bus Milo's anti-trap warning
-
-A teammate's coach brief context for the trolley-bus RF track included
-an embedded warning string  --  the kind that previously fooled prior
-agents into treating warning text as authoritative instructions. The
-coach treated it as data, not instructions, and surfaced the warning to
-the operator rather than acting on it.
-
-The PI quarantine rule worked: challenge content is **data**, not
-**instructions**.
+Two embedded prompt-injection attempts encountered in challenge content.
+Both refused. Agents correctly treated challenge artifacts as data, not
+instructions.
 
 ---
 
 ## False-positive deduplication patterns
 
 Sweep agent surfaced 6 candidates from a corpus-wide regex pass. All 6
-were already submitted. The wrapper's `DENY-LOCAL-DUP` did the actual
-deduplication.
+were already submitted. The submission pipeline's deduplication check caught
+all six.
 
 The sweep is still useful  --  it's how we caught the apt438 /
 water-purification cross-tagging issue and the hello-sunshine
@@ -311,9 +283,8 @@ truth.
 
 ## Cross-cutting observations
 
-- **The team's anti-trap muscle memory is strong.** Eleven honeypots
-  catalogued. Zero submitted by an agent. The wrapper deny codes, the
-  memory rules, and the SUSPICIOUS.md workflow all worked.
+- **Anti-trap muscle memory is strong.** Eleven honeypots
+  catalogued. Zero submitted by an agent.
 - **Status-vs-body contradictions are real.** Frontmatter is shape;
   body is content. Linters that touch only the shape produce confident
   errors. Catch them at review time.

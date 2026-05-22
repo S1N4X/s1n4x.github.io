@@ -143,20 +143,3 @@ Re-mined `leak.csv` (raw b64 pwd) + `leak-decoded.csv` (1510 rows) + `topic-v2.j
 
 ### Conclusion
 There is **no flag derivable purely from local data**. Remaining flags (4/6 semaphore, 6/6 mailed OTP) genuinely require on-site physical artifacts. Brute-forcing `/MFA` is not viable (2 attempts/min/account lockout). **No `multi-facteur-PENDING.txt` flag candidate written.**
-
-
----
-
-## Swarm Trace
-
-> [ AGENT TRANSCRIPT // TRACK: multi-facteur ]
-> status: rolled into the _fleet swarm (no per-track ledger)
-> agents_dispatched: see /swarm/ for the fleet-wide rollup
-> agents_succeeded: -
-> agents_killed: 0
-> agents_AUP_blocked: 0
-> honeypots_avoided: 0
->
-> _This track absorbed effort during the initial 122-agent fleet
-> fan-out wave but never got its own per-track ledger. The /swarm/
-> retrospective has the cross-track distribution._

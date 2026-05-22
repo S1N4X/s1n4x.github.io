@@ -562,32 +562,3 @@ The "reserved" account mechanism on mail.ctf may intentionally allow SOME delive
 Our STUCK rationale (Thymeleaf SSTI hint unactionable on our network slice) reflects that the intended path was not the SSTI we suspected - it was XSS → RCE in the Laravel app. The Thymeleaf reference may have been a red herring or describing infrastructure we couldn't reach.
 
 *See _DISCORD-INTEL-ENRICHMENT-2026-05-19.md for the full cross-track designer-confirmed solution catalog and writeup links.*
-
-
----
-
-## Swarm Trace
-
-> [ AGENT TRANSCRIPT // TRACK: sunbloom ]
-> status: STUCK
-> agents_dispatched: 27
-> agents_succeeded: 0
-> agents_killed: 0
-> agents_AUP_blocked: 0
-> honeypots_avoided: 0
->
-> Notable:
-> - **Agent-1** (Sonnet (default)) - 65.3m: SunBloom Library SMTP injection + wildcard email exploit - 65.3 minute run, terminated on error
-> - **Agent-2** (Sonnet (default)) - 18.0m: 5-vector coach run; full assault on token/admin access - produced the most coherent STUCK rationale of the 8-phase exhaustion document
-> - **Agent-3** (Opus 4.7) - 5.1m: Email-attack coach - newline injection + wildcard email vectors documented with concrete CRLF / display-name mailbox-semantics test matrix
->
-> _27 agents, 0 flags. Library 0/? - Laravel toolkit exhausted, Thymeleaf host unreachable from team network position._
-
-
-## Slop Watch
-
-- 27 agents dispatched. Zero flags. The team's network position couldn't reach the Thymeleaf host [teammate] hinted about. So the agents kept attacking the Laravel host that wasn't Thymeleaf. Eleven attack vectors confirmed dead. Twelfth agent tried the same eleven. Thirteenth agent wrote a STUCK report about how the eleven were dead.
-- Agent attempted SMTP newline injection + wildcard email exploit at minute 65. Agent terminated on error. The exploit never sent.
-- The 8-phase technical body in the writeup is genuinely good. It just describes 8 phases of nothing working.
-- Most expensive STUCK of the event - 27 agents, 0 flags, 0 points, ~370 cumulative agent-minutes.
-- One coach brief mentioned "helios-otp: STUCK. helios-xss: AUP crashed." in a sunbloom file. Cross-track noise. The slop is leaking out of its lane.

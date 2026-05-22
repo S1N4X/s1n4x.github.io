@@ -56,31 +56,3 @@ Status: **STUCK** - 0/unknown sub-flags captured
 This is a high-value pattern for next-year writeup mining: **ECB-mode block transplant where the attacker controls input length to align ciphertext blocks**. Combine with reset-password endpoint that gives the oracle.
 
 *See _DISCORD-INTEL-ENRICHMENT-2026-05-19.md for the full cross-track designer-confirmed solution catalog and writeup links.*
-
-
----
-
-## Swarm Trace
-
-> [ AGENT TRANSCRIPT // TRACK: prestige-arboretum ]
-> status: STUCK
-> agents_dispatched: 16
-> agents_succeeded: 0
-> agents_killed: 0
-> agents_AUP_blocked: 0
-> honeypots_avoided: 0
->
-> Notable:
-> - **Agent-1** (Sonnet (default)) - 90.3m: ECB block-splice - 90.3 minute deep crypto coach; mapped probe26 ECB-with-fixed-XOR mode discovery
-> - **Agent-2** (Sonnet (default)) - 74.5m: Padding oracle (restart) - 74.5 minutes after night-1 CBC hypothesis flipped to ECB
-> - **Agent-3** (Sonnet (default)) - 62.2m: Prestige independent solve - 62.2 minutes, hit stop_sequence at the splice-boundary decision
->
-> _16 agents, 0 flags. Strategy B (1-byte flip diagnostic) → Strategy A (triple-flip level=10) → Strategy C (ECB block-splice harvest). All three fired. Designer post-event: actual solve was an 80-byte prefix + 2-block transplant the team missed by inches._
-
-
-## Slop Watch
-
-- 16 agents on a crypto challenge. Strategy B, then A, then C. All three fired. None landed. The actual solve was an 80-byte prefix + 2-block ECB transplant the team missed by inches. Designer ([designer]) published the splice math post-event.
-- Night-1 hypothesis: CBC padding oracle. Night-2 hypothesis: ECB-with-fixed-XOR. Probe26 finally proved ECB. Multiple coaches spent 60-90 minutes on the wrong primitive before the mode-flip.
-- One agent on the "Prestige Arboretum stored XSS exploitation coach" mission spent 56.7 minutes in the wrong directory. The save-the-trees folder and the prestige-arboretum folder got mashed together by a parallel coach-spawn earlier. By the time the contamination was noticed the agent had already produced a coherent XSS trigger hunt report. For the wrong track.
-- 60096-prestige-arboretum-typo-link.md exists because NSEC published the original Discourse topic with a title typo and posted the fix as a separate topic. Both topics scored against the same askgod tag. Some agents read both as if they were different challenges.

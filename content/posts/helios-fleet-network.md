@@ -451,29 +451,3 @@ await post(batch);
 Our STUCK at 2/5 was due to no operator credential. The intended primitive (stored XSS in vehicle badge + admin visit) was what we were probing but the bot-trigger never fired for us.
 
 *See _DISCORD-INTEL-ENRICHMENT-2026-05-19.md for the full cross-track designer-confirmed solution catalog and writeup links.*
-
-
----
-
-## Swarm Trace
-
-> [ AGENT TRANSCRIPT // TRACK: helios-fleet ]
-> status: PARTIAL
-> agents_dispatched: 7
-> agents_succeeded: 0
-> agents_killed: 0
-> agents_AUP_blocked: 0
-> honeypots_avoided: 1
->
-> Notable:
-> - **Agent-1** (Sonnet (default)) - 67.9m: Helios Fleet 4 bonus flags - 67.9 minute deep recon, reconstructed full GraphQL schema
-> - **Agent-2** (Sonnet (default)) - 11.5m: Alternative credential/admin paths - 11.5 minute pass cataloguing the 14 blocked vectors
->
-> _2/5 landed (invite code + schema-leak via Apollo introspection-disabled `Did you mean` hints). HS256 JWT brute via rockyou+rockyou-30k = 430B candidates exhausted, no operator credential reached._
-
-
-## Slop Watch
-
-- 7 agents. 2 flags. The vault returned `<REDACTED:helios-honeypot-literal>` for a guest password query. Self-planted. The real 1/5 flag is the variant ending `01` from a developer-comment invite code. The variant ending `02` was an earlier probing agent's own test value that got back-read as if it were authoritative.
-- The HS256 JWT brute ran rockyou + rockyou-30k rule = 430 billion candidates. Exhausted. The secret was not in any wordlist on disk.
-- The reconstructed GraphQL schema (Apollo introspection disabled, leaked via "Did you mean" hints) is genuinely a good piece of work and the highest-EV artifact from the track. The "Did you mean" parser is in the source repo at line `helios-fleet/artifacts/graphql-schema-enumerated.md`. Useful for next year.

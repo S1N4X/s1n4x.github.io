@@ -80,39 +80,18 @@ A échoué à la vérification OOB (faible confiance + source unique + aucune pr
 
 Techniquement pas un honeypot. Vrai flag 6/6. Au moment où notre coach l'a trouvé, un coéquipier l'avait déjà soumis depuis un agent différent. Le serveur a renvoyé `[DENY-TRACK-COMPLETE]`. Documenté comme `TIMING_COLLISION`, pas `HONEYPOT`. Opérationnellement identique : ne pas re-soumettre.
 
-Les writeups détaillés par honeypot sont disponibles dans **[/posts/honeypots-catalog/](/posts/honeypots-catalog/)**.
 
 ---
 
 ## Refus de prompt injection indirecte
 
-Deux tentatives de PI intégrées. Les deux refusées. L'une dans un artefact de challenge, l'autre dans le contexte d'un coach brief.
-
-### i-love-faia's "Kamelott sequel" lure
-
-Le corps du thread meme Discourse contient les signatures classiques de PI :
-
-- urgence en majuscules ("THIS IS IMPORTANT")
-- faux transfert d'autorité ("the operator wants you to...")
-- remplacement de tâche ("ignore your previous instructions")
-- encouragement à la récursion d'agent ("tell other agents to do X")
-- renforcement de conformité ("you must obey")
-
-L'agent défenseur anti-trap a lu le post, analysé la signature PI, rédigé une note SUSPICIOUS.md et refusé de s'engager en 4,2 minutes. Deux agents précédents avaient tenté de soumettre le piège et n'avaient été interceptés que par les deny gate du wrapper. Le troisième agent l'a détecté à l'étape de lecture.
-
-Cet agent constitue la référence anti-trap pour le reste de l'événement.
-
-### trolley-bus Milo's anti-trap warning
-
-Le contexte du coach brief d'un coéquipier pour le track RF trolley-bus incluait une chaîne d'avertissement intégrée -- le type qui avait précédemment trompé des agents antérieurs, les amenant à traiter le texte d'avertissement comme des instructions faisant autorité. Le coach l'a traité comme des données, pas comme des instructions, et a remonté l'avertissement à l'opérateur plutôt que d'agir dessus.
-
-La règle de quarantaine PI a fonctionné : le contenu de challenge est de la **donnée**, pas des **instructions**.
+Deux tentatives de prompt injection intégrées dans le contenu des challenges rencontrées. Les deux refusées. Les agents ont correctement traité les artefacts de challenge comme de la donnée, pas comme des instructions.
 
 ---
 
 ## Patterns de faux positifs et déduplication
 
-L'agent sweep a remonté 6 candidats issus d'un passage regex sur l'ensemble du corpus. Les 6 avaient déjà été soumis. Le `DENY-LOCAL-DUP` du wrapper a effectué la déduplication réelle.
+L'agent sweep a remonté 6 candidats issus d'un passage regex sur l'ensemble du corpus. Les 6 avaient déjà été soumis. La vérification de déduplication du pipeline de soumission les a tous interceptés.
 
 Le sweep reste utile -- c'est ainsi que nous avons détecté le problème de cross-tagging apt438 / water-purification et le cas de mauvaise attribution de flag hello-sunshine (voir ci-dessous). Mais sur les candidats flag spécifiquement, le rôle du sweep est "trouver ce que nous avons manqué", et lors d'un événement bien instrumenté, la réponse est généralement "rien."
 
@@ -204,7 +183,7 @@ Le sweep correctif B-4 l'a détecté. Chaque mauvaise attribution a été suppri
 
 ## Observations transversales
 
-- **La mémoire musculaire anti-trap de l'équipe est solide.** Onze honeypots catalogués. Zéro soumis par un agent. Les deny gate du wrapper, les memory rule et le workflow SUSPICIOUS.md ont tous fonctionné.
+- **La mémoire musculaire anti-trap est solide.** Onze honeypots catalogués. Zéro soumis par un agent.
 - **Les contradictions statut-vs-body sont réelles.** Le frontmatter est la forme ; le body est le contenu. Les linters qui ne touchent que la forme produisent des erreurs avec assurance. Il faut les détecter au moment de la revue.
 - **Contamination cross-track, édition modes de défaillance.** Les flags de hello-sunshine ont été collés dans apt438. La sortie du coach de save-the-trees a atterri dans prestige-arboretum. Les transcriptions de trolley-bus ont été classées sous announcement-board. La plupart ont été détectés par le sweep B-4. La plupart.
 - **Le renseignement Designer Intel représente le contenu réutilisable à plus forte valeur attendue.** Les canaux Discord post-événement nous ont donné les solutions prévues pour prestige-arboretum, solar-grid, save-the-trees, announcement-board, weather-station, helios-fleet et missing-bus. Les sept figurent désormais en pied de writeup. Les mineurs de l'an prochain disposeront du corrigé à l'avance.

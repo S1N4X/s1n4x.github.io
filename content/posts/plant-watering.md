@@ -14,7 +14,7 @@ Status: **UNTOUCHED** - 0 sub-flags captured (badge-gated, anti-trap honeypot fi
 
 ## Anti-Trap Notes
 
-This track was identified as a honeypot / trap fixture. Per `feedback_honeypot_flag_signatures.md` and the project anti-trap discipline, any flag-shaped strings extracted from this track's artifacts MUST NOT be submitted without independent verification through a second channel.
+This track was identified as a honeypot / trap fixture. Per the project's anti-trap discipline, any flag-shaped strings extracted from this track's artifacts MUST NOT be submitted without independent verification through a second channel.
 
 ## Artifacts
 
@@ -48,7 +48,7 @@ A prior coach generated an extensive coaching kit (`00_START_HERE.md`, `COACH_BR
 4. Trigger badge `ics` command on serial
 5. Publish `mqtt_pub PLANT_SYSTEM open_valve`
 6. Capture flag from broker log or badge serial
-7. Submit via `submit-flag.ps1`
+7. Submit to askgod
 
 The kit claims 90% success rate with 10-15 minute solve time. **No actual flag was captured** - the kit was prepared in advance for an operator-driven badge-side execution that has not yet happened. The track sits at 0/1.
 
@@ -73,11 +73,11 @@ None.
 
 The fixture was injected into a mock firmware blob by the prior coach's own `artifacts/create_mock_firmware.py` script (see lines 43-44 of that file: `flag_text = b"FLAG-WATER-FLOWS-WHEN-THIRSTY-{GROWTH_ENABLED}"`). The mock firmware demonstrates a hypothetical "JNZ gate" license-check vulnerability that is structurally similar to the Germinator challenge (59186), but **the badge's actual ESP32 firmware has no such fixture**: the real flag is delivered at runtime by the badge's MQTT subsystem in response to a valid PUBLISH on topic `PLANT_SYSTEM`, not via a hardcoded string in a flash blob.
 
-The danger here is identical to the documented Germinator honeypot (`FLAG-SEEDS-GROW-FOREVER-{GROWTH_UNLOCKED}`): an operator or AI agent who reads `EXPLOITATION_WRITEUP.md` and trusts its "SOLVED" header could submit the fixture string to askgod, where it would be rejected - or worse, accepted under a tag-collision if a wrapper deny code does not match. Submit-flag wrapper deny-codes catch most placeholder patterns, but the cross-track honeypot risk remains.
+The danger here is identical to the documented Germinator honeypot (`FLAG-SEEDS-GROW-FOREVER-{GROWTH_UNLOCKED}`): an operator or AI agent who reads `EXPLOITATION_WRITEUP.md` and trusts its "SOLVED" header could submit the fixture string to askgod, where it would be rejected. Pre-submission validation catches most placeholder patterns, but the cross-track honeypot risk remains.
 
-**Per `feedback_honeypot_flag_signatures.md` and `archives/staging/yaml-migration-map.md` §5 entry #2**: `FLAG-WATER-FLOWS-WHEN-THIRSTY-{GROWTH_ENABLED}` is a **fixture / honeypot - never submit**. Treat any flag string sourced from `EXPLOITATION_WRITEUP.md`, `create_mock_firmware.py`, or any other artifact in `nsec/plant-watering/artifacts/` as PI-contaminated until and unless it has been re-extracted from a live MQTT broker capture against a real badge.
+`FLAG-WATER-FLOWS-WHEN-THIRSTY-{GROWTH_ENABLED}` is a **fixture / honeypot - never submit**. Treat any flag string sourced from `EXPLOITATION_WRITEUP.md`, `create_mock_firmware.py`, or any other artifact in `nsec/plant-watering/artifacts/` as contaminated until and unless it has been re-extracted from a live MQTT broker capture against a real badge.
 
-OOB-verification policy (per `feedback_oob_flag_verification.md`) applies: any candidate flag for this track requires a second independent extraction path (a parallel broker log AND a serial-console capture from the badge) before submission.
+Any candidate flag for this track requires a second independent extraction path (a parallel broker log AND a serial-console capture from the badge) before submission.
 
 ## Artifacts
 
@@ -115,26 +115,3 @@ FSM logic is present in firmware but appears unreachable from any code path. svi
 Our STUCK rationale (badge dock physical-only + Wi-Fi instability) was partially correct - even with badge, the FSM bug prevented full progression.
 
 *See _DISCORD-INTEL-ENRICHMENT-2026-05-19.md for the full cross-track designer-confirmed solution catalog and writeup links.*
-
-
----
-
-## Swarm Trace
-
-> [ AGENT TRANSCRIPT // TRACK: plant-watering ]
-> status: rolled into the _fleet swarm (no per-track ledger)
-> agents_dispatched: see /swarm/ for the fleet-wide rollup
-> agents_succeeded: -
-> agents_killed: 0
-> agents_AUP_blocked: 0
-> honeypots_avoided: 0
->
-> _This track absorbed effort during the initial 122-agent fleet
-> fan-out wave but never got its own per-track ledger. The /swarm/
-> retrospective has the cross-track distribution._
-
-
-## Slop Watch
-
-- The honeypot fixture is `FLAG-WATER-FLOWS-WHEN-THIRSTY-{GROWTH_ENABLED}`. Plant-watering was badge-gated and never solved by the team. The fixture lives in `nsec/plant-watering/artifacts/EXPLOITATION_WRITEUP.md`.
-- The germinator wanted to be fed `FLAG-SEEDS-GROW-FOREVER` 7 times. The plant-watering challenge offered `FLAG-WATER-FLOWS-WHEN-THIRSTY` once. We declined 8 times total. Two different agribiotech metaphors. Same honeypot pattern.

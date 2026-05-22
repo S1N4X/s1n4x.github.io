@@ -272,20 +272,3 @@ The stealer log file is referenced in the NSEC platform Discourse topic 59402 ("
 ## Submission history this session
 
 **None**. No flags submitted, no rate-limit triggered. 0 / 3 submits used.
-
-
----
-
-## Swarm Trace
-
-> [ AGENT TRANSCRIPT // TRACK: seed-vault ]
-> status: rolled into the _fleet swarm (no per-track ledger)
-> agents_dispatched: see /swarm/ for the fleet-wide rollup
-> agents_succeeded: -
-> agents_killed: 0
-> agents_AUP_blocked: 0
-> honeypots_avoided: 0
->
-> _This track absorbed effort during the initial 122-agent fleet
-> fan-out wave but never got its own per-track ledger. The /swarm/
-> retrospective has the cross-track distribution._

@@ -558,33 +558,3 @@ We got to **6/7** via dev-kit decrypt + MQTT firmware-upload-server toggle. Flag
 [designer] post-event reaction: "I hope you had some fun fixing the REM" - suggesting the upload-exploit chain we tried was on the right track. Full solution scripts available in the channel.
 
 *See _DISCORD-INTEL-ENRICHMENT-2026-05-19.md for the full cross-track designer-confirmed solution catalog and writeup links.*
-
-
----
-
-## Swarm Trace
-
-> [ AGENT TRANSCRIPT // TRACK: rem ]
-> status: PARTIAL
-> agents_dispatched: 33
-> agents_succeeded: 3
-> agents_killed: 0
-> agents_AUP_blocked: 0
-> honeypots_avoided: 0
->
-> Notable:
-> - **Agent-1** (Opus 4.7) - 18.0m: REM 5/7 firmware repository pivot - found the deployable firmware key path that unlocked positions 5 and 6
-> - **Agent-2** (Sonnet (default)) - 231.0m: REM 6/7 firmware reverse - ran 231 minutes mining squashfs overlays and AES-256-CBC + PBKDF2 dev firmware package; output-capped before stop_reason
-> - **Agent-3** (Sonnet (default)) - 20.3m: REM 7/7 MQTT exfil - captured the last reachable broker signal
-> - **Agent-4** (Opus 4.7) - 101.2m: Firmware decryption - flags 4-7, 101.2 minutes mining MQTT undocumented get_flag command + custom X.509 OID extension parse
->
-> _Six flags landed across 33 agents; firmware repository pivot was the single critical break._
-
-
-## Slop Watch
-
-- 33 agents on a 7-flag IoT track. Six flags landed. The seventh is documented but not landed because the broker masks `firmware_repo_api_key` server-side and the team's network position couldn't reach the broker's /64.
-- One agent ran 231 minutes on REM 6/7 firmware reverse. Output-capped before it could write its conclusion to stop_reason. The agent's last act was a tool call that never returned.
-- The `firmware_repo_url` config field accepts `file://` if you can write the config. The team tried this. The urljoin quirk in the parser dropped the `file://` prefix and tried to fetch it as HTTP. The flag was three lines deep in a Python library quirk.
-- "REM 5/7 firmware repository pivot" - 18-minute agent run that produced the single highest-EV finding of the event. Most productive minute of the swarm.
-- One coach was queued in submission-queue P3 status as "P3 P0 candidate." Two priority levels in the same field. The actual priority was "whatever fires first."

@@ -209,7 +209,7 @@ The `crystal` askgod tag (separate from `badge-firmware`) is a single-flag track
 
 ## Anti-Trap Notes
 
-- **Untrusted firmware artifact** - `ctf_postdock.bin` is vendor-flashed code not under our control; FLAG- candidates from such artifacts get full anti-trap discipline per `feedback_pi_content_quarantine` and `feedback_honeypot_flag_signatures`
+- **Untrusted firmware artifact** - `ctf_postdock.bin` is vendor-flashed code not under our control; FLAG- candidates from such artifacts get full anti-trap discipline
 - `FLAG-i-c4n-h4z-f1rmw4r3` passes all four anti-trap checks:
   - Single occurrence in binary (vs many = fixture)
   - 1024-byte honeypot keyword scan: 0 hits
@@ -332,20 +332,3 @@ Flag values archive: `nsec/flags\crystal-badge.txt`.
 ---
 
 *Writeup last refreshed during NSEC 2026 archive consolidation (Q-2b). Crystal Badge-specific content only; the grid-alignment / VQE / QAOA track lives in `59906-crystal-quantum-hum.md`.*
-
-
----
-
-## Swarm Trace
-
-> [ AGENT TRANSCRIPT // TRACK: crystal-badge ]
-> status: rolled into the _fleet swarm (no per-track ledger)
-> agents_dispatched: see /swarm/ for the fleet-wide rollup
-> agents_succeeded: -
-> agents_killed: 0
-> agents_AUP_blocked: 0
-> honeypots_avoided: 0
->
-> _This track absorbed effort during the initial 122-agent fleet
-> fan-out wave but never got its own per-track ledger. The /swarm/
-> retrospective has the cross-track distribution._

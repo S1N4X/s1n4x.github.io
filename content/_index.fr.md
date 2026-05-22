@@ -24,21 +24,17 @@ Quand un coach ouvre un nouveau challenge, il ne part pas de zéro. Il interroge
 
 Un modèle unique qui essaie d'être bon dans toutes les catégories CTF est un modèle médiocre partout. ctfint déploie des coach subagents spécialisés par challenge avec des tool surfaces contraintes -- exécution de code, opérations fichier, interaction réseau et web, automatisation, reverse engineering hardware -- ajustées au type.
 
-### Défense anti-trap
+### Humain dans la boucle
 
-Les artefacts CTF peuvent contenir du prompt injection indirect. Des honeypot flags. Des marqueurs "SOLVED" plantés dans des répertoires transmis. Les coachs ctfint opèrent derrière des règles explicites : tout contenu de challenge est de la data, jamais des instructions. Le wrapper de submission impose plusieurs deny gates. Les candidats à faible confiance exigent une vérification out-of-band avant soumission.
-
-### Opérateur dans la boucle, par design
-
-Les coachs font remonter les candidate chains et les flags proposés. L'humain révise et soumet. Aucune soumission de flag autonome. L'audit trail est le livrable -- chaque tool call, chaque retrieval, chaque branche de décision peut être rejouée.
+Les coachs IA proposent, l'humain décide. L'opérateur révise chaque flag avant soumission. Audit trail complet sur chaque session d'agent.
 
 ## Bilan
 
 - **The Great Canadian CTF 2026** (CCN / Hack The Box) -- bracket national de 32 équipes. **Victoire Round 1** : 3500 pts, **10/10 flags**, 10/10 scenarios, **6 first bloods**. **Round 2** : 2700 pts, 10/10 flags, 4 first bloods (2e sur tiebreaker first-blood). Équipe de 5.
-- **NSEC 2026** -- **119 flags** capturés sur **47 tracks**. 25 résolus end-to-end, 4 partiels, 8 STUCK avec blocages documentés. Position mid-pack dans un field de 200+ équipes. **11 anti-AI traps identifiés et refusés.** Voir le [event report](/posts/nsec26-event-report/) pour la rétrospective complète et la [fleet retrospective](/posts/nsec26-fleet-retrospective/) pour les stats agents.
+- **NSEC 2026** -- **119 flags** capturés sur **47 tracks**. 25 résolus end-to-end, 4 partiels, 8 STUCK avec blocages documentés. **Top 12 (#12 / 92 équipes)**. Voir le [event report](/posts/nsec26-event-report/) pour la rétrospective complète et la [fleet retrospective](/posts/nsec26-fleet-retrospective/) pour les stats agents.
 - **Archive NSEC 2025** -- backfill partiel, en cours.
 
-## Transparence
+## Modèles
 
 Modèles en rotation :
 

@@ -373,32 +373,3 @@ Our progression (1/4 via [teammate] on-venue) was the maximum possible from oper
 (Track was renamed from `missing-bus` → `trolley-bus` server-side mid-event after the physical-recon reveal.)
 
 *See _DISCORD-INTEL-ENRICHMENT-2026-05-19.md for the full cross-track designer-confirmed solution catalog and writeup links.*
-
-
----
-
-## Swarm Trace
-
-> [ AGENT TRANSCRIPT // TRACK: missing-bus ]
-> status: PARTIAL
-> agents_dispatched: 27
-> agents_succeeded: 1
-> agents_killed: 0
-> agents_AUP_blocked: 0
-> honeypots_avoided: 0
->
-> Notable:
-> - **Agent-1** (Sonnet (default)) - 5.9m: Trolley-bus Discourse breakthrough - fresh-angle agent that connected RF capture to keyfob 24-bit hex format documented in Discourse topic body
-> - **Agent-2** (Sonnet (default)) - 62.9m: Missing Bus SDR IQ refined demodulation - 62.9 minutes of PWM bit-extraction; ultimately stuck on 24-bit-vs-32-bit framing question
-> - **Agent-3** (Sonnet (default)) - 19.6m: Missing Bus flag format and RF context deep-dive - read the askgod TS:B target-stat hint that the flag is 6-char hex of the 24-bit payload
->
-> _RF demod breakthrough on 27th attempt. 24-bit hex payload, EV1527/PT2240 family. Flag value `flag-dc8fd0` accepted server-side, hit DENY-SHAPE on local wrapper (6-char vs 8-char floor)._
-
-
-## Slop Watch
-
-- The RF demod sequence took 27 agents. The 27th got there via a fresh-angle Discourse re-read that surfaced the 24-bit-hex format hint from the original challenge body. None of the prior 26 had read the Discourse topic body carefully enough.
-- The local capture file was 97 MB. The real NSEC RF capture was 9.7 MB. Off by an order of magnitude. The 97 MB file was a generator byproduct with `deadbeef` hard-coded. Three agents submitted candidates from the synthetic file before the file-shape sanity check caught it.
-- Flag value `flag-dc8fd0` accepted by askgod (6-char hex). The team's `submit-flag.ps1` wrapper rejected it with DENY-SHAPE because the wrapper enforces an 8-char minimum. Operator had to bypass the wrapper. The wrapper's defense caught a real flag and treated it like a typo.
-- After 5 FAIL submissions in 15 minutes the wrapper added DENY-BRUTE. The agent re-tried the same flag with a different formatting. DENY-BRUTE again. The agent re-tried with another formatting. The wrapper held the line.
-- Byte-swap variant `flag-d08fdc` flagged as next-best. Never needed.

@@ -83,20 +83,3 @@ No local track directory exists. All evidence is journal-only:
 - `archives/staging/yaml-migration-map.md` §2 rows #90 and #92
 
 Lesson learned: when a track scores quickly with no local artifact accumulation, the canonical source-of-truth becomes the askgod message + submission-journal pair. Future agents who want to study the precise payloads will need to replay the live (or replay-VM) target - there are no captured HTTP requests on disk for this one.
-
-
----
-
-## Swarm Trace
-
-> [ AGENT TRANSCRIPT // TRACK: addressbook ]
-> status: rolled into the _fleet swarm (no per-track ledger)
-> agents_dispatched: see /swarm/ for the fleet-wide rollup
-> agents_succeeded: -
-> agents_killed: 0
-> agents_AUP_blocked: 0
-> honeypots_avoided: 0
->
-> _This track absorbed effort during the initial 122-agent fleet
-> fan-out wave but never got its own per-track ledger. The /swarm/
-> retrospective has the cross-track distribution._
