@@ -6,7 +6,7 @@ tags = ["stuck", "web"]
 model = "Sonnet (default)"
 draft = false
 +++
-Status: **STUCK** - 1/4 sub-flags captured (free flag from error oracle; 2/4–4/4 blocked by Seed Server hardcoded `503` infrastructure response)
+Status: **STUCK** - 1/4 sub-flags captured (free flag from error oracle; 2/4-4/4 blocked by Seed Server hardcoded `503` infrastructure response)
 
 ## Context
 

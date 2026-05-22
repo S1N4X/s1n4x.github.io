@@ -116,7 +116,7 @@ The commit sequence (newest first) shows the attacker's progression:
 
 ## What's missing - 3/6 and 6/6
 
-I scanned every job trace (jobs 64–242, covering every non-skipped CI run since the project was created) with `grep -oaE "FLAG-\{[a-zA-Z0-9_-]+\}"`. Only the 2 traces above produced flag matches. The build artifacts (`build/web/main.dart.js`, `build/sbom.json`, `index.html`) contain no flag. The compiled flutter site on the deploy target also contains no flag. The PyInstaller-wrapped tools in `/usr/local/bin/monsatan/` are not reachable from the VPN and all the attacker's strings-on-them attempts returned only obfuscated binary noise.
+I scanned every job trace (jobs 64-242, covering every non-skipped CI run since the project was created) with `grep -oaE "FLAG-\{[a-zA-Z0-9_-]+\}"`. Only the 2 traces above produced flag matches. The build artifacts (`build/web/main.dart.js`, `build/sbom.json`, `index.html`) contain no flag. The compiled flutter site on the deploy target also contains no flag. The PyInstaller-wrapped tools in `/usr/local/bin/monsatan/` are not reachable from the VPN and all the attacker's strings-on-them attempts returned only obfuscated binary noise.
 
 The intel's positional guess for 3/6 (read pipeline log between commit history and CI env) appears wrong, or the 3/6 flag lives outside the website project entirely. Strongest unexplored candidates:
 

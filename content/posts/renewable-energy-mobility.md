@@ -429,7 +429,7 @@ Single-write evidence (excerpt from our log):
 ```
 
 `Errno 111 = Linux ECONNREFUSED` (broker is Linux). So the broker actively
-attempts a TCP connection to our URL on every poll cycle (~12–15 s).
+attempts a TCP connection to our URL on every poll cycle (~12-15 s).
 
 ### Primitive 2: HTTP status code oracle via status topic
 When the URL is reachable, broker echoes upstream status in

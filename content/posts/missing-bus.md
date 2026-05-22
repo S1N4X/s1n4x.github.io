@@ -292,7 +292,7 @@ askgod submit "flag-dc8fd0"
 **Why this is the right answer:**
 1. Discourse topic 59870 states: "Format of the flag `flag-{HEX KEY CODE}` only lower case alphanumeric values, no space and no dash."
 2. The natural interpretation is: `flag-` prefix + 6 hex characters (the 24-bit code in hex) = `flag-dc8fd0`
-3. The decoded value is stable across threshold sweeps (200–450 samples), all 10+ complete frames, and both burst envelopes
+3. The decoded value is stable across threshold sweeps (200-450 samples), all 10+ complete frames, and both burst envelopes
 4. No additional encoding layers (CRC, checksum, button bits, frame count, etc.) were found in the IQ capture
 
 **If submission fails:** The next-highest-EV hypothesis is the byte-swapped variant `flag-d08fdc`, which would also require wrapper bypass to test. But the decode is definitive; if both 6-char hexes fail, either the challenge format spec changed or the IQ file itself is honeypotted.
@@ -325,8 +325,8 @@ askgod submit "flag-dc8fd0"
 - All frames decode identically to `dc8fd0`
 
 **Verification:**
-- Threshold sweep (200–450 samples) converges on same bit pattern
-- Cross-correlation of envelopes: 0.63–0.97 (high)
+- Threshold sweep (200-450 samples) converges on same bit pattern
+- Cross-correlation of envelopes: 0.63-0.97 (high)
 - No FSK (freq delta <2 kHz), no PSK, no hidden second signal
 - Sync pulse is constant length (does not encode data)
 - 24-bit length confirmed via pulse count; no 32-bit extension
