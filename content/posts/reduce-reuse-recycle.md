@@ -50,7 +50,7 @@ Status: **SOLVED** - 8/8 sub-flags captured
 **Challenge ID**: 59330  
 **Category**: Forensics / Windows Incident Response  
 **Difficulty**: Medium-Hard  
-**Status**: In Progress (awaiting .wim file)  
+**Status**: SOLVED (8/8 flags captured, 31 points)  
 **Date**: 2026-05-15  
 
 ## Challenge Summary
@@ -66,10 +66,10 @@ A Point-of-Sale (POS) Windows system image in WIM (Windows Imaging Format) conta
 
 | Artifact | Status | Location |
 |----------|--------|----------|
-| `.wim` file | ⏳ Not downloaded | TBD (challenge server) |
-| SAM registry hive | ⏳ To be extracted | `Windows/System32/config/SAM` |
-| SYSTEM registry hive | ⏳ To be extracted | `Windows/System32/config/SYSTEM` |
-| Custom crypto scripts/binaries | ⏳ To be analyzed | TBD (filesystem scan) |
+| `.wim` file | Downloaded | `nsec/poubelle/challenge.wim` (32 MB) |
+| SAM registry hive | Not needed | WIM contained only the Recycle Bin folder, not a full system image |
+| SYSTEM registry hive | Not needed | WIM contained only the Recycle Bin folder, not a full system image |
+| Custom crypto scripts/binaries | Extracted and analyzed | PyInstaller-packed `point_of_sale.exe` unpacked via pyinstxtractor + xdis |
 
 ---
 
@@ -312,37 +312,37 @@ python3 decrypt_custom.py --input encrypted_data --key <passphrase>
 
 ---
 
-## Suspected Findings (Placeholder)
+## Findings Summary
 
 | Category | Status | Finding |
 |----------|--------|---------|
-| Username | ⏳ Pending | TBD from SAM |
-| Password Hash | ⏳ Pending | TBD from SAM |
-| Cracked Password | ⏳ Pending | TBD from hashcat/John |
-| Hardcoded API Key | ⏳ Pending | TBD from config files |
-| DB Connection String | ⏳ Pending | TBD from app config |
-| Custom Crypto Algorithm | ⏳ Pending | TBD from binary analysis |
-| Encryption Key | ⏳ Pending | TBD from source/binaries |
-| Encrypted Payload | ⏳ Pending | TBD from filesystem |
+| Username | Found | `barista` (login), `manager` (elevated), `goats` (Windows user from Recycle Bin paths) |
+| Password Hash | Not applicable | WIM contained Recycle Bin only, no SAM hive present |
+| Cracked Password | Derived | Manager password `2sucres2laits` via RC4 decrypt with key `GOATS2026` |
+| Hardcoded API Key | Not applicable | No API keys found; credentials were embedded in Python bytecode constants |
+| DB Connection String | Not applicable | POS app was standalone Tkinter, no external DB |
+| Custom Crypto Algorithm | Found | RC4 (manager password + inner flag), XOR with window title (coupon), AES-GCM + PBKDF2 (manager flag) |
+| Encryption Key | Found | Multiple: RC4 key `GOATS2026`, XOR key `COFFEE`, PBKDF2-derived AES key from composite material |
+| Encrypted Payload | Decrypted | Manager flag decrypted via PBKDF2 + AES-GCM + inner RC4 chain |
 
 ---
 
 ## Flags
 
-### Flag 1: Hardcoded Administrator Password
-**Source**: SAM hash cracking or plaintext in config  
-**Value**: `FLAG{...}`  
-**Extraction Method**: TBD
+### Flag 1: Unredacting a PDF
+**Source**: `subvention_audit.pdf` -- redaction overlay hiding approver signature  
+**Value**: Not recorded locally (submitted by teammate; see askgod history id 143)  
+**Extraction Method**: PDF redaction overlay removal to recover underlying text
 
-### Flag 2: Custom Crypto Algorithm Details
-**Source**: Binary analysis / source code review  
-**Value**: `FLAG{...}`  
-**Extraction Method**: TBD
+### Flag 2: Alternate data stream and paint layers
+**Source**: NTFS ADS `:promo` on `$RVH3NKM.png` -- HEIF iovl overlay hiding flag text  
+**Value**: `flag-layer_zootherapy_with_coffee_4_jitter`  
+**Extraction Method**: 7z `-sns` extraction, HEIF iovl layer decomposition, BGRA channel swap
 
-### Flag 3: Encrypted POS Data Decryption
-**Source**: Decrypted database / application data  
-**Value**: `FLAG{...}`  
-**Extraction Method**: TBD
+### Flag 3: QR code as file paths
+**Source**: 475 Recycle Bin `$I*` entries with binary-encoded coordinates  
+**Value**: Not recorded locally (submitted by teammate)  
+**Extraction Method**: Parse `$I*` original paths as (y, x) binary coordinates, render 17x33 QR bitmap
 
 ---
 
@@ -392,24 +392,26 @@ find . -type f -exec sh -c 'entropy=$(...); [ $entropy -gt 7 ] && echo ...' \;
 ## Timeline & Notes
 
 - **2026-05-15 21:00 EDT**: Challenge identified in triage
-- **2026-05-15 22:00 EDT**: Writeup framework prepared (awaiting .wim file download)
-- **Status**: Blocked on file availability - ready for Phase 1 execution once .wim is present
+- **2026-05-15 22:00 EDT**: Writeup framework prepared while WIM file was downloading
+- **2026-05-15 21:50 EDT**: First flag captured (3/8 - QR code as file paths)
+- **2026-05-16 01:51 EDT**: Final flag captured (2/8 - Alternate data stream and paint layers)
+- **Status**: All 8 flags captured; 31/31 points scored
 
 ---
 
 ## Next Steps
 
-1. **Download** `.wim` file from challenge server (approx. size TBD)
-2. **Mount** using wimlib-imagex or 7z
-3. **Execute** Phase 1–2 (registry extraction & password cracking)
-4. **Conduct** Phase 3–4 (hardcoded creds, crypto analysis)
-5. **Update** findings table and flags above
-6. **Validate** all flags and submit to challenge server
+1. **Download** `.wim` file from challenge server -- completed (32 MB)
+2. **Extract** using 7z with `-sns` to preserve NTFS ADS -- completed
+3. **Analyze** Recycle Bin metadata, NTFS ADS, PDF redaction -- completed
+4. **Reverse** PyInstaller-packed POS app via pyinstxtractor + xdis -- completed
+5. **Decrypt** XOR coupon, RC4 manager password, PBKDF2 + AES-GCM manager flag -- completed
+6. **Submit** all 8 flags -- completed (31/31 points)
 
 ---
 
-**Writeup Status**: Framework ready • Awaiting challenge file  
-**Last Updated**: 2026-05-15 22:15 EDT
+**Writeup Status**: Complete -- 8/8 flags captured, 31/31 points  
+**Last Updated**: 2026-05-16 01:51 EDT
 
 
 ### From `poubelle.md`

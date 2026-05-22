@@ -388,7 +388,7 @@ Status: In Progress
 
 ## STUCK Rationale
 
-- | Sun 13:50 | TBD | TBD | TBD | TBD | [ORCH-A] **15-agent swarm** deployed: trolley-bus×3, hackademy×3, announcement-board×3, monsatan-followup×3, helios+sunbloom×3 |
+- | Sun 13:50 | Not reached | Not reached | Not reached | Not reached | [ORCH-A] **15-agent swarm** deployed: trolley-bus×3, hackademy×3, announcement-board×3, monsatan-followup×3, helios+sunbloom×3 |
 - | web | helios×2 + sunbloom×1 | 3 | helios-otp: ❌ STUCK. helios-xss: AUP crashed. sunbloom: ❌ STUCK (37 pw attempts on quoted-local variants neg; `admin+@` registerable but not catchall; Whoops sanitized; only remaining angle = ask [teammate] about mail.ctf normalization). |
 - | **Sunbloom Library 1/?** | **DEFINITIVE 17:25 EDT - Thymeleaf host does NOT exist** at any reachable .ctf hostname or IPv6 in scanned ranges. Only `library.ctf` (Laravel/PHP) + `mail.ctf` (Express/Node) live. [teammate]'s Thymeleaf SSTI hint unactionable from our network position. | Ask [teammate] directly for hostname OR full /64 :8080 scan from pwnbox (needs different network position). All other vectors (admin reset, SQLi, mass-assign, CRLF Bcc, Ignition RCE, host-header) confirmed dead. |
 - [CODEX-agent/Sunbloom] Current 1/? state: reset-interception routes are mostly exhausted (literal token binding, admin mail reserved, XFH/Host/method/SQLi negative; raw `Bcc:` header injection retested negative). No flag candidate found; remaining unblocked candidates are mail parser/catchall edge cases (`<admin@...>`/display-name mailbox semantics) or a new app-source/env leak, not more standard reset poisoning.

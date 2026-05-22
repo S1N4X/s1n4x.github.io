@@ -1125,7 +1125,7 @@ Challenge Management Suite v1.5.3
 **Challenge Name**: Monsatan - Kiosk  
 **Category**: Miscellaneous / Kiosk Escape  
 **Difficulty**: Easy to Medium  
-**Points**: TBD  
+**Points**: 4  
 **Date Solved**: 2026-05-15  
 **Time Spent**: ~40-70 minutes  
 

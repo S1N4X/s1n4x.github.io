@@ -61,8 +61,8 @@ Status: **SOLVED** - 6/6 sub-flags captured
 | 2/6  | DONE   | 2026/05/15 22:23 | desktop screenshot QR |
 | 3/6  | DONE   | 2026/05/15 22:42 | logged-in catalog (`FLAG-l0gg3d-in-n0w-3l3v4t3-pr1vs`) |
 | 4/6  | DONE   | 2026/05/16 10:30 | elevate.php (physical riddle + SunniKey) |
-| 5/6  | **TODO** | - | "become an admin" |
-| 6/6  | **TODO** | - | "ensure the outsider cannot elevate" |
+| 5/6  | DONE   | 2026/05/16 11:20 | Elevated to admin (physical envelope tamper at venue) |
+| 6/6  | DONE   | 2026/05/16 12:53 | Perfectly tampered envelope; outsider cannot elevate |
 
 ## This session's deliverables
 

@@ -33,7 +33,7 @@ Status: **STUCK** - 0/unknown sub-flags captured
 
 ## STUCK Rationale
 
-- | 🎯 P3 | **solar-grid 3/3** | uvicorn `--reload` path via `/proc/1/cmdline` exec | TBD - needs staging | MED | open |
+- | 🎯 P3 | **solar-grid 3/3** | uvicorn `--reload` path via `/proc/1/cmdline` exec | Not fired - staged but blocked by time + 3 design bugs in RCE chain | MED | open |
 - | 🟡 P5 | **[ORCH-B] unverified flag triage** | 4 APT438 water-purif + 1 REM-pod + 1 monsatan-impact + 1 solar-grid (already maybe-submitted) candidates from grep sweep - cheap dry-test on each | direct askgod submit per `flags/*-CANDIDATES.txt` + see overnight-report §7.4 | UNKNOWN - DUP-safe | [ORCH-B] |
 - | 🎯 P3 | **[ORCH-A] solar-grid 3/3 - uvicorn --reload RCE** | DuckDB SQLi `COPY-TO` drops `.py` into `/home/service/app/`; uvicorn watcher imports it; injected code reads `/flag*` via `/api/_health/leak` or writes to static. No extension binary needed (chain swapped from DuckDB-ext). | ✅ READY: `solar-grid/artifacts/fire_solar_grid_rce.ps1` (5-step w/ fallbacks, dry-run safe) | MED-HIGH | [ORCH-A] |
 - | `solar-grid/CHALLENGE_PACKAGE.md` | `FLAG-d2093796194fdf44a39c8b21b00caef9` | solar-grid | May be one of the 2 already-submitted (1/3 + 2/3), verify |

@@ -183,7 +183,7 @@ with a wildcard DNS pointing at the new listener.
 ## STUCK Rationale
 
 - **Last updated:** 2026-05-17 13:55 EDT (FINAL HOUR: 🚨 trolley-bus 2/4 = PHYSICAL Wi-Fi recon, SSID `MNT-BUS` / PSK `hamped1304` from [teammate]'s 17:35Z Discourse reply; 14 agents still running; hackademy 17/18 SOLVED)
-- | Sun 13:50 | TBD | TBD | TBD | TBD | [ORCH-A] **15-agent swarm** deployed: trolley-bus×3, hackademy×3, announcement-board×3, monsatan-followup×3, helios+sunbloom×3 |
+- | Sun 13:50 | Not reached | Not reached | Not reached | Not reached | [ORCH-A] **15-agent swarm** deployed: trolley-bus×3, hackademy×3, announcement-board×3, monsatan-followup×3, helios+sunbloom×3 |
 - | web | hackademy chal5 + recon | 3 | ❌ DEFINITIVELY DONE: 17/18 SOLVED, chal5 STUCK (bot doesn't visit even with `http://` filter passed). All 3 hackademy agents confirm. Cross-track: askgod mislabels "You now know..." (=save-trees) and "That's a lot of cores..." (=drone-license). |
 - **Hackademy intel (chal5 STUCK rationale):** Bot never visits webhook listener despite IPv6 connectivity verified; JWT secret not recovered. Untested: JWT `kid` injection, POST variant of pentester.php, parameter pollution.
 - | 🎯 P2 | **hackademy chal5 (Open Redirect 101)** *(transferred from ORCH-B → ORCH-A)* | Provision webhook.site IPv6 → trigger `?sub_url=` → capture JWT → fetch flag | `flags/hackademy-chal5-NEXT.txt` (manual curl chain, 6 steps) | MED-HIGH | [ORCH-A] |
