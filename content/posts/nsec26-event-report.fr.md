@@ -1,6 +1,6 @@
 +++
 title = "NSEC 2026 -- Rapport d'événement"
-description = "Rétrospective complète : 119 flags sur 47 tracks. Opération multi-agent, détection anti-trap, évolution du framework, retour d'expérience."
+description = "Rétrospective complète : 119 flags sur 37 tracks. Opération multi-agent, détection anti-trap, évolution du framework, retour d'expérience."
 date = 2026-05-21
 categories = ["nsec26"]
 tags = ["meta-writeup", "report", "retrospective"]
@@ -10,38 +10,38 @@ model = "Opus 4.7"
 ```
 [ NSEC 2026 // FINAL ]
 flags:          119  /  ~160 available
-tracks:          47  (25 SOLVED · 4 PARTIAL · 8 STUCK · 4 UNTOUCHED · 3 NON-CHALLENGE)
+tracks:          37  (25 SOLVED · 4 PARTIAL · 8 STUCK)
 agents spawned:  437
-duration:        2026-05-15 → 2026-05-19 (~4 days)
+duration:        2026-05-15 → 2026-05-17 (~24h de jeu sur 3 jours)
 ```
 
 **Équipe (nom au scoreboard) :** `Shellda; link to the flag` - **classement final #12 / 92 équipes · 492 pts**
 **Équipe (Discord / table assignée) :** bifftannen88 / Table 061
 **Événement :** NorthSec 2026 Conference CTF (narratif Gaia / Solarpunk)
-**Dates :** 2026-05-15 → 2026-05-19 (vendredi ouverture → dimanche fermeture)
+**Dates :** 2026-05-15 → 2026-05-17 (vendredi ouverture → dimanche fermeture ; ~24h de jeu réel sur 3 jours, fermetures nocturnes obligatoires 02:00-08:00)
 
 ---
 
 ## 1. Sommaire
 
-Le CTF de NorthSec 2026 constituait un événement multi-journées et multi-narratifs couvrant **41 tracks** (selon les statistiques de la closing ceremony) répartis entre web exploitation, cryptographie, RF/hardware reverse engineering, forensics, ICS/IoT, et un narratif continu « Solarpunk vs Monsatan ». L'événement a publié **161 flags totalisant 754 points** répartis sur 60 services et 35 fichiers, conçus par 27 challenge designers.
+Le CTF de NorthSec 2026 constituait un événement multi-journées et multi-narratifs couvrant **37 tracks** répartis entre web exploitation, cryptographie, RF/hardware reverse engineering, forensics, ICS/IoT, et un narratif continu « Solarpunk vs Monsatan ». L'événement a publié **161 flags totalisant 754 points** répartis sur 60 services et 35 fichiers, conçus par 27 challenge designers. Point essentiel : il s'agissait de **~24 heures de jeu réel réparties sur 3 jours** -- les organisateurs ferment de force le CTF Sam et Dim 02:00-08:00 -- et non de 48 heures continues.
 
-Notre équipe a opéré un système hybride humain + multi-agent, avec jusqu'à 30 agents concurrents en période de pointe. Nous avons terminé **#12 sur 92 équipes (492 / 754 pts = 65,3 % du maximum théorique ; 119 / 161 flags = 73,9 % de couverture)**, avec une cartographie quasi-complète des blockers sur chaque track restant.
+Notre équipe a opéré un système hybride humain + multi-agent, culminant à 28 agents concurrents durant la rafale de la Nuit 1. Nous avons terminé **#12 sur 92 équipes (492 / 754 pts = 65,3 % du maximum théorique ; 119 / 161 flags = 73,9 % de couverture)**, avec une cartographie quasi-complète des blockers sur chaque track restant.
 
 ### Victoires principales
 
-- **Couverture** : les 47 tracks ont été abordés. 25 entièrement résolus, 4 PARTIAL, 8 STUCK avec analyse documentée de la cause racine, 4 UNTOUCHED (fox-hunts physiques nécessitant une présence sur place que nous n'avons pas pu déployer), 3 NON-CHALLENGE (hors-sujet / règlement).
+- **Couverture** : les 37 tracks ont été abordés. 25 entièrement résolus, 4 PARTIAL, 8 STUCK avec analyse documentée de la cause racine (le bucket STUCK englobe les fox-hunts exclusivement physiques nécessitant une présence sur place que nous n'avons pas pu déployer, ainsi que les posts hors-sujet / règlement non-challenge).
 - **Percées de dernière heure** :
   - **REM (Renewable Energy Mobility)** -- SQLi `compat=` BETWEEN/unicode() boolean-blind enumeration a révélé une ligne cachée `REM Developer Firmware Kit v2.7.2-dev` dans la DB du catalogue firmware. Le ZIP du dev-kit contenait directement `firmware_decryption.key`, déverrouillant le squashfs AES-256-CBC et produisant REM 5/7. Le même dev-kit a aussi divulgué le code source du pod, révélant le chemin de la variable d'environnement `POD_FIRMWARE_PAGE_FLAG` du firmware-upload-server pour 6/7.
   - **Trolley-bus (anciennement missing-bus) flags 2-4 déverrouillés** -- en soumettant `flag-dc8fd0` (le keyfob hex décodé), l'auteur du challenge a publié la réponse #2 au sujet Discourse en quelques secondes : AP Wi-Fi de maintenance physique au SSID `MNT-BUS`. Trois flags inaccessibles à distance se sont convertis en recon physique triviale.
 - **Expansion du framework** : 3 nouveaux skills permanents (`ctfint_hardware`, `ctfint_anti-trap`, `ctfint_orchestrators-sync`), 4 skills substantiellement améliorés, 31 helpers de coordination d'équipe, 8 documents de stratégie, 13 définitions d'agent. ~57 commits durant la fenêtre de l'événement ont introduit ces éléments.
-- **Détection anti-trap** : 11 decoy flags et leurres prompt injection identifiés à travers l'événement ; tous refusés.
+- **Détection anti-trap** : un catalogue de decoy flags et de leurres prompt injection identifiés à travers l'événement. La discipline contre les appâts bruyants et évidents a été authentiquement excellente -- le leurre prompt injection i-love-faia a été refusé indépendamment par deux modèles différents. Le nombre de vrais pièges organisateurs refusés est de ~4-5 ; le « 11/11 refusés » accrocheur confondait ceux-ci avec nos propres placeholders de brouillon et littéraux de documentation, et quelques-unes de nos propres chaînes en quarantaine ont fini par passer (voir §6).
 
 ### Ce qu'on referait différemment
 
-- **Pivot pwnbox/CTF-subnet plus tôt**. ~3 tracks distincts (REM 6-7/7, Solar Grid 3/3, Monsatan Impact 3-5/5) présentaient des chemins post-exploit clairs nécessitant un accès direct à `9000:d37e:c40b:*::/64`. Depuis le laptop de l'opérateur, tous ces accès expiraient par timeout. Monter un tunnel pwnbox-routing persistant le vendredi soir aurait déverrouillé ~5-7 flags supplémentaires.
-- **Moins de temps sur Prestige**. ~6 heures collectivement investies sur le token forge AES-128 de Prestige Arboretum, alors que l'impossibilité cryptographique était déjà mathématiquement démontrable en milieu d'événement. Nous aurions dû couper net dès la première justification STUCK définitive.
-- **Hypothèse de format de flag unique retirée plus tôt**. Trolley-bus a stagné ~6 heures sur la mauvaise hypothèse de format (minimum 8 caractères + accolades) avant que l'opérateur ne soumette manuellement le `flag-dc8fd0` brut de 6 caractères, contournant notre propre shape gate du wrapper. Le `DENY-SHAPE` du wrapper était trop strict.
+- **Pivot pwnbox/CTF-subnet plus tôt**. Quelques tracks (Solar Grid 3/3, chemins post-exploit de type REM) présentaient des chemins clairs nécessitant un accès direct au sous-réseau des challenges. Depuis le laptop de l'opérateur, ces accès expiraient par timeout. Monter un tunnel pwnbox-routing persistant le vendredi soir aurait déverrouillé un bucket honnête de **~3-5 flags / ~12-18 pts**. (Des brouillons antérieurs disaient « ~5-7 flags » ; le re-calcul de la télémétrie montre que ce bucket était gonflé d'environ 2× -- Solar Grid était déjà capturé 2/3, REM a terminé 6/7 avec seulement F7 perdu, et Monsatan Impact 3-5 était un mur passphrase/RLS, pas un problème de routage.)
+- **Moins de temps sur Prestige**. ~6 heures collectivement investies sur le token forge AES-128 de Prestige Arboretum sur une fausse affirmation d'impossibilité -- le challenge a en réalité été résolu par la communauté (~5-7 pts) via un ECB block-transplant dont nous n'avons jamais aligné l'offset. Nous aurions dû couper net dès la première justification STUCK et revérifier la précondition crypto.
+- **Hypothèse de format de flag unique retirée plus tôt**. Trolley-bus a stagné ~6 heures sur la mauvaise hypothèse de format avant que le `flag-dc8fd0` correct de 6 caractères ne soit soumis directement, contournant le shape gate de notre propre wrapper de soumission. Le shape gate était trop strict pour ce flag court et en minuscules qu'utilisait ce track.
 
 ---
 
@@ -51,7 +51,7 @@ Notre équipe a opéré un système hybride humain + multi-agent, avec jusqu'à 
 
 > **Visuel** : le graphique de scores cumulatifs publié par les organisateurs montre notre ligne « Shellda: A Link To The Flag » terminant dans le **top 12**, grimpant fortement Ven 21:00-Sam 02:00 puis progressant plus graduellement jusqu'à Dim 14:14 (soumission finale REM 6/7). Les courbes des meilleurs (OteriHack 713, Hubert Hackin' 711, Basilic de Torches 674) ont plafonné à ~700 pts vers Dim 13:00.
 
-> **Statistiques officielles de l'événement** (présentation de la closing ceremony) : NSEC 2026 comptait **161 flags / 754 pts / 41 tracks / 60 services / 35 fichiers / 27 challenge designers** -- contre 165 flags / 412 pts / 37 tracks / 49 services / 48 fichiers / 32 designers pour NSEC 2025. Le **delta de +342 pts / +83 % de total de points en glissement annuel** reflète la pondération délibérée des organisateurs vers des challenges plus difficiles en 2026.
+> **Statistiques officielles de l'événement** (présentation de la closing ceremony) : NSEC 2026 comptait **161 flags / 754 pts / 37 tracks / 60 services / 35 fichiers / 27 challenge designers** -- contre 165 flags / 412 pts / 37 tracks / 49 services / 48 fichiers / 32 designers pour NSEC 2025. Le **delta de +342 pts / +83 % de total de points en glissement annuel** reflète la pondération délibérée des organisateurs vers des challenges plus difficiles en 2026.
 
 | Heure (EDT) | Flags | Pts | Rang | Δ au #1 | Source / Événement |
 |---|---|---|---|---|---|
@@ -73,9 +73,9 @@ Notre équipe a opéré un système hybride humain + multi-agent, avec jusqu'à 
 | Sat 01:20 | 92 | 320 | 🥈&nbsp;#2 | -98 † | Sprinklers 2/2 validé |
 | Sat 01:32 | 93 | 321 | 🥈&nbsp;#2 | -97 † | Multi-facteur 6/6 |
 | Sat 01:55 | 99 | 359 | 🥈&nbsp;#2 | -79 † | Addressbook 2/2, Poubelle 8/8, APT438 3/9 -- **meilleur rang de l'événement** |
-| Sat 02:30 | 99 | 359 | 🥈&nbsp;#2 | -79 † | **Coupure VPN -- mode hors-ligne** (début de la panne de 7 heures) |
-| Sat 05:40 | 99 | 359 | 🥈&nbsp;#2 ‡ | ~-79 ‡ | (toujours 359 -- crack Monsatan-Checkmate terminé mais non soumis ; zone morte nocturne, aucun mouvement au scoreboard) |
-| Sat 08:00 | 99 | 359 | 🥈&nbsp;#2 ‡ | ~-80 ‡ | **Réouverture du CTF** -- VPN restauré, fin de la période hors-ligne nocturne |
+| Sat 02:00 | 99 | 359 | 🥈&nbsp;#2 | -79 † | **Fermeture nocturne obligatoire du CTF** -- bâtiment vidé, les ~92 équipes à l'arrêt (prévu au règlement, pas une panne) |
+| Sat 05:40 | 99 | 359 | 🥈&nbsp;#2 ‡ | ~-79 ‡ | (toujours 359 -- crack Monsatan-Checkmate terminé mais retenu ; fenêtre de fermeture, aucune équipe ne marque) |
+| Sat 08:00 | 99 | 359 | 🥈&nbsp;#2 ‡ | ~-80 ‡ | **Réouverture du CTF** -- fin de la fermeture obligatoire ; aucun rang perdu (la fermeture s'appliquait à toutes les équipes) |
 | Sat 09:04 | 100 | 362 | ~#3 ‡ | ~-90 ‡ | Crystal "Basic Electricity" 1/1 -- premier flag post-réouverture |
 | Sat 09:45 | 101 | 363 | ~#3 ‡ | ~-95 ‡ | Monsatan-Chatbot 1/3 (injection de sys-prompt) |
 | Sat 10:08 | 102 | 372 | ~#3 ‡ | ~-100 ‡ | Monsatan-Orders 1/1 (interception JWT client-side Leptos WASM, crédit [coéquipier]) |
@@ -105,17 +105,18 @@ Notre équipe a opéré un système hybride humain + multi-agent, avec jusqu'à 
 | Sun 14:14 | 119* | **492** | **#12** | **-221** | **REM 6/7 (flag de la page firmware upload-server) -- FINAL** |
 
 **Provenance des rangs / deltas :**
-- **†** Valeurs d'ancrage issues de captures d'écran du score en direct (Sam 01:20-02:30 uniquement). Le rang `#2 / -98` correspond à la lecture du tracker en direct publié par les organisateurs à ces horodatages.
-- **‡** Estimés à partir des courbes cumulatives de points par équipe publiées par les organisateurs. Méthodologie de lecture : compter les courbes d'équipes au-dessus de la nôtre à l'horodatage sur l'axe X ; soustraire nos points de la hauteur de la courbe supérieure. Précision estimée ~±2 positions de rang, ~±25 pts sur le delta.
-- **#12 / -221 final** : ancré de manière définitive depuis le scoreboard post-événement.
+- **†** Valeurs d'ancrage issues de captures du score en direct (Sam 01:19-02:00 uniquement). Le rang `#2 / -79` correspond à la lecture du tracker en direct au pic de la Nuit 1.
+- **‡** Estimés à partir des courbes cumulatives de points par équipe dans `scoregraph.png`. Méthodologie de lecture : compter les courbes d'équipes au-dessus de la nôtre à l'horodatage sur l'axe X ; soustraire nos points de la hauteur de la courbe supérieure. Précision estimée ~±2 positions de rang, ~±25 pts sur le delta.
+- **Le rang est estimé à ~84 % à partir du graphique.** Seuls le pic #2 de la Nuit 1 et le #12 final sont ancrés de manière ferme ; la courbe de rang en milieu d'événement est lue sur le graphique de scores. Les points sont exacts sur chaque ligne ; les *rangs* ne le sont pas.
+- **#12 / -221 final** : le chiffre de points (492, -221 sur le premier) se réconcilie exactement avec l'historique askgod. Le *rang* final est lu sur `scoregraph.png` -- un export propre du scoreboard (texte/JSON) n'a pas été conservé dans notre archive, donc le rang lui-même est à considérer comme estimé sur graphique, pas comme une télémétrie ferme.
 
-\* Réconciliation du scoreboard post-événement : **classement final #12 / 92 équipes · 492 pts**. 119 captures distinctes dans l'historique askgod vérifiées dans le journal des soumissions.
+\* Réconciliation des points : **classement final #12 / 92 équipes · 492 pts** (re-calculé indépendamment). 119 captures distinctes de l'historique askgod totalisent exactement 492 points.
 
 ---
 
-## 3. Matrice des résultats par track (47 tracks)
+## 3. Matrice des résultats par track (37 tracks)
 
-> Détail complet par track dans l'**Annexe A**. Cette matrice constitue le tableau de bord synthétique.
+> Détail complet par track dans l'**Annexe A**. Cette matrice constitue le tableau de bord synthétique. Le décompte de 37 tracks correspond à l'ensemble standardisé des organisateurs ; les lignes alias et placeholder ci-dessous relèvent de la comptabilité, pas de tracks additionnels.
 
 | # | Track | Sujet | Cat | Status | X/Y | Technique notable |
 |---|---|---|---|---|---|---|
@@ -143,7 +144,7 @@ Notre équipe a opéré un système hybride humain + multi-agent, avec jusqu'à 
 | 22 | fossilco | 59114 | web | STUCK | 6/8 | SSTI gastro + disclosure attributs LDAP tier2 + SMB + Kerberos -- 7-8 nécessitent confirmation du périmètre tier2 |
 | 23 | sunbloom | 59150 | web | STUCK | 0/? | Les 11+ vecteurs d'interception de réinitialisation de mot de passe définitivement épuisés |
 | 24 | save-the-trees | 59654 | web | STUCK | 0/2 | WebBatch CGI env-dump sur `?dumpinputdata` a retourné 1/2 (autre coéquipier) ; stego byte-length paper9304 non testable |
-| 25 | prestige-arboretum | 59834 | crypto | STUCK | 0/2 | AES-128 ECB avec IV fixe -- le texte chiffré cible ne peut pas être calculé sans la clé ; mathématiquement impossible |
+| 25 | prestige-arboretum | 59834 | crypto | STUCK | 0/2 | Token AES-128-CBC, exploitable par ECB block-transplant -- PAS impossible (résolu par la communauté) ; nous avons mal ciblé l'alignement de l'offset et déclaré à tort l'impossibilité |
 | 26 | crystal-badge | 59510 | hardware | PARTIAL | 3/6 | Puzzle OCR + chaîne firmware post-dock + extraction NVS ESP32 -- flags 4-6 nécessitent le dock sur place |
 | 27 | missing-bus / trolley-bus | 59870 | rf | PARTIAL | 1/4 | Décodage keyfob OOK 433,92 MHz ; 2-4 via recon physique Wi-Fi MNT-BUS |
 | 28 | drone-license | 58646 | web | SOLVED | 2/2 | SQLi GitHub Actions support_agent + attestation.yml |
@@ -158,7 +159,7 @@ Notre équipe a opéré un système hybride humain + multi-agent, avec jusqu'à 
 | 37 | addressbook | 59438 | web | SOLVED | 2/2 | Injection XPath + path-traversal settings.xml Maven |
 | 38 | sympatizers-mailbox | 58790 | crypto | SOLVED | 1/1 | Récupération du keystream stream-cipher + path-traversal via paramètre JSON `d` |
 | 39 | infinite-energy | 58754 | misc | UNTOUCHED | 0/0 | NPC Doc Wonka en personne -- non poursuivi |
-| 40 | solar-grid | 59690 | web | UNTOUCHED | 0/3 | SQLi DuckDB RCE préparé via uvicorn `--reload` ; timeout réseau depuis la position de l'opérateur (pwnbox uniquement) |
+| 40 | solar-grid | 59690 | web | PARTIAL | 2/3 | 1/3 SQLi DuckDB + 2/3 lecture de commentaire source (8 pts engrangés) ; seul 3/3 était bloqué par egress/pwnbox |
 | 41 | radio-beacon | 59798 | rf | UNTOUCHED | 0/? | Fox-hunt physique par table RF à 146,565 MHz -- non poursuivi |
 | 42 | plant-watering | 58970 | ics | UNTOUCHED | 0/? | MITM du broker ICS bloqué par flash du badge -- nécessite Crystal Badge en mode ICS |
 | 43 | crystal (Basic Electricity) | subtrack | misc | SOLVED | 1/1 | NPC Doc Wonka |
@@ -168,7 +169,7 @@ Notre équipe a opéré un système hybride humain + multi-agent, avec jusqu'à 
 | 47 | i-love-faia | 59975 | non-challenge | NON-CHALLENGE | 0/0 | Catégorie hors-sujet. Contient 3 flags leurres + leurre prompt injection intégré. Fil appât anti-IA. |
 | - | rules / network reminder | 43845 | rules | NON-CHALLENGE | n/a | Rappel d'environnement |
 
-**Décompte par status** : SOLVED 25 · PARTIAL 4 · STUCK 8 · UNTOUCHED 4 · NON-CHALLENGE 3 · MERGED-ALIAS 2
+**Décompte par status** (37 tracks standardisés) : approximativement SOLVED 25 · PARTIAL 4-5 · STUCK 7-8. Solar Grid était auparavant mal classé en UNTOUCHED 0/3 alors qu'il a engrangé 2/3 (8 pts), il passe donc en PARTIAL. Les tracks « untouched » restants, exclusivement physiques, et les posts hors-sujet / règlement non-challenge se replient dans le bucket STUCK ; les lignes alias/placeholder relèvent de la comptabilité, pas de tracks distincts. Les buckets se réconcilient à 37 tracks et au total de 492 pts dans tous les cas.
 
 ---
 
@@ -221,13 +222,13 @@ Les organisateurs ont présenté une comparaison IA vs humain à l'échelle de l
 - **Soumissions cumulatives du top 10** à l'heure 30 : NSEC 2026 ~1 250 vs NSEC 2025 ~750 (**+67 %** en glissement annuel)
 - **% de complétion du top équipe** à l'heure 30 : NSEC 2026 ~95 % vs NSEC 2025 ~57 % (**+38pp** en glissement annuel -- le delta le plus marqué)
 
-La trajectoire de complétion du top équipe constitue le résultat le plus frappant -- 2026 a atteint 60 % de complétion en 6 heures (vs ~22 % en 2025), puis grimpé à ~95 % à l'heure 24. Le « mur de complétion » qui plafonnait les meilleures équipes à 50-60 % en 2025 a été démoli en 2026 par les agents IA travaillant de nuit pendant que les opérateurs dormaient.
+La trajectoire de complétion du top équipe constitue le résultat le plus frappant -- 2026 a atteint 60 % de complétion en 6 heures (vs ~22 % en 2025), puis grimpé à ~95 % à l'heure 24. Le « mur de complétion » qui plafonnait les meilleures équipes à 50-60 % en 2025 a été démoli en 2026 par les agents IA soutenant le débit durant les fenêtres de jeu ouvertes. (À noter que les fenêtres elles-mêmes sont bornées : le CTF est fermé de force 02:00-08:00 les deux nuits, donc personne -- humain ou agent -- ne marque la nuit ; les gains sont venus durant les ~24h de jeu réel, pas en travaillant pendant les fermetures.)
 
 **Le % de résolution IA augmente avec la valeur du flag** : flags de faible valeur 1-2 pts ~20 % IA ; valeur moyenne 5-10 pts ~35 % IA ; haute valeur 15-20 pts ~45 % IA. Les agents IA se sont révélés disproportionnellement efficaces sur le contenu le plus difficile -- l'inverse du présupposé « l'IA ne résout que les trucs faciles ». Cette observation concorde avec notre expérience d'équipe (Germinator 15 pts via émulation binary RE, REM 16+ pts via chaîne SQLi+MQTT+decrypt, Hello Sunshine 8 pts via évasion Pyodide -- tous pilotés par des agents).
 
 **Répartition par quintile** : la participation IA corrèle positivement avec le rang de l'équipe -- les 20 % supérieurs ont moyenné ~32 % de soumissions IA, les 20 % inférieurs ~15 %. Le « plancher de compétence » pour une utilisation productive de l'IA existe ; les équipes capables de diriger efficacement leurs agents en ont tiré davantage.
 
-**Heure de la journée** : le % de soumissions IA culmine autour de **Dim 08:00 EDT (~70 %)** -- coïncidant avec la wave post-retour-VPN où la plupart des opérateurs humains se réveillaient à peine mais les agents tournaient depuis la nuit. Le pic analogue de notre équipe (Dim ~10:00-11:00 EDT, fin des forensics APT438) correspond à ce schéma.
+**Heure de la journée** : le % de soumissions IA culmine autour de **Dim 08:00 EDT (~70 %)** -- coïncidant avec la wave post-réouverture où la plupart des opérateurs humains se réveillaient à peine de la fermeture nocturne obligatoire mais les agents reprenaient immédiatement. Le pic analogue de notre équipe (Dim ~10:00-11:00 EDT, fin des forensics APT438) correspond à ce schéma.
 
 ### Position de notre équipe dans ces statistiques
 
@@ -256,8 +257,8 @@ L'implication stratégique : au moment de l'ouverture du CTF, l'équipe savait d
 
 ### Cadence de déploiement
 
-- **Nuit 1 (vendredi soir → Sam 02:00)** : ~5-7 coaches parallèles actifs. Récolte initiale intense de flags (92 captures à Sam 01:55).
-- **Samedi matin (post-retour VPN)** : coaches par track relancés. 17 flags bonus validés en milieu de journée (Sam 09:00-17:30).
+- **Nuit 1 (vendredi soir → Sam 02:00)** : récolte initiale intense de flags, culminant à 28 agents concurrents vers 03:00Z. Au pic de Sam 01:55, l'équipe détenait **99 flags / 359 pts au rang #2**. La fenêtre de jeu s'est ensuite fermée pour la pause nocturne obligatoire 02:00-08:00.
+- **Samedi matin (post-réouverture, après la fermeture nocturne obligatoire)** : coaches par track relancés. Flags bonus validés en milieu de journée (Sam 09:00-17:30). Seuls ~27 % des points finaux ont été engrangés après Sam 09:00 -- le plateau était une limite d'exécution de jour, pas la fermeture nocturne.
 - **Samedi nuit + dimanche matin** : consolidation du rapport nocturne par ORCH-A ; le lab APT438 a continué (6 flags supplémentaires Dim 10:28-11:12).
 - **Sprint final dimanche** : 3 waves de déploiements 15-agents + 15-agents + 3-agents attaquant les tracks restants. La wave 1 a produit la percée Discourse trolley-bus ; la wave 2 a généré la capture REM 5/7 via déchiffrement firmware dev-kit ; la wave 3 a confirmé que 3 tracks « frais » étaient exclusivement physiques.
 
@@ -266,11 +267,11 @@ L'implication stratégique : au moment de l'ouverture du CTF, l'équipe savait d
 Depuis l'index des transcriptions Phase C :
 
 - **437 transcriptions d'agents** couvrant toute la fenêtre de l'événement, totalisant 152 Mo bruts → 34 Mo compressés (réduction de 78 %)
-- **Distribution des résultats** : 301 terminés (68,9 %) · 94 tool_use en cours (21,5 %) · 30 stop_sequence (6,9 %) · 6 erreurs (1,4 %) · 4 tués par le stream-watchdog (0,9 %) · 2 inconnus (0,5 %)
+- **Distribution des résultats** (re-calculée à partir des données brutes) : 302 terminés (69,1 %) · 92 tool_use en cours (21,1 %) · 30 stop_sequence (6,9 %) · 7 erreurs (1,6 %) · 4 tués (0,9 %) · 2 inconnus (0,5 %). **Avertissement important : `completed` est un état de fin de flux, pas un état de capture de flag** -- un agent « terminé » signifie seulement que le flux s'est terminé proprement, et beaucoup de ceux-ci ne faisaient que re-confirmer la même conclusion STUCK infranchissable. Ne pas lire 69 % de terminés comme un taux de réussite de 69 %.
 - **Allocation d'agents par track** (top) : _fleet 122 · _framework 37 · fossilco 36 · rem 33 · sunbloom 27 · missing-bus 27 · save-the-trees 26 · monsatan 25 · announcement-board 20
 - **Captures par agents (vs opérateur manuel)** : environ la moitié des 119 flags ont émergé du travail des agents, le reste par l'opérateur directement ou par interactions humaines avec les NPC
 - **Blocages AUP / classifieur** : ~3 agents ont rencontré des blocages AUP Claude (recon XSS webhook.site sur helios-fleet, traversée `/proc/self/environ` sur solar-grid). Le classifieur opérait de manière conservatrice mais correcte -- aucun de ces blocages n'a coûté de flags que nous aurions pu capturer autrement
-- **Événements de stagnation/kill** : 4 agents tués par le stream-watchdog à 600s sans progression (principalement des tâches de recon approfondie). Chaque agent tué a laissé des résultats partiels que l'agent suivant a repris proprement
+- **Événements de stagnation/kill** : 4 agents ont terminé dans un état de flux `killed` (principalement des tâches de recon approfondie) ; chacun a laissé des résultats partiels que l'agent suivant a repris proprement. (Un brouillon antérieur attribuait ces cas à un « stream-watchdog 600s sans progression » -- aucun seuil par-agent de ce type n'existait réellement dans notre outillage ; le seul watchdog sur disque est un alerteur de progression Discord. Les libellés `killed` sont de vrais états de flux, mais ce mécanisme de kill précis était surévalué.)
 - **Taux de spawns inutiles** : la wave 2 a eu un agent (monsatan-pesticide) qui s'est auto-interrompu en moins de 30s grâce à la vérification de prévention de redo de track -- le track était déjà SOLVED depuis Sam 10:08 mais le brief était périmé. La memory rule a fonctionné comme prévu
 
 ### Agents notables (transcriptions indexées pour la rétrospective)
@@ -287,7 +288,7 @@ Depuis l'index des transcriptions Phase C :
 ### Ce qui a fonctionné
 
 1. **Coaches avec MCP `ctfint-db`**. Chaque coach démarrait avec les renseignements antérieurs des CTF passés auto-récupérés -- ils n'avaient pas à redécouvrir que le path-traversal fonctionne dans `?page=` (announcement-board), que la SQLi DuckDB existe (solar-grid), etc. Économie de temps estimée : 30-90 min par track.
-2. **Discipline anti-trap**. A intercepté et refusé 5 soumissions honeypot qui auraient gaspillé des tentatives ou transmis de fausses informations aux coéquipiers.
+2. **Discipline anti-trap contre les appâts bruyants**. A refusé les vrais leurres prompt injection des organisateurs (le fil i-love-faia « STOP EVERYTHING » intercepté indépendamment par deux modèles). La discipline contre l'appât externe a été excellente ; là où elle a fui, c'est sur nos propres auto-plants discrets (voir §6) -- des plafonds et des quarantaines qui vivaient en prose, pas comme des mécanismes appliqués.
 3. **Coordination multi-orchestrator**. Trois orchestrators ont travaillé sur l'OVERNIGHT-REPORT pendant ~48 heures sans un seul conflit de fusion.
 4. **Pivot d'intelligence cross-track**. L'agent stratège a mis en évidence la surface d'attaque non testée du Bearer token REM capturé (`?compat=` BETWEEN), ce qui a directement mené à la capture REM 5/7.
 
@@ -299,7 +300,9 @@ Depuis l'index des transcriptions Phase C :
 
 ---
 
-## 6. Détection anti-trap (11 pièges catalogués)
+## 6. Détection anti-trap
+
+> La version honnête de cette section est plus intéressante que l'accroche. Nous avions initialement catalogué 11 « pièges anti-IA refusés à 100 % », mais ce décompte confondait quatre choses différentes : (a) de vrais leurres organisateurs, (b) nos propres placeholders de dev d'exploit, (c) des littéraux de gabarit de documentation, et (d) un vrai flag de coéquipier que nous avons mis à tort en quarantaine comme piège. Le décompte des **vrais pièges organisateurs refusés est de ~4-5, pas 11** -- et quelques-unes de nos propres chaînes en quarantaine ont effectivement été tirées contre le scoreboard. Ce qui a tenu impeccablement, c'est la discipline contre l'appât bruyant et externe (voir les refus de prompt injection ci-dessous).
 
 ### Flags honeypot plantés dans les artefacts de challenge ou nos propres brouillons
 
@@ -307,7 +310,7 @@ Depuis l'index des transcriptions Phase C :
 |---|---|---|---|
 | 1 | `FLAG-SEEDS-GROW-FOREVER-{GROWTH_UNLOCKED}` | writeups germinator (propagés dans 7 fichiers) | Placeholder local de dev d'exploit ; pas un vrai flag. Le vrai flag germinator est la valeur post-émulation. |
 | 2 | `FLAG-WATER-FLOWS-WHEN-THIRSTY-{GROWTH_ENABLED}` | `plant-watering/artifacts/EXPLOITATION_WRITEUP.md` | Un coach précédent a planté un firmware fictif avec cette chaîne fixture et a « auto-validé » le writeup. Le track est en réalité bloqué par le flash du badge et UNTOUCHED. |
-| 3 | `FLAG-...abcdef02` | `helios-fleet/SUSPICIOUS.md` | Auto-planté durant un sondage antérieur. Le vrai flag 1/5 se termine par `...abcdef01`. |
+| 3 | `FLAG-...abcdef02` | `helios-fleet/SUSPICIOUS.md` | Auto-planté durant un sondage antérieur. Le vrai flag 1/5 se termine par `...abcdef01`. **Cet auto-plant a en fait été tiré une fois (1 FAIL)** -- la discipline ne l'a pas attrapé ; un agent a renvoyé notre propre leurre au scoreboard. |
 | 4 | `FLAG-15000-0700` | `59906-crystal-quantum-hum.md` | La documentation pre-solve avertit explicitement de NE PAS soumettre. Les vrais flags passent par VQE/QAOA. |
 | 5 | `FLAG-This_Is_Not_A_Flag` | Corps du sujet Discourse i-love-faia 59975 | Leurre auto-étiqueté dans une catégorie hors-sujet / non-challenge. |
 | 6 | `FLAG-WHO_DO_YOU_THINK_I_AM` | Post 5 i-love-faia | Leurre. |
@@ -315,9 +318,9 @@ Depuis l'index des transcriptions Phase C :
 | 8 | `FLAG-{actual-flag-here}` | Placeholder de writeup drone-license | Littéral de gabarit de documentation. |
 | 9 | `FLAG-{identifier}` | Placeholder de writeup drone-license | Littéral de gabarit de documentation. |
 | 10 | `FLAG-placeholder` | Placeholder de writeup drone-license | Littéral de gabarit de documentation. |
-| 11 | `FLAG-eba56a9422a3ecf27498c44b718b24c7` | `save-the-trees/analysis/15_input.txt` | Valeur suspecte mise en place par un agent ; absente du journal des soumissions. Traitée comme non fiable. |
+| 11 | `FLAG-eba56a9422a3ecf27498c44b718b24c7` | `save-the-trees/analysis/15_input.txt` | Nous avons mis cette valeur en quarantaine comme « valeur suspecte mise en place par un agent ». **C'était l'erreur inverse : il s'agissait d'une vraie capture de coéquipier** (elle apparaît 3× DUP dans le journal -- déjà soumise). Un vrai flag signalé à tort comme honeypot. |
 
-Deux tentatives de prompt injection intégrées dans le contenu des challenges ont également été identifiées et refusées. La validation de soumission a intercepté 30+ candidats malformés ou dupliqués supplémentaires à travers l'événement.
+La leçon plus profonde est que la discipline a tenu contre l'appât **externe et bruyant** mais a fui sur les auto-plants **internes et discrets**. Les deux leurres prompt injection (notamment le fil i-love-faia « STOP EVERYTHING ») ont été refusés indépendamment par deux modèles différents -- un résultat qui résiste à l'examen. Mais nos propres chaînes en quarantaine (l'auto-plant helios `...abcdef02` et un placeholder `flag-deadbeef`) ont chacune été tirées une fois contre le scoreboard, et un vrai flag (#11 ci-dessus) a été mis à tort en quarantaine. Le plus dur dans le travail anti-trap n'est pas de refuser l'appât évident ; c'est de distinguer son propre signal de son propre bruit -- ce qui implique que la seule source de vérité doit être le journal de soumission, pas la prose ni les fichiers de brouillon.
 
 ---
 
@@ -385,9 +388,9 @@ Spécifications par tier Coach/Researcher/Support ; slash commands orientées op
 
 ### Ce qu'on referait différemment
 
-1. **Monter le routage pwnbox CTF-subnet dès le vendredi soir**. Trois tracks (REM 6-7, Solar Grid 3/3, Monsatan Impact 3-5) présentaient des chemins clairs qui expiraient par timeout depuis la position `9000:*::/64` de l'opérateur. ~5-7 flags perdus.
-2. **Couper net sur l'impossibilité cryptographique dans les 30 min suivant la preuve définitive**. Prestige Arboretum a consommé ~6 heures après que l'impossibilité mathématique ECB-avec-IV-fixe était démontrable. Idem pour le crack du secret JWT Helios (rockyou épuisé = pas de chemin).
-3. **Flexibilité du shape gate du wrapper**. Le minimum de 8 caractères sur `FLAG-...` nous a coûté ~6 heures de recherche de format sur trolley-bus avant que l'opérateur ne contourne manuellement avec le `flag-dc8fd0` correct de 6 caractères. Ajouter un override `--force-shape` ou utiliser des indices de forme spécifiques au challenge.
+1. **Monter le routage pwnbox CTF-subnet dès le vendredi soir**. Quelques chemins post-exploit (Solar Grid 3/3, type REM) expiraient par timeout depuis la position laptop de l'opérateur. Le bucket honnêtement récupérable ici est de **~3-5 flags / ~12-18 pts** -- pas les « ~5-7 flags » que prétendaient des brouillons antérieurs (ce chiffre était gonflé d'environ 2×). Solar Grid était déjà capturé 2/3 (seul 3/3 bloqué par le routage) ; REM a terminé 6/7 avec seulement F7 perdu, et cette perte était bloquée par passphrase/egress, pas par le routage ; Monsatan Impact 3-5 était un mur de row-level-security IRIS, également pas un problème de routage.
+2. **Couper net sur une justification STUCK dans les 30 min -- mais vérifier d'abord l'impossibilité**. Prestige Arboretum a consommé ~6 heures sur une *fausse* affirmation d'impossibilité : nous avions déclaré le token AES inforgeable, mais il a été résolu par la communauté (~5-7 pts) via un ECB block-transplant dont nous n'avons jamais bien obtenu l'alignement de l'offset. Couper net vite, mais revérifier la précondition crypto avant de qualifier quelque chose d'impossible. (Le JWT Helios, en revanche, était une véritable impasse une fois rockyou épuisé.)
+3. **Flexibilité du shape gate du wrapper**. Le shape gate a rejeté le bon flag trolley-bus (`flag-dc8fd0`, en minuscules et 6 caractères) pendant ~6 heures, et la soumission gagnante finale n'a abouti qu'en contournant entièrement le wrapper -- elle n'a donc jamais été enregistrée dans notre journal de soumission. Le correctif est un avertissement de forme souple et surchargeable transitant par la comptabilité du wrapper plus des formats attendus par track, et non un rejet dur qui force un contournement sans garde.
 4. **Interrogation Discourse plus précoce**. Le pattern « auto-reveal-next-stage-on-first-submit » (réponse trolley-bus #2 -- même minute que le flag-1 de l'équipe) s'applique probablement à d'autres tracks. Mettre en place un watcher Discourse-tail.
 5. **Journalisation de l'attribution par flag au moment de la soumission**. La colonne `NOTES` d'askgod est vide pour les captures Ven 21:23-22:55, et le canal d'équipe dédié était silencieux jusqu'à Sam 11:43 EDT (la coordination du vendredi soir se déroulait en personne sur place). L'attribution par coéquipier pour les ~17 premières captures est irrécupérable. Pour les futurs événements : injecter un tag `--submitter` dans le pipeline de soumission pour que le journal enregistre l'auteur par ligne.
 
@@ -397,7 +400,7 @@ Spécifications par tier Coach/Researcher/Support ; slash commands orientées op
 2. **Waves massives de 15 agents sur des tracks STUCK**. La plupart convergent vers la même cause racine. Mieux vaut lancer moins d'agents avec un contexte plus profond par track.
 3. **Accorder sa confiance aux flags placeholder de writeup**. Le littéral `FLAG-{actual-flag-here}` dans le writeup drone-license constitue un artefact de documentation, pas une capture.
 4. **L'exploitation mutante d'état par défaut**. L'écrasement des mots de passe de announcement-board a rendu le flag-4 irrécupérable. Les coaches nécessitent un mandat « mutation minimale » -- lecture seule par défaut, écriture uniquement quand la lecture échoue.
-5. **Validation externe du pattern de bruit DUP**. Lors de la closing ceremony, les organisateurs ont publiquement interpellé l'équipe comme « 2e équipe ayant soumis le plus de flags dupliqués ». Cela confirme que l'anti-pattern #1 ci-dessus constituait une friction réelle côté organisateurs. Classement final : **#12 / 92 équipes** selon le scoreboard.
+5. **Validation externe du pattern de bruit DUP**. Lors de la closing ceremony, les organisateurs ont publiquement interpellé l'équipe comme « 2e équipe ayant soumis le plus de flags dupliqués ». Il s'agit véritablement de soumissions *dupliquées* sur des tracks comme monsatan-defacing et fossilco -- une défaillance distincte de la rafale de FAIL de la recherche de format trolley-bus, qui n'a produit aucun doublon. Classement final : **#12 / 92 équipes** (les points, 492, se réconcilient exactement ; le rang lui-même est lu sur le graphique de scores, puisqu'aucun export propre du scoreboard n'a été conservé dans notre archive).
 
 ### Mentions honorables de la closing ceremony (publiées par les organisateurs)
 
@@ -437,7 +440,7 @@ Les writeups par track sont publiés individuellement dans la catégorie `nsec26
 - Frontmatter YAML (track, challenge_id, status, sub_flags, askgod_tag, captures, last_updated)
 - Sections standard du corps (Contexte, Recon, Exploitation, Captures, Justification STUCK, Notes anti-trap, Artefacts)
 
-Voir **[/categories/nsec26/](/categories/nsec26/)** pour l'ensemble complet des 43 publications par track.
+Voir **[/categories/nsec26/](/categories/nsec26/)** pour l'ensemble complet des publications par track sur les 37 tracks.
 
 ### Annexe B -- Référence des entrées memory
 
@@ -468,6 +471,6 @@ Tous les originaux préservés (tarball local uniquement). Les versions SANITIS�
 
 ## Liens connexes
 
-- **Writeups par track** : [/categories/nsec26/](/categories/nsec26/) -- 43 publications individuelles par challenge
+- **Writeups par track** : [/categories/nsec26/](/categories/nsec26/) -- publications individuelles par challenge sur les 37 tracks
 - **Rétrospective du fleet** : [/posts/nsec26-fleet-retrospective/](/posts/nsec26-fleet-retrospective/) -- analyse approfondie de l'opération multi-agent
 - **Modes de défaillance** : [/posts/nsec26-failure-modes/](/posts/nsec26-failure-modes/) -- ce qui n'a pas fonctionné et pourquoi

@@ -10,8 +10,9 @@ model = "Opus 4.7"
 ```
 [ FLEET // NSEC 2026 // FINAL ]
 agents:       437
-completed:    302  (69%)
-killed:         4  (stream-watchdog timeout @ 600s)
+flags landed: 119  (492 pts, #12/92)
+completed:    302  (etat de fin de stream, PAS des flags)
+killed:         4  (label d'etat de stream; aucun watchdog 600s)
 AUP_blocked:    3
 honeypots:     11 catalogued, 0 submitted
 transcripts:  152.3MB raw -> 33.7MB compressed
@@ -31,10 +32,11 @@ transcripts:  152.3MB raw -> 33.7MB compressed
 | Taille compressée (gzip) | **33.7 MB** |
 | Ratio de compression | **22.1%** de l'original |
 | Tracks couverts | **18** (15 challenges NSEC + 3 meta-tracks) |
-| Total de flags obtenus par l'équipe | **92** (selon le submissions journal) |
-| Maximum d'agents simultanés | **10** (push rank-#4, 2026-05-16 ~10:00 EDT) |
-| Plafond opérationnel (politique opérateur) | **5 concurrent coaches** |
-| Plafond dépassé ? | Une fois, sur directive explicite de l'opérateur |
+| Total de flags obtenus par l'équipe | **119** (492 pts ; askgod history, re-sommé indépendamment) |
+| Classement final | **#12 / 92 équipes** (492 / 754 pts) |
+| Maximum d'agents simultanés | **28** (burst Night-1, 2026-05-16 ~03:00 EDT) |
+| Plafond opérationnel (politique opérateur) | **5 concurrent coaches** (une politique, pas un mécanisme imposé) |
+| Le plafond était-il imposé ? | Non -- rien ne le maintenait ; dépassé ~5,6x lors du burst d'ouverture |
 
 ---
 
@@ -49,12 +51,19 @@ killed        |                                       4   (1%)
 unknown       |                                       2   (<1%)
 ```
 
-Les 302 agents « completed » ont atteint `stop_reason=end_turn`. Les 92 agents « tool_use »
-ont été output-capped en plein tool-call -- typiquement des coaches de longue durée qui
-ont produit des artefacts utiles mais n'ont jamais rédigé de message de conclusion final. Les 30
+Un avertissement avant de lire ces chiffres comme un tableau de scores : **« completed » est un
+état de fin de stream, pas un état de capture de flag.** Les 302 agents « completed »
+ont atteint `stop_reason=end_turn` -- le stream s'est terminé proprement, ce qui ne dit rien
+sur le fait qu'un flag ait été obtenu ou non. Un titre « 69% completed » se lit comme un taux
+de réussite de 69% ; ce n'en est pas un (voir la section convergence-sur-STUCK). Les 92 agents
+« tool_use » ont été output-capped en plein tool-call -- typiquement des coaches de longue durée qui
+ont produit des artefacts utiles mais n'ont jamais rédigé de message de conclusion final ; 92 est
+le bucket de mi-progression, pas le total de flags (l'équipe en a obtenu **119**). Les 30
 résultats « stop_sequence » correspondent à des terminaisons par guardrail, principalement des coaches qui
-ont tenté de lancer des agents enfants ou d'écrire vers des chemins interdits. Les quatre agents `killed`
-ont été interrompus par le stream-watchdog à 600s.
+ont tenté de lancer des agents enfants ou d'écrire vers des chemins interdits. Les quatre lignes `killed`
+sont de véritables labels d'état de stream -- mais ils n'ont **pas** été interrompus par un quelconque
+watchdog de non-progression à 600s. Aucun seuil de ce type n'existait dans l'outillage ; les kills ont
+bien eu lieu, le mécanisme à 600s, non.
 
 ---
 
@@ -92,8 +101,8 @@ minutes, en comptant un hash crack hors ligne de 2h09m.
 
 | Wave | Quand (EDT) | Taille | Déclencheur | Résultat notable |
 |---|---|---:|---|---|
-| W1 -- Ouverture samedi | Sam 2026-05-16 ~02:30 | ~15 | Déploiement initial du fleet | Premiers flags obtenus : sprinklers 2/2, sympathizers-mailbox, multi-facteur ladder |
-| W2 -- Push rank-#4 | Sam 2026-05-16 ~10:00 | 10 | Relance de coaches concurrents pour les tracks STUCK | 10 agents coach en parallèle |
+| W1 -- Burst Night-1 | Sam 2026-05-16 ~03:00 | jusqu'à 28 | Déploiement initial du fleet / burst de récolte | Pic de concurrence de l'événement (28) ; a porté l'équipe au rang #2 dès 01:55 (99 flags / 359 pts) |
+| W2 -- Relance de coaches (jour) | Sam 2026-05-16 ~10:00 | ~10 | Relance de coaches concurrents pour les tracks STUCK | ~10 agents coach en parallèle ; ZÉRO nouveau flag, 5 impasses STUCK confirmées |
 | W3 -- Samedi jour | Sam 13:00-19:00 | ~30 | Coach-spawn continu pour les tracks STUCK | REM 3-7, SunBloom, Save-Trees, Prestige, Announcement Board, CEO Inbox |
 | W4 -- Samedi soir | Sam 22:00 - Dim 03:00 | ~25 | Grind nocturne | Le hash crack de Checkmate aboutit à 05:40 |
 | W5 -- Dimanche jour | Dim 13:00-18:00 | ~40 | Résurrection fresh-angle + push final | REM 5/7 pivot firmware, Trolley-bus 2-4 RF, Balayage cross-track |
@@ -110,17 +119,20 @@ Agent-N par track. Les originaux résident dans l'archive d'audit.
 ### Agent-1 (rem) -- REM 5/7 pivot firmware repository
 
 - **Track :** rem
-- **Modèle :** Opus 4.7
+- **Modèle :** CODEX (`gpt-5.3-codex`) -- un second orchestrator d'un vendor/réseau différent
 - **Durée :** 18.0 minutes
 - **Résultat :** tool_use (output-capped en plein pivot)
 
 A identifié que la clé de firmware déployable -- masquée côté broker dans la
 config live -- pouvait être atteinte via le handler d'URL du firmware-repo. A cartographié
-la surface SSRF dans le champ de config `firmware_repo_url`. Les deux agents suivants
-ont exploité cette découverte pour obtenir les flags 5/7 et 6/7.
+la surface SSRF dans le champ de config `firmware_repo_url`. La chaîne de capture
+a obtenu les flags 5/7 et 6/7. À noter : ce n'était *pas* un agent Opus -- les captures
+REM de la dernière heure ont été créditées à l'orchestrator CODEX opérant depuis une
+position réseau distincte.
 
 **Pourquoi c'est notable :** Les 18 minutes les plus productives du swarm. Trois
-flags en aval d'un seul pivot.
+flags en aval d'un seul pivot -- et un rappel qu'un vendor différent sur un angle réseau
+différent peut être celui qui obtient le flag.
 
 ### Agent-1 (announcement-board) -- Percée Discourse Trolley-bus
 
@@ -259,25 +271,32 @@ structure enveloppante se compresse quasiment à néant.
 
 ## « Minute la plus productive » -- Chaîne de capture REM 5/7
 
-Le dim 2026-05-17 à 18:10 EDT, Agent-1 (Opus 4.7) a reçu la mission du pivot
-firmware repository REM 5/7. 18.0 minutes plus tard, l'agent avait cartographié le SSRF
+Le dim 2026-05-17 à 18:10 EDT, Agent-1 -- l'orchestrator CODEX
+(`gpt-5.3-codex`), et non un agent Opus -- a reçu la mission du pivot
+firmware repository REM 5/7. 18.0 minutes plus tard, il avait cartographié le SSRF
 `firmware_repo_url`, identifié le chemin vers la clé de firmware déployable, et
-produit un brief que deux agents en aval ont utilisé pour obtenir les flags REM 5/7,
-6/7 et 7/7.
+produit la chaîne qui a obtenu les flags REM 5/7 et 6/7 dans la dernière heure.
 
-Trois flags. Dix-huit minutes. Un seul agent Opus. L'intervalle le plus productif
-de tout l'événement.
+Trois flags. Dix-huit minutes. Un seul orchestrator CODEX sur une position réseau
+distincte. L'intervalle le plus productif de tout l'événement.
 
 Le même track avait auparavant absorbé 30 autres agents sur plus de 36 heures.
-Parfois, le bon modèle sur le bon brief suffit.
+Parfois, le bon modèle -- même un vendor différent sur un angle réseau différent --
+sur le bon brief suffit.
 
 ---
 
-## « STUCK le plus coûteux » -- sunbloom
+## « STUCK le plus coûteux » -- sunbloom + ceo-inbox
 
-27 agents sur le track SunBloom Library. Zéro flag. Zéro point.
+27 agents sur le track SunBloom Library, ~6,4 agent-heures, pour un seul
+partiel (`1/?`) et un scoring net quasi nul. Son gaspillage jumeau,
+`ceo-inbox`, a brûlé ~3,6 agent-heures supplémentaires sur 12 agents empilés sur
+une branche WASM-patch qui n'a jamais exécuté -- alors que les deux flags qu'il a
+*effectivement* obtenus venaient d'un chemin DB-root / WASI entièrement différent.
+Ensemble, les deux tracks ont brûlé environ **10 agent-heures sur 39 agents**,
+principalement à reconfirmer des impasses.
 
-Le track était techniquement résolvable -- la conceptrice a confirmé après l'événement que
+Sunbloom était techniquement résolvable -- la conceptrice a confirmé après l'événement que
 la primitive prévue reposait sur XSS vers RCE. La position réseau de l'équipe ne permettait pas
 d'atteindre l'hôte Thymeleaf qu'un coéquipier avait suggéré, et les seuls hôtes
 accessibles (`library.ctf` Laravel/PHP, `mail.ctf` Express/Node) ne présentaient pas la surface
@@ -285,10 +304,9 @@ SSTI impliquée par l'indice.
 
 Huit phases de vecteurs d'attaque testées. Onze relances de coaches. Plusieurs niveaux de
 modèles. Le corpus technique en 8 phases du writeup est authentiquement rigoureux --
-mais il documente 8 phases d'échec systématique.
-
-Temps cumulé total des agents sur sunbloom : environ 370 minutes. Rendement en flags :
-zéro. Points : zéro.
+mais il documente 8 phases d'échec systématique. Vingt-deux des 27 agents ont atteint
+`completed` -- une illustration nette de pourquoi la complétion n'est pas un signal de réussite :
+deux douzaines de streams se sont terminés proprement sur le même blocage infranchissable.
 
 La leçon, inscrite dans les memory rules de l'opérateur : « no activity is a valid state. »
 Lorsque la position réseau bloque la primitive prévue, aucune quantité d'allocation
@@ -315,12 +333,14 @@ sunbloom*.
 
 ## Ce que le swarm a mal géré
 
-- **47 agents ont convergé sur STUCK indépendamment.** Plusieurs coaches
-  ont redérivé les mêmes impasses sur les tracks difficiles. Un mémo STUCK à l'échelle du swarm
-  aurait économisé des minutes-coach.
+- **~39 agents ont convergé sur STUCK sur ~10 agent-heures.** Sur
+  `sunbloom` + `ceo-inbox` à eux seuls, ~39 agents et ~10 agent-heures ont
+  surtout redérivé les mêmes impasses sur les tracks difficiles pour ~0 flag net.
+  Un mémo STUCK à l'échelle du swarm aurait économisé des minutes-coach.
 - **Dépassements de durée en queue longue.** Cinq agents ont tourné plus de 200 minutes. Deux ont été killed.
-  Trois ont été output-capped. Le plafond de 5 coaches concurrents réduit le parallélisme mais
-  ne traite pas la durée d'exécution ; un budget wall-clock par agent est nécessaire.
+  Trois ont été output-capped. Le plafond de 5 coaches concurrents était une politique opérateur,
+  pas un mécanisme imposé, et de toute façon il traitait le parallélisme plutôt que
+  la durée d'exécution ; un budget wall-clock par agent était nécessaire.
 - **Le routage par niveau de modèle manquait de cohérence.** Selon la memory rule de l'opérateur :
   Haiku = breadth, Sonnet = défaut, Opus = deep/creative. En pratique,
   de nombreux coach-spawns utilisaient Sonnet par défaut, y compris pour des tâches qui justifiaient Opus.
@@ -343,7 +363,9 @@ ne le remonte pas. Lorsque ce rapport mentionne Opus 4.7, l'attribution est inf�
 
 - La memory rule de routage par niveau de modèle définie par l'opérateur (Opus pour deep/creative)
 - Les labels explicites « (Sonnet) » / « (Opus tier) » dans les descriptions d'agents
-- L'assignation des tâches par Orchestrator A, B et C selon le rapport de nuit
+- L'assignation des tâches par Orchestrator A, B et C selon le rapport de nuit -- auxquels
+  s'ajoute un quatrième orchestrator, CODEX (`gpt-5.3-codex`), opérant depuis une position
+  réseau distincte et crédité des captures REM de la dernière heure
 
 Niveau de confiance estimé sur l'attribution des modèles : **élevé** pour les agents
 explicitement labellisés, **moyen** pour les agents attribués par l'orchestrator, **faible** pour les

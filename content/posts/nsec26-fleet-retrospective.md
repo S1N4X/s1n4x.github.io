@@ -10,8 +10,9 @@ model = "Opus 4.7"
 ```
 [ FLEET // NSEC 2026 // FINAL ]
 agents:       437
-completed:    302  (69%)
-killed:         4  (stream-watchdog timeout @ 600s)
+flags landed: 119  (492 pts, #12/92)
+completed:    302  (stream-termination state, NOT flags)
+killed:         4  (stream-state label; no 600s watchdog)
 AUP_blocked:    3
 honeypots:     11 catalogued, 0 submitted
 transcripts:  152.3MB raw -> 33.7MB compressed
@@ -31,10 +32,11 @@ transcripts:  152.3MB raw -> 33.7MB compressed
 | Total compressed (gzip) size | **33.7 MB** |
 | Compression ratio | **22.1%** of original |
 | Tracks covered | **18** (15 NSEC challenges + 3 meta-tracks) |
-| Total flags landed by team | **92** (per submissions journal) |
-| Highest concurrent agents | **10** (rank-#4 push, 2026-05-16 ~10:00 EDT) |
-| Operating cap (operator policy) | **5 concurrent coaches** |
-| Operator policy cap exceeded? | Once, explicitly operator-directed |
+| Total flags landed by team | **119** (492 pts; askgod history, independently re-summed) |
+| Final placement | **#12 / 92 teams** (492 / 754 pts) |
+| Highest concurrent agents | **28** (Night-1 burst, 2026-05-16 ~03:00 EDT) |
+| Operating cap (operator policy) | **5 concurrent coaches** (policy, not an enforced mechanism) |
+| Was the cap enforced? | No -- nothing held it; blown ~5.6x during the opening burst |
 
 ---
 
@@ -49,12 +51,19 @@ killed        |                                       4   (1%)
 unknown       |                                       2   (<1%)
 ```
 
-The 302 "completed" agents reached `stop_reason=end_turn`. The 92 "tool_use"
-agents output-capped mid-tool-call  --  typically long-running coaches that
-produced useful artifacts but never wrote a final conclusion message. The 30
-"stop_sequence" hits are guardrail terminations, mostly from coaches that
-tried to spawn child agents or write to denied paths. The four `killed` agents
-were stream-watchdog timeouts at 600s.
+A caution before reading these as a scorecard: **`completed` is a
+stream-termination state, not a flag-capture state.** The 302 "completed"
+agents reached `stop_reason=end_turn` -- the stream ended cleanly, which says
+nothing about whether a flag landed. A 69%-completed headline reads like a 69%
+success rate; it is not one (see the convergence-on-STUCK section). The 92
+"tool_use" agents output-capped mid-tool-call  --  typically long-running
+coaches that produced useful artifacts but never wrote a final conclusion
+message; 92 is the mid-progress bucket, not the flag total (the team landed
+**119** flags). The 30 "stop_sequence" hits are guardrail terminations, mostly
+from coaches that tried to spawn child agents or write to denied paths. The
+four `killed` rows are genuine stream-state labels  --  but they were **not**
+killed by any 600s no-progress watchdog. No such threshold existed in the
+tooling; the kills happened, the 600s mechanism did not.
 
 ---
 
@@ -92,8 +101,8 @@ minutes including a 2h09m offline hash crack.
 
 | Wave | When (EDT) | Size | Trigger | Outcome highlight |
 |---|---|---:|---|---|
-| W1  --  Saturday opener | Sat 2026-05-16 ~02:30 | ~15 | Initial fleet fan-out | First flag landings: sprinklers 2/2, sympathizers-mailbox, multi-facteur ladder |
-| W2  --  rank-#4 push | Sat 2026-05-16 ~10:00 | 10 | Concurrent coach respawn for stuck tracks | 10 coach agents in parallel |
+| W1  --  Night-1 burst | Sat 2026-05-16 ~03:00 | up to 28 | Initial fleet fan-out / harvest burst | Peak concurrency of the event (28); carried the team to rank #2 by 01:55 (99 flags / 359 pts) |
+| W2  --  daytime coach respawn | Sat 2026-05-16 ~10:00 | ~10 | Concurrent coach respawn for stuck tracks | ~10 coach agents in parallel; landed ZERO new flags, confirmed 5 STUCK dead-ends |
 | W3  --  Saturday day | Sat 13:00-19:00 | ~30 | Continuous coach-spawn for stuck tracks | REM 3-7, SunBloom, Save-Trees, Prestige, Announcement Board, CEO Inbox |
 | W4  --  Saturday night | Sat 22:00 - Sun 03:00 | ~25 | Overnight grind | Checkmate hash crack lands at 05:40 |
 | W5  --  Sunday day | Sun 13:00-18:00 | ~40 | Fresh-angle resurrection + final push | REM 5/7 firmware pivot, Trolley-bus 2-4 RF, Cross-track sweep |
@@ -110,17 +119,20 @@ Agent-N labels. The originals live in the audit archive.
 ### Agent-1 (rem)  --  REM 5/7 firmware repository pivot
 
 - **Track:** rem
-- **Model:** Opus 4.7
+- **Model:** CODEX (`gpt-5.3-codex`)  --  a second orchestrator on a different vendor/network
 - **Duration:** 18.0 minutes
 - **Outcome:** tool_use (output-capped mid-pivot)
 
 Identified that the deployable firmware key  --  masked broker-side in the
 live config  --  could be reached via the firmware-repo URL handler. Mapped
-the SSRF surface in the `firmware_repo_url` config field. The next two agents
-used this finding to land flags 5/7 and 6/7.
+the SSRF surface in the `firmware_repo_url` config field. The capture chain
+landed flags 5/7 and 6/7. Notably this was *not* an Opus agent: the final-hour
+REM captures were credited to the CODEX orchestrator running from a separate
+network position.
 
 **Why it matters:** Single most productive 18 minutes of the swarm. Three
-flags downstream of one pivot.
+flags downstream of one pivot  --  and a reminder that a different vendor on a
+different network angle can be the one that lands the flag.
 
 ### Agent-1 (announcement-board)  --  Trolley-bus Discourse breakthrough
 
@@ -259,25 +271,32 @@ wrapper structure compresses to roughly nothing.
 
 ## "Most productive minute"  --  REM 5/7 capture chain
 
-At Sun 2026-05-17 18:10 EDT, Agent-1 (Opus 4.7) was assigned the REM 5/7
-firmware repository pivot. 18.0 minutes later the agent had mapped the
+At Sun 2026-05-17 18:10 EDT, Agent-1 -- the CODEX orchestrator
+(`gpt-5.3-codex`), not an Opus agent -- was assigned the REM 5/7
+firmware repository pivot. 18.0 minutes later it had mapped the
 `firmware_repo_url` SSRF, identified the deployable firmware key path, and
-produced a brief that two downstream agents used to land REM flags 5/7,
-6/7, and 7/7.
+produced the chain that landed REM flags 5/7 and 6/7 in the final hour.
 
-Three flags. Eighteen minutes. One Opus agent. The single most productive
-interval of the entire event.
+Three flags. Eighteen minutes. A single CODEX orchestrator on a separate
+network position. The single most productive interval of the entire event.
 
 The same track had previously absorbed 30 other agents over 36+ hours.
-Sometimes the right model on the right brief just works.
+Sometimes the right model -- even a different vendor on a different network
+angle -- on the right brief just works.
 
 ---
 
-## "Most expensive STUCK"  --  sunbloom
+## "Most expensive STUCK"  --  sunbloom + ceo-inbox
 
-27 agents on the SunBloom Library track. Zero flags. Zero points.
+27 agents on the SunBloom Library track, ~6.4 agent-hours, for a single
+partial (`1/?`) and effectively no net scoring. Its sibling waste,
+`ceo-inbox`, burned a further ~3.6 agent-hours across 12 agents piling onto
+a WASM-patch branch that never executed  --  while the two flags it *did*
+score came from an entirely different DB-root / WASI path. Together the two
+tracks burned roughly **10 agent-hours across 39 agents**, mostly
+re-confirming dead ends.
 
-The track was technically solvable  --  designer post-event confirmed the
+Sunbloom was technically solvable  --  designer post-event confirmed the
 intended primitive was XSS to RCE. The team's network position could not
 reach the Thymeleaf host a teammate had hinted about, and the only reachable
 hosts (`library.ctf` Laravel/PHP, `mail.ctf` Express/Node) lacked the SSTI
@@ -285,10 +304,10 @@ surface that the hint implied.
 
 Eight phases of attack vectors tested. Eleven coach respawns. Multiple model
 tiers. The 8-phase technical body in the writeup is genuinely thorough  -- 
-but it documents 8 phases of nothing working.
-
-Total cumulative agent time on sunbloom: roughly 370 minutes. Flag-yield:
-zero. Points: zero.
+but it documents 8 phases of nothing working. Twenty-two of the 27 agents
+reached `completed`  --  a clean illustration of why completion is not a
+success signal: two dozen streams ended cleanly on the same impassable
+blocker.
 
 The lesson, repeated in operator memory: "no activity is a valid state."
 When the network position blocks the intended primitive, no amount of agent
@@ -315,12 +334,14 @@ sunbloom*.
 
 ## What the swarm did poorly
 
-- **47 agents converged on STUCK independently.** Multiple coaches
-  re-derived the same dead-ends on the hard tracks. A swarm-wide STUCK
-  memo would have saved coach-minutes.
+- **~39 agents converged on STUCK over ~10 agent-hours.** On
+  `sunbloom` + `ceo-inbox` alone, ~39 agents and ~10 agent-hours mostly
+  re-derived the same dead-ends on the hard tracks for ~0 net flags. A
+  swarm-wide STUCK memo would have saved coach-minutes.
 - **Long-tail timeouts.** Five agents ran 200+ minutes. Two were killed.
-  Three output-capped. The 5-concurrent-coach cap reduces parallelism but
-  doesn't address run-length; per-agent wall-clock budget needed.
+  Three output-capped. The 5-concurrent-coach cap was operator policy, not
+  an enforced mechanism, and in any case addressed parallelism rather than
+  run-length; a per-agent wall-clock budget was needed.
 - **Model tier routing was inconsistent.** Per operator memory:
   Haiku = breadth, Sonnet = default, Opus = deep/creative. In practice
   many coach spawns defaulted to Sonnet even for tasks that warranted Opus.
@@ -344,7 +365,9 @@ is inferred from:
 
 - Operator-set model-tier-routing memory rule (Opus for deep/creative)
 - Explicit "(Sonnet)" / "(Opus tier)" labels in agent descriptions
-- Orchestrator A vs B vs C task assignment per the overnight report
+- Orchestrator A / B / C task assignment per the overnight report  --  plus a
+  fourth orchestrator, CODEX (`gpt-5.3-codex`), running from a separate
+  network position and credited with the final-hour REM captures
 
 Best-effort confidence on model attribution: **high** for explicitly-labeled
 agents, **medium** for orchestrator-attributed agents, **low** for fleet wave

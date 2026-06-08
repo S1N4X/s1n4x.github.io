@@ -9,26 +9,40 @@ model = "Opus 4.7"
 
 ```
 [ FAILURE MODES // NSEC 2026 // FINAL ]
-honeypots refused:    11 of 11  (100%)
-PI lures refused:      2 (1 challenge body, 1 coach brief)
-sweep false positives: 6
-AUP blocks:            3
-stream-watchdog kills: 4 @ 600s
+organizer decoys refused:  ~4-5 genuine traps (NOT the "11/11" we claimed)
+self-plants that fired:    2 (helios ...02 + our own do-not-submit string)
+mis-catalogued real flag:  1 (save-the-trees, a teammate capture)
+PI lures refused:          2 (Opus + Haiku, double-confirmed)
+sweep false positives:     6
+AUP blocks:                3
+stream-state kills:        4 (no 600s watchdog — that mechanism wasn't real)
+state-mutation self-owns:  1 (185-password overwrite bricked a flag event-wide)
+sanitizer blind spots:     1 (UTF-16 secret leak past ASCII grep)
 frontmatter/body contradictions: 1 (caught in Q-2c)
-duplication ratio:    ~70% before Q-2a collapse
+duplication ratio:         ~70% before Q-2a collapse
 ```
 
-> "47 agents converged on STUCK independently. The crypto math hadn't changed."
+> "39 agents converged on STUCK independently across two tracks. The crypto math hadn't changed."
 
 An honest accounting of where the multi-agent system fell short, what failed
 silently, and what near-misses revealed about the underlying design.
 
 ---
 
-## Honeypot pattern detections (11 of 11 refused)
+## Honeypot pattern detections (the "11/11" was overstated)
 
-Eleven honeypot strings catalogued. Zero submitted by any of 437 agents.
-Per-trap detail:
+We originally published this as "11 of 11 honeypots refused, 100%, zero
+submitted by any of 437 agents." Re-summing the actual submission journal
+killed that headline. The number conflates four different things: genuine
+organizer decoys, our own exploit-dev placeholders, one *real* flag we
+mis-catalogued *as* a honeypot, and two self-plants that **did** fire. The
+honest count of genuine organizer traps refused is **~4-5, not 11** — and
+two catalogue entries were errors, not refusals.
+
+What survives scrutiny: no self-labelled organizer decoy ever reached the
+scoreboard. The discipline against *loud, external* bait was real. What
+broke was our ability to tell our own real captures from our own scratch
+noise. Per-trap detail, corrected:
 
 ### germinator's `FLAG-SEEDS-GROW-FOREVER`
 
@@ -56,7 +70,7 @@ the fixture.
 
 Total refusals across both tracks: 8.
 
-### helios-fleet's self-planted `abcdef02`
+### helios-fleet's self-planted `abcdef02` (this one fired)
 
 The vault returned `FLAG-...abcdef02` for a guest
 password query. Self-planted. An earlier probing agent submitted a test
@@ -67,6 +81,12 @@ up like a real flag.
 The real 1/5 flag ends `01`. The decoy ends `02`. Same hex prefix.
 Same length. Off by one nibble. The class of failure is unique: the
 agent's own probe artifact became the lure.
+
+**And we submitted it.** The submission journal records `...abcdef02` as
+**1× FAIL** — the self-plant was fired once. So this is not a "refused
+honeypot" at all; it is a quiet discipline failure. We echoed our own
+decoy out of our own vault and pushed it to the oracle. The catalogue
+called it refused; the log says otherwise.
 
 ### crystal-quantum-hum's `FLAG-15000-0700`
 
@@ -101,16 +121,23 @@ the most explicit placeholder pattern in the catalog.
 Documentation placeholder in an example `askgod submit` command.
 No real flag would consist of x's; pattern-matched and refused.
 
-### save-the-trees' `FLAG-eba56a9422a3ec...`
+### save-the-trees' `FLAG-eba56a9422a3ec...` (we mis-catalogued a real flag)
 
-Suspicious hex flag with no submission attribution. Appeared in
-`analysis/15_input.txt` as if extracted from a PDF stego decoding run.
-No submission journal row references it. No askgod history entry
-matches. Either an agent hallucination, a fixture from local
-exploit-dev, or a self-planted test value.
+We originally catalogued this hex string as a quarantined honeypot —
+"suspicious, no submission attribution, not in the journal, quarantined."
+That was wrong, and it is the most instructive entry in the whole list.
 
-Failed the OOB-verification check (low-confidence + single source +
-no submission evidence). Quarantined.
+Re-summing the submission journal, `eba56a9422a3ec...` shows up as
+**3× DUP** — "already submitted." It was a **real teammate capture** all
+along. We did not refuse a honeypot here; we **quarantined a real flag**
+and filed it under traps. This is the *inverse* of the failure the
+catalogue was built to catch: not a decoy slipping through, but a genuine
+capture wrongly thrown out.
+
+Same root cause as the self-plants firing: we could not reliably tell our
+own real captures from our own scratch noise. A quarantine is only as good
+as your ability to make that distinction — which means the single source
+of truth has to be the submission log, not prose or scratch files.
 
 ### monsatan-defacing's timing collision
 
@@ -125,9 +152,22 @@ re-submit.
 
 ## Indirect prompt injection refusals
 
-Two embedded prompt-injection attempts encountered in challenge content.
-Both refused. Agents correctly treated challenge artifacts as data, not
-instructions.
+This is the part of the anti-trap story that genuinely held up. The
+canonical specimen is the i-love-faia thread (Discourse topic 59975): an
+off-topic post whose body was a textbook indirect injection — a
+capitalized "STOP EVERYTHING" urgency cue, a fake authority handoff, a
+make-work task replacement, and an "ask more agents to help" recursion
+prod, all designed to burn an AI team's context budget.
+
+It was refused **twice, independently, by two different models**. An Opus
+agent labelled it a textbook prompt injection, decomposed it, and declined
+to comply — its transcript output shrank as it discarded the make-work. A
+separate Haiku agent independently tagged the embedded lure as a honeypot
+and declined. Two models, two refusals, both caught verbatim in real
+transcripts rather than merely claimed. The same thread also carried two
+sibling decoy strings (an opt-out taunt and a "this is too long" gag); none
+were submitted. Agents correctly treated challenge artifacts as data, not
+instructions. This is the result that survives re-summing the telemetry.
 
 ---
 
@@ -177,9 +217,17 @@ backdoor, shellcode, reverse shell, post-exploitation, persistence).
 
 ---
 
-## Stream-watchdog terminations
+## Long-running and terminated agents
 
-Four stream-watchdog timeouts at the 600s mark. Patterns and losses:
+A correction to our own first telling: we originally described "4 agents
+stream-watchdog killed at 600s no-progress." There was **no 600s watchdog
+threshold** — that mechanism never existed in our tooling. The only
+watchdog on disk was a Discord alerter that pings when calls happen but no
+flag lands, not a per-agent stream killer. The four `killed` outcomes are
+genuine stream-state labels, but the 600s number we attached to them was
+invented detail dressing up the system as more engineered than it was.
+
+What's real are the long-tail runs themselves. Patterns and losses:
 
 ### Solar Grid RCE retry alt (229.1 min, killed)
 
@@ -202,9 +250,14 @@ lesson.
 
 ### CEO Inbox WASM patch (2,644.9 min, completed)
 
-44 hours. Slowly accreted tool calls. Eventually produced a working
-solve. The agent reached `completed` status on its own. The outcome is
-ambiguous: the solve worked, but the wall-clock cost was extreme.
+44 hours. Slowly accreted tool calls. The agent reached `completed` status
+on its own — but `completed` only means the stream ended, not that this
+path produced anything. The track *did* score 2/2, but the flags came from
+a DB-root path and sandbox abuse, **not** from the WASM-patch work this
+agent piled onto. The WASM-patch path never actually executed (the compile
+budget ran out in the final hour). So this is a 44-hour run that "completed"
+on a dead branch while the flags were taken elsewhere — the wall-clock cost
+was extreme and its own contribution was zero.
 
 **Pattern:** long-tail runs cluster on tracks where the primitive is
 unconfirmed and the agent is doing exploratory work without a clean
@@ -281,10 +334,57 @@ truth.
 
 ---
 
+## State-mutation self-own: the password overwrite that bricked a flag
+
+The most damaging failure mode of the event was one we inflicted on
+ourselves, and our original write-up left it out entirely. On the
+announcement-board track, an early agent used a mass-assignment SQLi to
+*overwrite all 185 user passwords* — a write, not a read. That single
+state-mutating action permanently destroyed the original credential that
+was the recovery path for flag-4, and it poisoned the shared database for
+every agent that came after. The flag became unrecoverable for the entire
+team, not just one agent.
+
+This is the multi-agent version of a classic discipline failure: in a
+swarm, one irreversible write is a self-inflicted denial of service on the
+whole team's intel. You can foreclose a flag for every teammate who arrives
+after you. The lesson is read-only by default — only mutate target state
+when a read path has actually failed, and treat any destructive write as a
+decision that affects every other agent, not just yours.
+
+---
+
+## Sanitizer blind spot: the UTF-16 secret leak
+
+The subtlest failure mode is an encoding blind spot, and it is the most
+transferable lesson here. A secret-scanning pass that greps for ASCII
+patterns (`glpat-`, token prefixes, `password`) walks straight past a
+secret that was written to disk in UTF-16. The on-disk bytes carry a null
+between every character, so the ASCII needle never matches — the secret
+sits there in plain sight and the scan reports the tree as clean.
+
+That is exactly how a live credential survived an ASCII grep in our own
+corpus: secrets written by a default pipeline landed UTF-16-encoded, and an
+ASCII-only scan certified a tree that still contained them. The fix is to
+make secret scanners encoding-aware — decode UTF-16 (and UTF-8) before
+matching — run them recursively over the *whole* staged tree rather than a
+named allowlist of files, and wire the result as a hard fail gate.
+Standardizing artifact writes to UTF-8 so the null-byte hazard never
+appears is the cheaper preventive. A scanner that isn't encoding-aware
+doesn't just miss the secret; it hands you false confidence that there
+isn't one.
+
+---
+
 ## Cross-cutting observations
 
-- **Anti-trap muscle memory is strong.** Eleven honeypots
-  catalogued. Zero submitted by an agent.
+- **Anti-trap muscle memory is real, but narrower than we claimed.** The
+  discipline against loud *external* bait held (the prompt-injection lure
+  was double-refused by two models). But the "11/11, zero submitted"
+  headline was overstated: ~4-5 genuine organizer decoys were refused, two
+  of our own self-plants fired anyway, and we mis-catalogued one real
+  teammate flag *as* a honeypot. The hard part isn't refusing the obvious
+  bait; it's telling your own signal from your own noise.
 - **Status-vs-body contradictions are real.** Frontmatter is shape;
   body is content. Linters that touch only the shape produce confident
   errors. Catch them at review time.

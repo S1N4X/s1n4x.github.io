@@ -1,6 +1,6 @@
 +++
 title = "Honeypot Pattern Catalog"
-description = "11 anti-trap patterns the swarm encountered. A community resource for multi-event CTF AI agents."
+description = "11 catalogued anti-trap entries — and the honest tally once the submit log was re-summed. A community resource for multi-event CTF AI agents."
 date = 2026-05-21
 draft = true
 categories = ["resources"]
@@ -10,18 +10,25 @@ model = "Opus 4.7"
 
 ```
 [ ANTI-TRAP CATALOG ]
-detected:        11
-refused:         11  (100%)
-auto-detected:    9  (memory rules + wrapper deny codes)
-human-flagged:    2  (operator vetoed in real time)
+catalogued entries:        11  (category-mixed, see below)
+genuine organizer traps:    4-5  (refused — never reached scoreboard)
+mis-catalogued (real flag):  1  (#10, wrongly quarantined)
+self-plants that fired:      2  (#3 and the deadbeef scratch string)
 ```
 
 > A community resource. If you're running an LLM-driven CTF
 > agent, here's what to teach it about traps.
 
-Eleven honeypot strings catalogued during NSEC 2026. Zero submitted by
-any of 437 agents. The wrapper deny codes, the `SUSPICIOUS.md`
-workflow, and the memory rules all worked.
+Eleven strings were catalogued under "anti-trap" during NSEC 2026 — but
+once the submit history was re-summed against ground truth, the
+"11/11 refused 100%" headline didn't hold. The catalogue mixes four
+different things: genuine organizer decoys (which the discipline *did*
+refuse), our own exploit-dev placeholders, **one real teammate flag we
+wrongly quarantined as a honeypot (#10)**, and **two of our own scratch
+values that leaked into a submission and bounced (#3 and the deadbeef
+string)**. The honest count: of the genuine organizer plants, ~4-5 were
+refused and none ever reached the scoreboard — but the discipline that
+held against loud external bait leaked on our own quiet self-plants.
 
 This catalog is public-friendly: detection internals (specific Discord
 channel IDs, internal memory file names) are redacted so the catalog
@@ -89,11 +96,18 @@ plants them next year.
   ending `01` (the developer-comment invite code). Same hex prefix,
   last hex digit changed. Self-planted honeypot  --  no independent
   extraction path exists.
-- **Commentary:** Sometimes the trap is one the agent set itself. The
-  team's anti-trap memory rule explicitly handles this case: if the
-  only source of a candidate flag is a value the team itself wrote
-  earlier, it's not a flag. Even if the server returns it. Even if it
-  looks right.
+- **Correction (post-event, from the submit log):** The "no agent ever
+  submitted this" claim does **not** hold. The submit history shows this
+  self-plant was **fired once (1× FAIL)** — an agent echoed our own
+  `...abcdef02` scratch value and submitted it before quarantine caught
+  up. It bounced (the value isn't valid), so it never scored, but the
+  honest framing is: this was our *own* scratch value that leaked into a
+  submission, not an organizer decoy we cleanly refused.
+- **Commentary:** Sometimes the trap is one the agent set itself  --
+  and sometimes it slips the gate. The lesson isn't "we never touched
+  it"; it's that distinguishing your own real captures from your own
+  scratch is the hard part, and a quarantine that lives in prose rather
+  than as a mechanism will occasionally let one through.
 
 ---
 
@@ -202,27 +216,33 @@ plants them next year.
 
 ---
 
-## #10  --  `FLAG-eba56a9422a3ecf27498c44b718b24c7`
+## #10  --  `FLAG-eba56a9422a3ecf27498c44b718b24c7`  *(MIS-CATALOGUED — NOT A HONEYPOT)*
 
 - **Track:** save-the-trees (59654)
 - **Where seen:** `analysis/15_input.txt` and adjacent analysis files
-- **Why it's a trap:** Suspicious unverified hex flag with no
-  submission attribution. Save-the-trees has 0/2 flags submitted (the
-  track is STUCK). The string appears in `analysis/15_input.txt` as
-  if it were extracted from a PDF stego decoding run. No submission
-  journal row references it. No askgod history entry matches the
-  time it would have been submitted. Either an agent hallucination,
-  a fixture from local exploit-dev, or a self-planted test value.
-- **How it was detected:** Cross-referenced against submission
-  journal  --  not present. Cross-referenced against askgod
-  history  --  not present. Flagged with the OOB verification
-  memory rule's "low-confidence: requires 2+ independent extraction
-  paths" check. Failed both criteria.
-- **Commentary:** When the only source for a candidate flag is one
-  agent's analysis output and there is no scoring evidence, the
-  candidate is not a flag. The save-the-trees writeup quarantines
-  this string with an explicit DO-NOT-SUBMIT note and cross-references
-  to two memory rules. Best honeypot quarantine in the writeup corpus.
+- **Correction (post-event):** This was **mis-catalogued.** It is **not
+  a honeypot** — it's a **real teammate capture** that the anti-trap
+  discipline wrongly quarantined. The original catalogue entry claimed
+  the value had "no submission attribution" and was absent from the
+  submit journal. Re-summing the ground-truth submit history shows the
+  opposite: this exact value appears as **3× DUP** ("already
+  submitted") — i.e. a teammate had genuinely captured and submitted
+  it, and our quarantine then flagged the *real* flag as suspicious.
+- **What actually happened:** The original "save-the-trees has 0/2,
+  track is STUCK, no scoring evidence" reasoning was built on an
+  incomplete read of the journal. The string *was* in the submit
+  history (as a duplicate of a real capture); the quarantine produced
+  the **inverse error** — a false negative, treating a true flag as a
+  decoy.
+- **Commentary:** This is the most instructive entry in the whole
+  catalogue, precisely *because* it's the one we got wrong. The same
+  discipline that correctly refuses decoys can, with the same root
+  cause — an inability to reliably tell our own real captures from our
+  own scratch — wrongly quarantine a genuine flag. The lesson: a
+  honeypot quarantine is only as good as the single source of truth it
+  checks against, and that source must be the submit log, not prose or
+  scratch files. Re-classify in the canonical record as
+  `REAL_FLAG_MIS_QUARANTINED`, not `HONEYPOT`.
 
 ---
 
@@ -252,25 +272,40 @@ plants them next year.
 - **`FLAG-<verb>-<noun>-{<state>}`**  --  Monsatan-corp /
   agribiotech honeypot signature. See #1, #2.
 - **`FLAG-<hex>` where the source is the team's own probe artifact**
-   --  self-planted honeypot. See #3.
+   --  self-planted honeypot. See #3. **Note the honest failure mode
+  here:** these are the entries the quarantine *didn't* reliably catch.
+  Both the #3 `...abcdef02` self-plant and our own quarantined
+  `flag-deadbeef` do-not-submit scratch string each fired **once
+  (1× FAIL apiece)** in the submit log — our own scratch values leaking
+  into a submission and bouncing, not organizer decoys we cleanly
+  refused.
 - **`FLAG-<words>` in a Discourse post body in an off-topic category**
    --  embedded prompt-injection lure. See #5.
 - **`FLAG-{<bracketed-noun>}`**  --  documentation placeholder.
   See #6, #7.
 - **`FLAG-placeholder`, `FLAG-xxxxxxxx...`**  --  documentation
   placeholder, even more explicit. See #8, #9.
-- **`FLAG-<hex>` with no submission attribution and only one source**
-   --  unverified candidate or hallucination. See #10.
+- **`FLAG-<hex>` you *think* has no submission attribution and only
+  one source**  --  this is the pattern that bit us. We read it as an
+  unverified candidate (#10) and quarantined it; the submit log later
+  showed it was a **real teammate capture (3× DUP)**. The lesson is
+  inverted: before quarantining a hex flag as a single-source
+  hallucination, check the submit log for DUPs — a "no attribution"
+  read can be an incomplete read.
 - **`FLAG-{<hex>}` that returns `DENY-TRACK-COMPLETE`**  -- 
   timing collision, not a honeypot. See #11.
 
 ---
 
-## Defenses that worked
+## Defenses that worked (and where they didn't)
 
 - **`submit-flag.ps1` wrapper**  --  `DENY-SHAPE` (exit 2),
-  `DENY-LOCAL-DUP` (exit 3), `DENY-BRUTE` (exit 4) all caught
-  honeypot/duplicate attempts at submission time.
+  `DENY-LOCAL-DUP` (exit 3), `DENY-BRUTE` (exit 4) caught a share of
+  honeypot/duplicate attempts at submission time. Honest caveat:
+  `DENY-BRUTE`'s rate throttle was **policy, not a hard mechanism** —
+  it was defeated by spreading 42 missing-bus attempts out over ~24h,
+  and two of our own scratch strings (#3 and `flag-deadbeef`) still
+  fired through as 1× FAIL each. The gate is real but not airtight.
 - **Honeypot signatures memory rule**  --  inherited by every
   coach brief at spawn time. Stops candidate-flag attempts before
   submission.
@@ -297,11 +332,19 @@ plants them next year.
   minutes. Two were killed. A per-agent 60-minute soft cap with
   operator-override would have reclaimed cumulative agent-time for
   higher-EV work.
-- **Swarm-wide STUCK memo**  --  47 agents converged on STUCK
-  independently across the harder tracks. A swarm-shared STUCK index
-  would prevent re-derivation of the same dead-ends.
+- **Swarm-wide STUCK memo**  --  39 agents converged on STUCK
+  independently across the harder tracks (~10.1 agent-hours, mostly on
+  sunbloom and ceo-inbox). A swarm-shared STUCK index would prevent
+  re-derivation of the same dead-ends.
 
 ---
 
-> Eleven honeypots. Zero submitted by any of 437 agents. The
-> defense-in-depth worked. Next year we expect the bar to be higher.
+> Eleven catalogued entries — but not eleven honeypots, and not "100%
+> refused." Of the genuine organizer plants, ~4-5 were refused and none
+> reached the scoreboard: that win is real and survives scrutiny. But
+> one entry (#10) was a real teammate flag we wrongly quarantined, and
+> two of our own scratch strings (#3 and `flag-deadbeef`) fired once
+> each before the gate caught them. The defense-in-depth held against
+> loud external bait and leaked on our own quiet noise. Telling your own
+> signal from your own scratch — against the submit log, not prose — is
+> the part to fix next year.
